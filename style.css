@@ -241,6 +241,13 @@ section {
   .app-buttons {
     flex-direction: column;
     gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .btn-app-store, .btn-google-play {
+    width: 100%;
+    justify-content: center;
   }
   .nav-buttons {
     gap: 8px;
@@ -268,6 +275,40 @@ section {
   .social-media-fixed .social-btn svg {
     width: 16px;
     height: 16px;
+  }
+  
+  /* Hide desktop nav menu on mobile */
+  .nav-menu {
+    display: none;
+  }
+  
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  /* Fix receive methods checkmark color */
+  .section-bg-blue .method-features li {
+    color: #ffffff !important;
+  }
+  
+  /* Center Why Choose title on mobile */
+  .why-choose h2 {
+    text-align: center !important;
+  }
+  
+  /* Fix receive CTA buttons width */
+  .receive-app-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .receive-app-buttons .btn-app-store,
+  .receive-app-buttons .btn-google-play {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -557,6 +598,173 @@ html {
 }
 .btn-signup:hover {
   background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1002;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background: #1e40af;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-btn:hover .hamburger-line {
+  background: #1d4ed8;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 0;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-menu-overlay.active .mobile-menu-content {
+  transform: translateX(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.mobile-menu-logo {
+  height: 32px;
+  width: auto;
+}
+
+.mobile-menu-close {
+  background: transparent;
+  border: none;
+  color: #374151;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-menu-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-items {
+  padding: 24px;
+}
+
+.mobile-menu-section {
+  margin-bottom: 32px;
+}
+
+.mobile-menu-section h3 {
+  color: #1e40af;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(30, 64, 175, 0.2);
+}
+
+.mobile-menu-section a {
+  display: block;
+  color: #374151;
+  text-decoration: none;
+  padding: 12px 0;
+  font-size: 1rem;
+  transition: color 0.2s;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-menu-section a:hover {
+  color: #1e40af;
+}
+
+.mobile-menu-actions {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-btn-login,
+.mobile-btn-signup {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  margin-bottom: 12px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.mobile-btn-login {
+  background: transparent;
+  color: #374151;
+  border: 2px solid rgba(55, 65, 81, 0.3);
+}
+
+.mobile-btn-login:hover {
+  background: rgba(55, 65, 81, 0.1);
+  border-color: #374151;
+}
+
+.mobile-btn-signup {
+  background: #1e40af;
+  color: #fff;
+  border: 2px solid #1e40af;
+}
+
+.mobile-btn-signup:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
   transform: translateY(-1px);
 }
 
@@ -2176,4 +2384,78 @@ header.hero .container {
 /* Text centering */
 .text-center {
   text-align: center;
+}
+
+/* --- Improved Mobile Styles --- */
+@media (max-width: 900px) {
+  .navbar .container {
+    padding: 0 16px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 32px 12px;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+  }
+  .hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .btn-app-store, .btn-google-play {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
+  .app-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .btn-app-store, .btn-google-play {
+    width: 100%;
+    justify-content: center;
+  }
+  .receive-app-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .receive-app-buttons .btn-app-store,
+  .receive-app-buttons .btn-google-play {
+    width: 100%;
+    justify-content: center;
+  }
+  .section-bg-blue .method-features {
+    text-align: center;
+  }
+  .section-bg-blue .method-features li {
+    color: #fff !important;
+    text-align: center;
+  }
+  .why-choose h2 {
+    text-align: center !important;
+  }
+  .nav-menu {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 24px 8px;
+  }
+  .app-buttons {
+    max-width: 100%;
+  }
+  .receive-app-buttons {
+    max-width: 100%;
+  }
 }

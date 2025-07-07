@@ -75,6 +75,54 @@
           Sign Up
         </a>
       </div>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <!-- Mobile Menu Overlay -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-content">
+          <div class="mobile-menu-header">
+            <img src="images/logos/sendnreceive_logo3_transparent.png" alt="EYM App Logo" class="mobile-menu-logo" />
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close mobile menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="mobile-menu-items">
+            <div class="mobile-menu-section">
+              <h3>Individual</h3>
+              <a href="#">Send Money</a>
+              <a href="#">Receive Money</a>
+              <a href="#">Virtual Cards</a>
+              <a href="#">Savings</a>
+            </div>
+            <div class="mobile-menu-section">
+              <h3>Business</h3>
+              <a href="#">Business Payments</a>
+              <a href="#">Merchant Services</a>
+              <a href="#">API Integration</a>
+              <a href="#">Analytics</a>
+            </div>
+            <div class="mobile-menu-section">
+              <h3>Our Company</h3>
+              <a href="#">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Press</a>
+              <a href="#">Contact</a>
+            </div>
+            <div class="mobile-menu-actions">
+              <a href="#" class="mobile-btn-login">Login</a>
+              <a href="#" class="mobile-btn-signup">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -818,6 +866,28 @@
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(leadData)
       // });
+    });
+
+    // Mobile menu functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    mobileMenuClose.addEventListener('click', function() {
+      mobileMenuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    mobileMenuOverlay.addEventListener('click', function(e) {
+      if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
 
   </script>
