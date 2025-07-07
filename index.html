@@ -12,7 +12,7 @@
   <nav class="navbar">
     <div class="container">
       <div class="nav-brand">
-        <img src="images/SendNReceive_LOGO_3STAR.PNG" alt="EYM App Logo" class="nav-logo" />
+        <img src="images/logos/sendnreceive_logo3_transparent.png" alt="EYM App Logo" class="nav-logo" />
       </div>
       <div class="nav-buttons">
         <div class="nav-menu">
@@ -45,19 +45,26 @@
           </div>
         </div>
         <div class="language-selector">
-          <select class="lang-select premium-select" aria-label="Select language">
-            <option value="en">🇺🇸 English</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="pt">🇵🇹 Português</option>
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="zh">🇨🇳 中文</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="sw">🇰🇪 Swahili</option>
-            <option value="yo">🇳🇬 Yorùbá</option>
-            <option value="ha">🇳🇬 Hausa</option>
-            <option value="tw">🇬🇭 Twi</option>
-          </select>
+          <div class="lang-select-wrapper">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="globe-icon">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M2 12h20" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <select class="lang-select premium-select" aria-label="Select language">
+              <option value="en">🇺🇸 English</option>
+              <option value="fr">🇫🇷 Français</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="pt">🇵🇹 Português</option>
+              <option value="ar">🇸🇦 العربية</option>
+              <option value="zh">🇨🇳 中文</option>
+              <option value="hi">🇮🇳 हिन्दी</option>
+              <option value="sw">🇰🇪 Swahili</option>
+              <option value="yo">🇳🇬 Yorùbá</option>
+              <option value="ha">🇳🇬 Hausa</option>
+              <option value="tw">🇬🇭 Twi</option>
+            </select>
+          </div>
         </div>
         <a href="#" class="btn-login">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="10" cy="7" r="4" stroke="#1e40af" stroke-width="2"/><path d="M3 17c0-2.2091 3.134-4 7-4s7 1.7909 7 4" stroke="#1e40af" stroke-width="2"/></svg>
@@ -80,8 +87,8 @@
     </div>
     <div class="container">
       <div class="hero-content">
-        <h1>Send Money to Africa, Receive from Africa & Beyond</h1>
-        <p>Send money to Africa with zero fees and instant delivery. Receive money from anywhere in the world directly to your mobile money or bank account. Powered by blockchain technology for the most competitive rates.</p>
+        <h1>Send & Receive Money to Africa and Beyond</h1>
+        <p>Send money to Africa with zero fees and instant delivery. Receive money from anywhere in the world directly to your mobile wallet or bank account.</p>
         <div class="app-buttons">
           <a href="#" class="btn-app-store">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -102,15 +109,27 @@
             </div>
           </a>
         </div>
+        <div class="business-cta">
+          <a href="#" class="btn-contact-sales">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 8px;">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Contact Sales for Business
+          </a>
+        </div>
       </div>
       <div class="hero-image">
-        <!-- Placeholder for phone and cards SVG -->
-        <svg width="220" height="420" viewBox="0 0 220 420"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
+        <!-- Phone mockup without video -->
+        <div class="phone-mockup">
+          <svg width="220" height="420" viewBox="0 0 220 420" class="phone-frame">
+            <rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/>
+          </svg>
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="how-it-works fade-in" id="how-it-works">
+  <section class="how-it-works fade-in premium-section section-bg-1" id="how-it-works">
     <div class="container">
       <h2>How It Works</h2>
       <div class="steps">
@@ -138,7 +157,7 @@
     </div>
   </section>
 
-  <section class="trust-proof fade-in" id="trust-proof">
+  <section class="trust-proof fade-in premium-section section-bg-blue" id="trust-proof">
     <div class="container">
       <h2>Trusted by Millions Across Africa & Beyond</h2>
       <div class="trust-tagline">Africa to World, World to Africa - Zero Fees</div>
@@ -185,16 +204,16 @@
       <div class="media-mentions">
         <h3>Featured In</h3>
         <div class="media-logos">
-          <img src="https://via.placeholder.com/100x40/374151/ffffff?text=TechCrunch" alt="TechCrunch" />
-          <img src="https://via.placeholder.com/100x40/374151/ffffff?text=Forbes" alt="Forbes" />
-          <img src="https://via.placeholder.com/100x40/374151/ffffff?text=Bloomberg" alt="Bloomberg" />
-          <img src="https://via.placeholder.com/100x40/374151/ffffff?text=Reuters" alt="Reuters" />
+          <img src="images/logos/techcrunch.png" alt="TechCrunch" />
+          <img src="images/logos/forbes.png" alt="Forbes" />
+          <img src="images/logos/bloomberg.png" alt="Bloomberg" />
+          <img src="images/logos/reuters.png" alt="Reuters" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="exchange-rate fade-in" id="exchange-rate">
+  <section class="exchange-rate fade-in premium-section section-bg-1" id="exchange-rate">
     <div class="container">
       <h2>Remittance Calculator</h2>
       <p class="calculator-subtitle">See how much your recipient will get and how much you save with SendNReceive.</p>
@@ -262,9 +281,9 @@
     </div>
   </section>
 
-  <section class="receive-methods fade-in" id="receive-methods">
+  <section class="receive-methods fade-in premium-section section-bg-blue" id="receive-methods">
     <div class="container">
-      <h2>Receive Money from Africa & the World</h2>
+      <h2 class="text-center">Receive Money from Africa & the World</h2>
       <p class="receive-subtitle">Choose how you want to receive your money - we support all major payment methods in Africa</p>
       
       <div class="receive-grid">
@@ -336,37 +355,12 @@
           </ul>
         </div>
       </div>
-      
-      <div class="receive-cta">
-        <h3>Ready to receive money?</h3>
-        <p>Download the app and start receiving money from anywhere in the world</p>
-        <div class="receive-app-buttons">
-          <a href="#" class="btn-app-store">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            <div class="btn-text">
-              <span class="btn-label">Download on the</span>
-              <span class="btn-name">App Store</span>
-            </div>
-          </a>
-          <a href="#" class="btn-google-play">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-            </svg>
-            <div class="btn-text">
-              <span class="btn-label">GET IT ON</span>
-              <span class="btn-name">Google Play</span>
-            </div>
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
-  <section class="market-overview fade-in" id="market-overview">
+  <section class="market-overview fade-in premium-section section-bg-1" id="market-overview">
     <div class="container">
-      <h2>Africa's Fintech Revolution</h2>
+      <h2 class="text-center">Africa's Fintech Revolution</h2>
       <div class="overview-grid">
         <div class="overview-item highlighted">
           <h3>Stablecoin Advantage</h3>
@@ -384,7 +378,7 @@
     </div>
   </section>
 
-  <section class="why-choose fade-in" id="why-choose">
+  <section class="why-choose fade-in premium-section section-bg-blue" id="why-choose">
     <div class="container split">
       <div class="why-content">
         <h2>Why Choose SendNReceive?</h2>
@@ -397,7 +391,7 @@
     </div>
   </section>
 
-  <section class="app-carousel fade-in" id="app-carousel">
+  <section class="app-carousel fade-in premium-section section-bg-1" id="app-carousel">
     <div class="container">
       <h2>App Screenshots</h2>
       <p class="carousel-subtitle">See how easy it is to send, receive, and manage your money with SendNReceive.</p>
@@ -406,15 +400,15 @@
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-phone-frame">
             <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/app-screenshot1.png" alt="App Screenshot 1" class="carousel-img carousel-img-on-phone" />
+            <img src="images/screenshots/SS1.PNG" alt="App Screenshot 1" class="carousel-img carousel-img-on-phone" />
           </div>
           <div class="carousel-phone-frame">
             <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/app-screenshot2.png" alt="App Screenshot 2" class="carousel-img carousel-img-on-phone" />
+            <img src="images/screenshots/SS2.PNG" alt="App Screenshot 2" class="carousel-img carousel-img-on-phone" />
           </div>
           <div class="carousel-phone-frame">
             <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/app-screenshot3.png" alt="App Screenshot 3" class="carousel-img carousel-img-on-phone" />
+            <img src="images/screenshots/SS3.PNG" alt="App Screenshot 3" class="carousel-img carousel-img-on-phone" />
           </div>
           <div class="carousel-phone-frame">
             <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
@@ -426,39 +420,9 @@
     </div>
   </section>
 
-
-
-
-
-
-
-  <section class="faq fade-in" id="faq">
+  <section class="testimonials fade-in premium-section section-bg-blue" id="testimonials">
     <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question">Is my money safe with SendNReceive?</button>
-          <div class="faq-answer">Yes! We are licensed and regulated by the SEC, use bank-level encryption, and partner with trusted payment providers.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">What are the fees for sending money?</button>
-          <div class="faq-answer">For individuals, cross-border transfers are free. Business and merchant fees are transparent and competitive.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">How fast are transfers?</button>
-          <div class="faq-answer">Most transfers are instant or settle within minutes, thanks to blockchain technology and our payment partners.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Which countries and currencies are supported?</button>
-          <div class="faq-answer">We support USD, EUR, GHS, NGN, and more. Coverage is expanding—see our app for the latest list.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials fade-in" id="testimonials">
-    <div class="container">
-      <h2>What Our Users Say</h2>
+      <h2 class="text-center">What Our Users Say</h2>
       <p class="testimonials-subtitle">Real stories from people who trust SendNReceive for their cross-border transfers</p>
       
       <div class="testimonials-grid">
@@ -531,20 +495,51 @@
     </div>
   </section>
 
-
-
-  <section class="newsletter fade-in" id="newsletter">
+  <section class="newsletter fade-in premium-section section-bg-1" id="newsletter">
     <div class="container">
       <h2>Stay Updated</h2>
       <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates, tips, and exclusive offers.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email address" required />
+      <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" placeholder="Enter your email address" required />
+        <input type="hidden" name="source" value="website_newsletter" />
+        <input type="hidden" name="timestamp" id="timestamp" />
+        <input type="hidden" name="user_agent" id="userAgent" />
         <button type="submit">Subscribe</button>
       </form>
     </div>
   </section>
 
-
+  <!-- Move the 'Ready to receive money' CTA above newsletter -->
+  <section class="receive-cta fade-in premium-section section-bg-blue" id="receive-cta">
+    <div class="container">
+      <h3>Ready to receive money?</h3>
+      <p>Download the app and start receiving money from anywhere in the world</p>
+      <div class="receive-app-buttons">
+        <a href="#" class="btn-app-store" aria-label="Download on the App Store">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-label">Download on the</span>
+            <span class="btn-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="btn-google-play" aria-label="Get it on Google Play">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-label">GET IT ON</span>
+            <span class="btn-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+      <div class="qr-download">
+        <img src="images/QR_code.svg" alt="Download App QR Code" style="width:120px;height:120px;margin:16px auto 0;display:block;" />
+        <div class="qr-caption">Scan to download the app</div>
+      </div>
+    </div>
+  </section>
 
   <!-- Move social media buttons to a fixed floating element -->
   <div class="social-media-fixed">
@@ -792,10 +787,38 @@
     // Newsletter form logic
     document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Collect form data
+      const formData = new FormData(this);
+      const email = formData.get('email');
+      
+      // Add timestamp and user agent
+      document.getElementById('timestamp').value = new Date().toISOString();
+      document.getElementById('userAgent').value = navigator.userAgent;
+      
+      // Log the data (you can replace this with your actual API endpoint)
+      const leadData = {
+        email: email,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        source: 'website_newsletter',
+        ip: 'Will be captured by server',
+        location: 'Will be captured by server'
+      };
+      
+      console.log('Newsletter signup:', leadData);
+      
+      // Show success message
       this.reset();
-      alert('Thank you for subscribing!');
+      alert('Thank you for subscribing! We\'ll keep you updated with the latest news and exclusive offers.');
+      
+      // Here you would typically send the data to your server
+      // fetch('/api/newsletter-signup', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(leadData)
+      // });
     });
-
 
   </script>
 </body>

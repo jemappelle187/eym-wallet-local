@@ -116,9 +116,8 @@ section {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 .overview-item.highlighted {
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  color: #fff;
-  border: none;
+  background: #fff;
+  color: #1f2937;
 }
 
 .split {
@@ -412,32 +411,81 @@ html {
   margin-right: 16px;
 }
 .language-selector {
-  margin-left: 20px;
+  position: relative;
+  margin-right: 16px;
 }
+
+.lang-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(30, 64, 175, 0.05);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.lang-select-wrapper:hover {
+  background: rgba(30, 64, 175, 0.1);
+  border-color: rgba(30, 64, 175, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+}
+
+.globe-icon {
+  color: rgba(30, 64, 175, 0.7);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
 .lang-select {
-  font-size: 0.95rem;
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: 1.5px solid #e0e7ef;
-  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+  background: transparent;
+  border: none;
   color: #1e40af;
-  font-weight: 600;
-  outline: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(30,64,175,0.06);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0;
   cursor: pointer;
-  min-width: 140px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 120px;
 }
+
+.lang-select option {
+  background: #fff;
+  color: #1e40af;
+  padding: 8px 12px;
+}
+
 .lang-select:focus {
-  border: 2px solid #1e40af;
-  box-shadow: 0 6px 20px rgba(30,64,175,0.15);
-  transform: translateY(-1px);
-  background: linear-gradient(135deg, #fff 0%, #f0f9ff 100%);
+  outline: none;
 }
-.lang-select:hover {
-  border: 1.5px solid #3b82f6;
-  box-shadow: 0 4px 12px rgba(30,64,175,0.10);
-  transform: translateY(-1px);
+
+.lang-select:focus + .globe-icon {
+  color: #fbbf24;
+}
+
+/* Premium select styling */
+.premium-select {
+  position: relative;
+}
+
+.premium-select::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid rgba(30, 64, 175, 0.6);
+  pointer-events: none;
 }
 .nav-menu-item {
   position: relative;
@@ -565,12 +613,8 @@ html {
 }
 
 .nav-logo {
-  height: 40px;
-  max-height: 44px;
+  max-height: 40px;
   width: auto;
-  margin-right: 0;
-  vertical-align: middle;
-  display: inline-block;
 }
 
 .cookie-banner {
@@ -713,17 +757,24 @@ header.hero .container {
 .media-logos {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  align-items: center;
+  gap: 2rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .media-logos img {
+  height: 40px;
+  width: auto;
+  filter: grayscale(100%);
   opacity: 0.7;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .media-logos img:hover {
+  filter: grayscale(0%);
   opacity: 1;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -1935,4 +1986,194 @@ header.hero .container {
   .why-choose .why-image {
     margin-top: 20px;
   }
+}
+
+/* Premium section rounded borders and shadow */
+.premium-section {
+  border-radius: 28px;
+  box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.08), 0 1.5px 6px 0 rgba(30, 64, 175, 0.04);
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+/* Enhanced premium title shadows */
+.premium-section h2,
+.premium-section h3,
+.trust-tagline {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.section-bg-blue h2,
+.section-bg-blue h3 {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Fix Stablecoin Advantage text color - same as Global Reach */
+.overview-item.highlighted h3,
+.overview-item.highlighted p {
+  color: #1f2937;
+}
+
+/* Blue background for Scalable & Inclusive */
+.overview-item:nth-child(2) {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #fff;
+}
+
+.overview-item:nth-child(2) h3,
+.overview-item:nth-child(2) p {
+  color: #fff;
+}
+
+/* Section positioning and background alternation */
+.section-bg-1 {
+  background: #f8fafc;
+}
+.section-bg-2 {
+  background: #fff;
+}
+.section-bg-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: #fff;
+}
+
+/* Ensure proper text contrast in blue sections */
+.section-bg-blue h2,
+.section-bg-blue h3,
+.section-bg-blue p,
+.section-bg-blue .trust-subtitle,
+.section-bg-blue .receive-subtitle,
+.section-bg-blue .testimonials-subtitle,
+.section-bg-blue .qr-caption {
+  color: #fff;
+}
+
+/* QR download in blue section */
+.section-bg-blue .qr-caption {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Blue section stat items and labels */
+.section-bg-blue .stat-number,
+.section-bg-blue .stat-label {
+  color: #fff;
+}
+
+/* Trust-proof section (override old blue bg if any) */
+#trust-proof.section-bg-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+}
+
+/* Glassmorphism for cards in blue sections */
+.section-bg-blue .stat-item, 
+.section-bg-blue .testimonial-card, 
+.section-bg-blue .trust-badge, 
+.section-bg-blue .receive-method, 
+.section-bg-blue .overview-item {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.section-bg-blue .testimonial-card {
+  background: rgba(255,255,255,0.1);
+}
+
+.section-bg-blue .testimonial-text,
+.section-bg-blue .testimonial-author h4,
+.section-bg-blue .testimonial-author span {
+  color: #fff;
+}
+
+/* Newsletter form enhancements */
+.newsletter-form {
+  position: relative;
+}
+
+.newsletter-form input[type="email"] {
+  border: 2px solid rgba(30, 64, 175, 0.1);
+  transition: all 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  outline: none;
+}
+
+.newsletter-form button {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .premium-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Business CTA styling - left aligned */
+.business-cta {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.btn-contact-sales {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn-contact-sales:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Phone mockup styling without video */
+.phone-mockup {
+  position: relative;
+  display: inline-block;
+}
+
+.phone-frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* Text centering */
+.text-center {
+  text-align: center;
 }
