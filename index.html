@@ -47,23 +47,19 @@
         </div>
         <div class="language-selector">
           <div class="lang-select-wrapper">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="globe-icon">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M2 12h20" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-            <select class="lang-select premium-select" aria-label="Select language">
-              <option value="en">🇺🇸 English</option>
-              <option value="fr">🇫🇷 Français</option>
-              <option value="es">🇪🇸 Español</option>
-              <option value="pt">🇵🇹 Português</option>
-              <option value="ar">🇸🇦 العربية</option>
-              <option value="zh">🇨🇳 中文</option>
-              <option value="hi">🇮🇳 हिन्दी</option>
-              <option value="sw">🇰🇪 Swahili</option>
-              <option value="yo">🇳🇬 Yorùbá</option>
-              <option value="ha">🇳🇬 Hausa</option>
-              <option value="tw">🇬🇭 Twi</option>
+            <span class="lang-display" id="langDisplay">🇺🇸 EN</span>
+            <select class="lang-select premium-select" aria-label="Select language" id="langSelect">
+              <option value="en" data-flag="🇺🇸">EN</option>
+              <option value="fr" data-flag="🇫🇷">FR</option>
+              <option value="es" data-flag="🇪🇸">ES</option>
+              <option value="pt" data-flag="🇵🇹">PT</option>
+              <option value="ar" data-flag="🇸🇦">AR</option>
+              <option value="zh" data-flag="🇨🇳">ZH</option>
+              <option value="hi" data-flag="🇮🇳">HI</option>
+              <option value="sw" data-flag="🇰🇪">SW</option>
+              <option value="yo" data-flag="🇳🇬">YO</option>
+              <option value="ha" data-flag="🇳🇬">HA</option>
+              <option value="tw" data-flag="🇬🇭">TW</option>
             </select>
           </div>
         </div>
@@ -652,10 +648,14 @@
     </div>
   </footer>
 
-  <!-- Cookie Consent Banner -->
-  <div class="cookie-banner" id="cookieBanner">
-    <span>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies. <a href="#" class="cookie-link">Learn more</a>.</span>
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
+  <!-- Cookie Consent Modal -->
+  <div class="cookie-modal-overlay" id="cookieModalOverlay">
+    <div class="cookie-modal-content">
+      <h4><span style="font-size:1.3em;vertical-align:middle;">🍪</span> We Value Your Privacy</h4>
+      <p>We use cookies to enhance your experience, analyze site usage, and assist in our marketing efforts. You can accept all cookies or manage your preferences.</p>
+      <button class="cookie-modal-btn" id="cookieAcceptBtn">Accept</button>
+      <button class="cookie-modal-btn secondary" id="cookieManageBtn">Manage Preferences</button>
+    </div>
   </div>
 
   <!-- Contact/Support Widget -->
@@ -706,19 +706,6 @@
       }
       
       lastScrollTop = scrollTop;
-    });
-
-    // Cookie banner logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const banner = document.getElementById('cookieBanner');
-      const acceptBtn = document.getElementById('cookieAccept');
-      if (localStorage.getItem('cookieAccepted')) {
-        banner.style.display = 'none';
-      }
-      acceptBtn.addEventListener('click', function() {
-        banner.style.display = 'none';
-        localStorage.setItem('cookieAccepted', 'true');
-      });
     });
 
     // Enhanced calculator logic with more currencies
@@ -889,6 +876,49 @@
         mobileMenuOverlay.classList.remove('active');
         document.body.style.overflow = '';
       }
+    });
+
+    // Language selector logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const langDisplay = document.getElementById('langDisplay');
+      const langSelect = document.getElementById('langSelect');
+      const currentLang = navigator.language || navigator.userLanguage;
+      const selectedOption = langSelect.querySelector(`option[value="${currentLang.split('-')[0]}"]`);
+
+      if (selectedOption) {
+        langDisplay.textContent = selectedOption.dataset.flag;
+        langSelect.value = selectedOption.value;
+      } else {
+        langDisplay.textContent = '🌐'; // Default or fallback
+        langSelect.value = 'en'; // Default or fallback
+      }
+
+      langSelect.addEventListener('change', function() {
+        const selectedFlag = langSelect.options[langSelect.selectedIndex].dataset.flag;
+        langDisplay.textContent = selectedFlag;
+      });
+    });
+
+    // Cookie Consent Modal logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const cookieModal = document.getElementById('cookieModalOverlay');
+      const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
+      const cookieManageBtn = document.getElementById('cookieManageBtn');
+      if (!localStorage.getItem('cookieAccepted')) {
+        setTimeout(() => {
+          cookieModal.classList.add('active');
+        }, 800);
+      }
+      cookieAcceptBtn.addEventListener('click', function() {
+        cookieModal.classList.remove('active');
+        localStorage.setItem('cookieAccepted', 'true');
+      });
+      cookieManageBtn.addEventListener('click', function() {
+        alert('Cookie preferences management coming soon!');
+      });
+      cookieModal.addEventListener('click', function(e) {
+        if (e.target === cookieModal) cookieModal.classList.remove('active');
+      });
     });
 
   </script>
