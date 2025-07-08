@@ -2726,3 +2726,49 @@ header.hero .container {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
 }
+
+/* Hide mobile download section on desktop, show on mobile */
+#receive-cta-mobile {
+  display: none;
+}
+@media (max-width: 900px) {
+  #receive-cta-mobile {
+    display: block;
+    margin-bottom: 24px;
+    padding-top: 24px;
+    box-shadow: 0 4px 24px rgba(30,64,175,0.10);
+    border-radius: 0 0 32px 32px;
+    z-index: 100;
+  }
+  #receive-cta-mobile .btn-app-store,
+  #receive-cta-mobile .btn-google-play {
+    font-size: 1.1rem;
+    padding: 18px 0;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 12px auto;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(30,64,175,0.08);
+  }
+  #receive-cta-mobile .receive-app-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  #receive-cta-mobile .qr-download {
+    margin-top: 12px;
+  }
+  #receive-cta {
+    display: none !important;
+  }
+}
+@media (min-width: 901px) {
+  #receive-cta-mobile {
+    display: none !important;
+  }
+  #receive-cta {
+    display: block;
+  }
+}
