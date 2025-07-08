@@ -496,6 +496,7 @@ html {
   min-width: 120px;
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  font-family: inherit;
 }
 
 .lang-select option {
@@ -834,6 +835,8 @@ html {
 
 .mobile-logo {
   display: none;
+  max-height: 40px;
+  width: auto;
 }
 
 .cookie-banner {
@@ -2459,12 +2462,18 @@ header.hero .container {
   .mobile-menu-btn {
     display: flex !important;
   }
+  /* Hide login/signup buttons on mobile */
+  .btn-login, .btn-signup {
+    display: none !important;
+  }
   /* Show mobile logo, hide desktop logo */
   .desktop-logo {
     display: none !important;
   }
   .mobile-logo {
     display: block !important;
+    max-height: 40px;
+    width: auto;
   }
   /* Ensure mobile menu is visible */
   .mobile-menu-overlay {
@@ -2472,6 +2481,24 @@ header.hero .container {
   }
   .mobile-menu-content {
     z-index: 1002;
+  }
+  /* Center newsletter form on mobile */
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .newsletter-form input[type="email"] {
+    width: 100%;
+    text-align: center;
+  }
+  .newsletter-form button[type="submit"] {
+    width: 100%;
+    max-width: 200px;
   }
 }
 
@@ -2490,11 +2517,64 @@ header.hero .container {
     padding: 12px 16px;
     font-size: 0.9rem;
   }
+  /* Ensure language selector flags are visible */
+  .lang-select {
+    font-size: 1rem;
+    padding: 10px 14px;
+    min-width: 140px;
+  }
+  .lang-select option {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
 }
 
 /* Fix checkmark color for all devices in blue sections */
 .section-bg-blue .method-features li {
   color: #ffffff !important;
+}
+
+/* Ensure language selector is visible on all devices */
+.language-selector {
+  position: relative;
+  z-index: 10;
+}
+
+.lang-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lang-select {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(30, 64, 175, 0.3) !important;
+  color: #1e40af !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  cursor: pointer !important;
+  outline: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  min-width: 120px !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(10px) !important;
+  font-family: inherit !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.lang-select:focus {
+  border-color: #1e40af !important;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1) !important;
+}
+
+.lang-select option {
+  background: #ffffff !important;
+  color: #1e40af !important;
+  padding: 8px 12px !important;
+  font-size: 0.9rem !important;
 }
 
 /* Enhanced mobile device detection and orientation handling */
