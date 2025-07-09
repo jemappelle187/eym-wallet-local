@@ -91,32 +91,40 @@
               </svg>
             </button>
           </div>
-          <div class="mobile-menu-items">
-            <div class="mobile-menu-section">
-              <h3>Individual</h3>
-              <a href="#">Send Money</a>
-              <a href="#">Receive Money</a>
-              <a href="#">Virtual Cards</a>
-              <a href="#">Savings</a>
-            </div>
-            <div class="mobile-menu-section">
-              <h3>Business</h3>
-              <a href="#">Business Payments</a>
-              <a href="#">Merchant Services</a>
-              <a href="#">API Integration</a>
-              <a href="#">Analytics</a>
-            </div>
-            <div class="mobile-menu-section">
-              <h3>Company</h3>
-              <a href="#">About Us</a>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
-              <a href="#">Contact</a>
-            </div>
-            <div class="mobile-menu-actions">
-              <a href="#" class="mobile-btn-login">Login</a>
-              <a href="#" class="mobile-btn-signup">Sign Up</a>
-            </div>
+          <nav class="mobile-nav-menu">
+            <ul>
+              <li class="mobile-nav-menu-item has-dropdown">
+                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Individual</a>
+                <ul class="mobile-nav-dropdown">
+                  <li><a href="#">Send Money</a></li>
+                  <li><a href="#">Receive Money</a></li>
+                  <li><a href="#">Virtual Cards</a></li>
+                  <li><a href="#">Savings</a></li>
+                </ul>
+              </li>
+              <li class="mobile-nav-menu-item has-dropdown">
+                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Business</a>
+                <ul class="mobile-nav-dropdown">
+                  <li><a href="#">Business Payments</a></li>
+                  <li><a href="#">Merchant Services</a></li>
+                  <li><a href="#">API Integration</a></li>
+                  <li><a href="#">Analytics</a></li>
+                </ul>
+              </li>
+              <li class="mobile-nav-menu-item has-dropdown">
+                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Company</a>
+                <ul class="mobile-nav-dropdown">
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Careers</a></li>
+                  <li><a href="#">Press</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <div class="mobile-menu-actions">
+            <a href="#" class="mobile-btn-login">Login</a>
+            <a href="#" class="mobile-btn-signup">Sign Up</a>
           </div>
         </div>
       </div>
@@ -239,20 +247,16 @@
       
       <div class="trust-stats">
         <div class="stat-item">
-          <div class="stat-number" data-target="2.5">0</div>
-          <div class="stat-label">M+ Active Users</div>
+          <div class="stat-number" data-target="2.5">0</div><span class="stat-suffix">M+ Active Users</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="450">0</div>
-          <div class="stat-label">M+ Sent</div>
+          <div class="stat-number">$450</div><span class="stat-suffix">M+ Sent</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="40">0</div>
-          <div class="stat-label">+ Countries Covered</div>
+          <div class="stat-number">40</div><span class="stat-suffix">+ Countries Covered</span>
         </div>
         <div class="stat-item">
-          <div class="stat-number">4.9★</div>
-          <div class="stat-label">App Store Rating</div>
+          <div class="stat-number">4.9★</div><span class="stat-suffix">App Store Rating</span>
         </div>
       </div>
 
@@ -505,7 +509,7 @@
   <!-- Why We're Different Section -->
   <section class="why-choose fade-in premium-section section-bg-blue" id="why-choose">
     <div class="container split">
-      <div class="why-content">
+      <div class="why-content why-mobile-center">
         <h2>Why Choose SendNReceive?</h2>
         <ul class="why-benefits">
           <li>
@@ -605,7 +609,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
           </div>
-          <p class="testimonial-text">"I send money home weekly and have saved hundreds on fees."</p>
+          <p class="testimonial-text">"SendNReceive has revolutionized how I send money to my family in Ghana. The zero fees and instant delivery make it a game-changer."</p>
           <div class="testimonial-author">
             <div class="author-avatar">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -614,9 +618,9 @@
                 <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
               </svg>
             </div>
-            <div class="author-info">
-              <h4>Kwame</h4>
-              <span>UK</span>
+            <div class="author-info mobile-center">
+              <h4>Kwame Asante</h4>
+              <span>Software Engineer, London</span>
             </div>
           </div>
         </div>
@@ -629,7 +633,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
           </div>
-          <p class="testimonial-text">"My business receives stable value payments without FX losses."</p>
+          <p class="testimonial-text">"As a freelancer, I receive payments from clients worldwide. SendNReceive's stable currency feature protects me from exchange rate fluctuations."</p>
           <div class="testimonial-author">
             <div class="author-avatar">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -638,9 +642,9 @@
                 <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
               </svg>
             </div>
-            <div class="author-info">
-              <h4>Ayo</h4>
-              <span>Nigeria</span>
+            <div class="author-info mobile-center">
+              <h4>Ayo Adebayo</h4>
+              <span>Digital Marketing Consultant, Lagos</span>
             </div>
           </div>
         </div>
@@ -653,7 +657,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
           </div>
-          <p class="testimonial-text">"I trust SendNReceive for my family's financial needs."</p>
+          <p class="testimonial-text">"The virtual card feature is amazing! I can shop online and pay bills without worrying about currency conversion fees."</p>
           <div class="testimonial-author">
             <div class="author-avatar">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -662,9 +666,9 @@
                 <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
               </svg>
             </div>
-            <div class="author-info">
-              <h4>Adjoa</h4>
-              <span>Ghana</span>
+            <div class="author-info mobile-center">
+              <h4>Adjoa Mensah</h4>
+              <span>Student, Accra</span>
             </div>
           </div>
         </div>
@@ -1087,6 +1091,19 @@
       });
       cookieModal.addEventListener('click', function(e) {
         if (e.target === cookieModal) cookieModal.classList.remove('active');
+      });
+    });
+
+    // Mobile menu dropdown logic
+    const mobileDropdownLinks = document.querySelectorAll('.mobile-nav-link[data-toggle="dropdown"]');
+    mobileDropdownLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle('open');
+        
+        // Remove the old display manipulation since we're using CSS max-height now
+        // The CSS will handle the animation automatically
       });
     });
 
