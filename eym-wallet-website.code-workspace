@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../eym-wallet-website-feat-comprehensive-redesign-mvp"
+		},
+		{
+			"path": "../eym-wallet-website-feat-sendnreceive-mobile-mvp"
+		}
+	],
+	"settings": {}
+}

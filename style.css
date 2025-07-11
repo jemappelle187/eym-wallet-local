@@ -293,6 +293,11 @@ p {
   cursor: pointer;
 }
 
+.lang-select,
+.premium-select {
+  color: #111 !important;
+}
+
 .premium-select {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
