@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "expo-clipboard": "^7.1.5"
+    "expo-clipboard": "^7.1.5",
+    "expo-haptics": "^14.1.4"
   }
 }
