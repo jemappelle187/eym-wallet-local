@@ -1,6 +1,54 @@
 {
-  "dependencies": {
-    "expo-clipboard": "^7.1.5",
-    "expo-haptics": "^14.1.4"
+  "name": "sendnreceive-website",
+  "version": "2.0.0",
+  "description": "Premium fintech website for SendNReceive - Send money to Africa instantly with zero fees",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p30",
+    "dev": "live-server --port=300pen=/",
+    "build": "echoStatic site - no build step required'",
+    "test": "No tests specified",
+    "lint": "echo 'Nolinting configured'",
+    "optimize-images": "echo 'Run image optimization manually',  deploy": "echo 'Deploy to your preferred hosting service'"
+  },
+  "keywords": [
+    "fintech",
+    "remittance",
+    "africa",
+    "mobile-money",
+    "pwa",
+    "responsive",
+    "premium"
+  ],
+  "author": "SendNReceive Team",
+  "license": "PROPRIETARY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sendnreceive/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sendnreceive/website/issues"
+  },
+  "homepage": "https://sendnreceive.com",
+  "devDependencies": {
+    "serve": "^14.2",
+    "live-server": "^1.22"
+  },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "pwa": {
+    "name": "SendNReceive",
+    "short_name": "SendNReceive",
+    "description": "Send money to Africa instantly with zero fees",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#1e40af",
+    "theme_color": "#1e40af"
   }
 }

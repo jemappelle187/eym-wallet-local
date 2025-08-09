@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYM Wallet - Scroll Animation Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .demo-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+        
+        .demo-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .demo-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .demo-section {
+            padding: 4rem 2rem;
+            margin: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .demo-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .demo-section p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .demo-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        
+        .bounce-in {
+            opacity: 0;
+            transform: scale(0.3) translateY(50px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .bounce-in.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    
+    <!-- Demo Header -->
+    <header class="demo-header">
+        <h1>🎬 Scroll Animation Demo</h1>
+        <p>Experience the smooth, engaging scroll effects implemented on EYM Wallet</p>
+    </header>
+    
+    <!-- Fade In Section -->
+    <section class="demo-section fade-in" id="fade-section">
+        <h2>✨ Fade In Effect</h2>
+        <p>Elements smoothly fade in and slide up as they enter the viewport</p>
+        <div class="demo-grid">
+            <div class="demo-card stagger-item">
+                <div class="demo-icon">💳</div>
+                <h3>Bank Transfer</h3>
+                <p>Secure and instant bank transfers worldwide</p>
+            </div>
+            <div class="demo-card stagger-item">
+                <div class="demo-icon">📱</div>
+                <h3>Mobile Money</h3>
+                <p>Quick transfers to mobile wallets</p>
+            </div>
+            <div class="demo-card stagger-item">
+                <div class="demo-icon">💎</div>
+                <h3>Digital Assets</h3>
+                <p>Modern cryptocurrency support</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide In Left Section -->
+    <section class="demo-section slide-in-left" id="slide-left-section">
+        <h2>⬅️ Slide In Left</h2>
+        <p>Content slides in from the left with a smooth transition</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-icon floating">🚀</div>
+                <h3>Lightning Fast</h3>
+                <p>Transfers complete in seconds, not days</p>
+            </div>
+            <div class="demo-card">
+                <div class="demo-icon floating">🔒</div>
+                <h3>Bank-Grade Security</h3>
+                <p>Your money is protected with military-grade encryption</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide In Right Section -->
+    <section class="demo-section slide-in-right" id="slide-right-section">
+        <h2>➡️ Slide In Right</h2>
+        <p>Elements slide in from the right for dynamic content reveal</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-icon floating">🌍</div>
+                <h3>Global Reach</h3>
+                <p>Send money to 200+ countries worldwide</p>
+            </div>
+            <div class="demo-card">
+                <div class="demo-icon floating">💰</div>
+                <h3>Zero Fees</h3>
+                <p>No hidden charges or surprise fees</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scale In Section -->
+    <section class="demo-section scale-in" id="scale-section">
+        <h2>📏 Scale In Effect</h2>
+        <p>Elements grow and scale up as they become visible</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-icon floating">📊</div>
+                <h3>Real-Time Rates</h3>
+                <p>Live exchange rates with no markup</p>
+            </div>
+            <div class="demo-card">
+                <div class="demo-icon floating">🎯</div>
+                <h3>Precision</h3>
+                <p>Exact calculations with transparent pricing</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bounce In Section -->
+    <section class="demo-section bounce-in" id="bounce-section">
+        <h2>🎾 Bounce In Effect</h2>
+        <p>Interactive elements bounce in with playful animation</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-icon floating">🎉</div>
+                <h3>Celebrate Success</h3>
+                <p>Every successful transfer is a win</p>
+            </div>
+            <div class="demo-card">
+                <div class="demo-icon floating">🏆</div>
+                <h3>Top Choice</h3>
+                <p>Trusted by millions worldwide</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Section -->
+    <section class="demo-section" id="interactive-section">
+        <h2>🎮 Interactive Elements</h2>
+        <p>Hover over these cards to see smooth hover animations</p>
+        <div class="demo-grid">
+            <div class="demo-card" style="cursor: pointer;">
+                <div class="demo-icon">🎨</div>
+                <h3>Hover Me!</h3>
+                <p>Move your mouse over this card</p>
+            </div>
+            <div class="demo-card" style="cursor: pointer;">
+                <div class="demo-icon">⚡</div>
+                <h3>Try This Too!</h3>
+                <p>Experience the smooth transitions</p>
+            </div>
+            <div class="demo-card" style="cursor: pointer;">
+                <div class="demo-icon">🌟</div>
+                <h3>And This One!</h3>
+                <p>See the magic happen</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final Section -->
+    <section class="demo-section fade-in" id="final-section">
+        <h2>🎯 Ready to Experience More?</h2>
+        <p>These are just a sample of the smooth, engaging animations implemented throughout the EYM Wallet website. Every section has been carefully crafted to provide an immersive user experience.</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="demo-icon floating">📱</div>
+                <h3>Download App</h3>
+                <p>Experience the full animated experience</p>
+            </div>
+            <div class="demo-card">
+                <div class="demo-icon floating">🌐</div>
+                <h3>Visit Website</h3>
+                <p>See all animations in action</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Scroll Animations and Progress Tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .bounce-in, .stagger-item');
+            
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Add stagger animation for child elements
+                        const staggerItems = entry.target.querySelectorAll('.stagger-item');
+                        if (staggerItems.length > 0) {
+                            staggerItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, index * 100);
+                            });
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all animated elements
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Scroll progress tracking
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgress.style.width = scrollPercent + '%';
+                
+                // Show/hide back to top button
+                if (scrollTop > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scroll for back to top
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Enhanced hover effects for demo cards
+            const demoCards = document.querySelectorAll('.demo-card');
+            demoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Performance optimization: Throttle scroll events
+            let ticking = false;
+            function updateAnimations() {
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateAnimations);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick);
+            
+            // Initialize animations on page load
+            setTimeout(() => {
+                const headerTitle = document.querySelector('.demo-header h1');
+                const headerSubtitle = document.querySelector('.demo-header p');
+                if (headerTitle && headerSubtitle) {
+                    headerTitle.style.opacity = '1';
+                    headerTitle.style.transform = 'translateY(0)';
+                    headerSubtitle.style.opacity = '1';
+                    headerSubtitle.style.transform = 'translateY(0)';
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
+

@@ -3,151 +3,935 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SendNReceive - Send Money to Africa – Instantly & Fee-Free</title>
-  <link rel="stylesheet" href="style.css?v=3">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>SendNReceive - Global Financial Inclusion Platform | Currency Hedging & Payments</title>
+  <meta name="description" content="Empowering underbanked communities with global payment infrastructure, currency hedging, and financial inclusion. Fight inflation with auto-hedging deposits in local currencies.">
+  <meta name="keywords" content="financial inclusion, currency hedging, global payments, underbanked communities, inflation protection, digital banking, remittance, fintech">
+  <meta name="author" content="SendNReceive">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sendnreceive.com/">
+  <meta property="og:title" content="SendNReceive - Global Financial Inclusion Platform">
+  <meta property="og:description" content="Empowering underbanked communities with global payment infrastructure and currency hedging to fight inflation.">
+  <meta property="og:image" content="images/screenshots/Homescreen-Mockup.svg">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://sendnreceive.com/">
+  <meta property="twitter:title" content="SendNReceive - Global Financial Inclusion Platform">
+  <meta property="twitter:description" content="Empowering underbanked communities with global payment infrastructure and currency hedging to fight inflation.">
+  <meta property="twitter:image" content="images/screenshots/Homescreen-Mockup.svg">
+  <link rel="icon" href="images/logos/sendnreceive_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/logos/sendnreceive_logo.png">
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20250808143733">
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="nav-brand">
-        <img src="images/logos/sendnreceive_logo.png" alt="SendNReceive Logo" class="nav-logo desktop-logo" />
-        <img src="images/logos/sendnreceive_logo.png" alt="SendNReceive Logo" class="nav-logo mobile-logo" />
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+  
+  <!-- Premium Cookie Banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-container">
+      <div class="cookie-content">
+        <div class="cookie-header">
+          <div class="cookie-icon">🍪</div>
+          <h3>We Value Your Privacy</h3>
+        </div>
+        <p>We use cookies and similar technologies to provide you with the best possible experience, analyze site usage, and assist in our marketing efforts. By clicking "Accept All", you consent to our use of cookies for all purposes.</p>
+        <div class="cookie-options">
+          <div class="cookie-option">
+            <label class="cookie-checkbox">
+              <input type="checkbox" checked disabled>
+              <span class="checkmark"></span>
+              <span>Essential (Required)</span>
+            </label>
+            <p>Necessary for the website to function properly</p>
+          </div>
+          <div class="cookie-option">
+            <label class="cookie-checkbox">
+              <input type="checkbox" id="analyticsCookies">
+              <span class="checkmark"></span>
+              <span>Analytics</span>
+            </label>
+            <p>Help us understand how visitors interact with our website</p>
+          </div>
+          <div class="cookie-option">
+            <label class="cookie-checkbox">
+              <input type="checkbox" id="marketingCookies">
+              <span class="checkmark"></span>
+              <span>Marketing</span>
+            </label>
+            <p>Used to deliver personalized content and advertisements</p>
+          </div>
+        </div>
       </div>
-      <div class="nav-buttons">
-        <div class="nav-menu">
-          <div class="nav-menu-item">
-            <a href="#">Individual</a>
-            <div class="nav-dropdown">
-              <a href="#">Send Money</a>
-              <a href="#">Receive Money</a>
-              <a href="#">Virtual Cards</a>
-              <a href="#">Savings</a>
-            </div>
-          </div>
-          <div class="nav-menu-item">
-            <a href="#">Business</a>
-            <div class="nav-dropdown">
-              <a href="#">Business Payments</a>
-              <a href="#">Merchant Services</a>
-              <a href="#">API Integration</a>
-              <a href="#">Analytics</a>
-              <a href="#">Contact Sales</a>
-            </div>
-          </div>
-          <div class="nav-menu-item">
-            <a href="#">Company</a>
-            <div class="nav-dropdown">
-              <a href="#">About Us</a>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
-              <a href="#">Contact</a>
-            </div>
-          </div>
-        </div>
-        <div class="language-selector">
-          <div class="lang-select-wrapper">
-            <span class="lang-display" id="langDisplay">🇺🇸 EN</span>
-            <select class="lang-select premium-select" aria-label="Select language" id="langSelect">
-              <option value="en" data-flag="🇺🇸">EN</option>
-              <option value="fr" data-flag="🇫🇷">FR</option>
-              <option value="es" data-flag="🇪🇸">ES</option>
-              <option value="pt" data-flag="🇵🇹">PT</option>
-              <option value="ar" data-flag="🇸🇦">AR</option>
-              <option value="zh" data-flag="🇨🇳">ZH</option>
-              <option value="hi" data-flag="🇮🇳">HI</option>
-              <option value="sw" data-flag="🇰🇪">SW</option>
-              <option value="yo" data-flag="🇳🇬">YO</option>
-              <option value="ha" data-flag="🇳🇬">HA</option>
-              <option value="tw" data-flag="🇬🇭">TW</option>
-            </select>
-          </div>
-        </div>
-        <a href="#" class="btn-login">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="10" cy="7" r="4" stroke="#1e40af" stroke-width="2"/><path d="M3 17c0-2.2091 3.134-4 7-4s7 1.7909 7 4" stroke="#1e40af" stroke-width="2"/></svg>
-          Login
-        </a>
-        <a href="#" class="btn-signup">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;margin-right:6px;"><circle cx="10" cy="7" r="4" stroke="#fff" stroke-width="2"/><path d="M3 17c0-2.2091 3.134-4 7-4s7 1.7909 7 4" stroke="#fff" stroke-width="2"/><path d="M15 6h4m-2-2v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-          Sign Up
-        </a>
+      <div class="cookie-actions">
+        <button class="cookie-btn secondary" id="cookieCustomize">Customize</button>
+        <button class="cookie-btn primary" id="cookieAcceptAll">Accept All</button>
       </div>
-      
-      <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-      
-      <!-- Mobile Menu Overlay -->
-      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="mobile-menu-content">
-          <div class="mobile-menu-header">
-            <img src="images/logos/sendnreceive_logo.png" alt="SendNReceive Logo" class="mobile-menu-logo" />
-            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close mobile menu">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <nav class="mobile-nav-menu">
-            <ul>
-              <li class="mobile-nav-menu-item has-dropdown">
-                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Individual</a>
-                <ul class="mobile-nav-dropdown">
-                  <li><a href="#">Send Money</a></li>
-                  <li><a href="#">Receive Money</a></li>
-                  <li><a href="#">Virtual Cards</a></li>
-                  <li><a href="#">Savings</a></li>
-                </ul>
-              </li>
-              <li class="mobile-nav-menu-item has-dropdown">
-                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Business</a>
-                <ul class="mobile-nav-dropdown">
-                  <li><a href="#">Business Payments</a></li>
-                  <li><a href="#">Merchant Services</a></li>
-                  <li><a href="#">API Integration</a></li>
-                  <li><a href="#">Analytics</a></li>
-                  <li><a href="#">Contact Sales</a></li>
-                </ul>
-              </li>
-              <li class="mobile-nav-menu-item has-dropdown">
-                <a href="#" class="mobile-nav-link" data-toggle="dropdown">Company</a>
-                <ul class="mobile-nav-dropdown">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Careers</a></li>
-                  <li><a href="#">Press</a></li>
-                  <li><a href="#">Contact</a></li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-          <div class="mobile-menu-actions">
-            <a href="#" class="mobile-btn-login">Login</a>
-            <a href="#" class="mobile-btn-signup">Sign Up</a>
+    </div>
+  </div>
+  
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <div class="logo-animation"></div>
+        <span>SendNReceive</span>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <span class="logo-text">SendNReceive</span>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <div class="nav-item">
+          <a href="#home" class="nav-link active" aria-current="page">Home</a>
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#individuals" class="nav-link">Individuals</a>
+          <div class="dropdown-menu">
+            <a href="#send-money" class="dropdown-item">Send Money</a>
+            <a href="#receive-money" class="dropdown-item">Receive Money</a>
+            <a href="#currency-hedging" class="dropdown-item">Currency Hedging</a>
+            <a href="#virtual-cards" class="dropdown-item">Virtual Cards</a>
+            <a href="#savings" class="dropdown-item">Savings</a>
           </div>
         </div>
+        <div class="nav-item dropdown">
+          <a href="#businesses" class="nav-link">Businesses</a>
+          <div class="dropdown-menu">
+            <a href="#business-payments" class="dropdown-item">Business Payments</a>
+            <a href="#merchant-services" class="dropdown-item">Merchant Services</a>
+            <a href="#api-integration" class="dropdown-item">API Integration</a>
+            <a href="#analytics" class="dropdown-item">Analytics</a>
+            <a href="#contact-sales" class="dropdown-item">Contact Sales</a>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#company" class="nav-link">Company</a>
+          <div class="dropdown-menu">
+            <a href="#about-us" class="dropdown-item">About Us</a>
+            <a href="#careers" class="dropdown-item">Careers</a>
+            <a href="#press" class="dropdown-item">Press</a>
+            <a href="#contact" class="dropdown-item">Contact</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <a href="#security" class="nav-link">Security</a>
+          <div class="dropdown-menu">
+            <a href="#encryption" class="dropdown-item">Bank-Level Encryption</a>
+            <a href="#compliance" class="dropdown-item">Regulatory Compliance</a>
+            <a href="#fraud-protection" class="dropdown-item">Fraud Protection</a>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#language" class="nav-link">
+            <div class="flag-icon flag-icon-us current-flag"></div>
+            <span class="current-lang">EN</span>
+          </a>
+          <div class="dropdown-menu language-menu">
+            <a href="#" class="dropdown-item" data-lang="en">
+              <div class="flag-icon flag-icon-us"></div>
+              <span>English</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="es">
+              <div class="flag-icon flag-icon-es"></div>
+              <span>Español</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="fr">
+              <div class="flag-icon flag-icon-fr"></div>
+              <span>Français</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="de">
+              <div class="flag-icon flag-icon-de"></div>
+              <span>Deutsch</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="nl">
+              <div class="flag-icon flag-icon-nl"></div>
+              <span>Nederlands</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="pt">
+              <div class="flag-icon flag-icon-br"></div>
+              <span>Português</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="zh">
+              <div class="flag-icon flag-icon-cn"></div>
+              <span>中文</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="ja">
+              <div class="flag-icon flag-icon-jp"></div>
+              <span>日本語</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="ko">
+              <div class="flag-icon flag-icon-kr"></div>
+              <span>한국어</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="hi">
+              <div class="flag-icon flag-icon-in"></div>
+              <span>हिन्दी</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="ar">
+              <div class="flag-icon flag-icon-sa"></div>
+              <span>العربية</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="sw">
+              <div class="flag-icon flag-icon-ke"></div>
+              <span>Kiswahili</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="yo">
+              <div class="flag-icon flag-icon-ng"></div>
+              <span>Yorùbá</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="ha">
+              <div class="flag-icon flag-icon-ng"></div>
+              <span>Hausa</span>
+            </a>
+            <a href="#" class="dropdown-item" data-lang="tw">
+              <div class="flag-icon flag-icon-gh"></div>
+              <span>Twi</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+        <span></span><span></span><span></span>
       </div>
     </div>
   </nav>
+<main id="main" role="main">
 
-  <!-- Hero Section -->
-  <header class="hero fade-in" id="hero">
-    <div class="video-bg">
-      <video autoplay muted loop playsinline poster="images/Online Payment MockupCOVER.jpg" id="heroVideo">
-        <source src="videos/global-network.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="video-overlay"></div>
+  <section id="home" class="hero fade-in">
+
+        <!-- HERO BACKGROUND VIDEO -->
+        <div class="hero-video-wrap" aria-hidden="true">
+          <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata"
+                 poster="images/Online Payment MockupCOVER.jpg">
+            <source src="videos/global-network.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="hero-bg-overlay"></div>
+        </div>
+    
+      <!-- Video background is now handled by hero-video-wrap above -->
+      <div class="hero-container">
+        <div class="hero-content">
+
+          <h1 class="hero-title">
+            A FAIR WAY TO FINANCIAL INCLUSION
+          </h1>
+          
+          <p class="hero-subtitle">
+            The world's first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure. Access to the global financial network shouldn't be a luxury.
+          </p>
+          <div class="hero-cta">
+            <div class="app-buttons">
+              <a href="#download" class="btn-app-store bounce-in">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div class="btn-text">
+                  <span class="btn-label">Download on the</span>
+                                      <span class="btn-name">App Store</span>
+                  </div>
+                </a>
+                <a href="#download" class="btn-google-play bounce-in">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.61,11.5 20.41,11.83L18.83,14.39L16.54,12.1M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <div class="btn-text">
+                  <span class="btn-label">GET IT ON</span>
+                  <span class="btn-name">Google Play</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="hero-visual">
+          <div class="iphone-mockup">
+            <!-- iPhone 18 Frame -->
+            <div class="iphone-frame">
+              <!-- Dynamic Island -->
+              <div class="dynamic-island"></div>
+              
+              <!-- Screen -->
+              <div class="iphone-screen">
+                <!-- Real App Screenshot Background -->
+                <div class="app-screenshot"></div>
+                
+                <!-- Home Indicator -->
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+              </div>
+                          </div>
+            </div>
+
+</div>
+        </div>
+      </div>
+    </section>
+
+<section class="exchange-rate fade-in premium-section section-bg-light" id="exchange-rate">
+      <div class="container">
+        <h2>Remittance Calculator</h2>
+        <p class="calculator-subtitle">See exactly how much your recipient will receive with real-time calculations.</p>
+        
+        <!-- Enhanced Tooltip with Progress Indicators -->
+        <div class="calculator-tooltip">
+          <span class="tooltip-icon">ℹ️</span>
+          <span class="tooltip-text">Real-time exchange rates • Zero fees for individuals • Instant transfer estimate</span>
+        </div>
+
+        <!-- Quick Amount Presets -->
+        <div class="amount-presets">
+          <button type="button" class="preset-btn" data-amount="50">$50</button>
+          <button type="button" class="preset-btn" data-amount="100">$100</button>
+          <button type="button" class="preset-btn" data-amount="200">$200</button>
+          <button type="button" class="preset-btn" data-amount="500">$500</button>
+        </div>
+
+        <form class="exchange-form">
+          <div class="exchange-selects">
+            <div class="input-group">
+              <label for="calcAmount">Amount to Send</label>
+              <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required aria-label="Amount to send" />
+            </div>
+            
+            <div class="input-group">
+              <label for="calcFrom">From Currency</label>
+              <div class="currency-select-wrapper">
+                <select class="currency-select premium-select" id="calcFrom" aria-label="Currency to send from">
+                  <option value="USD">🇺🇸 USD - US Dollar</option>
+                  <option value="EUR">🇪🇺 EUR - Euro</option>
+                  <option value="GBP">🇬🇧 GBP - British Pound</option>
+                  <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
+                  <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
+                  <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
+                  <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
+                  <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
+                  <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
+                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="exchange-arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            
+            <div class="input-group">
+              <label for="calcTo">To Currency</label>
+              <div class="currency-select-wrapper">
+                <select class="currency-select premium-select" id="calcTo" aria-label="Currency to send to">
+                  <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
+                  <option value="USD">🇺🇸 USD - US Dollar</option>
+                  <option value="EUR">🇪🇺 EUR - Euro</option>
+                  <option value="GBP">🇬🇧 GBP - British Pound</option>
+                  <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
+                  <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
+                  <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
+                  <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
+                  <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
+                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transfer Speed Options -->
+          <div class="transfer-speed-options">
+            <label>Transfer Speed:</label>
+            <div class="speed-options">
+              <label class="speed-option">
+                <input type="radio" name="transferSpeed" value="instant" checked>
+                <span class="speed-label">
+                  <span class="speed-icon">⚡</span>
+                  <span class="speed-text">Instant (0% fee)</span>
+                </span>
+              </label>
+              <label class="speed-option">
+                <input type="radio" name="transferSpeed" value="standard">
+                <span class="speed-label">
+                  <span class="speed-icon">🕐</span>
+                  <span class="speed-text">Standard (0% fee, 1-2 days)</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Real-time Exchange Rate Display -->
+          <div class="exchange-rate-display">
+            <div class="rate-info">
+              <span class="rate-label">Current Exchange Rate:</span>
+              <span class="rate-value" id="exchangeRate">1 USD = 23.12 GHS</span>
+              <span class="rate-update">Updated just now</span>
+            </div>
+          </div>
+
+          <!-- Enhanced Results Section -->
+          <div class="calc-results" id="calcResults">
+            <div class="results-header">
+              <h3>Transfer Summary</h3>
+              <div class="calculation-status" id="calcStatus">
+                <span class="status-icon">✓</span>
+                <span class="status-text">Real-time calculation</span>
+              </div>
+            </div>
+            
+            <div class="results-grid">
+              <div class="result-card main-result">
+                <div class="result-label">Recipient gets:</div>
+                <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
+                <div class="result-subtitle">Zero fees applied</div>
+              </div>
+              
+              <div class="result-card fee-comparison">
+                <div class="result-label">Fee Comparison</div>
+                <div class="comparison-items">
+                  <div class="comparison-item success">
+                    <span class="comparison-icon">✓</span>
+                    <span class="comparison-text">SendNReceive: <strong>0% fee</strong></span>
+                  </div>
+                  <div class="comparison-item warning">
+                    <span class="comparison-icon">⚠️</span>
+                    <span class="comparison-text">Typical Bank: <strong id="calcBankFee">$7.99 fee</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Savings Display -->
+            <div class="calc-savings">
+              <div class="savings-header">
+                <span class="savings-icon">💰</span>
+                <span class="savings-title">Your Savings</span>
+              </div>
+              <div class="savings-amount" id="calcSavings">$8.00</div>
+              <div class="savings-subtitle">compared to traditional bank transfers</div>
+            </div>
+
+            <!-- Transfer Time Estimate -->
+            <div class="transfer-time">
+              <div class="time-info">
+                <span class="time-icon">🕐</span>
+                <span class="time-text">Estimated delivery: <strong id="transferTime">Instant</strong></span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+
+<section class="receive-methods fade-in premium-section section-bg-blue" id="receive-methods">
+      <div class="container">
+        <h2 class="text-center">Your Fintech Bridge to the World</h2>
+        <p class="receive-subtitle">Choose the method that suits your lifestyle. Send money instantly to bank accounts, mobile money, and digital asset wallets worldwide.</p>
+        
+        <div class="receive-grid">
+          <div class="receive-method stagger-item">
+            <div class="method-icon icon-animate">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <rect x="10" y="15" width="40" height="30" rx="5" fill="#1e40af" stroke="#fff" stroke-width="2"/>
+                <rect x="15" y="20" width="30" height="4" fill="#fff"/>
+                <rect x="15" y="28" width="20" height="4" fill="#fff"/>
+                <rect x="15" y="36" width="25" height="4" fill="#fff"/>
+              </svg>
+            </div>
+            <h3>Bank Transfer</h3>
+            <p>Secure delivery to local bank accounts</p>
+            <ul class="method-features">
+              <li>✓ No fees for recipients</li>
+              <li>✓ Works with all major banks</li>
+              <li>✓ Secure and reliable</li>
+            </ul>
+          </div>
+          
+          <div class="receive-method stagger-item">
+            <div class="method-icon icon-animate">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="25" fill="#059669" stroke="#fff" stroke-width="2"/>
+                <path d="M20 30L26 36L40 22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Mobile Money</h3>
+            <p>Instant transfer to MTN, Airtel, Vodafone & more</p>
+            <ul class="method-features">
+              <li>✓ Instant delivery</li>
+              <li>✓ No bank account needed</li>
+              <li>✓ Available 24/7</li>
+            </ul>
+          </div>
+          
+          <div class="receive-method stagger-item">
+            <div class="method-icon icon-animate">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <rect x="10" y="10" width="40" height="40" rx="8" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
+                <path d="M20 25L30 35L40 25" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Digital Wallet</h3>
+            <p>Keep funds in your SendNReceive wallet</p>
+            <ul class="method-features">
+              <li>✓ Zero fees</li>
+              <li>✓ Instant access</li>
+              <li>✓ Virtual card available</li>
+            </ul>
+          </div>
+          
+          <div class="receive-method stagger-item">
+            <div class="method-icon icon-animate">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <rect x="15" y="20" width="30" height="20" rx="3" fill="#dc2626" stroke="#fff" stroke-width="2"/>
+                <rect x="20" y="25" width="20" height="2" fill="#fff"/>
+                <rect x="20" y="30" width="15" height="2" fill="#fff"/>
+                <rect x="20" y="35" width="18" height="2" fill="#fff"/>
+              </svg>
+            </div>
+            <h3>Cash Pickup</h3>
+            <p>Pick up at nearby partner locations</p>
+            <ul class="method-features">
+              <li>✓ 50,000+ locations</li>
+              <li>✓ Valid ID required</li>
+              <li>✓ Available same day</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+<section class="app-showcase fade-in premium-section section-bg-light" id="app-showcase">
+      <div class="container">
+        <div class="section-header">
+          <h2>Experience Financial Freedom in Your Pocket</h2>
+          <p>See how easy it is to manage your money with our intuitive app interface</p>
+        </div>
+        
+        <div class="screenshots-grid">
+          <div class="screenshot-card" data-aos="fade-up">
+            <div class="screenshot-mockup">
+              <div class="iphone-mockup">
+                <!-- iPhone 18 Frame -->
+                <div class="iphone-frame">
+                  <!-- Dynamic Island -->
+                  <div class="dynamic-island"></div>
+                  
+                  <!-- Screen -->
+                  <div class="iphone-screen">
+                    <div class="app-header">
+                      <div class="status-bar">
+                        <span class="time">18:47</span>
+                        <div class="status-icons">
+                          <div class="signal-bars">
+                            <span></span><span></span><span></span><span></span>
+                          </div>
+                          <div class="wifi-icon">📶</div>
+                          <div class="battery">🔋</div>
+                        </div>
+                      </div>
+                      <div class="app-title">Add Funds</div>
+                    </div>
+                    <div class="app-content">
+                      <div class="balance-card">
+                        <div class="balance-label">Available Balance</div>
+                        <div class="balance-amount">$1,250.75</div>
+                      </div>
+                      <div class="add-funds-options">
+                        <div class="fund-option">
+                          <div class="option-icon">🏦</div>
+                          <div class="option-text">Bank Transfer</div>
+                        </div>
+                        <div class="fund-option">
+                          <div class="option-icon">💳</div>
+                          <div class="option-text">Card Payment</div>
+                        </div>
+                        <div class="fund-option">
+                          <div class="option-icon">📱</div>
+                          <div class="option-text">Mobile Money</div>
+                        </div>
+                      </div>
+                      <div class="quick-amounts">
+                        <button class="amount-btn">$50</button>
+                        <button class="amount-btn">$100</button>
+                        <button class="amount-btn">$250</button>
+                        <button class="amount-btn">$500</button>
+                      </div>
+                    </div>
+                    
+                    <!-- Home Indicator -->
+                    <div class="home-indicator"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screenshot-info">
+              <h3>Add Funds Instantly</h3>
+              <p>Multiple funding options with zero fees. Add money from your bank, card, or mobile wallet in seconds.</p>
+              <ul class="feature-list">
+                <li>✓ Zero transaction fees</li>
+                <li>✓ Instant processing</li>
+                <li>✓ Multiple payment methods</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="screenshot-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="screenshot-mockup">
+              <div class="iphone-mockup">
+                <!-- iPhone 18 Frame -->
+                <div class="iphone-frame">
+                  <!-- Dynamic Island -->
+                  <div class="dynamic-island"></div>
+                  
+                  <!-- Screen -->
+                  <div class="iphone-screen">
+                    <div class="app-header">
+                      <div class="status-bar">
+                        <span class="time">18:47</span>
+                        <div class="status-icons">
+                          <div class="signal-bars">
+                            <span></span><span></span><span></span><span></span>
+                          </div>
+                          <div class="wifi-icon">📶</div>
+                          <div class="battery">🔋</div>
+                        </div>
+                      </div>
+                      <div class="app-title">Send Money</div>
+                    </div>
+                    <div class="app-content">
+                      <div class="recipient-section">
+                        <div class="search-bar">
+                          <div class="search-icon">🔍</div>
+                          <input type="text" placeholder="Search contacts or enter number" class="search-input">
+                        </div>
+                      </div>
+                      <div class="recent-contacts">
+                        <div class="contact-item">
+                          <div class="contact-avatar">👤</div>
+                          <div class="contact-info">
+                            <div class="contact-name">Kwame Asante</div>
+                            <div class="contact-number">+233 24 123 4567</div>
+                          </div>
+                          <div class="contact-action">Send</div>
+                        </div>
+                        <div class="contact-item">
+                          <div class="contact-avatar">👤</div>
+                          <div class="contact-info">
+                            <div class="contact-name">Ayo Adebayo</div>
+                            <div class="contact-number">+234 80 987 6543</div>
+                          </div>
+                          <div class="contact-action">Send</div>
+                        </div>
+                      </div>
+                      <div class="quick-actions">
+                        <div class="action-btn">📱 Mobile Money</div>
+                        <div class="action-btn">🏦 Bank Transfer</div>
+                        <div class="action-btn">💳 Card Payment</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Home Indicator -->
+                    <div class="home-indicator"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screenshot-info">
+              <h3>Send Money Globally</h3>
+              <p>Transfer funds to anyone, anywhere in the world. Choose from multiple delivery methods for instant or same-day transfers.</p>
+              <ul class="feature-list">
+                <li>✓ Global reach</li>
+                <li>✓ Multiple delivery options</li>
+                <li>✓ Real-time tracking</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="screenshot-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="screenshot-mockup">
+              <div class="iphone-mockup">
+                <!-- iPhone 18 Frame -->
+                <div class="iphone-frame">
+                  <!-- Dynamic Island -->
+                  <div class="dynamic-island"></div>
+                  
+                  <!-- Screen -->
+                  <div class="iphone-screen">
+                    <div class="app-header">
+                      <div class="status-bar">
+                        <span class="time">18:47</span>
+                        <div class="status-icons">
+                          <div class="signal-bars">
+                            <span></span><span></span><span></span><span></span>
+                          </div>
+                          <div class="wifi-icon">📶</div>
+                          <div class="battery">🔋</div>
+                        </div>
+                      </div>
+                      <div class="app-title">Receive Money</div>
+                    </div>
+                    <div class="app-content">
+                      <div class="qr-section">
+                        <div class="qr-code">📱</div>
+                        <div class="qr-text">Scan to receive</div>
+                      </div>
+                      <div class="receive-options">
+                        <div class="receive-option">
+                          <div class="option-icon">🏦</div>
+                          <div class="option-details">
+                            <div class="option-title">Bank Account</div>
+                            <div class="option-subtitle">GH1234567890</div>
+                          </div>
+                          <div class="copy-btn">Copy</div>
+                        </div>
+                        <div class="receive-option">
+                          <div class="option-icon">📱</div>
+                          <div class="option-details">
+                            <div class="option-title">Mobile Money</div>
+                            <div class="option-subtitle">+233 24 123 4567</div>
+                          </div>
+                          <div class="copy-btn">Copy</div>
+                        </div>
+                      </div>
+                      <div class="receive-actions">
+                        <button class="action-button primary">Share QR Code</button>
+                        <button class="action-button secondary">Request Money</button>
+                      </div>
+                    </div>
+                    
+                    <!-- Home Indicator -->
+                    <div class="home-indicator"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screenshot-info">
+              <h3>Receive Money Seamlessly</h3>
+              <p>Get paid instantly with multiple receiving options. Share your QR code or account details for hassle-free transactions.</p>
+              <ul class="feature-list">
+                <li>✓ Instant notifications</li>
+                <li>✓ Multiple receiving methods</li>
+                <li>✓ Secure transactions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="showcase-cta">
+          <h3>Ready to Experience Financial Freedom?</h3>
+          <p>Download the app now and join millions of users worldwide</p>
+          <div class="app-buttons">
+            <a href="#" class="btn-app-store">
+              <div class="btn-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+              </div>
+              <div class="btn-text">
+                <span class="btn-label">Download on the</span>
+                <span class="btn-name">App Store</span>
+              </div>
+            </a>
+            <a href="#" class="btn-app-store play-store">
+              <div class="btn-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+              </div>
+              <div class="btn-text">
+                <span class="btn-label">GET IT ON</span>
+                <span class="btn-name">Google Play</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  <section id="security" class="security fade-in">
+      <div class="container">
+        <div class="section-header">
+          <h2>Enterprise-Grade Security</h2>
+          <p>Your financial data and transactions are protected with the highest security standards</p>
+        </div>
+        <div class="security-grid">
+          <div class="security-card" data-aos="fade-up">
+            <div class="security-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3>Quantum-Resistant Encryption</h3>
+            <p>Next-generation encryption protocols that protect against quantum computing threats, ensuring your data remains secure for decades to come.</p>
+          </div>
+          <div class="security-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="security-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3>Regulatory Compliance</h3>
+            <p>Full compliance with international financial regulations including PCI DSS, SOC 2, GDPR, and local banking laws in all operating countries.</p>
+          </div>
+          <div class="security-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="security-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h3>AI-Powered Fraud Detection</h3>
+            <p>Advanced machine learning algorithms that detect and prevent fraudulent transactions in real-time, protecting your funds 24/7.</p>
+          </div>
+        </div>
+        <div class="compliance-badges">
+          <div class="badge">
+            <span>🔒</span>
+            <span>PCI DSS Level 1</span>
+          </div>
+          <div class="badge">
+            <span>🛡️</span>
+            <span>SOC 2 Type II</span>
+          </div>
+          <div class="badge">
+            <span>📋</span>
+            <span>GDPR Compliant</span>
+          </div>
+          <div class="badge">
+            <span>🌐</span>
+            <span>ISO 27001</span>
+          </div>
+          <div class="badge dora-badge">
+            <span>⚡</span>
+            <span>DORA Compliant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Social Proof Section -->
+<section class="social-proof fade-in premium-section section-bg-light" id="social-proof">
+  <div class="container">
+    <div class="proof-header">
+      <h2>Trusted by Millions Worldwide</h2>
+      <p>Join the revolution that's transforming financial access for underbanked communities</p>
     </div>
-    <div class="container">
-      <div class="hero-content">
-        <h1>Send Money to Africa – Instantly & Fee-Free</h1>
-        <p>Zero fees. Instant delivery to mobile money, bank accounts, or digital wallets. Trusted by millions across the globe.</p>
-        <div class="app-buttons">
-          <a href="#" class="btn-app-store">
+    
+    <div class="proof-stats">
+      <div class="stat-card">
+        <div class="stat-number" data-count="50000000">0</div>
+        <div class="stat-label">Active Users</div>
+        <div class="stat-trend positive">+127% this year</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-count="150" data-format="+">0</div>
+        <div class="stat-label">Countries Served</div>
+        <div class="stat-trend positive">Global reach</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-count="99" data-format="%">0</div>
+        <div class="stat-label">Customer Satisfaction</div>
+        <div class="stat-trend positive">4.9/5 rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-count="5000000" data-format="$">0</div>
+        <div class="stat-label">Value Protected</div>
+        <div class="stat-trend positive">From inflation</div>
+      </div>
+    </div>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card featured">
+        <div class="testimonial-rating">★★★★★</div>
+        <blockquote>"SendNReceive changed everything for my family. We can now send money home instantly without worrying about high fees or currency fluctuations."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar mockup-avatar" data-name="Maria Santos"></div>
+          <div class="author-info">
+            <div class="author-name">Maria Santos</div>
+            <div class="author-title">Nurse, London → Brazil</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-rating">★★★★★</div>
+        <blockquote>"The hedging feature saved my savings when our local currency crashed. It's like having a financial shield."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar mockup-avatar" data-name="Kwame Asante"></div>
+          <div class="author-info">
+            <div class="author-name">Kwame Asante</div>
+            <div class="author-title">Software Engineer, Ghana</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-rating">★★★★★</div>
+        <blockquote>"Finally, a platform that understands the needs of African families. Zero fees and instant transfers make all the difference."</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar mockup-avatar" data-name="Ayo Adebayo"></div>
+          <div class="author-info">
+            <div class="author-name">Ayo Adebayo</div>
+            <div class="author-title">Freelancer, Nigeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="newsletter fade-in premium-section section-bg-light" id="newsletter">
+      <div class="container">
+        <h2 class="text-center">Stay in the Know</h2>
+        <p class="newsletter-subtitle">Get news, offers, and early access to new features.</p>
+        <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="email" name="email" placeholder="Enter your email address" required />
+          <input type="hidden" name="source" value="website_newsletter" />
+          <input type="hidden" name="timestamp" id="timestamp" />
+          <input type="hidden" name="user_agent" id="userAgent" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+<section class="receive-cta fade-in premium-section section-bg-blue" id="receive-cta">
+      <div class="container">
+        <h3>Ready to Send or Receive?</h3>
+        <p>Join millions of people worldwide who are already protecting their wealth and accessing global financial infrastructure. Download the app and experience fast, free transfers today.</p>
+        <div class="receive-app-buttons">
+          <a href="#" class="btn-app-store" aria-label="Download on the App Store">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
@@ -156,7 +940,7 @@
               <span class="btn-name">App Store</span>
             </div>
           </a>
-          <a href="#" class="btn-google-play">
+          <a href="#" class="btn-google-play" aria-label="Get it on Google Play">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
             </svg>
@@ -166,615 +950,209 @@
             </div>
           </a>
         </div>
+        <div class="qr-download">
+          <img src="images/qrcode.png" alt="Download App QR Code" style="width:100px;height:100px;margin:12px auto 0;display:block;" />
+          <div class="qr-caption">Scan to download the app</div>
+        </div>
       </div>
-      <div class="hero-image">
-        
-      </div>
-    </div>
-  </header>
+    </section>
 
-  <!-- How It Works Section -->
-  <section class="how-it-works fade-in premium-section section-bg-1" id="how-it-works">
-    <div class="container">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#1e40af"/>
-              <circle cx="24" cy="18" r="6" fill="#fff"/>
-              <path d="M8 36c0-6.627 7.163-12 16-12s16 5.373 16 12" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>Sign Up</h3>
-          <p>Create your account in minutes with just a few personal details.</p>
-        </div>
-        <div class="step">
-          <div class="step-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#6366f1"/>
-              <rect x="12" y="16" width="24" height="16" rx="2" fill="#fff"/>
-              <rect x="16" y="20" width="16" height="2" fill="#6366f1"/>
-              <rect x="16" y="24" width="12" height="2" fill="#6366f1"/>
-              <rect x="16" y="28" width="14" height="2" fill="#6366f1"/>
-            </svg>
-          </div>
-          <h3>Add Funds</h3>
-          <p>Use card payments, bank transfers, or mobile money to top up instantly.</p>
-        </div>
-        <div class="step">
-          <div class="step-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#fbbf24"/>
-              <path d="M16 24L22 30L32 20" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 16L28 16L28 24" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Send or Spend</h3>
-          <p>Transfer money or use your balance to shop, pay bills, or top up airtime.</p>
-        </div>
-        <div class="step">
-          <div class="step-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#22c55e"/>
-              <path d="M16 20L24 28L32 20" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="14" y="14" width="20" height="20" rx="2" stroke="#fff" stroke-width="2" fill="none"/>
-            </svg>
-          </div>
-          <h3>Track & Save</h3>
-          <p>Monitor your transfers in real-time and save in stable value currencies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trusted Worldwide Section -->
-  <section class="trust-proof fade-in premium-section section-bg-blue" id="trust-proof">
-    <div class="container">
-      <h2>Trusted by Millions Across Africa & Beyond</h2>
-      <div class="trust-tagline">From Africa to the World and back – Zero Fees, Instant Delivery</div>
-      <p class="trust-subtitle">Join over 2.5 million users who trust SendNReceive for their cross-border transfers</p>
+  <!-- Enhanced Remittance Calculator JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Quick Amount Presets
+      const presetBtns = document.querySelectorAll('.preset-btn');
+      const amountInput = document.getElementById('calcAmount');
       
-      <div class="trust-stats">
-        <div class="stat-item">
-          <div class="stat-number" data-target="2.5">0</div><span class="stat-suffix">M+ Active Users</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">$450</div><span class="stat-suffix">M+ Sent</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">40</div><span class="stat-suffix">+ Countries Covered</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">4.9★</div><span class="stat-suffix">App Store Rating</span>
-        </div>
-      </div>
+      presetBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const amount = this.getAttribute('data-amount');
+          amountInput.value = amount;
+          
+          // Update active state
+          presetBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Trigger calculation
+          calculateRemittance();
+        });
+      });
 
-      <div class="trust-badges">
-        <div class="trust-badge">
-          <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
-            <rect width="120" height="60" rx="8" fill="#1e40af"/>
-            <text x="60" y="35" text-anchor="middle" fill="#fff" font-family="Montserrat" font-size="12" font-weight="600">SEC LICENSED</text>
-          </svg>
-          <span>SEC Licensed</span>
-        </div>
-        <div class="trust-badge">
-          <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
-            <rect width="120" height="60" rx="8" fill="#059669"/>
-            <text x="60" y="35" text-anchor="middle" fill="#fff" font-family="Montserrat" font-size="12" font-weight="600">PCI DSS</text>
-          </svg>
-          <span>PCI DSS Compliant</span>
-        </div>
-        <div class="trust-badge">
-          <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
-            <rect width="120" height="60" rx="8" fill="#7c3aed"/>
-            <text x="60" y="35" text-anchor="middle" fill="#fff" font-family="Montserrat" font-size="12" font-weight="600">ISO 27001</text>
-          </svg>
-          <span>ISO 27001 Certified</span>
-        </div>
-        <div class="trust-badge">
-          <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
-            <rect width="120" height="60" rx="8" fill="#dc2626"/>
-            <text x="60" y="35" text-anchor="middle" fill="#fff" font-family="Montserrat" font-size="12" font-weight="600">256-bit SSL</text>
-          </svg>
-          <span>256-bit SSL Encryption</span>
-        </div>
-      </div>
+      // Transfer Speed Options
+      const speedOptions = document.querySelectorAll('input[name="transferSpeed"]');
+      speedOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          calculateRemittance();
+        });
+      });
 
-      <div class="media-mentions">
-        <h3>Featured In</h3>
-        <div class="media-logos">
-          <div class="media-logo">
-            <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-              <text x="60" y="25" text-anchor="middle" fill="#334155" font-family="Montserrat" font-size="14" font-weight="600">TechCrunch</text>
-            </svg>
-          </div>
-          <div class="media-logo">
-            <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-              <text x="60" y="25" text-anchor="middle" fill="#334155" font-family="Montserrat" font-size="14" font-weight="600">Forbes</text>
-            </svg>
-          </div>
-          <div class="media-logo">
-            <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-              <text x="60" y="25" text-anchor="middle" fill="#334155" font-family="Montserrat" font-size="14" font-weight="600">Bloomberg</text>
-            </svg>
-          </div>
-          <div class="media-logo">
-            <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-              <text x="60" y="25" text-anchor="middle" fill="#334155" font-family="Montserrat" font-size="14" font-weight="600">Reuters</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      // Real-time calculation on input change
+      amountInput.addEventListener('input', function() {
+        calculateRemittance();
+      });
 
-  <!-- Remittance Calculator Section -->
-  <section class="exchange-rate fade-in premium-section section-bg-1" id="exchange-rate">
-    <div class="container">
-      <h2>Remittance Calculator</h2>
-      <p class="calculator-subtitle">See exactly how much your recipient will receive.</p>
-      <div class="calculator-tooltip">
-        <span class="tooltip-icon">ℹ️</span>
-        <span class="tooltip-text">Real-time exchange rates • Zero fees for individuals • Instant transfer estimate</span>
-      </div>
-      <form class="exchange-form">
-        <div class="exchange-selects">
-          <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required aria-label="Amount to send" />
-          <select class="currency-select premium-select" id="calcFrom" aria-label="Currency to send from">
-            <option value="USD">🇺🇸 USD - US Dollar</option>
-            <option value="EUR">🇪🇺 EUR - Euro</option>
-            <option value="GBP">🇬🇧 GBP - British Pound</option>
-            <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-            <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-            <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-            <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-            <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-            <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-            <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-            <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-            <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-          </select>
-          <span class="exchange-arrow" aria-hidden="true">→</span>
-          <select class="currency-select premium-select" id="calcTo" aria-label="Currency to send to">
-            <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-            <option value="USD">🇺🇸 USD - US Dollar</option>
-            <option value="EUR">🇪🇺 EUR - Euro</option>
-            <option value="GBP">🇬🇧 GBP - British Pound</option>
-            <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-            <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-            <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-            <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-            <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-            <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-            <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-            <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-          </select>
-          <button type="submit" class="calc-submit-btn" aria-label="Calculate remittance amount">Calculate</button>
-        </div>
-        <div class="calc-results" id="calcResults">
-          <div class="calc-main-result">
-            <div class="result-label">Recipient gets:</div>
-            <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
-          </div>
-          <div class="calc-compare">
-            <span class="calc-badge success">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
-              SendNReceive: <b>0% fee</b>
-            </span>
-            <span class="calc-badge warning">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M12 9V13M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
-              Typical Bank: <b id="calcBankFee">$7.99 fee</b>
-            </span>
-          </div>
-          <div class="calc-savings">
-            <span class="savings-text">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right: 8px; vertical-align: middle;"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              You save: <span id="calcSavings" class="savings-amount">$8.00</span> compared to a bank.
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
+      // Currency change handlers
+      document.getElementById('calcFrom').addEventListener('change', calculateRemittance);
+      document.getElementById('calcTo').addEventListener('change', calculateRemittance);
 
-  <!-- Receive Your Money, Your Way Section -->
-  <section class="receive-methods fade-in premium-section section-bg-blue" id="receive-methods">
-    <div class="container">
-      <h2 class="text-center">Receive Money from Africa & the World</h2>
-      <p class="receive-subtitle">Choose the method that suits your lifestyle.</p>
-      
-      <div class="receive-grid">
-        <div class="receive-method">
-          <div class="method-icon">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <rect x="10" y="15" width="40" height="30" rx="5" fill="#1e40af" stroke="#fff" stroke-width="2"/>
-              <rect x="15" y="20" width="30" height="4" fill="#fff"/>
-              <rect x="15" y="28" width="20" height="4" fill="#fff"/>
-              <rect x="15" y="36" width="25" height="4" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>Bank Transfer</h3>
-          <p>Secure delivery to local bank accounts</p>
-          <ul class="method-features">
-            <li>✓ No fees for recipients</li>
-            <li>✓ Works with all major banks</li>
-            <li>✓ Secure and reliable</li>
-          </ul>
-        </div>
+      // Initial calculation
+      calculateRemittance();
+
+      function calculateRemittance() {
+        const amount = parseFloat(amountInput.value) || 0;
+        const fromCurrency = document.getElementById('calcFrom').value;
+        const toCurrency = document.getElementById('calcTo').value;
+        const transferSpeed = document.querySelector('input[name="transferSpeed"]:checked').value;
         
-        <div class="receive-method">
-          <div class="method-icon">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="25" fill="#059669" stroke="#fff" stroke-width="2"/>
-              <path d="M20 30L26 36L40 22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Mobile Money</h3>
-          <p>Instant transfer to MTN, Airtel, Vodafone & more</p>
-          <ul class="method-features">
-            <li>✓ Instant delivery</li>
-            <li>✓ No bank account needed</li>
-            <li>✓ Available 24/7</li>
-          </ul>
-        </div>
+        // Simulate real-time exchange rates (in real app, this would come from API)
+        const exchangeRates = {
+          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73 },
+          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86 },
+          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16 },
+          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032 },
+          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049 },
+          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049 }
+        };
+
+        // Get exchange rate
+        let rate = 1;
+        if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
+          rate = exchangeRates[fromCurrency][toCurrency];
+        } else if (exchangeRates[toCurrency] && exchangeRates[toCurrency][fromCurrency]) {
+          rate = 1 / exchangeRates[toCurrency][fromCurrency];
+        }
+
+        // Calculate converted amount
+        const convertedAmount = amount * rate;
         
-        <div class="receive-method">
-          <div class="method-icon">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <rect x="10" y="10" width="40" height="40" rx="8" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
-              <path d="M20 25L30 35L40 25" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Digital Wallet</h3>
-          <p>Keep funds in your SendNReceive wallet</p>
-          <ul class="method-features">
-            <li>✓ Zero fees</li>
-            <li>✓ Instant access</li>
-            <li>✓ Virtual card available</li>
-          </ul>
-        </div>
+        // Calculate fees and savings
+        const bankFee = 7.99; // Typical bank fee
+        const savings = bankFee; // SendNReceive has 0% fee
         
-        <div class="receive-method">
-          <div class="method-icon">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <rect x="15" y="20" width="30" height="20" rx="3" fill="#dc2626" stroke="#fff" stroke-width="2"/>
-              <rect x="20" y="25" width="20" height="2" fill="#fff"/>
-              <rect x="20" y="30" width="15" height="2" fill="#fff"/>
-              <rect x="20" y="35" width="18" height="2" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>Cash Pickup</h3>
-          <p>Pick up at nearby partner locations</p>
-          <ul class="method-features">
-            <li>✓ 50,000+ locations</li>
-            <li>✓ Valid ID required</li>
-            <li>✓ Available same day</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Market Opportunity Section -->
-  <section class="market-overview fade-in premium-section section-bg-1" id="market-overview">
-    <div class="container">
-      <h2 class="text-center">Africa's Fintech Revolution</h2>
-      <div class="overview-grid">
-        <div class="overview-item highlighted">
-          <div class="overview-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#1e40af"/>
-              <path d="M12 16L15 19L20 14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Stable Currency Advantage</h3>
-          <p>Avoid inflation and FX losses with stable USDC/EURC</p>
-        </div>
-        <div class="overview-item">
-          <div class="overview-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#6366f1"/>
-              <path d="M8 16L16 8L24 16L16 24L8 16Z" stroke="#fff" stroke-width="2" fill="none"/>
-            </svg>
-          </div>
-          <h3>Global Reach</h3>
-          <p>Trusted in 40+ countries with mobile and digital wallet integration</p>
-        </div>
-        <div class="overview-item">
-          <div class="overview-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#fbbf24"/>
-              <rect x="10" y="12" width="12" height="8" rx="1" stroke="#fff" stroke-width="2" fill="none"/>
-              <rect x="12" y="14" width="8" height="1" fill="#fff"/>
-            </svg>
-          </div>
-          <h3>Business Ready</h3>
-          <p>Ideal for freelancers, merchants, and online sellers</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why We're Different Section -->
-  <section class="why-choose fade-in premium-section section-bg-blue" id="why-choose">
-    <div class="container split">
-      <div class="why-content why-mobile-center">
-        <h2>Why Choose SendNReceive?</h2>
-        <ul class="why-benefits">
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/>
-            </svg>
-            Zero Fees for Individuals
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/>
-            </svg>
-            Instant Delivery to Mobile Money & Bank
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/>
-            </svg>
-            Save in Stable USDC/EURC to Fight Inflation
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/>
-            </svg>
-            Spend with Virtual Visa & Mastercard
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="margin-right: 12px;">
-              <path d="M9 12L11 14L15 10" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2" fill="none"/>
-            </svg>
-            Trusted & Regulated in Every Market
-          </li>
-        </ul>
-      </div>
-      <div class="why-image">
-        <div class="global-connection">
-          <svg width="220" height="420" viewBox="0 0 220 420" fill="none">
-            <rect x="20" y="20" width="180" height="380" rx="30" fill="#1e293b" stroke="#fff" stroke-width="4"/>
-            <circle cx="110" cy="120" r="15" fill="#1e40af"/>
-            <circle cx="110" cy="180" r="15" fill="#6366f1"/>
-            <circle cx="110" cy="240" r="15" fill="#fbbf24"/>
-            <path d="M110 135L110 165M110 195L110 225" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            <text x="110" y="280" text-anchor="middle" fill="#fff" font-family="Montserrat" font-size="14" font-weight="600">Global Connection</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- App Showcase Section -->
-  <section class="app-carousel fade-in premium-section section-bg-1" id="app-carousel">
-    <div class="container">
-      <h2>A Glimpse Inside the App</h2>
-      <p class="carousel-subtitle">Send, receive, pay, and manage your money – all from one app.</p>
-      <div class="carousel-wrapper premium-carousel">
-        <button class="carousel-btn left" id="carouselLeft" aria-label="Previous screenshot">&#8592;</button>
-        <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-phone-frame">
-            <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/screenshots/Homescreen-Mockup.svg" alt="App Screenshot 1" class="carousel-img carousel-img-on-phone" />
-          </div>
-          <div class="carousel-phone-frame">
-            <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/SS2.PNG" alt="App Screenshot 2" class="carousel-img carousel-img-on-phone" />
-          </div>
-          <div class="carousel-phone-frame">
-            <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/SS3.PNG" alt="App Screenshot 3" class="carousel-img carousel-img-on-phone" />
-          </div>
-          <div class="carousel-phone-frame">
-            <svg class="carousel-phone-svg" width="220" height="420" viewBox="0 0 220 420" style="position:absolute;z-index:1;left:0;top:0;"><rect x="20" y="20" width="180" height="380" rx="30" fill="#222e50" stroke="#fff" stroke-width="4"/></svg>
-            <img src="images/app-screenshot4.png" alt="App Screenshot 4" class="carousel-img carousel-img-on-phone" />
-          </div>
-        </div>
-        <button class="carousel-btn right" id="carouselRight" aria-label="Next screenshot">&#8594;</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="testimonials fade-in premium-section section-bg-blue" id="testimonials">
-    <div class="container">
-      <h2 class="text-center">What Our Users Say</h2>
-      <p class="testimonials-subtitle">Real experiences from around the world</p>
-      
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-          </div>
-          <p class="testimonial-text">"SendNReceive has revolutionized how I send money to my family in Ghana. The zero fees and instant delivery make it a game-changer."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#1e40af"/>
-                <circle cx="20" cy="16" r="6" fill="#fff"/>
-                <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
-              </svg>
-            </div>
-            <div class="author-info mobile-center">
-              <h4>Kwame Asante</h4>
-              <span>Software Engineer, London</span>
-            </div>
-          </div>
-        </div>
+        // Update exchange rate display
+        document.getElementById('exchangeRate').textContent = `1 ${fromCurrency} = ${rate.toFixed(2)} ${toCurrency}`;
         
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-          </div>
-          <p class="testimonial-text">"As a freelancer, I receive payments from clients worldwide. SendNReceive's stable currency feature protects me from exchange rate fluctuations."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#059669"/>
-                <circle cx="20" cy="16" r="6" fill="#fff"/>
-                <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
-              </svg>
-            </div>
-            <div class="author-info mobile-center">
-              <h4>Ayo Adebayo</h4>
-              <span>Digital Marketing Consultant, Lagos</span>
-            </div>
-          </div>
-        </div>
+        // Update results
+        document.getElementById('calcConverted').textContent = `${toCurrency} ${convertedAmount.toFixed(2)}`;
+        document.getElementById('calcBankFee').textContent = `$${bankFee.toFixed(2)} fee`;
+        document.getElementById('calcSavings').textContent = `$${savings.toFixed(2)}`;
         
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-          </div>
-          <p class="testimonial-text">"The virtual card feature is amazing! I can shop online and pay bills without worrying about currency conversion fees."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#7c3aed"/>
-                <circle cx="20" cy="16" r="6" fill="#fff"/>
-                <path d="M8 32c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff"/>
-              </svg>
-            </div>
-            <div class="author-info mobile-center">
-              <h4>Adjoa Mensah</h4>
-              <span>Student, Accra</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="testimonials-cta">
-        <h3>Join thousands of satisfied users</h3>
-        <p>Start sending money for free today</p>
-        <a href="#" class="btn-primary">Get Started Now</a>
-      </div>
-    </div>
-  </section>
+        // Update transfer time
+        const transferTime = transferSpeed === 'instant' ? 'Instant' : '1-2 days';
+        document.getElementById('transferTime').textContent = transferTime;
+        
+        // Update calculation status
+        const statusElement = document.getElementById('calcStatus');
+        statusElement.innerHTML = `
+          <span class="status-icon">✓</span>
+          <span class="status-text">Updated just now</span>
+        `;
+        
+        // Add updating animation
+        statusElement.classList.add('updating');
+        setTimeout(() => {
+          statusElement.classList.remove('updating');
+        }, 1000);
+      }
 
-  <!-- Newsletter Section -->
-  <section class="newsletter fade-in premium-section section-bg-1" id="newsletter">
-    <div class="container">
-      <h2>Stay in the Know</h2>
-      <p class="newsletter-subtitle">Get news, offers, and early access to new features.</p>
-      <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="email" name="email" placeholder="Enter your email address" required />
-        <input type="hidden" name="source" value="website_newsletter" />
-        <input type="hidden" name="timestamp" id="timestamp" />
-        <input type="hidden" name="user_agent" id="userAgent" />
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-  </section>
+      // Simulate real-time updates every 30 seconds
+      setInterval(() => {
+        // In real app, this would fetch latest rates from API
+        const rateElement = document.getElementById('exchangeRate');
+        const updateElement = document.querySelector('.rate-update');
+        
+        if (rateElement && updateElement) {
+          // Simulate small rate fluctuations
+          const currentText = rateElement.textContent;
+          const parts = currentText.split(' = ');
+          if (parts.length === 2) {
+            const currentRate = parseFloat(parts[1].split(' ')[0]);
+            const fluctuation = (Math.random() - 0.5) * 0.02; // ±1% fluctuation
+            const newRate = currentRate * (1 + fluctuation);
+            
+            rateElement.textContent = `${parts[0]} = ${newRate.toFixed(2)} ${parts[1].split(' ')[1]}`;
+            updateElement.textContent = 'Updated just now';
+            
+            // Trigger recalculation with new rate
+            setTimeout(calculateRemittance, 500);
+          }
+        }
+      }, 30000);
+    });
+  </script>
 
-  <!-- Ready to Get Started Section -->
-  <section class="receive-cta fade-in premium-section section-bg-blue" id="receive-cta">
-    <div class="container">
-      <h3>Ready to Send or Receive?</h3>
-      <p>Download the app and experience fast, free transfers today.</p>
-      <div class="receive-app-buttons">
-        <a href="#" class="btn-app-store" aria-label="Download on the App Store">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-          <div class="btn-text">
-            <span class="btn-label">Download on the</span>
-            <span class="btn-name">App Store</span>
-          </div>
-        </a>
-        <a href="#" class="btn-google-play" aria-label="Get it on Google Play">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-          </svg>
-          <div class="btn-text">
-            <span class="btn-label">GET IT ON</span>
-            <span class="btn-name">Google Play</span>
-          </div>
-        </a>
-      </div>
-      <div class="qr-download">
-        <img src="images/qrcode.png" alt="Download App QR Code" style="width:120px;height:120px;margin:16px auto 0;display:block;" />
-        <div class="qr-caption">Scan to download the app</div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Move social media buttons to a fixed floating element -->
-  <div class="social-media-fixed">
-    <div class="social-buttons">
-      <a href="#" class="social-btn" aria-label="X (Twitter)">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#18181B"/><path d="M22.5 9.5L9.5 22.5M9.5 9.5L22.5 22.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-      </a>
-      <a href="#" class="social-btn" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#E1306C"/><circle cx="16" cy="16" r="7" stroke="#fff" stroke-width="2"/><circle cx="22" cy="10" r="1.5" fill="#fff"/></svg>
-      </a>
-      <a href="#" class="social-btn" aria-label="YouTube">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#FF0000"/><polygon points="13,11 23,16 13,21" fill="#fff"/></svg>
-      </a>
-      <a href="#" class="social-btn" aria-label="LinkedIn">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#0A66C2"/><rect x="10" y="14" width="3" height="8" fill="#fff"/><rect x="19" y="17" width="3" height="5" fill="#fff"/><circle cx="11.5" cy="11.5" r="1.5" fill="#fff"/><rect x="15" y="14" width="3" height="2" fill="#fff"/><rect x="15" y="17" width="3" height="5" fill="#fff"/></svg>
-      </a>
-      <a href="#" class="social-btn" aria-label="TikTok">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#000000"/><path d="M16 8C18.2091 8 20 9.79086 20 12V16C20 18.2091 18.2091 20 16 20C13.7909 20 12 18.2091 12 16V12C12 9.79086 13.7909 8 16 8Z" fill="#FF0050"/><path d="M20 12H24V16C24 18.2091 22.2091 20 20 20V12Z" fill="#25F4EE"/></svg>
-      </a>
-      <a href="#" class="social-btn" aria-label="Facebook">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#1877F2"/><path d="M22 16C22 12.6863 19.3137 10 16 10C12.6863 10 10 12.6863 10 16C10 19.3137 12.6863 22 16 22C19.3137 22 22 19.3137 22 16Z" fill="#1877F2"/><path d="M18 14H16C15.4477 14 15 14.4477 15 15V17C15 17.5523 15.4477 18 16 18H18C18.5523 18 19 17.5523 19 17V15C19 14.4477 18.5523 14 18 14Z" fill="#FFFFFF"/></svg>
-      </a>
+  <!-- Footer -->
+  
+    <!-- Sticky CTA (mobile-first) -->
+    <div class="sticky-cta" role="region" aria-label="Download app">
+      <a class="sticky-cta-btn" href="#download" aria-label="Download the app">Download the app</a>
     </div>
-  </div>
-
-  <!-- Footer Section -->
-  <footer class="contact fade-in" id="contact">
+    
+</main>
+  <footer class="footer fade-in">
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h3>Legal</h3>
-          <div class="footer-links">
-            <a href="#">Terms of Use</a>
-            <a href="#">Privacy</a>
-            <a href="#">Licenses</a>
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <span class="logo-text">SendNReceive</span>
+          </div>
+          <p>Empowering underbanked communities with global financial infrastructure and currency hedging solutions.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="YouTube">📺</a>
+            <a href="#" aria-label="GitHub">💻</a>
           </div>
         </div>
         <div class="footer-section">
-          <h3>Support</h3>
-          <div class="footer-links">
-            <a href="#">FAQ</a>
-            <a href="#">Help Center</a>
-            <a href="#">Contact</a>
-          </div>
+          <h4>Solutions</h4>
+          <a href="#solutions">Global Payments</a>
+          <a href="#currency-hedging">Currency Hedging</a>
+          <a href="#security">Security</a>
         </div>
         <div class="footer-section">
-          <h3>Company</h3>
-          <div class="footer-links">
-            <a href="#">About Us</a>
-            <a href="#">Careers</a>
-            <a href="#">Blog</a>
-          </div>
+          <h4>Resources</h4>
+          <a href="#">API Documentation</a>
+          <a href="#">Developer Portal</a>
+          <a href="#">Financial Education</a>
+          <a href="#">Research Reports</a>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <a href="#">Help Center</a>
+          <a href="#">Contact Support</a>
+          <a href="#">Community Forum</a>
+          <a href="#">Status Page</a>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Partners</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 SendNReceive. All rights reserved.</p>
-        <p class="sec-license">Licensed by the Securities and Exchange Commission.</p>
+        <div class="footer-legal">
+          <p>&copy; 2026 SendNReceive. All rights reserved.</p>
+          <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+        <div class="footer-badges">
+          <span class="badge">🔒 Bank-Level Security</span>
+          <span class="badge">🌍 Global Network</span>
+          <span class="badge">🛡️ Regulated</span>
+        </div>
       </div>
     </div>
   </footer>
@@ -789,314 +1167,238 @@
     </div>
   </div>
 
-  <!-- Contact/Support Widget -->
-  <button class="support-widget-btn" id="supportWidgetBtn" aria-label="Contact Support">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1e40af"/><path d="M8 10h8M8 14h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="18" r="3" fill="#fbbf24"/></svg>
-    <span>Support</span>
-  </button>
-  <div class="support-modal" id="supportModal">
-    <div class="support-modal-content">
-      <button class="support-modal-close" id="supportModalClose" aria-label="Close">&times;</button>
-      <h3>Contact Support</h3>
-      <form class="support-form">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="How can we help you?" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </div>
+  <script src="script.js"></script>
 
   <script>
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.2 };
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-      appearOnScroll.observe(fader);
-    });
-
-    // Navbar scroll opacity effect
-    const navbar = document.querySelector('.navbar');
-    let lastScrollTop = 0;
-
-    window.addEventListener('scroll', function() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Add scrolled class when scrolling down
-      if (scrollTop > 100) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+    // Accessible hamburger toggle (no-op if elements missing)
+    (function(){
+      var btn = document.getElementById('hamburger');
+      var menu = document.getElementById('nav-menu');
+      if(btn && menu){
+        btn.addEventListener('click', function(){
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('active');
+        });
       }
-      
-      lastScrollTop = scrollTop;
-    });
+    })();
 
-    // Enhanced calculator logic with more currencies
-    const calcRates = {
-      // USD pairs
-      'USD_GHS': 14.5, 'USD_NGN': 1500, 'USD_KES': 160, 'USD_UGX': 3800, 'USD_ZAR': 18.5, 'USD_ZMW': 25.8,
-      'USD_CAD': 1.35, 'USD_AUD': 1.52, 'USD_CHF': 0.88, 'USD_GBP': 0.79,
-      // EUR pairs
-      'EUR_GHS': 15.7, 'EUR_NGN': 1630, 'EUR_KES': 174, 'EUR_UGX': 4130, 'EUR_ZAR': 20.1, 'EUR_ZMW': 28.0,
-      'EUR_CAD': 1.47, 'EUR_AUD': 1.65, 'EUR_CHF': 0.96, 'EUR_GBP': 0.86,
-      // GBP pairs
-      'GBP_GHS': 18.3, 'GBP_NGN': 1900, 'GBP_KES': 203, 'GBP_UGX': 4810, 'GBP_ZAR': 23.4, 'GBP_ZMW': 32.6,
-      'GBP_CAD': 1.71, 'GBP_AUD': 1.92, 'GBP_CHF': 1.12,
-      // African currencies
-      'GHS_NGN': 103, 'GHS_KES': 11.0, 'GHS_UGX': 262, 'GHS_ZAR': 1.28, 'GHS_ZMW': 1.78,
-      'NGN_KES': 0.107, 'NGN_UGX': 2.53, 'NGN_ZAR': 0.0123, 'NGN_ZMW': 0.0172,
-      'KES_UGX': 23.8, 'KES_ZAR': 0.116, 'KES_ZMW': 0.161,
-      'UGX_ZAR': 0.00487, 'UGX_ZMW': 0.00679,
-      'ZAR_ZMW': 1.39,
-      // Reverse pairs
-      'GHS_USD': 0.069, 'NGN_USD': 0.00067, 'KES_USD': 0.00625, 'UGX_USD': 0.00026, 'ZAR_USD': 0.054, 'ZMW_USD': 0.0388,
-      'GHS_EUR': 0.064, 'NGN_EUR': 0.00061, 'KES_EUR': 0.00575, 'UGX_EUR': 0.00024, 'ZAR_EUR': 0.0498, 'ZMW_EUR': 0.0357,
-      'GHS_GBP': 0.055, 'NGN_GBP': 0.00053, 'KES_GBP': 0.00493, 'UGX_GBP': 0.00021, 'ZAR_GBP': 0.0427, 'ZMW_GBP': 0.0307,
-      'CAD_USD': 0.741, 'AUD_USD': 0.658, 'CHF_USD': 1.136, 'GBP_USD': 1.266,
-      'CAD_EUR': 0.680, 'AUD_EUR': 0.606, 'CHF_EUR': 1.042, 'GBP_EUR': 1.163,
-      'CAD_GBP': 0.585, 'AUD_GBP': 0.521, 'CHF_GBP': 0.893
-    };
-
-    // Count-up animation for trust stats
-    function animateCountUp(element, target, duration = 2000) {
-      const start = 0;
-      const increment = target / (duration / 16);
-      let current = start;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        element.textContent = current.toFixed(1);
-      }, 16);
-    }
-
-    // Trigger count-up animation when trust section is visible
-    const trustStats = document.querySelectorAll('.stat-number[data-target]');
-    const trustObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = parseFloat(entry.target.dataset.target);
-          animateCountUp(entry.target, target);
-          trustObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    trustStats.forEach(stat => {
-      trustObserver.observe(stat);
-    });
-
-    function updateCalc() {
-      const resultsDiv = document.getElementById('calcResults');
-      resultsDiv.classList.add('updating');
-      
-      setTimeout(() => {
-        const amount = parseFloat(document.getElementById('calcAmount').value) || 100;
-        const from = document.getElementById('calcFrom').value;
-        const to = document.getElementById('calcTo').value;
-        const key = `${from}_${to}`;
-        const rate = calcRates[key];
-        const converted = rate ? (amount * rate) : 0;
-      
-      document.getElementById('calcConverted').textContent = rate ? 
-        `${to} ${converted.toLocaleString(undefined, {maximumFractionDigits: 2})}` : 'N/A';
-      
-      // Calculate typical bank fee: $7.99 or equivalent
-      let bankFee = 7.99;
-      if (from !== 'USD') {
-        const usdRate = calcRates[`${from}_USD`] || 1;
-        bankFee = 7.99 * usdRate;
-      }
-      
-      document.getElementById('calcBankFee').textContent = 
-        `${bankFee.toLocaleString(undefined, {maximumFractionDigits: 2})} ${from} fee`;
-      
-      // Calculate and display savings
-      const savings = bankFee;
-      document.getElementById('calcSavings').textContent = 
-        `${savings.toLocaleString(undefined, {maximumFractionDigits: 2})} ${from}`;
-        
-      resultsDiv.classList.remove('updating');
-      }, 150);
-    }
-
-    // Add event listeners for the new calculator
-    document.getElementById('calcAmount').addEventListener('input', updateCalc);
-    document.getElementById('calcFrom').addEventListener('change', updateCalc);
-    document.getElementById('calcTo').addEventListener('change', updateCalc);
-    document.querySelector('.exchange-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      updateCalc();
-    });
-    
-    // Initialize calculator
-    updateCalc();
-
-    // FAQ accordion logic
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const answer = this.nextElementSibling;
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-      });
-    });
-
-    // Simple carousel logic
-    const track = document.getElementById('carouselTrack');
-    const leftBtn = document.getElementById('carouselLeft');
-    const rightBtn = document.getElementById('carouselRight');
-    let scrollAmount = 0;
-    const scrollStep = 240;
-    leftBtn.addEventListener('click', () => {
-      track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
-    });
-    rightBtn.addEventListener('click', () => {
-      track.scrollBy({ left: scrollStep, behavior: 'smooth' });
-    });
-
-    // Support widget logic
-    const supportBtn = document.getElementById('supportWidgetBtn');
-    const supportModal = document.getElementById('supportModal');
-    const supportClose = document.getElementById('supportModalClose');
-    supportBtn.addEventListener('click', () => {
-      supportModal.style.display = 'flex';
-    });
-    supportClose.addEventListener('click', () => {
-      supportModal.style.display = 'none';
-    });
-    supportModal.addEventListener('click', (e) => {
-      if (e.target === supportModal) supportModal.style.display = 'none';
-    });
-    document.querySelector('.support-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      supportModal.style.display = 'none';
-      alert('Thank you! Your message has been sent.');
-    });
-
-    // Newsletter form logic
-    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Collect form data
-      const formData = new FormData(this);
-      const email = formData.get('email');
-      
-      // Add timestamp and user agent
-      document.getElementById('timestamp').value = new Date().toISOString();
-      document.getElementById('userAgent').value = navigator.userAgent;
-      
-      // Log the data (you can replace this with your actual API endpoint)
-      const leadData = {
-        email: email,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        source: 'website_newsletter',
-        ip: 'Will be captured by server',
-        location: 'Will be captured by server'
-      };
-      
-      console.log('Newsletter signup:', leadData);
-      
-      // Show success message
-      this.reset();
-      alert('Thank you for subscribing! We\'ll keep you updated with the latest news and exclusive offers.');
-      
-      // Here you would typically send the data to your server
-      // fetch('/api/newsletter-signup', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(leadData)
-      // });
-    });
-
-    // Mobile menu functionality
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileMenuOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-    
-    mobileMenuClose.addEventListener('click', function() {
-      mobileMenuOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-    
-    mobileMenuOverlay.addEventListener('click', function(e) {
-      if (e.target === mobileMenuOverlay) {
-        mobileMenuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Language selector logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const langDisplay = document.getElementById('langDisplay');
-      const langSelect = document.getElementById('langSelect');
-      const currentLang = navigator.language || navigator.userLanguage;
-      const selectedOption = langSelect.querySelector(`option[value="${currentLang.split('-')[0]}"]`);
-
-      if (selectedOption) {
-        langDisplay.textContent = selectedOption.dataset.flag;
-        langSelect.value = selectedOption.value;
-      } else {
-        langDisplay.textContent = '🌐'; // Default or fallback
-        langSelect.value = 'en'; // Default or fallback
-      }
-
-      langSelect.addEventListener('change', function() {
-        const selectedFlag = langSelect.options[langSelect.selectedIndex].dataset.flag;
-        langDisplay.textContent = selectedFlag;
-      });
-    });
-
-    // Cookie Consent Modal logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const cookieModal = document.getElementById('cookieModalOverlay');
-      const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
-      const cookieManageBtn = document.getElementById('cookieManageBtn');
-      if (!localStorage.getItem('cookieAccepted')) {
-        setTimeout(() => {
-          cookieModal.classList.add('active');
-        }, 800);
-      }
-      cookieAcceptBtn.addEventListener('click', function() {
-        cookieModal.classList.remove('active');
-        localStorage.setItem('cookieAccepted', 'true');
-      });
-      cookieManageBtn.addEventListener('click', function() {
-        alert('Cookie preferences management coming soon!');
-      });
-      cookieModal.addEventListener('click', function(e) {
-        if (e.target === cookieModal) cookieModal.classList.remove('active');
-      });
-    });
-
-    // Mobile menu dropdown logic
-    const mobileDropdownLinks = document.querySelectorAll('.mobile-nav-link[data-toggle="dropdown"]');
-    mobileDropdownLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const parent = this.parentElement;
-        parent.classList.toggle('open');
-        
-        // Remove the old display manipulation since we're using CSS max-height now
-        // The CSS will handle the animation automatically
-      });
-    });
-
+    // Respect prefers-reduced-motion
+    (function(){
+      try {
+        var prm = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prm && prm.matches) document.documentElement.classList.add('reduce-motion');
+      } catch(e){}
+    })();
   </script>
+
+
+ <script>
+ (function(){
+   var lastY = 0; var nav = document.querySelector('.navbar');
+   window.addEventListener('scroll', function(){
+     var y = window.scrollY || 0;
+     if(!nav) return;
+     if(y > 10) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+     if(y > lastY && y > 120) nav.classList.add('nav-hidden'); else nav.classList.remove('nav-hidden');
+     lastY = y;
+   });
+ })();
+ </script>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Scroll Animations Script -->
+    <script>
+        // Scroll Animations and Progress Tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .stagger-item, .bounce-in, .flip-in');
+            
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Add stagger animation for child elements
+                        const staggerItems = entry.target.querySelectorAll('.stagger-item');
+                        if (staggerItems.length > 0) {
+                            staggerItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, index * 100);
+                            });
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all animated elements
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Scroll progress tracking
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                scrollProgress.style.width = scrollPercent + '%';
+            });
+            
+            // Smooth scroll for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Parallax effect for background elements
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                parallaxElements.forEach(element => {
+                    const speed = element.dataset.speed || 0.5;
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+            
+            // Add animation classes to specific sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                // Apply fade-in + stagger to all sections
+                section.classList.add('fade-in');
+                
+                // Add stagger animation to grid items
+                const gridItems = section.querySelectorAll('.receive-method, .solution-card, .security-card, .stat-card, .testimonial-card, .benefit-item, .feature-item, .step-item, .screenshot-card, .security-feature, .stat-item, .testimonial-item');
+                gridItems.forEach(item => {
+                    item.classList.add('stagger-item');
+                });
+            });
+            
+            // Special handling for App Showcase mockups - ensure they appear one by one
+            const appMockups = document.querySelectorAll('.app-showcase .screenshot-card');
+            appMockups.forEach((mockup, index) => {
+                mockup.classList.add('stagger-item');
+                // Add a longer delay for mockups to make the sequence more visible
+                mockup.style.animationDelay = `${index * 200}ms`;
+            });
+            
+            // Keep Receive Methods section with its current animation but ensure stagger works
+            const receiveMethodsSection = document.querySelector('.receive-methods');
+            if (receiveMethodsSection) {
+                // Remove any conflicting animation classes and keep it simple
+                receiveMethodsSection.classList.remove('slide-in-left');
+                receiveMethodsSection.classList.add('fade-in');
+                
+                // Ensure all receive method cards have stagger animation
+                const receiveMethodCards = receiveMethodsSection.querySelectorAll('.receive-method');
+                receiveMethodCards.forEach((card, index) => {
+                    card.classList.add('stagger-item');
+                    // Keep the original timing for receive methods
+                    card.style.animationDelay = `${index * 100}ms`;
+                });
+            }
+            
+            // Enhanced hover effects for interactive elements
+            const interactiveElements = document.querySelectorAll('.card, .solution-card, .security-card, .receive-method, .btn');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Icon animations
+            const icons = document.querySelectorAll('.method-icon, .solution-icon, .security-icon, .benefit-icon');
+            icons.forEach(icon => {
+                icon.classList.add('icon-animate');
+            });
+            
+            // Performance optimization: Throttle scroll events
+            let ticking = false;
+            function updateAnimations() {
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateAnimations);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick);
+            
+            // Initialize animations on page load
+            setTimeout(() => {
+                const heroContent = document.querySelector('.hero .hero-content');
+                if (heroContent) {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                }
+                
+                // Ensure hero section has fade-in animation
+                const heroSection = document.querySelector('.hero');
+                if (heroSection) {
+                    heroSection.classList.add('fade-in');
+                }
+                
+                            // Ensure all main sections have fade-in animation
+            const mainSections = document.querySelectorAll('main > section, header.hero, footer.footer, section.hero');
+            mainSections.forEach(section => {
+                section.classList.add('fade-in');
+            });
+            }, 100);
+        });
+        
+        // Add floating animation to key elements
+        function addFloatingAnimation() {
+            const floatingElements = document.querySelectorAll('.hero-image, .app-mockup, .security-icon');
+            floatingElements.forEach(element => {
+                element.style.animation = 'floating 3s ease-in-out infinite';
+            });
+        }
+        
+        // CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floating {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            .floating {
+                animation: floating 3s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize floating animations
+        document.addEventListener('DOMContentLoaded', addFloatingAnimation);
+    </script>
 </body>
-</html> 
+</html>

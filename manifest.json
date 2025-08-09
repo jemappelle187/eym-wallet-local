@@ -1,0 +1,167 @@
+{
+  "name": "SendNReceive - Global Financial Inclusion Platform",
+  "short_name": "SendNReceive",
+  "description": "Empowering underbanked communities with global payment infrastructure, currency hedging, and financial inclusion. Fight inflation with auto-hedging deposits in local currencies.",
+  "version": "2.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "finance",
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "images/logos/sendnreceive_logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logos/sendnreceive_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logos/sendnreceive_logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshots/Homescreen-Mockup.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "SendNReceive Financial Inclusion Platform - Desktop View"
+    },
+    {
+      "src": "images/screenshots/Homescreen-Mockup.svg",
+      "sizes": "750x1334",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "SendNReceive Financial Inclusion Platform - Mobile View"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Send Money",
+      "short_name": "Send",
+      "description": "Send money to family and friends globally",
+      "url": "/send",
+      "icons": [
+        {
+          "src": "images/icons/send-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Currency Hedging",
+      "short_name": "Hedge",
+      "description": "Protect your wealth with currency hedging",
+      "url": "/hedge",
+      "icons": [
+        {
+          "src": "images/icons/hedge-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Global Network",
+      "short_name": "Network",
+      "description": "View our global payment network",
+      "url": "/network",
+      "icons": [
+        {
+          "src": "images/icons/network-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.sendnreceive.app",
+      "id": "com.sendnreceive.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/sendnreceive/id1234567890"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+sendnreceive",
+      "url": "/handle?protocol=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/handle-file",
+      "accept": {
+        "application/json": [".json"],
+        "text/csv": [".csv"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*", "application/pdf"]
+        }
+      ]
+    }
+  },
+  "permissions": [
+    "geolocation",
+    "notifications",
+    "camera",
+    "microphone"
+  ],
+  "features": [
+    "Cross Platform",
+    "fast",
+    "simple",
+    "secure",
+    "offline-capable"
+  ],
+  "developer": {
+    "name": "SendNReceive Team",
+    "url": "https://sendnreceive.com"
+  },
+  "homepage_url": "https://sendnreceive.com",
+  "scope_extensions": [
+    {
+      "origin": "https://api.sendnreceive.com"
+    }
+  ]
+} 
