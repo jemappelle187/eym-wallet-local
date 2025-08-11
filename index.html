@@ -215,7 +215,8 @@
   </nav>
 <main id="main" role="main">
 
-  <section id="home" class="hero fade-in section-bg-light">
+  <!-- HERO WITH VIDEO BACKGROUND -->
+  <section id="home" class="hero fade-in">
 
         <!-- HERO BACKGROUND VIDEO -->
         <div class="hero-video-wrap" aria-hidden="true">
@@ -641,158 +642,49 @@
       </div>
     </section>
 
-<!-- Remittance Calculator Section -->
+<!-- Simplified Remittance Calculator Section -->
 <section class="exchange-rate fade-in premium-section section-bg-light" id="exchange-rate">
       <div class="container">
         <h2>Remittance Calculator</h2>
-        <p class="calculator-subtitle">See exactly how much your recipient will receive with real-time calculations.</p>
-        
-        <!-- Enhanced Tooltip with Progress Indicators -->
-        <div class="calculator-tooltip">
-          <span class="tooltip-icon">ℹ️</span>
-          <span class="tooltip-text">Real-time exchange rates • Zero fees for individuals • Instant transfer estimate</span>
-        </div>
-
-        <!-- Quick Amount Presets -->
-        <div class="amount-presets">
-          <button type="button" class="preset-btn" data-amount="50">$50</button>
-          <button type="button" class="preset-btn" data-amount="100">$100</button>
-          <button type="button" class="preset-btn" data-amount="200">$200</button>
-          <button type="button" class="preset-btn" data-amount="500">$500</button>
-        </div>
+        <p class="calculator-subtitle">Calculate your transfer amount instantly.</p>
 
         <form class="exchange-form">
           <div class="exchange-selects">
             <div class="input-group">
-              <label for="calcAmount">Amount to Send</label>
-              <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required aria-label="Amount to send" />
+              <label for="calcAmount">Amount</label>
+              <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required />
             </div>
             
             <div class="input-group">
-              <label for="calcFrom">From Currency</label>
-              <div class="currency-select-wrapper">
-                <select class="currency-select premium-select" id="calcFrom" aria-label="Currency to send from">
-                  <option value="USD">🇺🇸 USD - US Dollar</option>
-                  <option value="EUR">🇪🇺 EUR - Euro</option>
-                  <option value="GBP">🇬🇧 GBP - British Pound</option>
-                  <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-                  <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-                  <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-                  <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-                  <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-                  <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-                </select>
-              </div>
+              <label for="calcFrom">From</label>
+              <select class="currency-select" id="calcFrom">
+                <option value="USD">🇺🇸 USD</option>
+                <option value="EUR">🇪🇺 EUR</option>
+                <option value="GBP">🇬🇧 GBP</option>
+                <option value="GHS">🇬🇭 GHS</option>
+                <option value="NGN">🇳🇬 NGN</option>
+              </select>
             </div>
             
-            <div class="exchange-arrow" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
+            <div class="exchange-arrow">→</div>
             
             <div class="input-group">
-              <label for="calcTo">To Currency</label>
-              <div class="currency-select-wrapper">
-                <select class="currency-select premium-select" id="calcTo" aria-label="Currency to send to">
-                  <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-                  <option value="USD">🇺🇸 USD - US Dollar</option>
-                  <option value="EUR">🇪🇺 EUR - Euro</option>
-                  <option value="GBP">🇬🇧 GBP - British Pound</option>
-                  <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-                  <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-                  <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-                  <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-                  <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-                  <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-                  <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-                  <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-                </select>
-              </div>
+              <label for="calcTo">To</label>
+              <select class="currency-select" id="calcTo">
+                <option value="GHS">🇬🇭 GHS</option>
+                <option value="USD">🇺🇸 USD</option>
+                <option value="EUR">🇪🇺 EUR</option>
+                <option value="GBP">🇬🇧 GBP</option>
+                <option value="NGN">🇳🇬 NGN</option>
+              </select>
             </div>
           </div>
 
-          <!-- Transfer Speed Options -->
-          <div class="transfer-speed-options">
-            <label>Transfer Speed:</label>
-            <div class="speed-options">
-              <label class="speed-option">
-                <input type="radio" name="transferSpeed" value="instant" checked>
-                <span class="speed-label">
-                  <span class="speed-icon">⚡</span>
-                  <span class="speed-text">Instant (0% fee)</span>
-                </span>
-              </label>
-              <label class="speed-option">
-                <input type="radio" name="transferSpeed" value="standard">
-                <span class="speed-label">
-                  <span class="speed-icon">🕐</span>
-                  <span class="speed-text">Standard (0% fee, 1-2 days)</span>
-                </span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Real-time Exchange Rate Display -->
-          <div class="exchange-rate-display">
-            <div class="rate-info">
-              <span class="rate-label">Current Exchange Rate:</span>
-              <span class="rate-value" id="exchangeRate">1 USD = 23.12 GHS</span>
-              <span class="rate-update">Updated just now</span>
-            </div>
-          </div>
-
-          <!-- Enhanced Results Section -->
           <div class="calc-results" id="calcResults">
-            <div class="results-header">
-              <h3>Transfer Summary</h3>
-              <div class="calculation-status" id="calcStatus">
-                <span class="status-icon">✓</span>
-                <span class="status-text">Real-time calculation</span>
-              </div>
-            </div>
-            
-            <div class="results-grid">
-              <div class="result-card main-result">
-                <div class="result-label">Recipient gets:</div>
-                <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
-                <div class="result-subtitle">Zero fees applied</div>
-              </div>
-              
-              <div class="result-card fee-comparison">
-                <div class="result-label">Fee Comparison</div>
-                <div class="comparison-items">
-                  <div class="comparison-item success">
-                    <span class="comparison-icon">✓</span>
-                    <span class="comparison-text">SendNReceive: <strong>0% fee</strong></span>
-                  </div>
-                  <div class="comparison-item warning">
-                    <span class="comparison-icon">⚠️</span>
-                    <span class="comparison-text">Typical Bank: <strong id="calcBankFee">$7.99 fee</strong></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Enhanced Savings Display -->
-            <div class="calc-savings">
-              <div class="savings-header">
-                <span class="savings-icon">💰</span>
-                <span class="savings-title">Your Savings</span>
-              </div>
-              <div class="savings-amount" id="calcSavings">$8.00</div>
-              <div class="savings-subtitle">compared to traditional bank transfers</div>
-            </div>
-
-            <!-- Transfer Time Estimate -->
-            <div class="transfer-time">
-              <div class="time-info">
-                <span class="time-icon">🕐</span>
-                <span class="time-text">Estimated delivery: <strong id="transferTime">Instant</strong></span>
-              </div>
+            <div class="result-card main-result">
+              <div class="result-label">Recipient gets:</div>
+              <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
+              <div class="result-subtitle">Zero fees • Instant transfer</div>
             </div>
           </div>
         </form>
@@ -863,12 +755,46 @@
           <div class="author-info">
             <div class="author-name">Ayo Adebayo</div>
             <div class="author-title">Freelancer, Nigeria</div>
+                        </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <!-- HERO WITH GRADIENT OVERLAY (FOR COMPARISON) -->
+    <section id="hero-gradient" class="hero fade-in section-bg-light">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            A FAIR WAY TO FINANCIAL INCLUSION (GRADIENT VERSION)
+          </h1>
+          
+          <p class="hero-subtitle">
+            The world's first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure. Access to the global financial network shouldn't be a luxury.
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-large download-app-btn bounce-in" onclick="showDownloadOptions()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Download the App
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="iphone-mockup">
+            <div class="iphone-frame">
+              <div class="dynamic-island"></div>
+              <div class="iphone-screen">
+                <div class="app-screenshot"></div>
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 
