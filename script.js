@@ -1355,3 +1355,451 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 }); 
+
+// ===== MOBILE OPTIMIZATIONS =====
+// Enhanced mobile experience without affecting desktop
+
+class MobileOptimizer {
+  constructor() {
+    this.isMobile = window.innerWidth <= 768;
+    this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    this.touchStartY = 0;
+    this.touchStartX = 0;
+    
+    this.init();
+  }
+  
+  init() {
+    if (this.isMobile) {
+      this.setupMobileOptimizations();
+      this.setupTouchGestures();
+      this.setupMobilePerformance();
+      this.setupMobileAccessibility();
+    }
+  }
+  
+  setupMobileOptimizations() {
+    // Optimize scroll performance on mobile
+    let ticking = false;
+    
+    const updateScroll = () => {
+      // Update scroll-based animations only when needed
+      ticking = false;
+    };
+    
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Optimize resize events on mobile
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        this.handleMobileResize();
+      }, 250);
+    });
+    
+    // Reduce motion on mobile for better performance
+    if (this.isMobile) {
+      document.documentElement.style.setProperty('--transition-fast', '0.2s');
+      document.documentElement.style.setProperty('--transition-base', '0.3s');
+    }
+  }
+  
+  setupTouchGestures() {
+    if (!this.isTouchDevice) return;
+    
+    // Handle touch gestures for better mobile navigation
+    document.addEventListener('touchstart', (e) => {
+      this.touchStartY = e.touches[0].clientY;
+      this.touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchEndX = e.changedTouches[0].clientX;
+      const deltaY = this.touchStartY - touchEndY;
+      const deltaX = this.touchStartX - touchEndX;
+      
+      // Swipe up to show navbar
+      if (deltaY > 50 && Math.abs(deltaX) < 50) {
+        document.querySelector('.navbar')?.classList.remove('nav-hidden');
+      }
+      
+      // Swipe down to hide navbar
+      if (deltaY < -50 && Math.abs(deltaX) < 50) {
+        document.querySelector('.navbar')?.classList.add('nav-hidden');
+      }
+    }, { passive: true });
+    
+    // Optimize touch feedback
+    const touchElements = document.querySelectorAll('.btn, .card, .solution-card, .security-card, .receive-method');
+    touchElements.forEach(element => {
+      element.addEventListener('touchstart', () => {
+        element.style.transform = 'scale(0.98)';
+      }, { passive: true });
+      
+      element.addEventListener('touchend', () => {
+        element.style.transform = 'scale(1)';
+      }, { passive: true });
+    });
+  }
+  
+  setupMobilePerformance() {
+    // Lazy load images on mobile for better performance
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              observer.unobserve(img);
+            }
+          }
+        });
+      });
+      
+      const lazyImages = document.querySelectorAll('img[data-src]');
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
+    
+    // Optimize video playback on mobile
+    const heroVideo = document.querySelector('.hero-bg-video');
+    if (heroVideo && this.isMobile) {
+      // Reduce video quality on mobile for better performance
+      heroVideo.setAttribute('preload', 'metadata');
+      
+      // Pause video when not visible to save battery
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            heroVideo.play().catch(() => {
+              // Video autoplay failed, keep it paused
+            });
+          } else {
+            heroVideo.pause();
+          }
+        });
+      });
+      
+      videoObserver.observe(heroVideo);
+    }
+    
+    // Optimize animations on mobile
+    if (this.isMobile) {
+      const animatedElements = document.querySelectorAll('[data-aos], .fade-in, .slide-in-left, .slide-in-right, .scale-in');
+      animatedElements.forEach(element => {
+        element.style.animationDuration = '0.4s';
+        element.style.transitionDuration = '0.3s';
+      });
+    }
+  }
+  
+  setupMobileAccessibility() {
+    // Improve mobile navigation accessibility
+    const mobileMenu = document.getElementById('nav-menu');
+    const hamburger = document.getElementById('hamburger');
+    
+    if (mobileMenu && hamburger) {
+      // Add ARIA labels for mobile menu
+      hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-controls', 'nav-menu');
+      
+      hamburger.addEventListener('click', () => {
+        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', !isExpanded);
+      });
+      
+      // Trap focus in mobile menu when open
+      const focusableElements = mobileMenu.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+      
+      mobileMenu.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+              e.preventDefault();
+              lastFocusable.focus();
+            }
+          } else {
+            if (document.activeElement === lastFocusable) {
+              e.preventDefault();
+              firstFocusable.focus();
+            }
+          }
+        }
+        
+        if (e.key === 'Escape') {
+          hamburger.click();
+          hamburger.focus();
+        }
+      });
+    }
+    
+    // Improve mobile form accessibility
+    const mobileForms = document.querySelectorAll('form');
+    mobileForms.forEach(form => {
+      const inputs = form.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        // Ensure proper input sizing on mobile
+        if (input.type === 'text' || input.type === 'email' || input.type === 'password') {
+          input.style.fontSize = '16px'; // Prevents zoom on iOS
+        }
+        
+        // Add mobile-friendly labels
+        if (!input.id && !input.getAttribute('aria-label')) {
+          const placeholder = input.placeholder;
+          if (placeholder) {
+            input.setAttribute('aria-label', placeholder);
+          }
+        }
+      });
+    });
+  }
+  
+  handleMobileResize() {
+    // Handle orientation changes and resize events
+    const isLandscape = window.innerWidth > window.innerHeight;
+    
+    if (isLandscape && this.isMobile) {
+      // Optimize for landscape mode
+      document.documentElement.style.setProperty('--hero-padding', '60px 20px 30px');
+      document.documentElement.style.setProperty('--hero-title-size', '2.2rem');
+    } else if (this.isMobile) {
+      // Optimize for portrait mode
+      document.documentElement.style.setProperty('--hero-padding', '80px 20px 40px');
+      document.documentElement.style.setProperty('--hero-title-size', '2.5rem');
+    }
+  }
+  
+  // Mobile-specific utility methods
+  static isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+  
+  static isLowEndDevice() {
+    // Detect low-end devices for additional optimizations
+    const memory = navigator.deviceMemory || 4;
+    const cores = navigator.hardwareConcurrency || 4;
+    return memory < 4 || cores < 4;
+  }
+  
+  static optimizeForLowEnd() {
+    if (this.isLowEndDevice()) {
+      // Disable complex animations on low-end devices
+      document.documentElement.style.setProperty('--animation-complexity', 'simple');
+      
+      // Reduce shadow complexity
+      const style = document.createElement('style');
+      style.textContent = `
+        .card, .btn, .solution-card, .security-card {
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+        .hero-particles, .hero-waves, .hero-connections {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+}
+
+// Initialize mobile optimizations
+document.addEventListener('DOMContentLoaded', () => {
+  new MobileOptimizer();
+  
+  // Apply low-end device optimizations
+  MobileOptimizer.optimizeForLowEnd();
+  
+  // Mobile-specific scroll optimizations
+  if (window.innerWidth <= 768) {
+    // Use passive scroll listeners for better mobile performance
+    const scrollElements = document.querySelectorAll('.scroll-container, .scroll-content');
+    scrollElements.forEach(element => {
+      element.addEventListener('scroll', () => {}, { passive: true });
+    });
+    
+    // Optimize mobile menu performance
+    const mobileMenu = document.getElementById('nav-menu');
+    if (mobileMenu) {
+      // Use transform instead of height for better performance
+      mobileMenu.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      
+      // Optimize mobile menu animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.opacity = '1';
+          }
+        });
+      });
+      
+      observer.observe(mobileMenu);
+    }
+  }
+});
+
+// Mobile-specific error handling
+window.addEventListener('error', (e) => {
+  if (window.innerWidth <= 768) {
+    // Log mobile-specific errors
+    console.warn('Mobile error detected:', e.error);
+    
+    // Gracefully handle common mobile issues
+    if (e.error && e.error.message.includes('video')) {
+      // Handle video playback errors on mobile
+      const heroVideo = document.querySelector('.hero-bg-video');
+      if (heroVideo) {
+        heroVideo.style.display = 'none';
+        // Show fallback background
+        document.querySelector('.hero-bg-overlay').style.background = 'var(--premium-gradient)';
+      }
+    }
+  }
+});
+
+// Mobile-specific performance monitoring
+if (window.innerWidth <= 768) {
+  // Monitor mobile performance
+  let frameCount = 0;
+  let lastTime = performance.now();
+  
+  function checkPerformance() {
+    frameCount++;
+    const currentTime = performance.now();
+    
+    if (currentTime >= lastTime + 1000) {
+      const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+      
+      if (fps < 30) {
+        // Apply performance optimizations for low FPS
+        document.documentElement.style.setProperty('--animation-complexity', 'minimal');
+        console.warn('Low FPS detected on mobile, applying optimizations');
+      }
+      
+      frameCount = 0;
+      lastTime = currentTime;
+    }
+    
+    requestAnimationFrame(checkPerformance);
+  }
+  
+  requestAnimationFrame(checkPerformance);
+}
+
+// ===== FOOTER CONTROLS =====
+// Dark Mode and Language Controls
+
+class FooterControls {
+  constructor() {
+    this.darkModeBtn = document.getElementById('darkModeBtn');
+    this.languageBtn = document.getElementById('languageBtn');
+    this.languageDropdown = document.getElementById('languageDropdown');
+    this.isDarkMode = localStorage.getItem('darkMode') === 'true';
+    
+    this.init();
+  }
+  
+  init() {
+    this.setupDarkMode();
+    this.setupLanguageSelector();
+    this.applyInitialState();
+  }
+  
+  setupDarkMode() {
+    if (this.darkModeBtn) {
+      this.darkModeBtn.addEventListener('click', () => {
+        this.toggleDarkMode();
+      });
+    }
+  }
+  
+  setupLanguageSelector() {
+    if (this.languageBtn && this.languageDropdown) {
+      this.languageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleLanguageDropdown();
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!this.languageBtn.contains(e.target) && !this.languageDropdown.contains(e.target)) {
+          this.languageDropdown.classList.remove('show');
+        }
+      });
+      
+      // Language option clicks
+      const languageOptions = this.languageDropdown.querySelectorAll('.language-option');
+      languageOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = option.getAttribute('data-lang');
+          this.changeLanguage(lang);
+          this.languageDropdown.classList.remove('show');
+        });
+      });
+    }
+  }
+  
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('darkMode', this.isDarkMode);
+    this.applyDarkMode();
+  }
+  
+  applyDarkMode() {
+    if (this.isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+      this.darkModeBtn.classList.add('active');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      this.darkModeBtn.classList.remove('active');
+    }
+  }
+  
+  toggleLanguageDropdown() {
+    this.languageDropdown.classList.toggle('show');
+  }
+  
+  changeLanguage(lang) {
+    // Store selected language
+    localStorage.setItem('selectedLanguage', lang);
+    
+    // Apply language change (you can integrate with your existing language system)
+    this.applyLanguage(lang);
+  }
+  
+  applyLanguage(lang) {
+    // Add language class to body for CSS targeting
+    document.body.className = document.body.className.replace(/lang-\w+/g, '');
+    document.body.classList.add(`lang-${lang}`);
+    
+    // You can add more language-specific logic here
+    console.log(`Language changed to: ${lang}`);
+  }
+  
+  applyInitialState() {
+    // Apply saved dark mode state
+    this.applyDarkMode();
+    
+    // Apply saved language
+    const savedLang = localStorage.getItem('selectedLanguage') || 'en';
+    this.changeLanguage(savedLang);
+  }
+}
+
+// Initialize footer controls
+document.addEventListener('DOMContentLoaded', () => {
+  new FooterControls();
+}); 
