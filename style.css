@@ -3940,6 +3940,15 @@ body {
   position: relative;
 }
 
+/* Special handling for hero section to keep video visible */
+.hero.section-bg-light {
+  background: none;
+}
+
+.hero.section-bg-light::before {
+  display: none;
+}
+
 .section-bg-light::before {
   content: '';
   position: absolute;
