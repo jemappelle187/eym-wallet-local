@@ -3929,8 +3929,38 @@ body {
 }
 
 .section-bg-light {
-  background: var(--color-light-blue);
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #ffffff 10%, 
+    var(--color-light-blue) 50%, 
+    #ffffff 90%, 
+    #ffffff 100%
+  );
   color: var(--color-text-primary);
+  position: relative;
+}
+
+.section-bg-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0) 10%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0) 90%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-bg-light > * {
+  position: relative;
+  z-index: 2;
 }
 
 .section-bg-dark {
