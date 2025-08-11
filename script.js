@@ -1024,39 +1024,49 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function updateCalc() {
-  const resultsDiv = document.getElementById('calcResults');
-  if (!resultsDiv) return;
+  const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
+  const fromCurrency = document.getElementById('calcFrom').value;
+  const toCurrency = document.getElementById('calcTo').value;
   
-  resultsDiv.classList.add('updating');
+  if (amount <= 0) {
+    document.getElementById('calcConverted').textContent = 'Enter amount';
+    document.getElementById('rateInfo').textContent = 'Enter amount to calculate';
+    return;
+  }
   
-  setTimeout(() => {
-    const amount = parseFloat(document.getElementById('calcAmount').value) || 100;
-    const from = document.getElementById('calcFrom').value;
-    const to = document.getElementById('calcTo').value;
-    const key = `${from}_${to}`;
-    const rate = calcRates[key];
-    const converted = rate ? (amount * rate) : 0;
+  // Get exchange rate
+  const rateKey = `${fromCurrency}_${toCurrency}`;
+  const rate = calcRates[rateKey] || 1;
   
-    document.getElementById('calcConverted').textContent = rate ? 
-      `${to} ${converted.toLocaleString(undefined, {maximumFractionDigits: 2})}` : 'N/A';
+  // Calculate converted amount
+  const convertedAmount = amount * rate;
   
-    // Calculate typical bank fee: $7.99 or equivalent
-    let bankFee = 7.99;
-    if (from !== 'USD') {
-      const usdRate = calcRates[`${from}_USD`] || 1;
-      bankFee = 7.99 * usdRate;
-    }
-    
-    document.getElementById('calcBankFee').textContent = 
-      `${bankFee.toLocaleString(undefined, {maximumFractionDigits: 2})} ${from} fee`;
-    
-    // Calculate and display savings
-    const savings = bankFee;
-    document.getElementById('calcSavings').textContent = 
-      `${savings.toLocaleString(undefined, {maximumFractionDigits: 2})} ${from}`;
-      
-    resultsDiv.classList.remove('updating');
-  }, 150);
+  // Format the result
+  const formattedAmount = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: toCurrency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(convertedAmount);
+  
+  // Update display
+  document.getElementById('calcConverted').textContent = formattedAmount;
+  
+  // Update rate info
+  const rateInfo = document.getElementById('rateInfo');
+  if (rate && rate !== 1) {
+    const rateFormatted = rate.toFixed(4);
+    rateInfo.textContent = `1 ${fromCurrency} = ${rateFormatted} ${toCurrency}`;
+  } else {
+    rateInfo.textContent = 'Same currency';
+  }
+}
+
+function updateCalculatorDisplay() {
+  // Update the calculator if it exists
+  if (document.getElementById('calcAmount')) {
+    updateCalc();
+  }
 }
 
 // Add event listeners for the calculator

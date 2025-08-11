@@ -2307,15 +2307,15 @@ body {
 
 /* Remittance Calculator Styles */
 .exchange-rate {
-  padding: 40px 0;
+  padding: 32px 0;
   background: var(--color-light-blue);
 }
 
 .calculator-subtitle {
   text-align: center;
   color: var(--color-text-secondary);
-  margin-bottom: 16px;
-  font-size: 16px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
 
 .calculator-tooltip {
@@ -2371,12 +2371,12 @@ body {
 }
 
 .exchange-form {
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
   background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -5829,8 +5829,8 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   background: transparent;
   color: var(--text-secondary);
   border: none;
@@ -5840,43 +5840,33 @@ html {
 
 .social-link-compact:hover {
   background: transparent;
-  color: var(--text-primary);
   transform: translateY(-2px);
 }
 
 .social-link-compact svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-normal);
 }
 
-.social-link-compact.linkedin:hover {
-  background: #0077b5;
-  color: white;
-  border-color: #0077b5;
+.social-link-compact.linkedin:hover svg {
+  color: #0077b5;
 }
 
-.social-link-compact.facebook:hover {
-  background: #1877f2;
-  color: white;
-  border-color: #1877f2;
+.social-link-compact.facebook:hover svg {
+  color: #1877f2;
 }
 
-.social-link-compact.x:hover {
-  background: #000000;
-  color: white;
-  border-color: #000000;
+.social-link-compact.x:hover svg {
+  color: #000000;
 }
 
-.social-link-compact.instagram:hover {
-  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-  color: white;
-  border-color: #dc2743;
+.social-link-compact.instagram:hover svg {
+  color: #e4405f;
 }
 
-.social-link-compact.tiktok:hover {
-  background: #000000;
-  color: white;
-  border-color: #000000;
+.social-link-compact.tiktok:hover svg {
+  color: #000000;
 }
 
 /* Download App Button Styling */
@@ -6067,4 +6057,11 @@ html {
   .download-option-subtitle {
     font-size: 12px;
   }
+}
+
+.rate-info {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 8px;
+  font-style: italic;
 }
