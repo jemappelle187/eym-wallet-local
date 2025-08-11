@@ -3932,7 +3932,7 @@ body {
   background: linear-gradient(180deg, 
     #ffffff 0%, 
     #ffffff 10%, 
-    var(--color-light-blue) 50%, 
+    #e6f3ff 50%, 
     #ffffff 90%, 
     #ffffff 100%
   );
