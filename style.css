@@ -3130,8 +3130,8 @@ body {
 /* Receive Methods Section Styles */
 .receive-methods {
   padding: 40px 0;
-  background: linear-gradient(135deg, var(--color-brand-blue), var(--color-indigo));
-  color: white;
+  background: white;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -3161,19 +3161,18 @@ body {
 }
 
 .receive-method {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  background: var(--background-secondary);
   border-radius: 16px;
   padding: 24px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-color);
   transition: all var(--transition-normal);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .receive-method:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--background-tertiary);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -3185,7 +3184,7 @@ body {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: white;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -3193,7 +3192,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 16px;
-  opacity: 0.9;
+  color: var(--color-text-secondary);
   text-align: center;
 }
 
@@ -3207,7 +3206,7 @@ body {
 .method-features li {
   padding: 8px 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3286,8 +3285,8 @@ body {
 /* Ready to Get Started Section Styles */
 .receive-cta {
   padding: var(--spacing-md) 0;
-  background: linear-gradient(135deg, var(--color-brand-blue), var(--color-indigo));
-  color: white;
+  background: white;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
@@ -3295,12 +3294,13 @@ body {
   font-size: var(--font-size-xl);
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
 }
 
 .receive-cta p {
   font-size: var(--font-size-base);
   margin-bottom: var(--spacing-sm);
-  opacity: 0.9;
+  color: var(--color-text-secondary);
 }
 
 .receive-app-buttons {
@@ -3317,19 +3317,18 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  background: var(--background-secondary);
   border-radius: 12px;
   text-decoration: none;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text-primary);
+  border: 1px solid var(--border-color);
   transition: all var(--transition-normal);
   min-width: 180px;
 }
 
 .receive-app-buttons .btn-app-store:hover,
 .receive-app-buttons .btn-google-play:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--background-tertiary);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
@@ -4429,7 +4428,7 @@ input:focus, select:focus, textarea:focus{
 /* Social Proof Section */
 .social-proof {
   padding: var(--spacing-lg) 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: white;
 }
 
 .proof-header {
@@ -4463,12 +4462,12 @@ input:focus, select:focus, textarea:focus{
 }
 
 .stat-card {
-  background: white;
+  background: var(--background-secondary);
   padding: var(--spacing-md);
   border-radius: var(--radius-lg);
   text-align: center;
   box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -4492,6 +4491,7 @@ input:focus, select:focus, textarea:focus{
 
 .stat-card:hover {
   transform: translateY(-4px);
+  background: var(--background-tertiary);
   box-shadow: var(--shadow-lg);
 }
 
@@ -4530,11 +4530,11 @@ input:focus, select:focus, textarea:focus{
 }
 
 .testimonial-card {
-  background: white;
+  background: var(--background-secondary);
   padding: var(--spacing-md);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   position: relative;
 }
@@ -4562,6 +4562,7 @@ input:focus, select:focus, textarea:focus{
 
 .testimonial-card:hover {
   transform: translateY(-2px);
+  background: var(--background-tertiary);
   box-shadow: var(--shadow-lg);
 }
 
@@ -5781,3 +5782,255 @@ html {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Compact Social Media Links in Footer */
+.social-links-compact {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.social-link-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.social-link-compact:hover {
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.social-link-compact svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-link-compact.linkedin:hover {
+  background: #0077b5;
+  color: white;
+  border-color: #0077b5;
+}
+
+.social-link-compact.facebook:hover {
+  background: #1877f2;
+  color: white;
+  border-color: #1877f2;
+}
+
+.social-link-compact.x:hover {
+  background: #000000;
+  color: white;
+  border-color: #000000;
+}
+
+.social-link-compact.instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+  color: white;
+  border-color: #dc2743;
+}
+
+.social-link-compact.tiktok:hover {
+  background: #000000;
+  color: white;
+  border-color: #000000;
+}
+
+/* Download App Button Styling */
+.download-app-btn {
+  background: linear-gradient(135deg, var(--color-brand-blue), var(--color-indigo));
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);
+}
+
+.download-app-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(30, 64, 175, 0.4);
+}
+
+.download-app-btn svg {
+  margin-right: 8px;
+}
+
+/* Download Options Modal */
+.download-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.download-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.download-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.download-modal h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.download-modal p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.download-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.download-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--background-secondary);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.download-option:hover {
+  border-color: var(--color-brand-blue);
+  background: var(--background-tertiary);
+  transform: translateY(-2px);
+}
+
+.download-option-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--color-brand-blue);
+  color: white;
+}
+
+.download-option-text {
+  flex: 1;
+  text-align: left;
+  margin-left: 16px;
+}
+
+.download-option-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.download-option-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.download-option-arrow {
+  color: var(--text-secondary);
+  transition: transform var(--transition-normal);
+}
+
+.download-option:hover .download-option-arrow {
+  transform: translateX(4px);
+  color: var(--color-brand-blue);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all var(--transition-normal);
+}
+
+.modal-close:hover {
+  background: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .download-modal-content {
+    margin: 20px;
+    padding: 24px;
+  }
+  
+  .download-option {
+    padding: 12px;
+  }
+  
+  .download-option-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .download-option-text {
+    margin-left: 12px;
+  }
+  
+  .download-option-title {
+    font-size: 14px;
+  }
+  
+  .download-option-subtitle {
+    font-size: 12px;
+  }
+}
