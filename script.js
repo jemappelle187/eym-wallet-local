@@ -1813,3 +1813,195 @@ class NavbarControls {
 document.addEventListener('DOMContentLoaded', () => {
   new NavbarControls();
 }); 
+
+// Advanced Currency Slider Functionality
+class CurrencySlider {
+  constructor() {
+    this.currentSlide = 0;
+    this.slides = document.querySelectorAll('.slider-slide');
+    this.dots = document.querySelectorAll('.dot');
+    this.currencyBtns = document.querySelectorAll('.currency-btn');
+    this.prevBtn = document.getElementById('prevBtn');
+    this.nextBtn = document.getElementById('nextBtn');
+    this.sliderTrack = document.getElementById('sliderTrack');
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.slides.length) return;
+    
+    this.bindEvents();
+    this.updateNavigation();
+    this.startAutoPlay();
+  }
+  
+  bindEvents() {
+    // Navigation buttons
+    this.prevBtn?.addEventListener('click', () => this.prevSlide());
+    this.nextBtn?.addEventListener('click', () => this.nextSlide());
+    
+    // Dot navigation
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => this.goToSlide(index));
+    });
+    
+    // Currency selector
+    this.currencyBtns.forEach((btn, index) => {
+      btn.addEventListener('click', () => this.goToSlide(index));
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') this.prevSlide();
+      if (e.key === 'ArrowRight') this.nextSlide();
+    });
+    
+    // Touch/swipe support
+    this.addTouchSupport();
+    
+    // Pause autoplay on hover
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => this.pauseAutoPlay());
+      sliderContainer.addEventListener('mouseleave', () => this.startAutoPlay());
+    }
+  }
+  
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    
+    // Remove active class from current slide
+    this.slides[this.currentSlide].classList.remove('active');
+    this.dots[this.currentSlide]?.classList.remove('active');
+    this.currencyBtns[this.currentSlide]?.classList.remove('active');
+    
+    // Add active class to new slide
+    this.currentSlide = index;
+    this.slides[this.currentSlide].classList.add('active');
+    this.dots[this.currentSlide]?.classList.add('active');
+    this.currencyBtns[this.currentSlide]?.classList.add('active');
+    
+    // Update slider track position
+    this.updateSliderTrack();
+    this.updateNavigation();
+    
+    // Add animation classes
+    this.animateSlideTransition();
+  }
+  
+  prevSlide() {
+    const newIndex = this.currentSlide - 1;
+    if (newIndex < 0) {
+      this.goToSlide(this.slides.length - 1);
+    } else {
+      this.goToSlide(newIndex);
+    }
+  }
+  
+  nextSlide() {
+    const newIndex = this.currentSlide + 1;
+    if (newIndex >= this.slides.length) {
+      this.goToSlide(0);
+    } else {
+      this.goToSlide(newIndex);
+    }
+  }
+  
+  updateSliderTrack() {
+    if (this.sliderTrack) {
+      const translateX = -this.currentSlide * 100;
+      this.sliderTrack.style.transform = `translateX(${translateX}%)`;
+    }
+  }
+  
+  updateNavigation() {
+    // Update button states
+    if (this.prevBtn) {
+      this.prevBtn.disabled = this.currentSlide === 0;
+    }
+    if (this.nextBtn) {
+      this.nextBtn.disabled = this.currentSlide === this.slides.length - 1;
+    }
+  }
+  
+  animateSlideTransition() {
+    // Add fade-in animation to current slide
+    const currentSlide = this.slides[this.currentSlide];
+    currentSlide.classList.add('fade-in');
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      currentSlide.classList.remove('fade-in');
+    }, 600);
+  }
+  
+  addTouchSupport() {
+    let startX = 0;
+    let endX = 0;
+    
+    const sliderContainer = document.querySelector('.slider-container');
+    if (!sliderContainer) return;
+    
+    sliderContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    sliderContainer.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      this.handleSwipe();
+    });
+    
+    sliderContainer.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      const handleMouseUp = (e) => {
+        endX = e.clientX;
+        this.handleSwipe();
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+      document.addEventListener('mouseup', handleMouseUp);
+    });
+  }
+  
+  handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        this.nextSlide(); // Swipe left
+      } else {
+        this.prevSlide(); // Swipe right
+      }
+    }
+  }
+  
+  startAutoPlay() {
+    this.autoPlayInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // Change slide every 5 seconds
+  }
+  
+  pauseAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
+  }
+  
+  destroy() {
+    this.pauseAutoPlay();
+    // Remove event listeners if needed
+  }
+}
+
+// Initialize the currency slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize existing functionality
+  initializeAnimations();
+  initializeNavbarControls();
+  initializeRemittanceCalculator();
+  
+  // Initialize the new currency slider
+  new CurrencySlider();
+}); 

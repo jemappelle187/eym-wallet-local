@@ -7093,3 +7093,403 @@ html {
       background: var(--dark-text-primary) !important;
     }
   }
+
+/* Advanced Currency Slider Styles */
+.currency-slider {
+  padding: var(--spacing-4xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  gap: var(--spacing-2xl);
+}
+
+.slider-slide {
+  min-width: 100%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: blur(2px);
+}
+
+.slider-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.mockup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+  text-align: center;
+}
+
+.mockup-container .iphone-mockup {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+.mockup-container .iphone-mockup:hover {
+  transform: scale(1.25);
+}
+
+.mockup-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.currency-info {
+  max-width: 400px;
+}
+
+.currency-info h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.currency-info p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.currency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  transition: all 0.3s ease;
+}
+
+.currency-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
+}
+
+/* Slider Navigation */
+.slider-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-3xl);
+}
+
+.slider-btn {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-border);
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-text-primary);
+}
+
+.slider-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.slider-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.slider-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.slider-dots {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--color-primary);
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: var(--color-secondary);
+  transform: scale(1.1);
+}
+
+/* Currency Selector */
+.currency-selector {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-2xl);
+}
+
+.currency-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.currency-btn:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
+}
+
+.currency-btn.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-color: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+}
+
+.currency-btn .flag {
+  font-size: 24px;
+}
+
+.currency-btn .code {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+/* Dark Mode Styles */
+.dark-mode .currency-slider {
+  background: var(--dark-bg-primary);
+}
+
+.dark-mode .currency-info h3 {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark-mode .currency-info p {
+  color: var(--dark-text-secondary);
+}
+
+.dark-mode .slider-btn {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+  color: var(--dark-text-primary);
+}
+
+.dark-mode .slider-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.dark-mode .dot {
+  background: var(--dark-border-color);
+}
+
+.dark-mode .dot.active {
+  background: var(--color-primary);
+}
+
+.dark-mode .dot:hover {
+  background: var(--color-secondary);
+}
+
+.dark-mode .currency-btn {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+  color: var(--dark-text-primary);
+}
+
+.dark-mode .currency-btn:hover {
+  border-color: var(--color-primary);
+}
+
+.dark-mode .currency-btn.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-color: var(--color-primary);
+  color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .currency-slider {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .slider-container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .slider-track {
+    gap: var(--spacing-xl);
+  }
+  
+  .mockup-container .iphone-mockup {
+    transform: scale(1);
+  }
+  
+  .mockup-container .iphone-mockup:hover {
+    transform: scale(1.05);
+  }
+  
+  .currency-info h3 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .currency-info p {
+    font-size: var(--font-size-base);
+  }
+  
+  .slider-nav {
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+  }
+  
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .slider-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .currency-selector {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .currency-btn {
+    min-width: 70px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .currency-btn .flag {
+    font-size: 20px;
+  }
+  
+  .currency-btn .code {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .currency-slider {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .mockup-container {
+    gap: var(--spacing-lg);
+  }
+  
+  .currency-info {
+    max-width: 300px;
+  }
+  
+  .currency-info h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .currency-info p {
+    font-size: var(--font-size-sm);
+  }
+  
+  .slider-nav {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .currency-selector {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .currency-btn {
+    flex-direction: row;
+    min-width: 120px;
+    justify-content: center;
+  }
+}
+
+/* Animation Classes */
+.slider-slide.fade-in {
+  animation: slideFadeIn 0.6s ease-out;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.slider-slide.slide-out {
+  animation: slideFadeOut 0.6s ease-in;
+}
+
+@keyframes slideFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+}
