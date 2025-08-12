@@ -3132,6 +3132,16 @@ body {
     height: 120px !important;
   }
   
+  /* Mobile hero iPhone mockup optimization */
+  .hero-iphone-mockup {
+    margin-top: 10px;
+  }
+  
+  .hero-iphone-mockup-image {
+    width: 150px;
+    max-height: 200px;
+  }
+  
   /* Mobile navbar height adjustment */
   .navbar {
     height: 70px !important;
@@ -7024,6 +7034,39 @@ html {
 
 .logo-image:hover {
   transform: scale(1.05);
+}
+
+/* iPhone Mockup in Hero Section */
+.hero-iphone-mockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-iphone-mockup-image {
+  width: 200px;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
+  transform: rotate(-5deg);
+}
+
+.hero-iphone-mockup-image:hover {
+  transform: rotate(0deg) scale(1.05);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3));
+}
+
+.dark-mode .hero-iphone-mockup-image {
+  filter: drop-shadow(0 8px 16px rgba(255, 255, 255, 0.15)) brightness(0.9);
+}
+
+.dark-mode .hero-iphone-mockup-image:hover {
+  filter: drop-shadow(0 12px 24px rgba(255, 255, 255, 0.25)) brightness(1);
 }
 
   /* Dark mode for logo image */
