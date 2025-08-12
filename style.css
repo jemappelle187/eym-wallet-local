@@ -3089,6 +3089,9 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all var(--transition-normal);
+    z-index: 1000;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
   
   .nav-menu.active {
@@ -3098,11 +3101,54 @@ body {
   }
   
   .hamburger {
-    display: flex;
+    display: flex !important;
+    z-index: 1001;
+  }
+  
+  /* Ensure nav items are properly styled in mobile menu */
+  .nav-menu .nav-item {
+    width: 100%;
+    margin: 8px 0;
+  }
+  
+  .nav-menu .nav-link {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .nav-menu .nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
   }
   
   .nav-cta {
     display: none;
+  }
+  
+  /* Mobile logo optimization */
+  .logo-image {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  /* Mobile navbar height adjustment */
+  .navbar {
+    height: 70px !important;
+  }
+  
+  .nav-container {
+    height: 70px !important;
+  }
+  
+  /* Mobile nav controls positioning */
+  .nav-controls {
+    gap: 8px !important;
+  }
+  
+  .nav-btn {
+    width: 36px !important;
+    height: 36px !important;
   }
   
   .hero-title {
@@ -5738,9 +5784,23 @@ html {
     animation: none !important;
   }
   
-  /* Optimize video background for mobile */
+  /* Disable video background on mobile for better performance */
+  .hero-video-wrap {
+    display: none !important;
+  }
+  
   .hero-bg-video {
-    object-position: center center !important;
+    display: none !important;
+  }
+  
+  /* Use white-blue-white gradient background on mobile */
+  .hero {
+    background: linear-gradient(180deg, 
+      #ffffff 0%, 
+      #f8fafc 25%, 
+      #1e40af 50%, 
+      #6366f1 75%, 
+      #ffffff 100%) !important;
   }
   
   /* Reduce complex gradients on mobile */
@@ -5835,6 +5895,59 @@ html {
   .btn:focus, .nav-link:focus, .dropdown-item:focus {
     outline: 3px solid #3b82f6 !important;
     outline-offset: 2px !important;
+  }
+  
+  /* Mobile touch optimizations */
+  .btn, .nav-link, .dropdown-item {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Mobile scroll optimizations */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Mobile performance optimizations */
+  .hero-particles,
+  .hero-grid,
+  .hero-waves {
+    display: none !important;
+  }
+  
+  /* Mobile form optimizations */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  /* Mobile button optimizations */
+  .btn {
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+  }
+  
+  /* Mobile navigation optimizations */
+  .nav-menu {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  
+  /* Mobile logo positioning */
+  .nav-logo {
+    gap: 8px !important;
+  }
+  
+  /* Mobile nav controls */
+  .nav-controls {
+    position: relative !important;
+  }
+  
+  /* Mobile dropdown optimizations */
+  .nav-language-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    min-width: 200px !important;
   }
   
   /* Improve text contrast on mobile */
@@ -6900,3 +7013,40 @@ html {
   margin-top: 8px;
   font-style: italic;
 }
+
+/* Logo Image Styles */
+.logo-image {
+  width: 192px;
+  height: 192px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+  /* Dark mode for logo image */
+  .dark-mode .logo-image {
+    filter: brightness(0) invert(1);
+  }
+  
+  /* Mobile dark mode optimizations */
+  @media (max-width: 768px) {
+    .dark-mode .nav-menu {
+      background: var(--dark-bg-primary) !important;
+      border-bottom: 1px solid var(--dark-border-color) !important;
+    }
+    
+    .dark-mode .nav-menu .nav-link {
+      color: var(--dark-text-primary) !important;
+    }
+    
+    .dark-mode .nav-menu .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .dark-mode .hamburger span {
+      background: var(--dark-text-primary) !important;
+    }
+  }
