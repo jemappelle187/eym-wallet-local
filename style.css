@@ -3417,6 +3417,20 @@ body {
 }
 
 .qr-caption {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+  text-align: center;
+}
+
+.qr-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-sm);
+  text-align: center;
+  font-style: italic;
+  opacity: 0.8;
+}
   margin-top: 8px;
   font-size: 14px;
   opacity: 0.9;
