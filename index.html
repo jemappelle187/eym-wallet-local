@@ -138,72 +138,84 @@
             <a href="#fraud-protection" class="dropdown-item">Fraud Protection</a>
           </div>
         </div>
-        <div class="nav-item dropdown">
-          <a href="#language" class="nav-link">
-            <div class="flag-icon flag-icon-us current-flag"></div>
-            <span class="current-lang">EN</span>
-          </a>
-          <div class="dropdown-menu language-menu">
-            <a href="#" class="dropdown-item" data-lang="en">
-              <div class="flag-icon flag-icon-us"></div>
-              <span>English</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="es">
-              <div class="flag-icon flag-icon-es"></div>
-              <span>Español</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="fr">
-              <div class="flag-icon flag-icon-fr"></div>
-              <span>Français</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="de">
-              <div class="flag-icon flag-icon-de"></div>
-              <span>Deutsch</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="nl">
-              <div class="flag-icon flag-icon-nl"></div>
-              <span>Nederlands</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="pt">
-              <div class="flag-icon flag-icon-br"></div>
-              <span>Português</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="zh">
-              <div class="flag-icon flag-icon-cn"></div>
-              <span>中文</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="ja">
-              <div class="flag-icon flag-icon-jp"></div>
-              <span>日本語</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="ko">
-              <div class="flag-icon flag-icon-kr"></div>
-              <span>한국어</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="hi">
-              <div class="flag-icon flag-icon-in"></div>
-              <span>हिन्दी</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="ar">
-              <div class="flag-icon flag-icon-sa"></div>
-              <span>العربية</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="sw">
-              <div class="flag-icon flag-icon-ke"></div>
-              <span>Kiswahili</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="yo">
-              <div class="flag-icon flag-icon-ng"></div>
-              <span>Yorùbá</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="ha">
-              <div class="flag-icon flag-icon-ng"></div>
-              <span>Hausa</span>
-            </a>
-            <a href="#" class="dropdown-item" data-lang="tw">
-              <div class="flag-icon flag-icon-gh"></div>
-              <span>Twi</span>
-            </a>
+        <!-- Navbar Controls -->
+        <div class="nav-controls">
+          <button class="nav-btn dark-mode-btn" id="darkModeBtn" aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+            </svg>
+          </button>
+          <div class="nav-language-selector">
+            <button class="nav-btn language-btn" id="languageBtn" aria-label="Change language">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </button>
+            <div class="nav-language-dropdown" id="navLanguageDropdown">
+              <a href="#" data-lang="en" class="nav-language-option">
+                <span class="flag-icon">🇺🇸</span>
+                <span>English</span>
+              </a>
+              <a href="#" data-lang="es" class="nav-language-option">
+                <span class="flag-icon">🇪🇸</span>
+                <span>Español</span>
+              </a>
+              <a href="#" data-lang="fr" class="nav-language-option">
+                <span class="flag-icon">🇫🇷</span>
+                <span>Français</span>
+              </a>
+              <a href="#" data-lang="de" class="nav-language-option">
+                <span class="flag-icon">🇩🇪</span>
+                <span>Deutsch</span>
+              </a>
+              <a href="#" data-lang="nl" class="nav-language-option">
+                <span class="flag-icon">🇳🇱</span>
+                <span>Nederlands</span>
+              </a>
+              <a href="#" data-lang="pt" class="nav-language-option">
+                <span class="flag-icon">🇧🇷</span>
+                <span>Português</span>
+              </a>
+              <a href="#" data-lang="zh" class="nav-language-option">
+                <span class="flag-icon">🇨🇳</span>
+                <span>中文</span>
+              </a>
+              <a href="#" data-lang="ja" class="nav-language-option">
+                <span class="flag-icon">🇯🇵</span>
+                <span>日本語</span>
+              </a>
+              <a href="#" data-lang="ko" class="nav-language-option">
+                <span class="flag-icon">🇰🇷</span>
+                <span>한국어</span>
+              </a>
+              <a href="#" data-lang="hi" class="nav-language-option">
+                <span class="flag-icon">🇮🇳</span>
+                <span>हिन्दी</span>
+              </a>
+              <a href="#" data-lang="ar" class="nav-language-option">
+                <span class="flag-icon">🇸🇦</span>
+                <span>العربية</span>
+              </a>
+              <a href="#" data-lang="sw" class="nav-language-option">
+                <span class="flag-icon">🇰🇪</span>
+                <span>Kiswahili</span>
+              </a>
+              <a href="#" data-lang="yo" class="nav-language-option">
+                <span class="flag-icon">🇳🇬</span>
+                <span>Yorùbá</span>
+              </a>
+              <a href="#" data-lang="ha" class="nav-language-option">
+                <span class="flag-icon">🇳🇬</span>
+                <span>Hausa</span>
+              </a>
+              <a href="#" data-lang="tw" class="nav-language-option">
+                <span class="flag-icon">🇬🇭</span>
+                <span>Twi</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -883,45 +895,7 @@
           <a href="#">Press</a>
           <a href="#">Partners</a>
         </div>
-        <div class="footer-controls">
-          <button class="footer-btn dark-mode-btn" id="darkModeBtn" aria-label="Toggle dark mode">
-            <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-            </svg>
-            <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
-            </svg>
-          </button>
-          <div class="language-selector">
-            <button class="footer-btn language-btn" id="languageBtn" aria-label="Change language">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-              </svg>
-            </button>
-            <div class="language-dropdown" id="languageDropdown">
-              <a href="#" data-lang="en" class="language-option">
-                <span class="flag-icon">🇺🇸</span>
-                <span>English</span>
-              </a>
-              <a href="#" data-lang="es" class="language-option">
-                <span class="flag-icon">🇪🇸</span>
-                <span>Español</span>
-              </a>
-              <a href="#" data-lang="fr" class="language-option">
-                <span class="flag-icon">🇫🇷</span>
-                <span>Français</span>
-              </a>
-              <a href="#" data-lang="de" class="language-option">
-                <span class="flag-icon">🇩🇪</span>
-                <span>Deutsch</span>
-              </a>
-              <a href="#" data-lang="zh" class="language-option">
-                <span class="flag-icon">🇨🇳</span>
-                <span>中文</span>
-              </a>
-      </div>
-          </div>
-        </div>
+
       </div>
       
       <!-- Social Media Icons - Above the divider -->

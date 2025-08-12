@@ -1708,14 +1708,14 @@ if (window.innerWidth <= 768) {
   requestAnimationFrame(checkPerformance);
 }
 
-// ===== FOOTER CONTROLS =====
+// ===== NAVBAR CONTROLS =====
 // Dark Mode and Language Controls
 
-class FooterControls {
+class NavbarControls {
   constructor() {
     this.darkModeBtn = document.getElementById('darkModeBtn');
     this.languageBtn = document.getElementById('languageBtn');
-    this.languageDropdown = document.getElementById('languageDropdown');
+    this.languageDropdown = document.getElementById('navLanguageDropdown');
     this.isDarkMode = localStorage.getItem('darkMode') === 'true';
     
     this.init();
@@ -1750,7 +1750,7 @@ class FooterControls {
       });
       
       // Language option clicks
-      const languageOptions = this.languageDropdown.querySelectorAll('.language-option');
+      const languageOptions = this.languageDropdown.querySelectorAll('.nav-language-option');
       languageOptions.forEach(option => {
         option.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1809,7 +1809,7 @@ class FooterControls {
   }
 }
 
-// Initialize footer controls
+// Initialize navbar controls
 document.addEventListener('DOMContentLoaded', () => {
-  new FooterControls();
+  new NavbarControls();
 }); 
