@@ -1829,26 +1829,43 @@ class CurrencySlider {
   }
   
   init() {
-    if (!this.slides.length) return;
+    if (!this.slides.length) {
+      console.log('No slides found for currency slider');
+      return;
+    }
     
+    console.log(`Currency slider initialized with ${this.slides.length} slides`);
     this.bindEvents();
     this.updateNavigation();
+    this.updateSliderTrack(); // Ensure initial position is set
     this.startAutoPlay();
   }
   
   bindEvents() {
     // Navigation buttons
-    this.prevBtn?.addEventListener('click', () => this.prevSlide());
-    this.nextBtn?.addEventListener('click', () => this.nextSlide());
+    this.prevBtn?.addEventListener('click', () => {
+      console.log('Previous button clicked');
+      this.prevSlide();
+    });
+    this.nextBtn?.addEventListener('click', () => {
+      console.log('Next button clicked');
+      this.nextSlide();
+    });
     
     // Dot navigation
     this.dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => this.goToSlide(index));
+      dot.addEventListener('click', () => {
+        console.log(`Dot ${index} clicked`);
+        this.goToSlide(index);
+      });
     });
     
     // Currency selector
     this.currencyBtns.forEach((btn, index) => {
-      btn.addEventListener('click', () => this.goToSlide(index));
+      btn.addEventListener('click', () => {
+        console.log(`Currency button ${index} clicked`);
+        this.goToSlide(index);
+      });
     });
     
     // Keyboard navigation
@@ -1869,7 +1886,12 @@ class CurrencySlider {
   }
   
   goToSlide(index) {
-    if (index < 0 || index >= this.slides.length) return;
+    if (index < 0 || index >= this.slides.length) {
+      console.log(`Invalid slide index: ${index}`);
+      return;
+    }
+    
+    console.log(`Going to slide ${index} from slide ${this.currentSlide}`);
     
     // Remove active class from current slide
     this.slides[this.currentSlide].classList.remove('active');
@@ -1888,6 +1910,8 @@ class CurrencySlider {
     
     // Add animation classes
     this.animateSlideTransition();
+    
+    console.log(`Now on slide ${this.currentSlide}`);
   }
   
   prevSlide() {
@@ -1912,6 +1936,12 @@ class CurrencySlider {
     if (this.sliderTrack) {
       const translateX = -this.currentSlide * 100;
       this.sliderTrack.style.transform = `translateX(${translateX}%)`;
+      
+      // Ensure all slides are visible in the track
+      this.slides.forEach((slide, index) => {
+        slide.style.minWidth = '100%';
+        slide.style.flexShrink = '0';
+      });
     }
   }
   
