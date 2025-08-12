@@ -5559,6 +5559,20 @@ html {
     right: -10px !important;
   }
   
+  /* Dark mode mobile optimizations */
+  .dark-mode .nav-controls {
+    gap: 6px !important;
+  }
+  
+  .dark-mode .nav-btn {
+    background: var(--dark-bg-tertiary) !important;
+    border-color: var(--dark-border-color) !important;
+  }
+  
+  .dark-mode .nav-btn:hover {
+    background: var(--dark-bg-secondary) !important;
+  }
+  
   .btn-app-store, .btn-play-store {
     width: 100% !important;
     max-width: 280px !important;
@@ -6004,6 +6018,543 @@ html {
 .dark-mode .language-option:hover {
   background: var(--dark-bg-secondary);
   color: var(--dark-text-primary);
+}
+
+/* ===== COMPREHENSIVE DARK MODE OPTIMIZATION ===== */
+
+/* Dark mode for all sections */
+.dark-mode .section-bg-light {
+  background: var(--dark-bg-primary) !important;
+}
+
+.dark-mode .section-bg-light::before {
+  background: linear-gradient(180deg, var(--dark-bg-primary) 0%, var(--dark-bg-primary) 10%, var(--dark-bg-secondary) 50%, var(--dark-bg-primary) 90%, var(--dark-bg-primary) 100%) !important;
+}
+
+/* Dark mode for specific sections */
+.dark-mode .receive-methods,
+.dark-mode .social-proof,
+.dark-mode .receive-cta {
+  background: var(--dark-bg-primary) !important;
+}
+
+.dark-mode .receive-methods h2,
+.dark-mode .social-proof h2,
+.dark-mode .receive-cta h2 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-methods p,
+.dark-mode .social-proof p,
+.dark-mode .receive-cta p {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for cards and components */
+.dark-mode .receive-method {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-method:hover {
+  background: var(--dark-bg-tertiary) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .receive-method h3 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-method p {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .receive-method .method-features li {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for app showcase */
+.dark-mode .screenshot-card {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .screenshot-card:hover {
+  background: var(--dark-bg-tertiary) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .screenshot-info h3 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .screenshot-info p {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .feature-list li {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for security section */
+.dark-mode .security-card {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .security-card:hover {
+  background: var(--dark-bg-tertiary) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .security-card h3 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .security-card p {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for compliance badges */
+.dark-mode .badge {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .badge:hover {
+  background: var(--dark-bg-secondary) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark mode for remittance calculator */
+.dark-mode .exchange-form {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .exchange-form input,
+.dark-mode .exchange-form select {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .exchange-form input:focus,
+.dark-mode .exchange-form select:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.dark-mode .exchange-form label {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .calculator-subtitle {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .rate-info {
+  color: var(--dark-text-muted) !important;
+}
+
+/* Dark mode for social proof section */
+.dark-mode .stat-card {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .stat-card:hover {
+  background: var(--dark-bg-tertiary) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .stat-card::before {
+  background: var(--dark-bg-tertiary) !important;
+}
+
+.dark-mode .stat-number {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .stat-label {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .stat-trend {
+  color: var(--color-success) !important;
+}
+
+/* Dark mode for testimonials */
+.dark-mode .testimonial-card {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .testimonial-card:hover {
+  background: var(--dark-bg-tertiary) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .testimonial-card.featured {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .testimonial-card.featured:hover {
+  background: var(--dark-bg-secondary) !important;
+}
+
+.dark-mode .testimonial-text {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .testimonial-author {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .testimonial-role {
+  color: var(--dark-text-muted) !important;
+}
+
+/* Dark mode for newsletter form */
+.dark-mode .newsletter-form input[type="email"] {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .newsletter-form input[type="email"]:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.dark-mode .newsletter-form input[type="email"]::placeholder {
+  color: var(--dark-text-muted) !important;
+}
+
+.dark-mode .newsletter-form button {
+  background: var(--color-primary) !important;
+  color: white !important;
+}
+
+.dark-mode .newsletter-form button:hover {
+  background: var(--color-primary-dark) !important;
+}
+
+/* Dark mode for buttons */
+.dark-mode .btn {
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .btn-primary {
+  background: var(--color-primary) !important;
+  color: white !important;
+}
+
+.dark-mode .btn-primary:hover {
+  background: var(--color-primary-dark) !important;
+}
+
+.dark-mode .btn-secondary {
+  background: var(--dark-bg-tertiary) !important;
+  color: var(--dark-text-primary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .btn-secondary:hover {
+  background: var(--dark-bg-secondary) !important;
+}
+
+/* Dark mode for navigation */
+.dark-mode .nav-link {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+
+.dark-mode .dropdown-menu {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .dropdown-item {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .dropdown-item:hover {
+  background: var(--dark-bg-secondary) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Dark mode for navbar controls */
+.dark-mode .nav-language-dropdown {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .nav-language-option {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .nav-language-option:hover {
+  background: var(--dark-bg-secondary) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Dark mode for social media icons */
+.dark-mode .social-link-compact {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .social-link-compact:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Dark mode for footer */
+.dark-mode .footer {
+  background: var(--dark-bg-secondary) !important;
+  border-top-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .footer h4 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .footer a {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .footer a:hover {
+  color: var(--color-primary) !important;
+}
+
+.dark-mode .footer-bottom {
+  border-top-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .footer-legal p {
+  color: var(--dark-text-muted) !important;
+}
+
+.dark-mode .legal-links a {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .legal-links a:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Dark mode for modals */
+.dark-mode .cookie-modal-content {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .cookie-modal-content h4 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .cookie-modal-content p {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .download-modal-content {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .download-option {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .download-option:hover {
+  background: var(--dark-bg-secondary) !important;
+}
+
+.dark-mode .download-option-title {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .download-option-subtitle {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for scroll progress */
+.dark-mode .scroll-progress {
+  background: var(--dark-bg-tertiary) !important;
+}
+
+.dark-mode .scroll-progress::after {
+  background: var(--color-primary) !important;
+}
+
+/* Dark mode for hamburger menu */
+.dark-mode .hamburger span {
+  background: var(--dark-text-primary) !important;
+}
+
+/* Dark mode for section headers */
+.dark-mode .section-header h2 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .section-header p {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for QR code section */
+.dark-mode .qr-caption {
+  color: var(--dark-text-secondary) !important;
+}
+
+.dark-mode .qr-subtitle {
+  color: var(--dark-text-muted) !important;
+}
+
+/* Dark mode for app store buttons */
+.dark-mode .btn-app-store,
+.dark-mode .btn-play-store {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+}
+
+.dark-mode .btn-app-store:hover,
+.dark-mode .btn-play-store:hover {
+  background: var(--dark-bg-secondary) !important;
+}
+
+/* Dark mode for hero section */
+.dark-mode .hero-title {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .hero-subtitle {
+  color: var(--dark-text-secondary) !important;
+}
+
+/* Dark mode for video overlay */
+.dark-mode .hero-bg-overlay {
+  background: rgba(15, 23, 42, 0.7) !important;
+}
+
+/* Dark mode for mobile menu */
+.dark-mode .nav-menu {
+  background: rgba(15, 23, 42, 0.98) !important;
+}
+
+.dark-mode .nav-menu .nav-link {
+  border-bottom-color: var(--dark-border-color) !important;
+}
+
+/* Additional dark mode optimizations for better contrast */
+.dark-mode .container {
+  color: var(--dark-text-primary);
+}
+
+.dark-mode .premium-section {
+  background: var(--dark-bg-primary) !important;
+}
+
+.dark-mode .fade-in {
+  color: var(--dark-text-primary);
+}
+
+.dark-mode .stagger-item {
+  color: var(--dark-text-primary);
+}
+
+/* Dark mode for any remaining text elements */
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode p, .dark-mode span, .dark-mode div {
+  color: var(--dark-text-primary);
+}
+
+.dark-mode a {
+  color: var(--dark-text-secondary);
+}
+
+.dark-mode a:hover {
+  color: var(--color-primary);
+}
+
+/* Dark mode for form elements */
+.dark-mode input, .dark-mode textarea, .dark-mode select {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode input::placeholder, .dark-mode textarea::placeholder {
+  color: var(--dark-text-muted) !important;
+}
+
+/* Dark mode for icons */
+.dark-mode .method-icon svg,
+.dark-mode .solution-icon svg,
+.dark-mode .security-icon svg {
+  color: var(--color-primary) !important;
+}
+
+/* Dark mode for gradients and overlays */
+.dark-mode .hero-bg-overlay {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%) !important;
+}
+
+/* Dark mode for any remaining cards or containers */
+.dark-mode .card,
+.dark-mode .container-card,
+.dark-mode .info-card {
+  background: var(--dark-bg-secondary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+/* Dark mode for any remaining buttons */
+.dark-mode .download-app-btn,
+.dark-mode .cta-btn,
+.dark-mode .action-btn {
+  background: var(--color-primary) !important;
+  color: white !important;
+  border-color: var(--color-primary) !important;
+}
+
+.dark-mode .download-app-btn:hover,
+.dark-mode .cta-btn:hover,
+.dark-mode .action-btn:hover {
+  background: var(--color-primary-dark) !important;
+}
+
+/* Dark mode for any remaining lists */
+.dark-mode ul, .dark-mode ol {
+  color: var(--dark-text-primary);
+}
+
+.dark-mode li {
+  color: var(--dark-text-secondary);
+}
+
+/* Dark mode for any remaining dividers */
+.dark-mode hr, .dark-mode .divider {
+  border-color: var(--dark-border-color) !important;
+}
+
+/* Dark mode for any remaining shadows and effects */
+.dark-mode .shadow,
+.dark-mode .elevated {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark mode for any remaining borders */
+.dark-mode .bordered {
+  border-color: var(--dark-border-color) !important;
 }
 
 /* Dark mode transitions */
