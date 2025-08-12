@@ -5897,8 +5897,8 @@ html {
   display: flex;
   justify-content: center;
   gap: 4px;
-  margin: 12px 0 0 0;
-  padding: 8px 0 0 0;
+  margin: 12px 0 8px 0;
+  padding: 8px 0 8px 0;
   border-top: 1px solid var(--border-color);
 }
 
