@@ -7301,11 +7301,14 @@ html {
 
 .currency-btn .flag {
   font-size: 24px;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .currency-btn .code {
   font-weight: 600;
   font-size: var(--font-size-sm);
+  display: block;
 }
 
 /* Dark Mode Styles */

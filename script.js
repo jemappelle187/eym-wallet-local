@@ -1861,10 +1861,11 @@ class CurrencySlider {
     });
     
     // Currency selector
-    this.currencyBtns.forEach((btn, index) => {
+    this.currencyBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        console.log(`Currency button ${index} clicked`);
-        this.goToSlide(index);
+        const slideIndex = parseInt(btn.getAttribute('data-slide'));
+        console.log(`Currency button ${btn.getAttribute('data-currency')} clicked, going to slide ${slideIndex}`);
+        this.goToSlide(slideIndex);
       });
     });
     
@@ -1936,6 +1937,8 @@ class CurrencySlider {
     if (this.sliderTrack) {
       const translateX = -this.currentSlide * 100;
       this.sliderTrack.style.transform = `translateX(${translateX}%)`;
+      
+      console.log(`Slider track moved to translateX(${translateX}%) for slide ${this.currentSlide}`);
       
       // Ensure all slides are visible in the track
       this.slides.forEach((slide, index) => {
