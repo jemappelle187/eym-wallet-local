@@ -5896,7 +5896,7 @@ html {
 .social-links-compact {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 4px;
   margin: 24px 0;
   padding: 16px 0;
   border-top: 1px solid var(--border-color);
