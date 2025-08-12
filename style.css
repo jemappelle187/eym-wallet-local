@@ -6532,6 +6532,20 @@ html {
   background: var(--color-primary-dark) !important;
 }
 
+/* Dark mode for hero download button specifically */
+.dark-mode .hero .download-app-btn {
+  background: white !important;
+  color: var(--color-primary) !important;
+  border-color: white !important;
+}
+
+.dark-mode .hero .download-app-btn:hover {
+  background: var(--gray-100) !important;
+  color: var(--color-primary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+}
+
 /* Dark mode for any remaining lists */
 .dark-mode ul, .dark-mode ol {
   color: var(--dark-text-primary);
