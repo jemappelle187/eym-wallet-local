@@ -6535,13 +6535,13 @@ html {
 /* Dark mode for hero download button specifically */
 .dark-mode .hero .download-app-btn {
   background: white !important;
-  color: var(--color-primary) !important;
+  color: #1a1a1a !important;
   border-color: white !important;
 }
 
 .dark-mode .hero .download-app-btn:hover {
   background: var(--gray-100) !important;
-  color: var(--color-primary) !important;
+  color: #1a1a1a !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
 }
@@ -6549,26 +6549,26 @@ html {
 /* Dark mode for app store download buttons */
 .dark-mode .btn-app-store,
 .dark-mode .btn-play-store {
-  background: white !important;
-  border-color: white !important;
-  color: var(--color-primary) !important;
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
 }
 
 .dark-mode .btn-app-store:hover,
 .dark-mode .btn-play-store:hover {
-  background: var(--gray-100) !important;
-  color: var(--color-primary) !important;
+  background: var(--dark-bg-secondary) !important;
+  color: var(--dark-text-primary) !important;
 }
 
 /* Dark mode for app store button text and labels */
 .dark-mode .btn-app-store .store-label,
 .dark-mode .btn-play-store .store-label {
-  color: var(--color-primary) !important;
+  color: var(--dark-text-primary) !important;
 }
 
 .dark-mode .btn-app-store .store-name,
 .dark-mode .btn-play-store .store-name {
-  color: var(--color-primary) !important;
+  color: var(--dark-text-primary) !important;
 }
 
 /* Dark mode for receive CTA download buttons */
