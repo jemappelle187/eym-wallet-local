@@ -6546,7 +6546,7 @@ html {
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Dark mode for app store download buttons */
+/* Dark mode for app store download buttons - ensure identical styling */
 .dark-mode .btn-app-store,
 .dark-mode .btn-play-store {
   background: var(--dark-bg-tertiary) !important;
@@ -6560,40 +6560,64 @@ html {
   color: var(--dark-text-primary) !important;
 }
 
-/* Dark mode for app store button text and labels */
-.dark-mode .btn-app-store .store-label,
-.dark-mode .btn-play-store .store-label {
+/* Dark mode for app store button text and labels - ensure identical styling */
+.dark-mode .btn-app-store .btn-label,
+.dark-mode .btn-play-store .btn-label {
   color: var(--dark-text-primary) !important;
 }
 
-.dark-mode .btn-app-store .store-name,
-.dark-mode .btn-play-store .store-name {
+.dark-mode .btn-app-store .btn-name,
+.dark-mode .btn-play-store .btn-name {
   color: var(--dark-text-primary) !important;
 }
 
-/* Dark mode for receive CTA download buttons */
+/* Ensure both buttons have identical styling in all contexts */
+.dark-mode .receive-app-buttons .btn-app-store,
+.dark-mode .receive-app-buttons .btn-play-store {
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-app-buttons .btn-app-store:hover,
+.dark-mode .receive-app-buttons .btn-play-store:hover {
+  background: var(--dark-bg-secondary) !important;
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-app-buttons .btn-app-store .btn-label,
+.dark-mode .receive-app-buttons .btn-play-store .btn-label {
+  color: var(--dark-text-primary) !important;
+}
+
+.dark-mode .receive-app-buttons .btn-app-store .btn-name,
+.dark-mode .receive-app-buttons .btn-play-store .btn-name {
+  color: var(--dark-text-primary) !important;
+}
+
+/* Dark mode for receive CTA download buttons - ensure identical styling */
 .dark-mode .receive-cta .btn-app-store,
 .dark-mode .receive-cta .btn-play-store {
-  background: white !important;
-  border-color: white !important;
-  color: var(--color-primary) !important;
+  background: var(--dark-bg-tertiary) !important;
+  border-color: var(--dark-border-color) !important;
+  color: var(--dark-text-primary) !important;
 }
 
 .dark-mode .receive-cta .btn-app-store:hover,
 .dark-mode .receive-cta .btn-play-store:hover {
-  background: var(--gray-100) !important;
-  color: var(--color-primary) !important;
+  background: var(--dark-bg-secondary) !important;
+  color: var(--dark-text-primary) !important;
 }
 
-/* Dark mode for receive CTA button text and labels */
-.dark-mode .receive-cta .btn-app-store .store-label,
-.dark-mode .receive-cta .btn-play-store .store-label {
-  color: var(--color-primary) !important;
+/* Dark mode for receive CTA button text and labels - ensure identical styling */
+.dark-mode .receive-cta .btn-app-store .btn-label,
+.dark-mode .receive-cta .btn-play-store .btn-label {
+  color: var(--dark-text-primary) !important;
 }
 
-.dark-mode .receive-cta .btn-app-store .store-name,
-.dark-mode .receive-cta .btn-play-store .store-name {
-  color: var(--color-primary) !important;
+.dark-mode .receive-cta .btn-app-store .btn-name,
+.dark-mode .receive-cta .btn-play-store .btn-name {
+  color: var(--dark-text-primary) !important;
 }
 
 /* Dark mode for any remaining lists */
