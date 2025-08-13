@@ -1827,6 +1827,7 @@ function showSlide(slideName) {
     const slideElement = document.getElementById(`slide-${slide}`);
     if (slideElement) {
       slideElement.classList.remove('active', 'prev');
+      console.log(`Removed active from slide: ${slide}`);
     }
   });
   
@@ -1834,8 +1835,14 @@ function showSlide(slideName) {
   slides.forEach(slide => {
     const dot = document.querySelector(`.nav-dot[data-slide="${slide}"]`);
     const btn = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
-    if (dot) dot.classList.remove('active');
-    if (btn) btn.classList.remove('active');
+    if (dot) {
+      dot.classList.remove('active');
+      console.log(`Removed active from dot: ${slide}`);
+    }
+    if (btn) {
+      btn.classList.remove('active');
+      console.log(`Removed active from button: ${slide}`);
+    }
   });
   
   // Show current slide
@@ -1843,13 +1850,23 @@ function showSlide(slideName) {
   if (currentSlideElement) {
     currentSlideElement.classList.add('active');
     console.log(`Activated slide: ${slideName}`);
+    console.log(`Slide element classes:`, currentSlideElement.className);
+    console.log(`Slide element computed style:`, window.getComputedStyle(currentSlideElement).opacity);
+  } else {
+    console.error(`Slide element not found: slide-${slideName}`);
   }
   
   // Activate navigation
   const currentDot = document.querySelector(`.nav-dot[data-slide="${slideName}"]`);
   const currentBtn = document.querySelector(`.currency-btn[data-slide="${slideName}"]`);
-  if (currentDot) currentDot.classList.add('active');
-  if (currentBtn) currentBtn.classList.add('active');
+  if (currentDot) {
+    currentDot.classList.add('active');
+    console.log(`Activated dot: ${slideName}`);
+  }
+  if (currentBtn) {
+    currentBtn.classList.add('active');
+    console.log(`Activated button: ${slideName}`);
+  }
   
   currentSlide = slideName;
   updateArrowStates();
@@ -1983,4 +2000,18 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('USD slide element:', document.getElementById('slide-usd'));
   console.log('AED slide element:', document.getElementById('slide-aed'));
   console.log('GHS slide element:', document.getElementById('slide-ghs'));
+  
+  // Force initial state
+  setTimeout(() => {
+    showSlide('usd');
+    console.log('Forced initial slide state');
+  }, 100);
+  
+  // Add window resize handler to fix mobile/desktop issues
+  window.addEventListener('resize', () => {
+    setTimeout(() => {
+      showSlide(currentSlide);
+      console.log('Fixed slider after resize');
+    }, 100);
+  });
 }); 
