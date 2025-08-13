@@ -7242,6 +7242,10 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Touch-friendly improvements */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .nav-arrow:hover {
@@ -7301,6 +7305,10 @@ html {
   cursor: pointer;
   transition: all 0.3s ease;
   min-width: 80px;
+  /* Touch-friendly improvements */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .currency-btn:hover {
@@ -7414,19 +7422,24 @@ html {
   }
   
   .nav-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+    border-width: 2px;
   }
   
   .currency-buttons {
+    flex-direction: row;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
+    justify-content: center;
   }
   
   .currency-btn {
     min-width: 70px;
+    max-width: 85px;
     padding: var(--spacing-sm) var(--spacing-md);
+    flex-direction: column;
   }
   
   .currency-btn .flag {
@@ -7435,6 +7448,7 @@ html {
   
   .currency-btn .code {
     font-size: 12px;
+    font-weight: 600;
   }
 }
 
@@ -7462,18 +7476,42 @@ html {
   
   .currency-controls {
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
   }
   
   .currency-buttons {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
   }
   
   .currency-btn {
-    flex-direction: row;
-    min-width: 120px;
+    flex-direction: column;
+    min-width: 80px;
+    max-width: 90px;
+    padding: var(--spacing-sm) var(--spacing-md);
     justify-content: center;
+  }
+  
+  .currency-btn .flag {
+    font-size: 18px;
+  }
+  
+  .currency-btn .code {
+    font-size: 11px;
+    font-weight: 600;
+  }
+  
+  .dot-nav {
+    gap: var(--spacing-sm);
+  }
+  
+  .nav-dot {
+    width: 10px;
+    height: 10px;
   }
 }
 
