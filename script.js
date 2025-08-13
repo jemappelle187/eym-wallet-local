@@ -1815,6 +1815,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 // Simple Currency Slider
+let currencySlider;
+
 class SimpleCurrencySlider {
   constructor() {
     this.currentSlide = 'usd';
@@ -1822,8 +1824,6 @@ class SimpleCurrencySlider {
     this.slideElements = {};
     this.navDots = {};
     this.currencyBtns = {};
-    this.prevBtn = document.getElementById('prevSlide');
-    this.nextBtn = document.getElementById('nextSlide');
     
     this.init();
   }
@@ -1832,37 +1832,18 @@ class SimpleCurrencySlider {
     // Get all slide elements
     this.slides.forEach(slide => {
       this.slideElements[slide] = document.getElementById(`slide-${slide}`);
-      this.navDots[slide] = document.querySelector(`[data-slide="${slide}"]`);
+      this.navDots[slide] = document.querySelector(`.nav-dot[data-slide="${slide}"]`);
       this.currencyBtns[slide] = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
     });
     
     console.log('Simple Currency Slider initialized');
-    this.bindEvents();
+    console.log('Slide elements:', this.slideElements);
+    console.log('Nav dots:', this.navDots);
+    console.log('Currency buttons:', this.currencyBtns);
+    
     this.showSlide('usd'); // Start with USD
-  }
-  
-  bindEvents() {
-    // Arrow navigation
-    this.prevBtn?.addEventListener('click', () => this.prevSlide());
-    this.nextBtn?.addEventListener('click', () => this.nextSlide());
     
-    // Dot navigation
-    Object.values(this.navDots).forEach(dot => {
-      dot?.addEventListener('click', () => {
-        const slide = dot.getAttribute('data-slide');
-        this.showSlide(slide);
-      });
-    });
-    
-    // Currency buttons
-    Object.values(this.currencyBtns).forEach(btn => {
-      btn?.addEventListener('click', () => {
-        const slide = btn.getAttribute('data-slide');
-        this.showSlide(slide);
-      });
-    });
-    
-    // Keyboard navigation
+    // Add keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') this.prevSlide();
       if (e.key === 'ArrowRight') this.nextSlide();
@@ -1876,28 +1857,44 @@ class SimpleCurrencySlider {
     Object.values(this.slideElements).forEach(slide => {
       if (slide) {
         slide.classList.remove('active', 'prev');
+        console.log(`Removed active from slide: ${slide.id}`);
       }
     });
     
     // Remove active from all navigation
     Object.values(this.navDots).forEach(dot => {
-      if (dot) dot.classList.remove('active');
+      if (dot) {
+        dot.classList.remove('active');
+        console.log(`Removed active from dot: ${dot.getAttribute('data-slide')}`);
+      }
     });
     Object.values(this.currencyBtns).forEach(btn => {
-      if (btn) btn.classList.remove('active');
+      if (btn) {
+        btn.classList.remove('active');
+        console.log(`Removed active from button: ${btn.getAttribute('data-slide')}`);
+      }
     });
     
     // Show current slide
     if (this.slideElements[slideName]) {
       this.slideElements[slideName].classList.add('active');
+      console.log(`Added active to slide: ${slideName}`);
+    } else {
+      console.error(`Slide element not found: ${slideName}`);
     }
     
     // Activate navigation
     if (this.navDots[slideName]) {
       this.navDots[slideName].classList.add('active');
+      console.log(`Added active to dot: ${slideName}`);
+    } else {
+      console.error(`Nav dot not found: ${slideName}`);
     }
     if (this.currencyBtns[slideName]) {
       this.currencyBtns[slideName].classList.add('active');
+      console.log(`Added active to button: ${slideName}`);
+    } else {
+      console.error(`Currency button not found: ${slideName}`);
     }
     
     this.currentSlide = slideName;
@@ -1936,5 +1933,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeRemittanceCalculator();
   
   // Initialize the new simple currency slider
-  new SimpleCurrencySlider();
+  currencySlider = new SimpleCurrencySlider();
 }); 
