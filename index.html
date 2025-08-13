@@ -542,32 +542,32 @@
         <div class="currency-controls">
           <!-- Arrow Navigation -->
           <div class="arrow-nav">
-            <button type="button" class="nav-arrow prev" id="currencyPrevBtn" onclick="currencySlider.prevSlide()">
+            <button type="button" class="nav-arrow prev" id="currencyPrevBtn" onclick="prevSlide()">
               <span>‹</span>
             </button>
-            <button type="button" class="nav-arrow next" id="currencyNextBtn" onclick="currencySlider.nextSlide()">
+            <button type="button" class="nav-arrow next" id="currencyNextBtn" onclick="nextSlide()">
               <span>›</span>
             </button>
           </div>
           
           <!-- Dot Navigation -->
           <div class="dot-nav">
-            <button type="button" class="nav-dot active" data-slide="usd" onclick="currencySlider.showSlide('usd')"></button>
-            <button type="button" class="nav-dot" data-slide="aed" onclick="currencySlider.showSlide('aed')"></button>
-            <button type="button" class="nav-dot" data-slide="ghs" onclick="currencySlider.showSlide('ghs')"></button>
+            <button type="button" class="nav-dot active" data-slide="usd" onclick="showSlide('usd')"></button>
+            <button type="button" class="nav-dot" data-slide="aed" onclick="showSlide('aed')"></button>
+            <button type="button" class="nav-dot" data-slide="ghs" onclick="showSlide('ghs')"></button>
           </div>
           
           <!-- Currency Buttons -->
           <div class="currency-buttons">
-            <button type="button" class="currency-btn active" data-slide="usd" onclick="currencySlider.showSlide('usd')">
+            <button type="button" class="currency-btn active" data-slide="usd" onclick="showSlide('usd')">
               <span class="flag">🇺🇸</span>
               <span class="code">USD</span>
             </button>
-            <button type="button" class="currency-btn" data-slide="aed" onclick="currencySlider.showSlide('aed')">
+            <button type="button" class="currency-btn" data-slide="aed" onclick="showSlide('aed')">
               <span class="flag">🇦🇪</span>
               <span class="code">AED</span>
             </button>
-            <button type="button" class="currency-btn" data-slide="ghs" onclick="currencySlider.showSlide('ghs')">
+            <button type="button" class="currency-btn" data-slide="ghs" onclick="showSlide('ghs')">
               <span class="flag">🇬🇭</span>
               <span class="code">GHS</span>
             </button>

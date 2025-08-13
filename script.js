@@ -1814,39 +1814,82 @@ document.addEventListener('DOMContentLoaded', () => {
   new NavbarControls();
 }); 
 
-// Simple Currency Slider
-let currencySlider;
+// Simple Currency Slider - Global Functions
+let currentSlide = 'usd';
+const slides = ['usd', 'aed', 'ghs'];
+
+// Global functions for onclick handlers
+function showSlide(slideName) {
+  console.log(`Global showSlide called with: ${slideName}`);
+  
+  // Hide all slides
+  slides.forEach(slide => {
+    const slideElement = document.getElementById(`slide-${slide}`);
+    if (slideElement) {
+      slideElement.classList.remove('active', 'prev');
+    }
+  });
+  
+  // Remove active from all navigation
+  slides.forEach(slide => {
+    const dot = document.querySelector(`.nav-dot[data-slide="${slide}"]`);
+    const btn = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
+    if (dot) dot.classList.remove('active');
+    if (btn) btn.classList.remove('active');
+  });
+  
+  // Show current slide
+  const currentSlideElement = document.getElementById(`slide-${slideName}`);
+  if (currentSlideElement) {
+    currentSlideElement.classList.add('active');
+    console.log(`Activated slide: ${slideName}`);
+  }
+  
+  // Activate navigation
+  const currentDot = document.querySelector(`.nav-dot[data-slide="${slideName}"]`);
+  const currentBtn = document.querySelector(`.currency-btn[data-slide="${slideName}"]`);
+  if (currentDot) currentDot.classList.add('active');
+  if (currentBtn) currentBtn.classList.add('active');
+  
+  currentSlide = slideName;
+  updateArrowStates();
+}
+
+function prevSlide() {
+  const currentIndex = slides.indexOf(currentSlide);
+  const prevIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+  showSlide(slides[prevIndex]);
+}
+
+function nextSlide() {
+  const currentIndex = slides.indexOf(currentSlide);
+  const nextIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+  showSlide(slides[nextIndex]);
+}
+
+function updateArrowStates() {
+  const prevBtn = document.getElementById('currencyPrevBtn');
+  const nextBtn = document.getElementById('currencyNextBtn');
+  
+  if (prevBtn && nextBtn) {
+    prevBtn.style.opacity = '1';
+    nextBtn.style.opacity = '1';
+  }
+}
 
 class SimpleCurrencySlider {
   constructor() {
-    this.currentSlide = 'usd';
-    this.slides = ['usd', 'aed', 'ghs'];
-    this.slideElements = {};
-    this.navDots = {};
-    this.currencyBtns = {};
-    
     this.init();
   }
   
   init() {
-    // Get all slide elements
-    this.slides.forEach(slide => {
-      this.slideElements[slide] = document.getElementById(`slide-${slide}`);
-      this.navDots[slide] = document.querySelector(`.nav-dot[data-slide="${slide}"]`);
-      this.currencyBtns[slide] = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
-    });
-    
     console.log('Simple Currency Slider initialized');
-    console.log('Slide elements:', this.slideElements);
-    console.log('Nav dots:', this.navDots);
-    console.log('Currency buttons:', this.currencyBtns);
-    
-    this.showSlide('usd'); // Start with USD
+    showSlide('usd'); // Start with USD
     
     // Add keyboard navigation
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') this.prevSlide();
-      if (e.key === 'ArrowRight') this.nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
     });
   }
   
@@ -1933,5 +1976,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeRemittanceCalculator();
   
   // Initialize the new simple currency slider
-  currencySlider = new SimpleCurrencySlider();
+  new SimpleCurrencySlider();
+  
+  // Test the slider immediately
+  console.log('Testing slider functionality...');
+  console.log('USD slide element:', document.getElementById('slide-usd'));
+  console.log('AED slide element:', document.getElementById('slide-aed'));
+  console.log('GHS slide element:', document.getElementById('slide-ghs'));
 }); 
