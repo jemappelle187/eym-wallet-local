@@ -1814,58 +1814,51 @@ document.addEventListener('DOMContentLoaded', () => {
   new NavbarControls();
 }); 
 
-// Advanced Currency Slider Functionality
-class CurrencySlider {
+// Simple Currency Slider
+class SimpleCurrencySlider {
   constructor() {
-    this.currentSlide = 0;
-    this.slides = document.querySelectorAll('.slider-slide');
-    this.dots = document.querySelectorAll('.dot');
-    this.currencyBtns = document.querySelectorAll('.currency-btn');
-    this.prevBtn = document.getElementById('prevBtn');
-    this.nextBtn = document.getElementById('nextBtn');
-    this.sliderTrack = document.getElementById('sliderTrack');
+    this.currentSlide = 'usd';
+    this.slides = ['usd', 'aed', 'ghs'];
+    this.slideElements = {};
+    this.navDots = {};
+    this.currencyBtns = {};
+    this.prevBtn = document.getElementById('prevSlide');
+    this.nextBtn = document.getElementById('nextSlide');
     
     this.init();
   }
   
   init() {
-    if (!this.slides.length) {
-      console.log('No slides found for currency slider');
-      return;
-    }
+    // Get all slide elements
+    this.slides.forEach(slide => {
+      this.slideElements[slide] = document.getElementById(`slide-${slide}`);
+      this.navDots[slide] = document.querySelector(`[data-slide="${slide}"]`);
+      this.currencyBtns[slide] = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
+    });
     
-    console.log(`Currency slider initialized with ${this.slides.length} slides`);
+    console.log('Simple Currency Slider initialized');
     this.bindEvents();
-    this.updateNavigation();
-    this.updateSliderTrack(); // Ensure initial position is set
-    this.startAutoPlay();
+    this.showSlide('usd'); // Start with USD
   }
   
   bindEvents() {
-    // Navigation buttons
-    this.prevBtn?.addEventListener('click', () => {
-      console.log('Previous button clicked');
-      this.prevSlide();
-    });
-    this.nextBtn?.addEventListener('click', () => {
-      console.log('Next button clicked');
-      this.nextSlide();
-    });
+    // Arrow navigation
+    this.prevBtn?.addEventListener('click', () => this.prevSlide());
+    this.nextBtn?.addEventListener('click', () => this.nextSlide());
     
     // Dot navigation
-    this.dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        console.log(`Dot ${index} clicked`);
-        this.goToSlide(index);
+    Object.values(this.navDots).forEach(dot => {
+      dot?.addEventListener('click', () => {
+        const slide = dot.getAttribute('data-slide');
+        this.showSlide(slide);
       });
     });
     
-    // Currency selector
-    this.currencyBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const slideIndex = parseInt(btn.getAttribute('data-slide'));
-        console.log(`Currency button ${btn.getAttribute('data-currency')} clicked, going to slide ${slideIndex}`);
-        this.goToSlide(slideIndex);
+    // Currency buttons
+    Object.values(this.currencyBtns).forEach(btn => {
+      btn?.addEventListener('click', () => {
+        const slide = btn.getAttribute('data-slide');
+        this.showSlide(slide);
       });
     });
     
@@ -1874,157 +1867,64 @@ class CurrencySlider {
       if (e.key === 'ArrowLeft') this.prevSlide();
       if (e.key === 'ArrowRight') this.nextSlide();
     });
-    
-    // Touch/swipe support
-    this.addTouchSupport();
-    
-    // Pause autoplay on hover
-    const sliderContainer = document.querySelector('.slider-container');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('mouseenter', () => this.pauseAutoPlay());
-      sliderContainer.addEventListener('mouseleave', () => this.startAutoPlay());
-    }
   }
   
-  goToSlide(index) {
-    if (index < 0 || index >= this.slides.length) {
-      console.log(`Invalid slide index: ${index}`);
-      return;
+  showSlide(slideName) {
+    console.log(`Showing slide: ${slideName}`);
+    
+    // Hide all slides
+    Object.values(this.slideElements).forEach(slide => {
+      if (slide) {
+        slide.classList.remove('active', 'prev');
+      }
+    });
+    
+    // Remove active from all navigation
+    Object.values(this.navDots).forEach(dot => {
+      if (dot) dot.classList.remove('active');
+    });
+    Object.values(this.currencyBtns).forEach(btn => {
+      if (btn) btn.classList.remove('active');
+    });
+    
+    // Show current slide
+    if (this.slideElements[slideName]) {
+      this.slideElements[slideName].classList.add('active');
     }
     
-    console.log(`Going to slide ${index} from slide ${this.currentSlide}`);
+    // Activate navigation
+    if (this.navDots[slideName]) {
+      this.navDots[slideName].classList.add('active');
+    }
+    if (this.currencyBtns[slideName]) {
+      this.currencyBtns[slideName].classList.add('active');
+    }
     
-    // Remove active class from current slide
-    this.slides[this.currentSlide].classList.remove('active');
-    this.dots[this.currentSlide]?.classList.remove('active');
-    this.currencyBtns[this.currentSlide]?.classList.remove('active');
-    
-    // Add active class to new slide
-    this.currentSlide = index;
-    this.slides[this.currentSlide].classList.add('active');
-    this.dots[this.currentSlide]?.classList.add('active');
-    this.currencyBtns[this.currentSlide]?.classList.add('active');
-    
-    // Update slider track position
-    this.updateSliderTrack();
-    this.updateNavigation();
-    
-    // Add animation classes
-    this.animateSlideTransition();
-    
-    console.log(`Now on slide ${this.currentSlide}`);
+    this.currentSlide = slideName;
+    this.updateArrowStates();
   }
   
   prevSlide() {
-    const newIndex = this.currentSlide - 1;
-    if (newIndex < 0) {
-      this.goToSlide(this.slides.length - 1);
-    } else {
-      this.goToSlide(newIndex);
-    }
+    const currentIndex = this.slides.indexOf(this.currentSlide);
+    const prevIndex = currentIndex - 1;
+    const slideName = prevIndex >= 0 ? this.slides[prevIndex] : this.slides[this.slides.length - 1];
+    this.showSlide(slideName);
   }
   
   nextSlide() {
-    const newIndex = this.currentSlide + 1;
-    if (newIndex >= this.slides.length) {
-      this.goToSlide(0);
-    } else {
-      this.goToSlide(newIndex);
+    const currentIndex = this.slides.indexOf(this.currentSlide);
+    const nextIndex = currentIndex + 1;
+    const slideName = nextIndex < this.slides.length ? this.slides[nextIndex] : this.slides[0];
+    this.showSlide(slideName);
+  }
+  
+  updateArrowStates() {
+    // Enable/disable arrows based on current slide
+    if (this.prevBtn && this.nextBtn) {
+      // For now, keep both enabled for circular navigation
+      this.prevBtn.disabled = false;
+      this.nextBtn.disabled = false;
     }
-  }
-  
-  updateSliderTrack() {
-    if (this.sliderTrack) {
-      const translateX = -this.currentSlide * 100;
-      this.sliderTrack.style.transform = `translateX(${translateX}%)`;
-      
-      console.log(`Slider track moved to translateX(${translateX}%) for slide ${this.currentSlide}`);
-      
-      // Ensure all slides are visible in the track
-      this.slides.forEach((slide, index) => {
-        slide.style.minWidth = '100%';
-        slide.style.flexShrink = '0';
-      });
-    }
-  }
-  
-  updateNavigation() {
-    // Update button states
-    if (this.prevBtn) {
-      this.prevBtn.disabled = this.currentSlide === 0;
-    }
-    if (this.nextBtn) {
-      this.nextBtn.disabled = this.currentSlide === this.slides.length - 1;
-    }
-  }
-  
-  animateSlideTransition() {
-    // Add fade-in animation to current slide
-    const currentSlide = this.slides[this.currentSlide];
-    currentSlide.classList.add('fade-in');
-    
-    // Remove animation class after animation completes
-    setTimeout(() => {
-      currentSlide.classList.remove('fade-in');
-    }, 600);
-  }
-  
-  addTouchSupport() {
-    let startX = 0;
-    let endX = 0;
-    
-    const sliderContainer = document.querySelector('.slider-container');
-    if (!sliderContainer) return;
-    
-    sliderContainer.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-    
-    sliderContainer.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].clientX;
-      this.handleSwipe();
-    });
-    
-    sliderContainer.addEventListener('mousedown', (e) => {
-      startX = e.clientX;
-      const handleMouseUp = (e) => {
-        endX = e.clientX;
-        this.handleSwipe();
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-      document.addEventListener('mouseup', handleMouseUp);
-    });
-  }
-  
-  handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = startX - endX;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        this.nextSlide(); // Swipe left
-      } else {
-        this.prevSlide(); // Swipe right
-      }
-    }
-  }
-  
-  startAutoPlay() {
-    this.autoPlayInterval = setInterval(() => {
-      this.nextSlide();
-    }, 5000); // Change slide every 5 seconds
-  }
-  
-  pauseAutoPlay() {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-      this.autoPlayInterval = null;
-    }
-  }
-  
-  destroy() {
-    this.pauseAutoPlay();
-    // Remove event listeners if needed
   }
 }
 
@@ -2035,6 +1935,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeNavbarControls();
   initializeRemittanceCalculator();
   
-  // Initialize the new currency slider
-  new CurrencySlider();
+  // Initialize the new simple currency slider
+  new SimpleCurrencySlider();
 }); 

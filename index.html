@@ -486,103 +486,84 @@
         </div>
     </section>
 
-    <!-- Advanced Currency Mockup Slider -->
-    <section class="currency-slider fade-in premium-section section-bg-light" id="currency-slider">
+    <!-- Multi-Currency Experience Section -->
+    <section class="currency-showcase fade-in premium-section section-bg-light" id="currency-showcase">
       <div class="container">
         <div class="section-header">
           <h2>MULTI-CURRENCY EXPERIENCE</h2>
           <p>Experience our app in different currencies - USD, AED, and GHS</p>
         </div>
         
-        <div class="slider-container">
-          <div class="slider-track" id="sliderTrack">
-            <div class="slider-slide active" data-currency="USD">
-              <div class="mockup-container">
-                <div class="iphone-mockup">
-                  <div class="iphone-frame">
-                    <div class="dynamic-island"></div>
-                    <div class="iphone-screen">
-                      <img src="images/screenshots/homescreen_usd.svg" alt="USD Home Screen" class="mockup-image">
-                    </div>
-                  </div>
-                </div>
-                <div class="currency-info">
-                  <h3>USD Experience</h3>
-                  <p>American Dollar interface with familiar pricing and features</p>
-                  <div class="currency-badge">🇺🇸 USD</div>
-                </div>
+        <div class="currency-slider">
+          <!-- Slide 1: USD -->
+          <div class="currency-slide active" id="slide-usd">
+            <div class="slide-content">
+              <div class="mockup-wrapper">
+                <img src="images/screenshots/homescreen_usd.svg" alt="USD Home Screen" class="currency-mockup">
               </div>
-            </div>
-            
-            <div class="slider-slide" data-currency="AED">
-              <div class="mockup-container">
-                <div class="iphone-mockup">
-                  <div class="iphone-frame">
-                    <div class="dynamic-island"></div>
-                    <div class="iphone-screen">
-                      <img src="images/screenshots/homescreen_aed.svg" alt="AED Home Screen" class="mockup-image">
-                    </div>
-                  </div>
-                </div>
-                <div class="currency-info">
-                  <h3>AED Experience</h3>
-                  <p>UAE Dirham interface optimized for Middle Eastern users</p>
-                  <div class="currency-badge">🇦🇪 AED</div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="slider-slide" data-currency="GHS">
-              <div class="mockup-container">
-                <div class="iphone-mockup">
-                  <div class="iphone-frame">
-                    <div class="dynamic-island"></div>
-                    <div class="iphone-screen">
-                      <img src="images/screenshots/homescreen_ghs.svg" alt="GHS Home Screen" class="mockup-image">
-                    </div>
-                  </div>
-                </div>
-                <div class="currency-info">
-                  <h3>GHS Experience</h3>
-                  <p>Ghanaian Cedi interface designed for African markets</p>
-                  <div class="currency-badge">🇬🇭 GHS</div>
-                </div>
+              <div class="slide-info">
+                <h3>USD Experience</h3>
+                <p>American Dollar interface with familiar pricing and features</p>
+                <div class="currency-badge">🇺🇸 USD</div>
               </div>
             </div>
           </div>
           
-          <!-- Slider Navigation -->
-          <div class="slider-nav">
-            <button class="slider-btn prev-btn" id="prevBtn" aria-label="Previous slide">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-              </svg>
-            </button>
-            
-            <div class="slider-dots" id="sliderDots">
-              <button class="dot active" data-slide="0" aria-label="Go to slide 1"></button>
-              <button class="dot" data-slide="1" aria-label="Go to slide 2"></button>
-              <button class="dot" data-slide="2" aria-label="Go to slide 3"></button>
+          <!-- Slide 2: AED -->
+          <div class="currency-slide" id="slide-aed">
+            <div class="slide-content">
+              <div class="mockup-wrapper">
+                <img src="images/screenshots/homescreen_aed.svg" alt="AED Home Screen" class="currency-mockup">
+              </div>
+              <div class="slide-info">
+                <h3>AED Experience</h3>
+                <p>UAE Dirham interface optimized for Middle Eastern users</p>
+                <div class="currency-badge">🇦🇪 AED</div>
+              </div>
             </div>
-            
-            <button class="slider-btn next-btn" id="nextBtn" aria-label="Next slide">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </button>
           </div>
           
-          <!-- Currency Selector -->
-          <div class="currency-selector">
-            <button class="currency-btn active" data-currency="USD" data-slide="0">
+          <!-- Slide 3: GHS -->
+          <div class="currency-slide" id="slide-ghs">
+            <div class="slide-content">
+              <div class="mockup-wrapper">
+                <img src="images/screenshots/homescreen_ghs.svg" alt="GHS Home Screen" class="currency-mockup">
+              </div>
+              <div class="slide-info">
+                <h3>GHS Experience</h3>
+                <p>Ghanaian Cedi interface designed for African markets</p>
+                <div class="currency-badge">🇬🇭 GHS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="currency-controls">
+          <!-- Arrow Navigation -->
+          <div class="arrow-nav">
+            <button class="nav-arrow prev" id="prevSlide">‹</button>
+            <button class="nav-arrow next" id="nextSlide">›</button>
+          </div>
+          
+          <!-- Dot Navigation -->
+          <div class="dot-nav">
+            <button class="nav-dot active" data-slide="usd"></button>
+            <button class="nav-dot" data-slide="aed"></button>
+            <button class="nav-dot" data-slide="ghs"></button>
+          </div>
+          
+          <!-- Currency Buttons -->
+          <div class="currency-buttons">
+            <button class="currency-btn active" data-slide="usd">
               <span class="flag">🇺🇸</span>
               <span class="code">USD</span>
             </button>
-            <button class="currency-btn" data-currency="AED" data-slide="1">
+            <button class="currency-btn" data-slide="aed">
               <span class="flag">🇦🇪</span>
               <span class="code">AED</span>
             </button>
-            <button class="currency-btn" data-currency="GHS" data-slide="2">
+            <button class="currency-btn" data-slide="ghs">
               <span class="flag">🇬🇭</span>
               <span class="code">GHS</span>
             </button>
