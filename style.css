@@ -7104,7 +7104,7 @@ html {
   transition: all 0.3s ease;
   transform: rotate(-5deg);
   border-radius: 20px;
-  background: #000;
+  background: transparent;
 }
 
 .hero-app-mockup-video:hover {
