@@ -3148,8 +3148,8 @@ body {
   }
   
   .hero-app-mockup-video {
-    width: 150px;
-    max-height: 200px;
+    width: 250px;
+    max-height: 350px;
   }
   
   /* Mobile navbar height adjustment */
@@ -3257,8 +3257,8 @@ body {
   
   /* Mobile video mockup optimization */
   .hero-app-mockup-video {
-    width: 120px;
-    max-height: 160px;
+    width: 180px;
+    max-height: 240px;
   }
 }
 
@@ -7096,9 +7096,9 @@ html {
 }
 
 .hero-app-mockup-video {
-  width: 200px;
+  width: 350px;
   height: auto;
-  max-height: 300px;
+  max-height: 500px;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
   transition: all 0.3s ease;
