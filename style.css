@@ -7085,7 +7085,7 @@ html {
   filter: drop-shadow(0 12px 24px rgba(255, 255, 255, 0.25)) brightness(1);
 }
 
-/* Hero Video Mockup */
+/* Hero Video Mockup - Applied to all hero sections */
 .hero-video-mockup-container {
   display: flex;
   align-items: center;
