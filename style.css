@@ -7096,9 +7096,9 @@ html {
 }
 
 .hero-app-mockup-video {
-  width: 350px;
+  width: 450px;
   height: auto;
-  max-height: 500px;
+  max-height: 600px;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
   transition: all 0.3s ease;
@@ -7122,7 +7122,19 @@ html {
 
 /* White background for video mockup hero */
 #hero-video-mockup {
-  background: white;
+  background: white !important;
+  background-image: none !important;
+  background-size: auto !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+#hero-video-mockup::before {
+  display: none !important;
+}
+
+#hero-video-mockup::after {
+  display: none !important;
 }
 
 #hero-video-mockup .hero-title {
@@ -7131,6 +7143,22 @@ html {
 
 #hero-video-mockup .hero-subtitle {
   color: var(--color-text-secondary);
+}
+
+/* Ensure no gradient effects on the hero container */
+#hero-video-mockup .hero-container {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+#hero-video-mockup .hero-content {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+#hero-video-mockup .hero-visual {
+  background: transparent !important;
+  background-image: none !important;
 }
 
   /* Dark mode for logo image */
