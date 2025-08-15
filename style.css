@@ -7629,40 +7629,60 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3rem 0;
-  padding: 2rem 0;
+  margin: 2rem 0;
 }
 
 .balance-cards-mockup {
   max-width: 100%;
   height: auto;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .balance-cards-mockup:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
 }
 
-/* Mobile responsive for balance cards */
+/* Updated Slide Content Layout */
+.slide-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.slide-info {
+  flex: 1;
+  max-width: 400px;
+}
+
+.mockup-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile responsive for new layout */
 @media (max-width: 768px) {
-  .balance-cards-container {
-    margin: 2rem 0;
-    padding: 1rem 0;
+  .slide-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
   }
   
-  .balance-cards-mockup {
-    max-width: 90%;
-    border-radius: 15px;
+  .slide-info {
+    max-width: 100%;
   }
-}
-
-/* Dark mode support for balance cards */
-.dark-mode .balance-cards-mockup {
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  
+  .mockup-wrapper {
+    order: -1; /* Show mockup first on mobile */
+  }
 }
 
 /* Add Send Receive Showcase Section */
