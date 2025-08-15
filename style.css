@@ -5841,6 +5841,7 @@ html {
     background: transparent !important;
     overflow-x: hidden !important;
     overflow-y: visible !important;
+    position: relative !important;
   }
   
   /* Fix horizontal scrolling on mobile */
@@ -8012,6 +8013,7 @@ html {
     flex-direction: column;
     gap: 2rem;
     text-align: center;
+    position: relative !important;
   }
 
   .hero-title {
@@ -8027,13 +8029,18 @@ html {
   }
 
   .hero-visual {
-    order: -1;
-    margin-bottom: 2rem;
+    order: 1;
+    margin-bottom: 0;
+    position: relative;
   }
 
   .hero-app-mockup-video {
     max-width: 280px;
     height: auto;
+    position: absolute !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10 !important;
   }
 
   /* Mobile Video Background */
@@ -8237,6 +8244,10 @@ html {
 
   .hero-app-mockup-video {
     max-width: 240px;
+    position: absolute !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    z-index: 10 !important;
   }
 
   .btn {
