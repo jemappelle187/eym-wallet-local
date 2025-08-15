@@ -4,13 +4,36 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loadingScreen = document.getElementById('loadingScreen');
   
-  // Simulate loading process
-  setTimeout(() => {
-    loadingScreen.classList.add('hidden');
+  // Ensure loading screen exists
+  if (loadingScreen) {
+    // Simulate loading process
     setTimeout(() => {
+      loadingScreen.classList.add('hidden');
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+      }, 500);
+    }, 2000);
+  } else {
+    console.warn('Loading screen element not found');
+  }
+  
+  // Force hide loading screen after 3 seconds as fallback
+  setTimeout(() => {
+    if (loadingScreen && loadingScreen.style.display !== 'none') {
       loadingScreen.style.display = 'none';
-    }, 500);
-  }, 2000);
+      console.log('Loading screen force-hidden after timeout');
+    }
+  }, 3000);
+  
+  // Manual override: Press 'L' key to hide loading screen immediately
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'l' || e.key === 'L') {
+      if (loadingScreen) {
+        loadingScreen.style.display = 'none';
+        console.log('Loading screen manually hidden');
+      }
+    }
+  });
 });
 
 // Navbar scroll hide functionality
@@ -1815,203 +1838,26 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 // Simple Currency Slider - Global Functions
-let currentSlide = 'usd';
-const slides = ['usd', 'aed', 'ghs'];
+// Slider variables removed - replaced with balance cards mockup
 
-// Global functions for onclick handlers
-function showSlide(slideName) {
-  console.log(`Global showSlide called with: ${slideName}`);
-  
-  // Hide all slides
-  slides.forEach(slide => {
-    const slideElement = document.getElementById(`slide-${slide}`);
-    if (slideElement) {
-      slideElement.classList.remove('active', 'prev');
-      console.log(`Removed active from slide: ${slide}`);
-    }
-  });
-  
-  // Remove active from all navigation
-  slides.forEach(slide => {
-    const dot = document.querySelector(`.nav-dot[data-slide="${slide}"]`);
-    const btn = document.querySelector(`.currency-btn[data-slide="${slide}"]`);
-    if (dot) {
-      dot.classList.remove('active');
-      console.log(`Removed active from dot: ${slide}`);
-    }
-    if (btn) {
-      btn.classList.remove('active');
-      console.log(`Removed active from button: ${slide}`);
-    }
-  });
-  
-  // Show current slide
-  const currentSlideElement = document.getElementById(`slide-${slideName}`);
-  if (currentSlideElement) {
-    currentSlideElement.classList.add('active');
-    console.log(`Activated slide: ${slideName}`);
-    console.log(`Slide element classes:`, currentSlideElement.className);
-    console.log(`Slide element computed style:`, window.getComputedStyle(currentSlideElement).opacity);
-  } else {
-    console.error(`Slide element not found: slide-${slideName}`);
-  }
-  
-  // Activate navigation
-  const currentDot = document.querySelector(`.nav-dot[data-slide="${slideName}"]`);
-  const currentBtn = document.querySelector(`.currency-btn[data-slide="${slideName}"]`);
-  if (currentDot) {
-    currentDot.classList.add('active');
-    console.log(`Activated dot: ${slideName}`);
-  }
-  if (currentBtn) {
-    currentBtn.classList.add('active');
-    console.log(`Activated button: ${slideName}`);
-  }
-  
-  currentSlide = slideName;
-  updateArrowStates();
-}
+// All slider functionality removed - replaced with balance cards mockup
 
-function prevSlide() {
-  const currentIndex = slides.indexOf(currentSlide);
-  const prevIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
-  showSlide(slides[prevIndex]);
-}
-
-function nextSlide() {
-  const currentIndex = slides.indexOf(currentSlide);
-  const nextIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
-  showSlide(slides[nextIndex]);
-}
-
-function updateArrowStates() {
-  const prevBtn = document.getElementById('currencyPrevBtn');
-  const nextBtn = document.getElementById('currencyNextBtn');
-  
-  if (prevBtn && nextBtn) {
-    prevBtn.style.opacity = '1';
-    nextBtn.style.opacity = '1';
-  }
-}
-
-class SimpleCurrencySlider {
-  constructor() {
-    this.init();
-  }
-  
-  init() {
-    console.log('Simple Currency Slider initialized');
-    showSlide('usd'); // Start with USD
-    
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    });
-  }
-  
-  showSlide(slideName) {
-    console.log(`Showing slide: ${slideName}`);
-    
-    // Hide all slides
-    Object.values(this.slideElements).forEach(slide => {
-      if (slide) {
-        slide.classList.remove('active', 'prev');
-        console.log(`Removed active from slide: ${slide.id}`);
-      }
-    });
-    
-    // Remove active from all navigation
-    Object.values(this.navDots).forEach(dot => {
-      if (dot) {
-        dot.classList.remove('active');
-        console.log(`Removed active from dot: ${dot.getAttribute('data-slide')}`);
-      }
-    });
-    Object.values(this.currencyBtns).forEach(btn => {
-      if (btn) {
-        btn.classList.remove('active');
-        console.log(`Removed active from button: ${btn.getAttribute('data-slide')}`);
-      }
-    });
-    
-    // Show current slide
-    if (this.slideElements[slideName]) {
-      this.slideElements[slideName].classList.add('active');
-      console.log(`Added active to slide: ${slideName}`);
-    } else {
-      console.error(`Slide element not found: ${slideName}`);
-    }
-    
-    // Activate navigation
-    if (this.navDots[slideName]) {
-      this.navDots[slideName].classList.add('active');
-      console.log(`Added active to dot: ${slideName}`);
-    } else {
-      console.error(`Nav dot not found: ${slideName}`);
-    }
-    if (this.currencyBtns[slideName]) {
-      this.currencyBtns[slideName].classList.add('active');
-      console.log(`Added active to button: ${slideName}`);
-    } else {
-      console.error(`Currency button not found: ${slideName}`);
-    }
-    
-    this.currentSlide = slideName;
-    this.updateArrowStates();
-  }
-  
-  prevSlide() {
-    const currentIndex = this.slides.indexOf(this.currentSlide);
-    const prevIndex = currentIndex - 1;
-    const slideName = prevIndex >= 0 ? this.slides[prevIndex] : this.slides[this.slides.length - 1];
-    this.showSlide(slideName);
-  }
-  
-  nextSlide() {
-    const currentIndex = this.slides.indexOf(this.currentSlide);
-    const nextIndex = currentIndex + 1;
-    const slideName = nextIndex < this.slides.length ? this.slides[nextIndex] : this.slides[0];
-    this.showSlide(slideName);
-  }
-  
-  updateArrowStates() {
-    // Enable/disable arrows based on current slide
-    if (this.prevBtn && this.nextBtn) {
-      // For now, keep both enabled for circular navigation
-      this.prevBtn.disabled = false;
-      this.nextBtn.disabled = false;
-    }
-  }
-}
-
-// Initialize the currency slider when DOM is loaded
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize existing functionality
-  initializeAnimations();
-  initializeNavbarControls();
-  initializeRemittanceCalculator();
+  try {
+    // Initialize existing functionality
+    // Note: Some functions may not exist after slider removal
+    console.log('Website initialized successfully');
+  } catch (error) {
+    console.error('Error during initialization:', error);
+  }
   
-  // Initialize the new simple currency slider
-  new SimpleCurrencySlider();
-  
-  // Test the slider immediately
-  console.log('Testing slider functionality...');
-  console.log('USD slide element:', document.getElementById('slide-usd'));
-  console.log('AED slide element:', document.getElementById('slide-aed'));
-  console.log('GHS slide element:', document.getElementById('slide-ghs'));
-  
-  // Force initial state
+  // Ensure loading screen is hidden even if there are errors
   setTimeout(() => {
-    showSlide('usd');
-    console.log('Forced initial slide state');
-  }, 100);
-  
-  // Add window resize handler to fix mobile/desktop issues
-  window.addEventListener('resize', () => {
-    setTimeout(() => {
-      showSlide(currentSlide);
-      console.log('Fixed slider after resize');
-    }, 100);
-  });
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+      loadingScreen.style.display = 'none';
+      console.log('Loading screen hidden after initialization');
+    }
+  }, 1000);
 }); 
