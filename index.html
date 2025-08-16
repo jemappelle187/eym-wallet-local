@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Mobile-specific meta tags for better mobile experience -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#667eea">
+  <meta name="msapplication-TileColor" content="#667eea">
+  <meta name="format-detection" content="telephone=no">
+  
   <title>SendNReceive - Global Financial Inclusion Platform | Currency Hedging & Payments</title>
   <meta name="description" content="Empowering underbanked communities with global payment infrastructure, currency hedging, and financial inclusion. Fight inflation with auto-hedging deposits in local currencies.">
   <meta name="keywords" content="financial inclusion, currency hedging, global payments, underbanked communities, inflation protection, digital banking, remittance, fintech">
@@ -22,6 +31,7 @@
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20250808143733">
+  <link rel="stylesheet" href="mobile-optimizations.css">
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -229,7 +239,8 @@
         <div class="hero-video-wrap" aria-hidden="true">
           <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata"
                  poster="images/Online Payment MockupCOVER.jpg">
-            <source src="videos/global-network.mp4" type="video/mp4">
+            <source src="videos/hero_worldhand.mp4" type="video/mp4" media="(min-width: 768px)">
+            <source src="images/Online Payment MockupCOVER.jpg" type="image/jpeg" media="(max-width: 767px)">
             Your browser does not support the video tag.
           </video>
           <div class="hero-bg-overlay"></div>
@@ -255,7 +266,55 @@
         </div>
         <div class="hero-visual">
           <div class="hero-video-mockup-container">
-            <img src="images/screenshots/homescreen_mockuphand.svg" alt="SendNReceive App Mockup" class="hero-app-mockup-video">
+            <!-- SVG mockup removed for comparison -->
+          </div>
+        </div>
+
+
+              </div>
+                          </div>
+            </div>
+
+</div>
+        </div>
+      </div>
+    </section>
+
+  <!-- HERO WITH VIDEO BACKGROUND - DUPLICATE FOR COMPARISON -->
+  <section id="home-comparison" class="hero fade-in">
+
+        <!-- HERO BACKGROUND VIDEO -->
+        <div class="hero-video-wrap" aria-hidden="true">
+          <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata"
+                 poster="images/Online Payment MockupCOVER.jpg">
+            <source src="videos/hero_globehand.MP4" type="video/mp4" media="(min-width: 768px)">
+            <source src="images/Online Payment MockupCOVER.jpg" type="image/jpeg" media="(max-width: 767px)">
+            Your browser does not support the video tag.
+          </video>
+          <div class="hero-bg-overlay"></div>
+        </div>
+    
+      <!-- Video background is now handled by hero-video-wrap above -->
+      <div class="hero-container">
+        <div class="hero-content">
+
+          <h1 class="hero-title">
+            A FAIR WAY TO FINANCIAL INCLUSION
+          </h1>
+          
+          <p class="hero-subtitle">
+            The world's first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-large download-app-btn bounce-in" onclick="showDownloadOptions()">
+              Download the App
+            </button>
+          </div>
+
+        </div>
+        <div class="hero-visual">
+          <div class="hero-video-mockup-container">
+            <!-- SVG mockup removed for comparison -->
           </div>
         </div>
 
@@ -275,7 +334,7 @@
 
 <section class="receive-methods fade-in premium-section section-bg-light" id="receive-methods">
       <div class="container">
-        <h2 class="text-center">YOUR FINTECH BRIDGE TO THE WORLD</h2>
+        <h2 class="text-center">YOUR BRIDGE TO THE WORLD</h2>
         <p class="receive-subtitle">Choose the method that suits your lifestyle. Send money instantly to bank accounts, mobile money, and digital asset wallets worldwide.</p>
         
         <div class="receive-grid">
@@ -354,129 +413,71 @@
 
 
 
-<section class="app-showcase fade-in premium-section section-bg-light" id="app-showcase">
-      <div class="container">
-        <div class="section-header">
-          <h2>EXPERIENCE FINANCIAL INCLUSION IN YOUR OWN HANDS</h2>
-          <p>See how easy it is to manage your money with our intuitive app interface</p>
-        </div>
-        
-        <div class="screenshots-grid">
-          <div class="screenshot-card" data-aos="fade-up">
-            <div class="screenshot-mockup">
-              <div class="iphone-mockup">
-                <!-- iPhone 18 Frame -->
-                <div class="iphone-frame">
-                  <!-- Dynamic Island -->
-                  <div class="dynamic-island"></div>
-                  
-                  <!-- Screen -->
-                  <div class="iphone-screen">
-                    <img src="images/screenshots/iphone18mockup_fundscreen.PNG" alt="Add Funds Screen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="screenshot-info">
-              <h3>Add Funds Instantly</h3>
-              <p>Multiple funding options with zero fees. Add money from your bank, card, or mobile wallet in seconds.</p>
-              <ul class="feature-list">
-                <li>Zero transaction fees</li>
-                <li>Instant processing</li>
-                <li>Multiple payment methods</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="screenshot-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="screenshot-mockup">
-              <div class="iphone-mockup">
-                <!-- iPhone 18 Frame -->
-                <div class="iphone-frame">
-                  <!-- Dynamic Island -->
-                  <div class="dynamic-island"></div>
-                  
-                  <!-- Screen -->
-                  <div class="iphone-screen">
-                    <img src="images/screenshots/iphone18mockup_sendscreen.PNG" alt="Send Money Screen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="screenshot-info">
-              <h3>Send Money Globally</h3>
-              <p>Transfer funds to anyone, anywhere in the world. Choose from multiple delivery methods for instant or same-day transfers.</p>
-              <ul class="feature-list">
-                <li>Global reach</li>
-                <li>Multiple delivery options</li>
-                <li>Real-time tracking</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="screenshot-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="screenshot-mockup">
-              <div class="iphone-mockup">
-                <!-- iPhone 18 Frame -->
-                <div class="iphone-frame">
-                  <!-- Dynamic Island -->
-                  <div class="dynamic-island"></div>
-                  
-                  <!-- Screen -->
-                  <div class="iphone-screen">
-                    <img src="images/screenshots/iphone18mockup_receivescreen.PNG" alt="Receive Money Screen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="screenshot-info">
-              <h3>Receive Money Seamlessly</h3>
-              <p>Get paid instantly with multiple receiving options. Share your QR code or account details for hassle-free transactions.</p>
-              <ul class="feature-list">
-                <li>Instant notifications</li>
-                <li>Multiple receiving methods</li>
-                <li>Secure transactions</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    </section>
+
 
     <!-- Add Send Receive Showcase Section -->
     <section class="addsendreceive-showcase fade-in premium-section section-bg-light" id="addsendreceive-showcase">
       <div class="container">
         <div class="section-header">
           <h2>ADD • SEND • RECEIVE</h2>
-          <p>Complete financial control in one seamless experience</p>
+          <p>Experience the benefits of stablecoins and enjoy complete financial control in one seamless experience.</p>
         </div>
         
         <div class="addsendreceive-container">
-          <div class="addsendreceive-mockup" data-aos="fade-up">
-            <img src="images/screenshots/addsendreceive_mockup.svg" alt="Add Send Receive Mockup" class="addsendreceive-image">
-          </div>
-          
-          <div class="addsendreceive-features" data-aos="fade-up" data-aos-delay="200">
-            <div class="feature-item">
-              <div class="feature-icon">💰</div>
-              <div class="feature-content">
+          <div class="flow-diagram" data-aos="fade-up" data-aos-delay="200">
+            <div class="flow-step add-step">
+              <div class="step-icon">
+                <div class="icon-circle">
+                  <span class="step-emoji">💰</span>
+                </div>
+                <div class="step-number">1</div>
+              </div>
+              <div class="step-content">
                 <h3>Add Money</h3>
-                <p>Multiple funding options with zero fees. Add money from your bank, card, or mobile wallet in seconds.</p>
+                <p>Multiple funding options. Add money in seconds.</p>
+                <div class="step-highlight"></div>
               </div>
             </div>
             
-            <div class="feature-item">
-              <div class="feature-icon">📤</div>
-              <div class="feature-content">
+            <div class="flow-arrow">
+              <svg viewBox="0 0 100 20" fill="none">
+                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="currentColor" stroke-width="2" class="arrow-path"/>
+                <circle cx="50" cy="10" r="3" class="arrow-dot"/>
+              </svg>
+            </div>
+            
+            <div class="flow-step send-step">
+              <div class="step-icon">
+                <div class="icon-circle">
+                  <span class="step-emoji">💸</span>
+                </div>
+                <div class="step-number">2</div>
+              </div>
+              <div class="step-content">
                 <h3>Send Money</h3>
-                <p>Transfer funds globally with real-time tracking. Choose from multiple delivery methods for instant or same-day transfers.</p>
+                <p>Transfer funds globally with real-time tracking.</p>
+                <div class="step-highlight"></div>
               </div>
             </div>
             
-            <div class="feature-item">
-              <div class="feature-icon">📥</div>
-              <div class="feature-content">
+            <div class="flow-arrow">
+              <svg viewBox="0 0 100 20" fill="none">
+                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="currentColor" stroke-width="2" class="arrow-path"/>
+                <circle cx="50" cy="10" r="3" class="arrow-dot"/>
+              </svg>
+            </div>
+            
+            <div class="flow-step receive-step">
+              <div class="step-icon">
+                <div class="icon-circle">
+                  <span class="step-emoji">📥</span>
+                </div>
+                <div class="step-number">3</div>
+              </div>
+              <div class="step-content">
                 <h3>Receive Money</h3>
-                <p>Get paid instantly with multiple receiving options. Share your QR code or account details for hassle-free transactions.</p>
+                <p>Get paid instantly with multiple receiving options.</p>
+                <div class="step-highlight"></div>
               </div>
             </div>
           </div>
@@ -485,92 +486,14 @@
     </section>
 
     <!-- Multi-Currency Experience Section -->
-    <section class="currency-showcase fade-in premium-section section-bg-light" id="currency-showcase">
-      <div class="container">
-        <div class="section-header">
-          <h2>MULTI-CURRENCY EXPERIENCE</h2>
-          <p>Experience our app in different currencies - USD, AED, and GHS</p>
+    <section class="currency-showcase fade-in premium-section" id="currency-showcase" style="background-image: url('images/backgrounds/background_womansunhand.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+      <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); z-index: 1;"></div>
+            <div class="container" style="position: relative; z-index: 2;">
+        <div class="section-header" style="color: white;">
+          <h2 style="color: white;">MULTI-CURRENCY EXPERIENCE</h2>
+          <p style="color: rgba(255, 255, 255, 0.9);">Experience our app in different currencies - AED, EUR, GHS, NGN, USD & MORE!</p>
         </div>
-        
-        <div class="currency-slider">
-          <!-- Slide 1: USD -->
-          <div class="currency-slide active" id="slide-usd">
-            <div class="slide-content">
-              <div class="slide-info">
-                <h3>USD Experience</h3>
-                <p>American Dollar interface with familiar pricing and features</p>
-                <div class="currency-badge">🇺🇸 USD</div>
-              </div>
-              <div class="mockup-wrapper">
-                <img src="images/screenshots/balancecards_mockup.gif" alt="Balance Cards Mockup" class="currency-mockup">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 2: AED -->
-          <div class="currency-slide" id="slide-aed">
-            <div class="slide-content">
-              <div class="slide-info">
-                <h3>AED Experience</h3>
-                <p>UAE Dirham interface optimized for Middle Eastern users</p>
-                <div class="currency-badge">🇦🇪 AED</div>
-              </div>
-              <div class="mockup-wrapper">
-                <img src="images/screenshots/homescreen_aed.svg" alt="AED Home Screen" class="currency-mockup">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Slide 3: GHS -->
-          <div class="currency-slide" id="slide-ghs">
-            <div class="slide-content">
-              <div class="slide-info">
-                <h3>GHS Experience</h3>
-                <p>Ghanaian Cedi interface designed for African markets</p>
-                <div class="currency-badge">🇬🇭 GHS</div>
-              </div>
-              <div class="mockup-wrapper">
-                <img src="images/screenshots/homescreen_ghs.svg" alt="GHS Home Screen" class="currency-mockup">
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Navigation Controls -->
-        <div class="currency-controls">
-          <!-- Arrow Navigation -->
-          <div class="arrow-nav">
-            <button type="button" class="nav-arrow prev" id="currencyPrevBtn" onclick="prevSlide()">
-              <span>‹</span>
-            </button>
-            <button type="button" class="nav-arrow next" id="currencyNextBtn" onclick="nextSlide()">
-              <span>›</span>
-            </button>
-          </div>
-          
-          <!-- Dot Navigation -->
-          <div class="dot-nav">
-            <button type="button" class="nav-dot active" data-slide="usd" onclick="showSlide('usd')"></button>
-            <button type="button" class="nav-dot" data-slide="aed" onclick="showSlide('aed')"></button>
-            <button type="button" class="nav-dot" data-slide="ghs" onclick="showSlide('ghs')"></button>
-          </div>
-          
-          <!-- Currency Buttons -->
-          <div class="currency-buttons">
-            <button type="button" class="currency-btn active" data-slide="usd" onclick="showSlide('usd')">
-              <span class="flag">🇺🇸</span>
-              <span class="code">USD</span>
-            </button>
-            <button type="button" class="currency-btn" data-slide="aed" onclick="showSlide('aed')">
-              <span class="flag">🇦🇪</span>
-              <span class="code">AED</span>
-            </button>
-            <button type="button" class="currency-btn" data-slide="ghs" onclick="showSlide('ghs')">
-              <span class="flag">🇬🇭</span>
-              <span class="code">GHS</span>
-            </button>
-          </div>
-        </div>
+        <img src="images/screenshots/balancecards_mockup.gif" alt="Balance Cards Mockup" style="width: 400px; height: 500px; object-fit: contain;">
       </div>
     </section>
 
@@ -634,77 +557,81 @@
       </div>
     </section>
 
-<!-- Optimized Remittance Calculator Section -->
+<!-- Enhanced Compact Remittance Calculator Section -->
 <section class="exchange-rate fade-in premium-section section-bg-light" id="exchange-rate">
       <div class="container">
-        <h2>Remittance Calculator</h2>
-        <p class="calculator-subtitle">Calculate your transfer amount instantly.</p>
+        <h2>FAIR FX RATES</h2>
+        <p class="calculator-subtitle"> your transfer amount instantly.</p>
 
         <form class="exchange-form">
           <div class="exchange-selects">
-            <div class="input-group">
-              <label for="calcAmount">Amount</label>
-              <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required />
-              </div>
-            
-            <div class="input-group">
-              <label for="calcFrom">From</label>
-              <select class="currency-select" id="calcFrom">
-                <option value="USD">🇺🇸 USD</option>
-                <option value="EUR">🇪🇺 EUR</option>
-                <option value="GBP">🇬🇧 GBP</option>
-                <option value="GHS">🇬🇭 GHS</option>
-                <option value="NGN">🇳🇬 NGN</option>
-                <option value="KES">🇰🇪 KES</option>
-                <option value="UGX">🇺🇬 UGX</option>
-                <option value="ZAR">🇿🇦 ZAR</option>
-                <option value="ZMW">🇿🇲 ZMW</option>
-                <option value="CAD">🇨🇦 CAD</option>
-                <option value="AUD">🇦🇺 AUD</option>
-                <option value="CHF">🇨🇭 CHF</option>
-              </select>
-              </div>
-            
-            <div class="exchange-arrow">→</div>
-            
-            <div class="input-group">
-              <label for="calcTo">To</label>
-              <select class="currency-select" id="calcTo">
-                <option value="GHS">🇬🇭 GHS</option>
-                <option value="USD">🇺🇸 USD</option>
-                <option value="EUR">🇪🇺 EUR</option>
-                <option value="GBP">🇬🇧 GBP</option>
-                <option value="NGN">🇳🇬 NGN</option>
-                <option value="KES">🇰🇪 KES</option>
-                <option value="UGX">🇺🇬 UGX</option>
-                <option value="ZAR">🇿🇦 ZAR</option>
-                <option value="ZMW">🇿🇲 ZMW</option>
-                <option value="CAD">🇨🇦 CAD</option>
-                <option value="AUD">🇦🇺 AUD</option>
-                <option value="CHF">🇨🇭 CHF</option>
-              </select>
+            <!-- Top row: Amount field centered -->
+            <div class="amount-row">
+              <div class="input-group amount-group">
+                <label for="calcAmount">Amount</label>
+                <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required 
+                       inputmode="decimal" pattern="[0-9]*" />
               </div>
             </div>
+            
+            <!-- Bottom row: From and To currencies with swap button -->
+            <div class="currency-row">
+              <div class="input-group">
+                <label for="calcFrom">From</label>
+                <select class="currency-select" id="calcFrom">
+                  <option value="USD">🇺🇸 USD</option>
+                  <option value="EUR">🇪🇺 EUR</option>
+                  <option value="GBP">🇬🇧 GBP</option>
+                  <option value="GHS">🇬🇭 GHS</option>
+                  <option value="NGN">🇳🇬 NGN</option>
+                  <option value="KES">🇰🇪 KES</option>
+                  <option value="ZAR">🇿🇦 ZAR</option>
+                  <option value="CAD">🇨🇦 CAD</option>
+                </select>
+              </div>
+              
+              <button type="button" class="swap-btn" id="swapCurrencies" aria-label="Swap currencies">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
+                </svg>
+              </button>
+              
+              <div class="input-group">
+                <label for="calcTo">To</label>
+                <select class="currency-select" id="calcTo">
+                  <option value="GHS">🇬🇭 GHS</option>
+                  <option value="USD">🇺🇸 USD</option>
+                  <option value="EUR">🇪🇺 EUR</option>
+                  <option value="GBP">🇬🇧 GBP</option>
+                  <option value="NGN">🇳🇬 NGN</option>
+                  <option value="KES">🇰🇪 KES</option>
+                  <option value="ZAR">🇿🇦 ZAR</option>
+                  <option value="CAD">🇨🇦 CAD</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
           <div class="calc-results" id="calcResults">
             <div class="result-card main-result">
-              <div class="result-label">Recipient gets:</div>
               <div class="result-amount" id="calcConverted">Calculating...</div>
-              <div class="result-subtitle">Zero fees • Instant transfer</div>
-              <div class="rate-info" id="rateInfo">Loading rates...</div>
+              <div class="result-details">
+                <div class="rate-info" id="rateInfo">Loading rates...</div>
+                <div class="result-subtitle">Zero fees • Instant transfer</div>
+              </div>
+            </div>
           </div>
-              </div>
         </form>
-              </div>
+      </div>
     </section>
 
 <!-- Social Proof Section -->
 <section class="social-proof fade-in premium-section section-bg-light" id="social-proof">
   <div class="container">
-    <div class="proof-header">
-      <h3>TRUSTED BY MILLIONS WORLDWIDE</h3>
+    <div class="section-header">
+      <h2>TRUSTED BY MILLIONS WORLDWIDE</h2>
       <p>Join the revolution that's transforming financial access for underbanked communities</p>
-              </div>
+    </div>
     
     <div class="proof-stats">
       <div class="stat-card">
@@ -773,12 +700,15 @@
 
 <section class="receive-cta fade-in premium-section section-bg-light" id="receive-cta">
       <div class="container">
-        <h3>READY TO SEND OR RECEIVE?</h3>
-        <p>Join millions of people worldwide. Download the app and experience fast, free transfers today.</p>
+        <div class="section-header">
+          <h2>READY TO SEND OR RECEIVE?</h2>
+          <p>Join millions of people worldwide. Download the app and experience fast, free transfers today.</p>
+        </div>
         
         <!-- Email Newsletter Signup -->
         <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <input type="email" name="email" placeholder="Enter your email address" required />
+          <input type="email" name="email" placeholder="Enter your email address" required 
+                 inputmode="email" autocomplete="email" />
           <input type="hidden" name="source" value="website_newsletter" />
           <input type="hidden" name="timestamp" id="timestamp" />
           <input type="hidden" name="user_agent" id="userAgent" />
@@ -797,7 +727,7 @@
           </a>
           <a href="#" class="btn-google-play" aria-label="Get it on Google Play">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.61,11.5 20.41,11.83L18.83,14.39L16.54,12.1M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
             </svg>
             <div class="btn-text">
               <span class="btn-label">GET IT ON</span>
@@ -810,36 +740,34 @@
           <div class="qr-caption">Scan to download the app</div>
           <p class="qr-subtitle">Access to the global financial network shouldn't be a luxury.</p>
         </div>
+        
+
       </div>
     </section>
 
-  <!-- Enhanced Remittance Calculator JavaScript -->
+  <!-- Enhanced Compact Remittance Calculator JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Quick Amount Presets
-      const presetBtns = document.querySelectorAll('.preset-btn');
       const amountInput = document.getElementById('calcAmount');
-      
-      presetBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const amount = this.getAttribute('data-amount');
-          amountInput.value = amount;
-          
-          // Update active state
-          presetBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          
-          // Trigger calculation
-          calculateRemittance();
-        });
-      });
 
-      // Transfer Speed Options
-      const speedOptions = document.querySelectorAll('input[name="transferSpeed"]');
-      speedOptions.forEach(option => {
-        option.addEventListener('change', function() {
-          calculateRemittance();
-        });
+      // Currency Swap Button
+      const swapBtn = document.getElementById('swapCurrencies');
+      swapBtn.addEventListener('click', function() {
+        const fromSelect = document.getElementById('calcFrom');
+        const toSelect = document.getElementById('calcTo');
+        const tempValue = fromSelect.value;
+        
+        fromSelect.value = toSelect.value;
+        toSelect.value = tempValue;
+        
+        // Trigger calculation
+        calculateRemittance();
+        
+        // Add swap animation
+        this.classList.add('swapping');
+        setTimeout(() => {
+          this.classList.remove('swapping');
+        }, 300);
       });
 
       // Real-time calculation on input change
@@ -858,16 +786,17 @@
         const amount = parseFloat(amountInput.value) || 0;
         const fromCurrency = document.getElementById('calcFrom').value;
         const toCurrency = document.getElementById('calcTo').value;
-        const transferSpeed = document.querySelector('input[name="transferSpeed"]:checked').value;
         
-        // Simulate real-time exchange rates (in real app, this would come from API)
+        // Enhanced exchange rates (in real app, this would come from API)
         const exchangeRates = {
-          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73 },
-          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86 },
-          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16 },
-          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032 },
-          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049 },
-          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049 }
+          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73, 'ZAR': 18.5, 'CAD': 1.35 },
+          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86, 'ZAR': 21.8, 'CAD': 1.59 },
+          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16, 'ZAR': 25.4, 'CAD': 1.85 },
+          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032, 'ZAR': 0.80, 'CAD': 0.058 },
+          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049, 'ZAR': 0.012, 'CAD': 0.0009 },
+          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049, 'ZAR': 0.123, 'CAD': 0.009 },
+          'ZAR': { 'USD': 0.054, 'GHS': 1.25, 'NGN': 81, 'EUR': 0.046, 'GBP': 0.039, 'KES': 8.1, 'CAD': 0.073 },
+          'CAD': { 'USD': 0.74, 'GHS': 17.1, 'NGN': 1111, 'EUR': 0.63, 'GBP': 0.54, 'KES': 111, 'ZAR': 13.7 }
         };
 
         // Get exchange rate
@@ -881,34 +810,16 @@
         // Calculate converted amount
         const convertedAmount = amount * rate;
         
-        // Calculate fees and savings
-        const bankFee = 7.99; // Typical bank fee
-        const savings = bankFee; // SendNReceive has 0% fee
-        
-        // Update exchange rate display
-        document.getElementById('exchangeRate').textContent = `1 ${fromCurrency} = ${rate.toFixed(2)} ${toCurrency}`;
-        
         // Update results
         document.getElementById('calcConverted').textContent = `${toCurrency} ${convertedAmount.toFixed(2)}`;
-        document.getElementById('calcBankFee').textContent = `$${bankFee.toFixed(2)} fee`;
-        document.getElementById('calcSavings').textContent = `$${savings.toFixed(2)}`;
-        
-        // Update transfer time
-        const transferTime = transferSpeed === 'instant' ? 'Instant' : '1-2 days';
-        document.getElementById('transferTime').textContent = transferTime;
-        
-        // Update calculation status
-        const statusElement = document.getElementById('calcStatus');
-        statusElement.innerHTML = `
-          <span class="status-icon">✓</span>
-          <span class="status-text">Updated just now</span>
-        `;
+        document.getElementById('rateInfo').textContent = `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
         
         // Add updating animation
-        statusElement.classList.add('updating');
+        const resultsElement = document.getElementById('calcResults');
+        resultsElement.classList.add('updating');
         setTimeout(() => {
-          statusElement.classList.remove('updating');
-        }, 1000);
+          resultsElement.classList.remove('updating');
+        }, 500);
       }
 
       // Simulate real-time updates every 30 seconds
@@ -1374,4 +1285,5 @@
         document.addEventListener('DOMContentLoaded', addFloatingAnimation);
     </script>
 </body>
+</html>
 </html>

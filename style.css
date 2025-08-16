@@ -1098,7 +1098,10 @@ body {
 .hero-visual {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* Changed from center to flex-end to anchor to bottom */
+  align-self: end; /* Ensure it sticks to the bottom of the grid */
+  position: relative;
+  bottom: 0;
 }
 
 /* iPhone 18 Mockup */
@@ -3148,7 +3151,12 @@ body {
   
   /* Mobile hero video mockup optimization */
   .hero-video-mockup-container {
-    margin-top: 10px;
+    margin-top: 0; /* Remove top margin */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    bottom: 0;
   }
   
   .hero-app-mockup-video {
@@ -3604,10 +3612,6 @@ body {
   text-align: center;
   font-style: italic;
   opacity: 0.8;
-}
-  margin-top: 8px;
-  font-size: 14px;
-  opacity: 0.9;
 }
 
 /* App Showcase Section */
@@ -7146,15 +7150,17 @@ html {
 }
 
 .hero-app-mockup-video {
-  width: 450px;
+  width: 550px;
   height: auto;
-  max-height: 600px;
+  max-height: 700px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
   transition: all 0.3s ease;
   transform: rotate(0deg);
   border-radius: 20px;
   background: transparent;
+  position: relative;
+  bottom: -50px;
 }
 
 .hero-app-mockup-video:hover {
@@ -7743,14 +7749,18 @@ html {
 /* Add Send Receive Showcase Section */
 .addsendreceive-showcase {
   padding: 6rem 0;
-  background: var(--light-bg);
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #ffffff 10%, 
+    #e6f3ff 50%, 
+    #ffffff 90%, 
+    #ffffff 100%
+  ) !important;
 }
 
 .addsendreceive-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  display: flex;
+  justify-content: center;
   margin-top: 4rem;
 }
 
@@ -8035,11 +8045,10 @@ html {
   }
 
   .hero-app-mockup-video {
-    max-width: 280px;
+    max-width: 320px;
     height: auto;
-    position: absolute !important;
-    bottom: 20px !important;
-    right: 20px !important;
+    position: relative !important;
+    bottom: -20px !important;
     z-index: 10 !important;
   }
 
@@ -8243,10 +8252,9 @@ html {
   }
 
   .hero-app-mockup-video {
-    max-width: 240px;
-    position: absolute !important;
-    bottom: 15px !important;
-    right: 15px !important;
+    max-width: 280px;
+    position: relative !important;
+    bottom: -15px !important;
     z-index: 10 !important;
   }
 
@@ -8289,18 +8297,41 @@ html {
   .iphone-mockup {
     width: 240px;
     height: 360px;
-/ *   M o b i l e   O v e r f l o w   F i x e s   -   P r e v e n t   H o r i z o n t a l   S c r o l l i n g   * / 
- 
- @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
- 
-     h t m l ,   b o d y   {   o v e r f l o w - x :   h i d d e n   ! i m p o r t a n t ;   m a x - w i d t h :   1 0 0 v w   ! i m p o r t a n t ;   w i d t h :   1 0 0 %   ! i m p o r t a n t ;   } 
- 
-     . h e r o - v i d e o - w r a p   {   d i s p l a y :   b l o c k   ! i m p o r t a n t ;   p o s i t i o n :   a b s o l u t e   ! i m p o r t a n t ;   t o p :   0   ! i m p o r t a n t ;   l e f t :   0   ! i m p o r t a n t ;   r i g h t :   0   ! i m p o r t a n t ;   b o t t o m :   0   ! i m p o r t a n t ;   z - i n d e x :   - 3   ! i m p o r t a n t ;   o v e r f l o w :   h i d d e n   ! i m p o r t a n t ;   } 
- 
-     . h e r o - b g - v i d e o   {   d i s p l a y :   b l o c k   ! i m p o r t a n t ;   w i d t h :   1 0 0 %   ! i m p o r t a n t ;   h e i g h t :   1 0 0 %   ! i m p o r t a n t ;   o b j e c t - f i t :   c o v e r   ! i m p o r t a n t ;   p o s i t i o n :   a b s o l u t e   ! i m p o r t a n t ;   t o p :   0   ! i m p o r t a n t ;   l e f t :   0   ! i m p o r t a n t ;   } 
- 
-     . c o n t a i n e r   {   m a x - w i d t h :   1 0 0 %   ! i m p o r t a n t ;   p a d d i n g :   0   1 6 p x   ! i m p o r t a n t ;   o v e r f l o w - x :   h i d d e n   ! i m p o r t a n t ;   } 
- 
- } 
- 
- 
+  }
+}
+
+/* Mobile Overflow Fixes - Prevent Horizontal Scrolling */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+
+  .hero-video-wrap {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: -3 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-bg-video {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 16px !important;
+    overflow-x: hidden !important;
+  }
+}

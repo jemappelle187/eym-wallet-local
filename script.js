@@ -61,6 +61,239 @@ window.addEventListener('scroll', () => {
   lastScrollTop = scrollTop;
 });
 
+// Mobile Navigation Management - FIXED HAMBURGER MENU
+class MobileNavigation {
+  constructor() {
+    this.navbar = document.querySelector('.navbar');
+    this.hamburger = document.getElementById('hamburger');
+    this.navMenu = document.getElementById('nav-menu');
+    this.navLinks = document.querySelectorAll('.nav-link');
+    this.dropdowns = document.querySelectorAll('.dropdown');
+    this.isMenuOpen = false;
+    
+    this.init();
+  }
+  
+  init() {
+    this.setupHamburgerMenu();
+    this.setupDropdowns();
+    this.setupMobileOptimizations();
+    this.setupTouchOptimizations();
+  }
+  
+  setupHamburgerMenu() {
+    if (this.hamburger && this.navMenu) {
+      // Remove any existing event listeners
+      const newHamburger = this.hamburger.cloneNode(true);
+      this.hamburger.parentNode.replaceChild(newHamburger, this.hamburger);
+      this.hamburger = newHamburger;
+      
+      // Add proper ARIA attributes
+      this.hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+      this.hamburger.setAttribute('aria-expanded', 'false');
+      this.hamburger.setAttribute('aria-controls', 'nav-menu');
+      
+      // Add click event listener
+      this.hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleMenu();
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (this.isMenuOpen && !this.navbar.contains(e.target)) {
+          this.closeMenu();
+        }
+      });
+      
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isMenuOpen) {
+          this.closeMenu();
+        }
+      });
+      
+      // Close menu when clicking on nav links
+      this.navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          this.closeMenu();
+        });
+      });
+    }
+  }
+  
+  toggleMenu() {
+    if (this.isMenuOpen) {
+      this.closeMenu();
+    } else {
+      this.openMenu();
+    }
+  }
+  
+  openMenu() {
+    this.hamburger.classList.add('active');
+    this.navMenu.classList.add('active');
+    this.hamburger.setAttribute('aria-expanded', 'true');
+    this.isMenuOpen = true;
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = 'hidden';
+    
+    // Focus management
+    const firstLink = this.navMenu.querySelector('a');
+    if (firstLink) {
+      setTimeout(() => firstLink.focus(), 100);
+    }
+  }
+  
+  closeMenu() {
+    this.hamburger.classList.remove('active');
+    this.navMenu.classList.remove('active');
+    this.hamburger.setAttribute('aria-expanded', 'false');
+    this.isMenuOpen = false;
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+    
+    // Return focus to hamburger
+    this.hamburger.focus();
+  }
+  
+  setupDropdowns() {
+    this.dropdowns.forEach(dropdown => {
+      const dropdownToggle = dropdown.querySelector('.nav-link');
+      const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+      
+      if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+  }
+  
+  setupMobileOptimizations() {
+    // Add mobile-specific classes
+    if (window.innerWidth <= 768) {
+      document.body.classList.add('mobile-device');
+    }
+    
+    // Handle resize events
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && this.isMenuOpen) {
+        this.closeMenu();
+      }
+    });
+  }
+  
+  setupTouchOptimizations() {
+    // Add touch feedback to interactive elements
+    const touchElements = document.querySelectorAll('.btn, .nav-link, .dropdown-item');
+    
+    touchElements.forEach(element => {
+      element.addEventListener('touchstart', () => {
+        element.style.transform = 'scale(0.98)';
+      });
+      
+      element.addEventListener('touchend', () => {
+        element.style.transform = '';
+      });
+    });
+  }
+}
+
+// Initialize mobile navigation
+document.addEventListener('DOMContentLoaded', () => {
+  new MobileNavigation();
+  
+  // Mobile-specific download functionality
+  setupMobileDownloads();
+  
+  // Mobile-specific cookie banner improvements
+  setupMobileCookieBanner();
+});
+
+// Mobile Download Functionality
+function setupMobileDownloads() {
+  const mobileDownloadLinks = document.querySelectorAll('.mobile-app-link');
+  
+  mobileDownloadLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const platform = link.getAttribute('data-platform');
+      
+      // Detect if user is on mobile
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // Direct app store links for mobile users
+        if (platform === 'ios') {
+          window.open('https://apps.apple.com/app/sendnreceive', '_blank');
+        } else if (platform === 'android') {
+          window.open('https://play.google.com/store/apps/details?id=com.sendnreceive', '_blank');
+        }
+      } else {
+        // Show QR code or redirect for desktop users
+        showDownloadOptions();
+      }
+    });
+  });
+}
+
+// Mobile Cookie Banner Improvements
+function setupMobileCookieBanner() {
+  const cookieBanner = document.getElementById('cookieBanner');
+  const cookieAcceptAll = document.getElementById('cookieAcceptAll');
+  const cookieCustomize = document.getElementById('cookieCustomize');
+  
+  if (cookieBanner && cookieAcceptAll) {
+    // Auto-dismiss cookie banner after 5 seconds on mobile
+    if (window.innerWidth <= 768) {
+      setTimeout(() => {
+        if (cookieBanner.style.display !== 'none') {
+          cookieBanner.style.opacity = '0';
+          setTimeout(() => {
+            cookieBanner.style.display = 'none';
+          }, 300);
+        }
+      }, 5000);
+    }
+    
+    // Improved mobile cookie banner interaction
+    cookieAcceptAll.addEventListener('click', () => {
+      cookieBanner.style.opacity = '0';
+      setTimeout(() => {
+        cookieBanner.style.display = 'none';
+      }, 300);
+      
+      // Save cookie preferences
+      localStorage.setItem('cookiePreferences', 'all');
+    });
+    
+    cookieCustomize.addEventListener('click', () => {
+      // Show cookie customization modal
+      showCookieModal();
+    });
+  }
+}
+
+// Mobile Cookie Modal
+function showCookieModal() {
+  const modal = document.getElementById('cookieModalOverlay');
+  if (modal) {
+    modal.style.display = 'flex';
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  }
+}
+
 // Navigation Management
 class Navigation {
   constructor() {
@@ -81,20 +314,9 @@ class Navigation {
   }
   
   setupMobileMenu() {
-    if (this.hamburger && this.navMenu) {
-      this.hamburger.addEventListener('click', () => {
-        this.hamburger.classList.toggle('active');
-        this.navMenu.classList.toggle('active');
-      });
-      
-      // Close mobile menu when clicking on a link
-      this.navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          this.hamburger.classList.remove('active');
-          this.navMenu.classList.remove('active');
-        });
-      });
-    }
+    // Mobile menu is now handled by MobileNavigation class
+    // This method is kept for compatibility but disabled
+    console.log('Mobile menu handled by MobileNavigation class');
   }
   
   setupScrollSpy() {
@@ -1537,47 +1759,9 @@ class MobileOptimizer {
   }
   
   setupMobileAccessibility() {
-    // Improve mobile navigation accessibility
-    const mobileMenu = document.getElementById('nav-menu');
-    const hamburger = document.getElementById('hamburger');
-    
-    if (mobileMenu && hamburger) {
-      // Add ARIA labels for mobile menu
-      hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-controls', 'nav-menu');
-      
-      hamburger.addEventListener('click', () => {
-        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-        hamburger.setAttribute('aria-expanded', !isExpanded);
-      });
-      
-      // Trap focus in mobile menu when open
-      const focusableElements = mobileMenu.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
-      const firstFocusable = focusableElements[0];
-      const lastFocusable = focusableElements[focusableElements.length - 1];
-      
-      mobileMenu.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey) {
-            if (document.activeElement === firstFocusable) {
-              e.preventDefault();
-              lastFocusable.focus();
-            }
-          } else {
-            if (document.activeElement === lastFocusable) {
-              e.preventDefault();
-              firstFocusable.focus();
-            }
-          }
-        }
-        
-        if (e.key === 'Escape') {
-          hamburger.click();
-          hamburger.focus();
-        }
-      });
-    }
+    // Mobile navigation accessibility is now handled by MobileNavigation class
+    // This section is kept for compatibility but disabled
+    console.log('Mobile navigation accessibility handled by MobileNavigation class');
     
     // Improve mobile form accessibility
     const mobileForms = document.querySelectorAll('form');
@@ -1837,16 +2021,170 @@ document.addEventListener('DOMContentLoaded', () => {
   new NavbarControls();
 }); 
 
-// Simple Currency Slider - Global Functions
-// Slider variables removed - replaced with balance cards mockup
+// Enhanced Multi-Currency Slider - Global Functions
+let currentSlide = 0;
+const slides = ['usd', 'aed', 'ghs'];
+let autoPlayInterval;
 
-// All slider functionality removed - replaced with balance cards mockup
+// Show specific slide
+function showSlide(slideIndex) {
+  // Convert string to index if needed
+  if (typeof slideIndex === 'string') {
+    slideIndex = slides.indexOf(slideIndex);
+  }
+  
+  if (slideIndex < 0 || slideIndex >= slides.length) return;
+  
+  // Update current slide
+  currentSlide = slideIndex;
+  
+  // Hide all slides
+  slides.forEach((slide, index) => {
+    const slideElement = document.getElementById(`slide-${slide}`);
+    if (slideElement) {
+      slideElement.classList.remove('active', 'prev', 'next');
+      if (index < currentSlide) {
+        slideElement.classList.add('prev');
+      } else if (index > currentSlide) {
+        slideElement.classList.add('next');
+      }
+    }
+  });
+  
+  // Show current slide
+  const currentSlideElement = document.getElementById(`slide-${slides[currentSlide]}`);
+  if (currentSlideElement) {
+    currentSlideElement.classList.add('active');
+  }
+  
+  // Update navigation states
+  updateNavigation();
+  
+  // Reset auto-play
+  resetAutoPlay();
+}
+
+// Next slide
+function nextSlide() {
+  const nextIndex = (currentSlide + 1) % slides.length;
+  showSlide(nextIndex);
+}
+
+// Previous slide
+function prevSlide() {
+  const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(prevIndex);
+}
+
+// Update navigation states
+function updateNavigation() {
+  // Update dots
+  const dots = document.querySelectorAll('.nav-dot');
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentSlide);
+  });
+  
+  // Update currency buttons
+  const currencyBtns = document.querySelectorAll('.currency-btn');
+  currencyBtns.forEach((btn, index) => {
+    btn.classList.toggle('active', index === currentSlide);
+  });
+  
+  // Update arrows
+  const prevBtn = document.getElementById('currencyPrevBtn');
+  const nextBtn = document.getElementById('currencyNextBtn');
+  
+  if (prevBtn) prevBtn.disabled = false;
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+// Auto-play functionality
+function startAutoPlay() {
+  autoPlayInterval = setInterval(() => {
+    nextSlide();
+  }, 5000); // Change slide every 5 seconds
+}
+
+function stopAutoPlay() {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval);
+    autoPlayInterval = null;
+  }
+}
+
+function resetAutoPlay() {
+  stopAutoPlay();
+  startAutoPlay();
+}
+
+// Keyboard navigation
+function handleKeyboardNavigation(e) {
+  switch(e.key) {
+    case 'ArrowLeft':
+      e.preventDefault();
+      prevSlide();
+      break;
+    case 'ArrowRight':
+      e.preventDefault();
+      nextSlide();
+      break;
+    case 'Escape':
+      e.preventDefault();
+      stopAutoPlay();
+      break;
+  }
+}
+
+// Touch/swipe support
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleTouchStart(e) {
+  touchStartX = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd(e) {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}
+
+function handleSwipe() {
+  const swipeThreshold = 50;
+  const diff = touchStartX - touchEndX;
+  
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      nextSlide(); // Swipe left
+    } else {
+      prevSlide(); // Swipe right
+    }
+  }
+}
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   try {
+    // Initialize currency slider
+    const currencySlider = document.querySelector('.currency-slider');
+    if (currencySlider) {
+      // Add touch event listeners
+      currencySlider.addEventListener('touchstart', handleTouchStart, { passive: true });
+      currencySlider.addEventListener('touchend', handleTouchEnd, { passive: true });
+      
+      // Add keyboard navigation
+      document.addEventListener('keydown', handleKeyboardNavigation);
+      
+      // Start auto-play
+      startAutoPlay();
+      
+      // Pause auto-play on hover
+      currencySlider.addEventListener('mouseenter', stopAutoPlay);
+      currencySlider.addEventListener('mouseleave', startAutoPlay);
+      
+      console.log('Currency slider initialized successfully');
+    }
+    
     // Initialize existing functionality
-    // Note: Some functions may not exist after slider removal
     console.log('Website initialized successfully');
   } catch (error) {
     console.error('Error during initialization:', error);

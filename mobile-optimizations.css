@@ -1,0 +1,435 @@
+/* ===== MOBILE OPTIMIZATIONS - ENHANCED ===== */
+
+/* Base mobile optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Mobile-specific performance optimizations */
+@media (max-width: 768px) {
+  /* Optimize animations for mobile performance */
+  .fade-in, .slide-in-left, .slide-in-right, .scale-in, .stagger-item {
+    animation-duration: 0.4s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Reduce complex shadows on mobile for better performance */
+  .card, .solution-card, .security-card, .receive-method,
+  .btn, .screenshot-card, .testimonial-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Optimize hover effects for touch devices */
+  .card:hover, .solution-card:hover, .security-card:hover, .receive-method:hover,
+  .btn:hover, .screenshot-card:hover, .testimonial-card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Touch-friendly button sizes */
+  .btn {
+    min-height: 48px !important;
+    padding: 14px 20px !important;
+    font-size: 16px !important;
+  }
+  
+  /* Mobile-optimized navigation */
+  .nav-menu {
+    background: rgba(17, 24, 39, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 20px 0 !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    transform: translateY(-100%) !important;
+    transition: transform 0.3s ease-in-out !important;
+  }
+  
+  .nav-menu.active {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .nav-link {
+    padding: 16px 24px !important;
+    font-size: 18px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .nav-link:last-child {
+    border-bottom: none !important;
+  }
+  
+  /* Enhanced mobile hero section */
+  .hero {
+    min-height: 100vh !important;
+    padding: 80px 20px 40px !important;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .hero-features {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .feature-item {
+    padding: 20px !important;
+    text-align: center !important;
+  }
+  
+  /* Mobile-optimized app buttons */
+  .app-buttons {
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  
+  /* Navbar Controls Mobile */
+  .nav-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+  
+  .nav-toggle {
+    display: block !important;
+    background: none !important;
+    border: none !important;
+    color: var(--white) !important;
+    font-size: 24px !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Mobile-optimized sections */
+  .section-header h2 {
+    font-size: 2rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .section-header p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Mobile grid layouts */
+  .solutions-grid,
+  .security-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  /* Mobile-optimized cards */
+  .solution-card,
+  .security-card,
+  .testimonial-card {
+    padding: 24px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Mobile exchange calculator */
+  .exchange-form {
+    padding: 20px !important;
+  }
+  
+  .exchange-selects {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  
+  .amount-row,
+  .currency-row {
+    width: 100% !important;
+  }
+  
+  .input-group {
+    width: 100% !important;
+  }
+  
+  /* Mobile-optimized flow diagram */
+  .flow-diagram {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  
+  .flow-arrow {
+    transform: rotate(90deg) !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .flow-arrow svg {
+    width: 60px !important;
+    height: 15px !important;
+  }
+  
+  .flow-step {
+    max-width: 100% !important;
+  }
+  
+  .step-content h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Mobile-optimized images */
+  .currency-showcase img {
+    width: 100% !important;
+    max-width: 300px !important;
+    height: auto !important;
+  }
+  
+  /* Mobile-optimized newsletter form */
+  .newsletter-form {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .newsletter-form input[type="email"] {
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+  
+  .newsletter-form button {
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+  
+  /* Mobile-optimized app store buttons */
+  .receive-app-buttons {
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  
+  .btn-app-store,
+  .btn-google-play {
+    width: 100% !important;
+    min-height: 60px !important;
+    padding: 16px 24px !important;
+  }
+  
+  /* Mobile-optimized QR code */
+  .qr-download {
+    text-align: center !important;
+    margin: 30px 0 !important;
+  }
+  
+  .qr-download img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  /* Mobile-optimized testimonials */
+  .testimonial-card {
+    padding: 24px !important;
+  }
+  
+  .testimonial-author {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 12px !important;
+  }
+  
+  /* Mobile-optimized stats */
+  .proof-stats {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .stat-card {
+    padding: 24px !important;
+    text-align: center !important;
+  }
+  
+  /* Mobile-optimized compliance badges */
+  .compliance-badges {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .badge {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 16px !important;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .flow-diagram {
+    gap: 1.5rem !important;
+  }
+  
+  .icon-circle {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .step-emoji {
+    font-size: 1.5rem !important;
+  }
+  
+  .step-number {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .btn {
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+  }
+  
+  .container {
+    padding: 0 16px !important;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh !important;
+    padding: 60px 20px 30px !important;
+  }
+  
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .flow-diagram {
+    flex-direction: row !important;
+    gap: 1rem !important;
+  }
+  
+  .flow-arrow {
+    transform: none !important;
+    margin: 0 1rem !important;
+  }
+}
+
+/* High DPI mobile devices */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .icon-circle,
+  .btn,
+  .card {
+    border-radius: 8px !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .card:hover,
+  .nav-link:hover {
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .btn:active,
+  .card:active,
+  .nav-link:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* Accessibility improvements for mobile */
+@media (max-width: 768px) {
+  /* Ensure sufficient color contrast */
+  .text-secondary {
+    color: #6b7280 !important;
+  }
+  
+  /* Improve focus indicators */
+  .btn:focus,
+  .nav-link:focus,
+  input:focus,
+  select:focus {
+    outline: 2px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Ensure readable font sizes */
+  body {
+    font-size: 16px !important;
+  }
+  
+  /* Improve touch targets */
+  .nav-link,
+  .btn,
+  .feature-item {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Reduce animation complexity */
+  .fade-in {
+    animation: fadeInMobile 0.4s ease-out !important;
+  }
+  
+  @keyframes fadeInMobile {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Optimize images */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Reduce layout shifts */
+  .container {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+}

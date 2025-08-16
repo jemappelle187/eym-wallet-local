@@ -4,12 +4,13 @@
   "description": "Premium fintech website for SendNReceive - Send money to Africa instantly with zero fees",
   "main": "index.html",
   "scripts": {
-    "start": "serve . -p30",
-    "dev": "live-server --port=300pen=/",
-    "build": "echoStatic site - no build step required'",
-    "test": "No tests specified",
-    "lint": "echo 'Nolinting configured'",
-    "optimize-images": "echo 'Run image optimization manually',  deploy": "echo 'Deploy to your preferred hosting service'"
+    "start": "serve . -p 3000",
+    "dev": "live-server --port=3000 --open=/",
+    "build": "echo 'Static site - no build step required'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'",
+    "optimize-images": "echo 'Run image optimization manually'",
+    "deploy": "echo 'Deploy to your preferred hosting service'"
   },
   "keywords": [
     "fintech",
@@ -31,8 +32,8 @@
   },
   "homepage": "https://sendnreceive.com",
   "devDependencies": {
-    "serve": "^14.2",
-    "live-server": "^1.22"
+    "serve": "^14.2.0",
+    "live-server": "^1.2.2"
   },
   "engines": {
     "node": ">=14.0"
