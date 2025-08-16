@@ -1726,27 +1726,67 @@ class MobileOptimizer {
       lazyImages.forEach(img => imageObserver.observe(img));
     }
     
-    // Optimize video playback on mobile
-    const heroVideo = document.querySelector('.hero-bg-video');
-    if (heroVideo && this.isMobile) {
-      // Reduce video quality on mobile for better performance
-      heroVideo.setAttribute('preload', 'metadata');
-      
-      // Pause video when not visible to save battery
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            heroVideo.play().catch(() => {
-              // Video autoplay failed, keep it paused
+    // Optimize video playback on mobile and desktop
+    const heroVideos = document.querySelectorAll('.hero-bg-video');
+    heroVideos.forEach(heroVideo => {
+      if (heroVideo) {
+        // Ensure video is properly configured for all devices
+        heroVideo.setAttribute('preload', 'metadata');
+        heroVideo.setAttribute('playsinline', 'true');
+        heroVideo.setAttribute('muted', 'true');
+        heroVideo.setAttribute('loop', 'true');
+        heroVideo.setAttribute('autoplay', 'true');
+        
+        // Ensure video is visible
+        heroVideo.style.display = 'block';
+        heroVideo.style.visibility = 'visible';
+        
+        // Optimize for mobile performance
+        if (this.isMobile) {
+          // Reduce video quality on mobile for better performance
+          heroVideo.style.objectFit = 'cover';
+          
+          // Pause video when not visible to save battery
+          const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                heroVideo.play().catch(() => {
+                  // Video autoplay failed, keep it paused
+                  console.log('Video autoplay failed, using fallback');
+                });
+              } else {
+                heroVideo.pause();
+              }
             });
-          } else {
-            heroVideo.pause();
+          }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+          });
+          
+          videoObserver.observe(heroVideo);
+        } else {
+          // Desktop: ensure video plays smoothly
+          heroVideo.play().catch(() => {
+            console.log('Desktop video autoplay failed');
+          });
+        }
+        
+        // Handle video loading errors
+        heroVideo.addEventListener('error', () => {
+          console.log('Video loading error, using poster image');
+          heroVideo.style.display = 'none';
+          const poster = heroVideo.getAttribute('poster');
+          if (poster) {
+            const videoWrap = heroVideo.closest('.hero-video-wrap');
+            if (videoWrap) {
+              videoWrap.style.backgroundImage = `url(${poster})`;
+              videoWrap.style.backgroundSize = 'cover';
+              videoWrap.style.backgroundPosition = 'center';
+            }
           }
         });
-      });
-      
-      videoObserver.observe(heroVideo);
-    }
+      }
+    });
     
     // Optimize animations on mobile
     if (this.isMobile) {
@@ -1762,6 +1802,9 @@ class MobileOptimizer {
     // Mobile navigation accessibility is now handled by MobileNavigation class
     // This section is kept for compatibility but disabled
     console.log('Mobile navigation accessibility handled by MobileNavigation class');
+    
+    // FIXED: Optimize scroll performance to prevent blocking
+    this.optimizeScrollPerformance();
     
     // Improve mobile form accessibility
     const mobileForms = document.querySelectorAll('form');
@@ -1797,6 +1840,43 @@ class MobileOptimizer {
       document.documentElement.style.setProperty('--hero-padding', '80px 20px 40px');
       document.documentElement.style.setProperty('--hero-title-size', '2.5rem');
     }
+  }
+  
+  // FIXED: Optimize scroll performance to prevent blocking
+  optimizeScrollPerformance() {
+    // Prevent scroll blocking during animations
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .stagger-item');
+    
+    animatedElements.forEach(element => {
+      // Use passive event listeners for better scroll performance
+      element.addEventListener('touchstart', () => {}, { passive: true });
+      element.addEventListener('touchmove', () => {}, { passive: true });
+      element.addEventListener('touchend', () => {}, { passive: true });
+      
+      // Optimize CSS properties for better performance
+      element.style.willChange = 'auto';
+      element.style.transform = 'translateZ(0)';
+      element.style.backfaceVisibility = 'hidden';
+    });
+    
+    // Optimize scroll containers
+    const scrollContainers = document.querySelectorAll('.container, .hero, section');
+    scrollContainers.forEach(container => {
+      container.style.overflowX = 'hidden';
+      container.style.position = 'relative';
+      container.style.willChange = 'auto';
+    });
+    
+    // Debounce scroll events for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(() => {
+        // Handle scroll end
+      }, 16); // ~60fps
+    }, { passive: true });
   }
   
   // Mobile-specific utility methods

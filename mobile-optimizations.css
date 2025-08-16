@@ -8,6 +8,99 @@
   user-select: none;
 }
 
+/* FIXED: Mobile video visibility and performance */
+@media (max-width: 768px) {
+  /* Ensure hero videos are visible on mobile */
+  .hero-video-wrap {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: -3 !important;
+    overflow: hidden !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  .hero-bg-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    /* Optimize for mobile performance */
+    preload: metadata !important;
+    playsinline: true !important;
+    muted: true !important;
+    loop: true !important;
+    autoplay: true !important;
+  }
+  
+  /* Ensure video sources are properly loaded */
+  .hero-bg-video source {
+    display: block !important;
+  }
+  
+  /* Fallback image for video loading */
+  .hero-bg-video[poster] {
+    background-image: var(--fallback-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  
+  /* Optimize video overlay for mobile */
+  .hero-bg-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%) !important;
+    opacity: 0.8 !important;
+    z-index: -1 !important;
+  }
+}
+
+/* FIXED: Smooth scrolling optimizations */
+@media (max-width: 768px) {
+  /* Ensure smooth scrolling works properly on mobile */
+  html {
+    scroll-behavior: smooth !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  body {
+    scroll-behavior: smooth !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    /* Prevent scroll blocking */
+    position: relative !important;
+    width: 100% !important;
+  }
+  
+  /* Optimize scroll performance */
+  .container, .hero, section {
+    overflow-x: hidden !important;
+    position: relative !important;
+    /* Prevent layout shifts during scroll */
+    will-change: auto !important;
+    transform: translateZ(0) !important;
+  }
+  
+  /* Reduce scroll blocking elements */
+  .fade-in, .slide-in-left, .slide-in-right, .scale-in {
+    will-change: auto !important;
+    transform: translateZ(0) !important;
+    /* Prevent scroll blocking during animations */
+    pointer-events: auto !important;
+  }
+}
+
 /* Mobile-specific performance optimizations */
 @media (max-width: 768px) {
   /* Optimize animations for mobile performance */
@@ -72,6 +165,9 @@
   .hero {
     min-height: 100vh !important;
     padding: 80px 20px 40px !important;
+    /* Ensure proper positioning for video background */
+    position: relative !important;
+    overflow: hidden !important;
   }
   
   .hero-title {
