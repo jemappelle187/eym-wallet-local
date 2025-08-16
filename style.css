@@ -8346,3 +8346,185 @@ html {
     overflow-x: hidden !important;
   }
 }
+
+/* ===== FLOW DIAGRAM STYLES ===== */
+/* Add Send Receive Flow Diagram */
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 280px;
+  position: relative;
+}
+
+.step-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.step-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.step-number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: var(--color-accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.step-content {
+  text-align: center;
+}
+
+.step-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.step-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.step-highlight {
+  width: 40px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: 2px;
+  margin: 0 auto;
+  transition: width 0.3s ease;
+}
+
+.flow-step:hover .step-highlight {
+  width: 60px;
+}
+
+/* Flow Arrows */
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.flow-arrow:hover {
+  opacity: 1;
+}
+
+.flow-arrow svg {
+  width: 80px;
+  height: 20px;
+}
+
+.arrow-path {
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.arrow-dot {
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.flow-arrow:hover .arrow-dot {
+  transform: scale(1.2);
+}
+
+/* Responsive Flow Diagram */
+@media (max-width: 1024px) {
+  .flow-diagram {
+    gap: 1.5rem;
+  }
+  
+  .flow-step {
+    max-width: 240px;
+  }
+  
+  .icon-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .step-emoji {
+    font-size: 1.75rem;
+  }
+  
+  .step-content h3 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .flow-diagram {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .flow-arrow {
+    transform: rotate(90deg);
+    margin: 1rem 0;
+  }
+  
+  .flow-arrow svg {
+    width: 60px;
+    height: 15px;
+  }
+  
+  .flow-step {
+    max-width: 100%;
+  }
+  
+  .step-content h3 {
+    font-size: 1.25rem;
+  }
+}
