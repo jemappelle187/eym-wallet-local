@@ -7631,7 +7631,7 @@ html {
 
 /* Dark Mode Styles */
 .dark-mode .currency-showcase {
-  background: var(--dark-bg-primary);
+  background-color: var(--dark-bg-primary);
 }
 
 .dark-mode .slide-info h3 {
