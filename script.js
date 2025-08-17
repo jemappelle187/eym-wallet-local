@@ -1,15 +1,20 @@
 // SendNReceive - 2026 Fintech Platform JavaScript
+console.log('SendNReceive script loaded successfully');
 
 // Loading Screen Management
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded event fired');
   const loadingScreen = document.getElementById('loadingScreen');
   
   // Ensure loading screen exists
   if (loadingScreen) {
+    console.log('Loading screen found, starting hide process');
     // Simulate loading process
     setTimeout(() => {
+      console.log('Adding hidden class to loading screen');
       loadingScreen.classList.add('hidden');
       setTimeout(() => {
+        console.log('Setting loading screen display to none');
         loadingScreen.style.display = 'none';
       }, 500);
     }, 2000);
@@ -20,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Force hide loading screen after 3 seconds as fallback
   setTimeout(() => {
     if (loadingScreen && loadingScreen.style.display !== 'none') {
+      console.log('Force-hiding loading screen after timeout');
       loadingScreen.style.display = 'none';
       console.log('Loading screen force-hidden after timeout');
     }
@@ -29,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'l' || e.key === 'L') {
       if (loadingScreen) {
+        console.log('Manually hiding loading screen');
         loadingScreen.style.display = 'none';
         console.log('Loading screen manually hidden');
       }
