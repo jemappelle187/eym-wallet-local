@@ -6373,6 +6373,53 @@ html {
   color: var(--dark-text-secondary) !important;
 }
 
+/* ===== DARK MODE BACKGROUND IMAGE PRESERVATION ===== */
+/* Ensure background images remain visible in dark mode */
+
+/* Preserve background images for receive-method cards */
+.dark-mode .receive-method[style*="background-image"] {
+  background-color: transparent !important;
+}
+
+/* Preserve background images for security cards */
+.dark-mode .security-card[style*="background-image"] {
+  background-color: transparent !important;
+}
+
+/* Preserve background images for currency showcase section */
+.dark-mode .currency-showcase[style*="background-image"] {
+  background-color: transparent !important;
+}
+
+/* Ensure method overlays work properly in dark mode */
+.dark-mode .method-overlay {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .method-overlay:hover {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Ensure text remains readable on background images in dark mode */
+.dark-mode .receive-method[style*="background-image"] h3,
+.dark-mode .receive-method[style*="background-image"] p,
+.dark-mode .receive-method[style*="background-image"] li {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .security-card[style*="background-image"] h3,
+.dark-mode .security-card[style*="background-image"] p,
+.dark-mode .security-card[style*="background-image"] li {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Preserve any other elements with background images */
+.dark-mode [style*="background-image"] {
+  background-color: transparent !important;
+}
+
 /* Dark mode for app showcase */
 .dark-mode .screenshot-card {
   background: var(--dark-bg-secondary) !important;
