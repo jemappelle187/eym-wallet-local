@@ -6279,14 +6279,14 @@ html {
 }
 
 .dark-mode .section {
-  background: var(--dark-bg-primary);
+  background-color: var(--dark-bg-primary);
 }
 
 .dark-mode .card,
 .dark-mode .solution-card,
 .dark-mode .security-card,
 .dark-mode .receive-method {
-  background: var(--dark-bg-secondary);
+  background-color: var(--dark-bg-secondary);
   border-color: var(--dark-border-color);
 }
 
@@ -6351,13 +6351,13 @@ html {
 
 /* Dark mode for cards and components */
 .dark-mode .receive-method {
-  background: var(--dark-bg-secondary) !important;
+  background-color: var(--dark-bg-secondary) !important;
   border-color: var(--dark-border-color) !important;
   color: var(--dark-text-primary) !important;
 }
 
 .dark-mode .receive-method:hover {
-  background: var(--dark-bg-tertiary) !important;
+  background-color: var(--dark-bg-tertiary) !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
@@ -6445,12 +6445,12 @@ html {
 
 /* Dark mode for security section */
 .dark-mode .security-card {
-  background: var(--dark-bg-secondary) !important;
+  background-color: var(--dark-bg-secondary) !important;
   border-color: var(--dark-border-color) !important;
 }
 
 .dark-mode .security-card:hover {
-  background: var(--dark-bg-tertiary) !important;
+  background-color: var(--dark-bg-tertiary) !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
@@ -6464,13 +6464,13 @@ html {
 
 /* Dark mode for compliance badges */
 .dark-mode .badge {
-  background: var(--dark-bg-tertiary) !important;
+  background-color: var(--dark-bg-tertiary) !important;
   border-color: var(--dark-border-color) !important;
   color: var(--dark-text-primary) !important;
 }
 
 .dark-mode .badge:hover {
-  background: var(--dark-bg-secondary) !important;
+  background-color: var(--dark-bg-secondary) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
