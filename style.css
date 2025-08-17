@@ -8810,15 +8810,15 @@ html {
   right: 30px;
   width: 56px;
   height: 56px;
-  background: rgba(249, 250, 251, 0.8); /* Made transparent */
+  background: rgba(249, 250, 251, 0.5); /* Made more transparent */
   color: var(--text-primary);
-  border: 1px solid rgba(229, 231, 235, 0.6); /* Made border transparent */
+  border: 1px solid rgba(229, 231, 235, 0.4); /* Made border more transparent */
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); /* Made shadow more subtle */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06); /* Made shadow more subtle */
   transition: all var(--transition-normal);
   opacity: 0;
   visibility: hidden;
@@ -8836,13 +8836,13 @@ html {
 
 .scroll-to-top:hover {
   transform: translateY(-4px) scale(1.05);
-  background: rgba(243, 244, 246, 0.9); /* Made hover state transparent */
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* Made hover shadow more subtle */
+  background: rgba(243, 244, 246, 0.7); /* Made hover state more transparent */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Made hover shadow more subtle */
 }
 
 .scroll-to-top:active {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
 .scroll-to-top svg {
