@@ -6803,7 +6803,7 @@ html {
 }
 
 .dark-mode .premium-section {
-  background: var(--dark-bg-primary) !important;
+  background-color: var(--dark-bg-primary) !important;
 }
 
 .dark-mode .fade-in {
