@@ -8736,3 +8736,54 @@ html {
   color: #22c55e !important;
   text-shadow: none !important;
 }
+
+
+/* ===== DUPLICATE SECURITY SECTION TEXT COLOR OVERRIDE ===== */
+#security-duplicate .security-card h3 {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+#security-duplicate .security-card p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ===== DUPLICATE SECURITY SECTION CARD SIZE & STYLING ===== */
+#security-duplicate .security-card {
+  min-height: 280px;
+  padding: 32px 24px;
+  border-radius: 16px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#security-duplicate .security-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+#security-duplicate .security-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments for duplicate security cards */
+@media (max-width: 768px) {
+  #security-duplicate .security-card {
+    min-height: 240px;
+    padding: 24px 20px;
+    border-radius: 12px !important;
+  }
+  
+  #security-duplicate .security-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  #security-duplicate .security-card p {
+    font-size: 0.9rem;
+  }
+}
