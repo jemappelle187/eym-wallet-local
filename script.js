@@ -2399,4 +2399,3 @@ class ScrollToTop {
 document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
-});
