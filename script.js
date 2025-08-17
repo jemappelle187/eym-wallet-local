@@ -2407,22 +2407,23 @@ document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
 
-// Progress Ring Animation for "We Are Here For" Section
-class ProgressRingAnimation {
+// Timeline Animation for "We Are Here For" Section
+class TimelineAnimation {
   constructor() {
-    this.progressRings = document.querySelectorAll('.progress-ring-circle');
+    this.timelineItems = document.querySelectorAll('.timeline-item');
+    this.floatingElements = document.querySelectorAll('.floating-element');
     this.observer = null;
     this.init();
   }
   
   init() {
-    if (this.progressRings.length === 0) return;
+    if (this.timelineItems.length === 0) return;
     
     // Set up intersection observer for animation triggers
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          this.animateProgressRing(entry.target);
+          this.animateTimelineItem(entry.target);
         }
       });
     }, {
@@ -2430,31 +2431,38 @@ class ProgressRingAnimation {
       rootMargin: '0px 0px -50px 0px'
     });
     
-    // Observe each progress ring
-    this.progressRings.forEach(ring => {
-      this.observer.observe(ring);
+    // Observe each timeline item
+    this.timelineItems.forEach(item => {
+      this.observer.observe(item);
     });
   }
   
-  animateProgressRing(ring) {
-    // Get the stroke-dashoffset from the CSS
-    const computedStyle = getComputedStyle(ring);
-    const strokeDashoffset = computedStyle.strokeDashoffset;
+  animateTimelineItem(item) {
+    // Add animation class to the timeline item
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
     
-    // Set initial state
-    ring.style.strokeDashoffset = '339.292';
-    
-    // Animate to final state
     setTimeout(() => {
-      ring.style.strokeDashoffset = strokeDashoffset;
+      item.style.transition = 'all 0.8s ease-out';
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
     }, 100);
     
-    // Stop observing this ring after animation
-    this.observer.unobserve(ring);
+    // Animate floating elements with staggered delays
+    const floatingElements = item.querySelectorAll('.floating-element');
+    floatingElements.forEach((element, index) => {
+      const delay = parseInt(element.getAttribute('data-delay')) || index * 200;
+      setTimeout(() => {
+        element.style.animation = 'floatIn 0.6s ease-out forwards';
+      }, delay);
+    });
+    
+    // Stop observing this item after animation
+    this.observer.unobserve(item);
   }
 }
 
-// Initialize progress ring animations
+// Initialize timeline animations
 document.addEventListener('DOMContentLoaded', () => {
-  new ProgressRingAnimation();
+  new TimelineAnimation();
 });
