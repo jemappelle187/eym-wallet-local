@@ -2407,23 +2407,22 @@ document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
 
-// 3D Cards and Parallax Animation for "We Are Here For" Section
-class Interactive3DCardsAnimation {
+// Progress Rings Animation for "We Are Here For" Section
+class ProgressRingsAnimation {
   constructor() {
-    this.floatingElements = document.querySelectorAll('.floating-element');
-    this.cards3D = document.querySelectorAll('.card-3d');
+    this.progressRings = document.querySelectorAll('.progress-ring-circle');
     this.observer = null;
     this.init();
   }
   
   init() {
-    if (this.floatingElements.length === 0) return;
+    if (this.progressRings.length === 0) return;
     
     // Set up intersection observer for animation triggers
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          this.animateCards(entry.target);
+          this.animateProgressRing(entry.target);
         }
       });
     }, {
@@ -2431,61 +2430,55 @@ class Interactive3DCardsAnimation {
       rootMargin: '0px 0px -50px 0px'
     });
     
-    // Observe the interactive 3D cards container
-    const cardsContainer = document.querySelector('.interactive-3d-cards');
-    if (cardsContainer) {
-      this.observer.observe(cardsContainer);
+    // Observe each progress ring
+    this.progressRings.forEach(ring => {
+      this.observer.observe(ring);
+    });
+  }
+  
+  animateProgressRing(ring) {
+    const progress = parseInt(ring.getAttribute('data-progress'));
+    const circumference = 2 * Math.PI * 54; // r = 54
+    const offset = circumference - (progress / 100) * circumference;
+    
+    // Animate the progress ring
+    ring.style.strokeDashoffset = offset;
+    
+    // Animate the progress number
+    const progressNumber = ring.closest('.progress-ring-container').querySelector('.progress-number');
+    if (progressNumber) {
+      this.animateNumber(progressNumber, 0, progress, 2000);
     }
     
-    // Initialize parallax effect for floating elements
-    this.initParallax();
+    // Stop observing this ring after animation
+    this.observer.unobserve(ring);
   }
   
-  initParallax() {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * -0.5;
-      
-      this.floatingElements.forEach((element, index) => {
-        const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
-        const yPos = -(scrolled * speed);
-        element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.1}deg)`;
-      });
-    });
-  }
-  
-  animateCards(container) {
-    // Animate 3D cards with staggered entrance
-    this.cards3D.forEach((card, index) => {
-      setTimeout(() => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px) rotateX(20deg)';
-        
-        setTimeout(() => {
-          card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0) rotateX(0deg)';
-        }, 100);
-      }, index * 200); // Stagger the animations
-    });
+  animateNumber(element, start, end, duration) {
+    const startTime = performance.now();
+    const startValue = start;
+    const endValue = end;
     
-    // Add hover effects for 3D cards
-    this.cards3D.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-      });
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
       
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-      });
-    });
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = Math.round(startValue + (endValue - startValue) * easeOutQuart);
+      
+      element.textContent = currentValue + '%';
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
     
-    // Stop observing after animation
-    this.observer.unobserve(container);
+    requestAnimationFrame(animate);
   }
 }
 
-// Initialize 3D cards and parallax animations
+// Initialize progress rings animations
 document.addEventListener('DOMContentLoaded', () => {
-  new Interactive3DCardsAnimation();
+  new ProgressRingsAnimation();
 });

@@ -8938,329 +8938,177 @@ html {
   }
 }
 
-/* ===== WE ARE HERE FOR SECTION - STYLE 6: INTERACTIVE 3D CARDS WITH PARALLAX EFFECTS AND FLOATING ELEMENTS ===== */
+/* ===== WE ARE HERE FOR SECTION - STYLE 1: INTERACTIVE GRID WITH PROGRESS RINGS ===== */
 .we-are-here-for {
   padding: var(--spacing-4xl) 0;
   background: var(--color-bg-light);
-  position: relative;
-  overflow: hidden;
 }
 
-/* Floating Elements Container */
-.floating-elements-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.floating-element {
-  position: absolute;
-  opacity: 0.1;
-  transition: all 0.3s ease;
-  animation: float 6s ease-in-out infinite;
-}
-
-.floating-element:nth-child(1) {
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.floating-element:nth-child(2) {
-  top: 20%;
-  right: 15%;
-  animation-delay: 1s;
-}
-
-.floating-element:nth-child(3) {
-  top: 60%;
-  left: 5%;
-  animation-delay: 2s;
-}
-
-.floating-element:nth-child(4) {
-  top: 70%;
-  right: 10%;
-  animation-delay: 3s;
-}
-
-.floating-element:nth-child(5) {
-  top: 40%;
-  left: 20%;
-  animation-delay: 4s;
-}
-
-.floating-element:nth-child(6) {
-  top: 80%;
-  right: 25%;
-  animation-delay: 5s;
-}
-
-.element-icon {
-  font-size: 2rem;
-  filter: blur(0.5px);
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
-}
-
-/* Interactive 3D Cards */
-.interactive-3d-cards {
+.interactive-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-2xl);
   margin-top: var(--spacing-3xl);
-  position: relative;
-  z-index: 2;
 }
 
-.card-3d {
-  perspective: 1000px;
-  height: 400px;
-}
-
-.card-3d-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
-
-.card-3d:hover .card-3d-inner {
-  transform: rotateY(180deg);
-}
-
-.card-3d-front,
-.card-3d-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+.grid-item {
+  background: var(--color-bg-white);
   border-radius: var(--border-radius-xl);
   padding: var(--spacing-2xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: all var(--transition-normal);
-}
-
-.card-3d-front {
-  background: linear-gradient(135deg, var(--color-bg-white) 0%, rgba(248, 250, 252, 0.8) 100%);
   border: 2px solid var(--color-border-light);
 }
 
-.card-3d-back {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: white;
-  transform: rotateY(180deg);
-  border: 2px solid var(--color-primary);
+.grid-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(30, 64, 175, 0.15);
+  border-color: var(--color-primary);
 }
 
-.card-3d:hover .card-3d-front {
-  box-shadow: 0 16px 48px rgba(30, 64, 175, 0.2);
+/* Progress Ring Container */
+.progress-ring-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--spacing-xl);
 }
 
-.card-3d:hover .card-3d-back {
-  box-shadow: 0 16px 48px rgba(30, 64, 175, 0.3);
+.progress-ring {
+  transform: rotate(-90deg);
 }
 
-.card-3d-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-lg);
-  transition: all var(--transition-normal);
-  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.2);
+.progress-ring-circle-bg {
+  fill: none;
+  stroke: var(--color-border-light);
+  stroke-width: 8;
 }
 
-.card-3d:hover .card-3d-icon {
-  transform: scale(1.1) rotate(10deg);
-  box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+.progress-ring-circle {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 2s ease-in-out;
 }
 
-.card-3d-icon svg {
-  width: 40px;
-  height: 40px;
-  color: white;
-}
-
-.card-3d-front h3 {
-  font-size: var(--font-size-xl);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-lg);
-  line-height: 1.3;
-}
-
-.card-3d-back h4 {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  margin-bottom: var(--spacing-md);
-  color: white;
-}
-
-.card-3d-back p {
-  font-size: var(--font-size-sm);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-lg);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.card-3d-stats {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: var(--spacing-lg);
-}
-
-.stat-3d {
+.progress-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
 }
 
-.stat-number-3d {
-  display: block;
+.progress-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-number {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.grid-item h3 {
   font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+.grid-item p {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.grid-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: var(--spacing-lg);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: var(--spacing-xs);
 }
 
-.stat-label-3d {
-  font-size: var(--font-size-sm);
+.stat-label {
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   font-weight: 500;
-}
-
-.card-3d-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-lg);
-  justify-content: center;
-}
-
-.feature-tag {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.card-3d-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: var(--spacing-sm) var(--spacing-xl);
-  border-radius: var(--border-radius-lg);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-normal);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
 }
 
-.card-3d-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-}
-
-/* Dark mode styles for 3D Cards */
+/* Dark mode styles for Interactive Grid */
 .dark-mode .we-are-here-for {
   background-color: var(--dark-bg-primary);
 }
 
-.dark-mode .card-3d-front {
-  background: linear-gradient(135deg, var(--dark-bg-secondary) 0%, rgba(30, 41, 59, 0.8) 100%);
+.dark-mode .grid-item {
+  background: var(--dark-bg-secondary);
   border-color: var(--dark-border-color);
 }
 
-.dark-mode .card-3d-front h3 {
+.dark-mode .grid-item h3 {
   color: var(--dark-text-primary);
 }
 
-.dark-mode .stat-number-3d {
-  color: var(--color-primary);
-}
-
-.dark-mode .stat-label-3d {
+.dark-mode .grid-item p {
   color: var(--dark-text-secondary);
 }
 
-/* Mobile responsive adjustments for 3D Cards */
+.dark-mode .progress-ring-circle-bg {
+  stroke: var(--dark-border-color);
+}
+
+.dark-mode .stat-label {
+  color: var(--dark-text-secondary);
+}
+
+/* Mobile responsive adjustments for Interactive Grid */
 @media (max-width: 768px) {
-  .interactive-3d-cards {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  .interactive-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-xl);
   }
   
-  .card-3d {
-    height: 350px;
-  }
-  
-  .card-3d-front,
-  .card-3d-back {
+  .grid-item {
     padding: var(--spacing-xl);
   }
   
-  .card-3d-icon {
-    width: 60px;
-    height: 60px;
+  .progress-ring-container {
+    width: 100px;
+    height: 100px;
   }
   
-  .card-3d-icon svg {
-    width: 30px;
-    height: 30px;
+  .progress-icon {
+    font-size: 1.5rem;
   }
   
-  .card-3d-front h3 {
-    font-size: var(--font-size-lg);
-  }
-  
-  .card-3d-back h4 {
+  .progress-number {
     font-size: var(--font-size-base);
   }
   
-  .card-3d-back p {
-    font-size: var(--font-size-xs);
-  }
-  
-  .stat-number-3d {
+  .grid-item h3 {
     font-size: var(--font-size-lg);
   }
   
-  .stat-label-3d {
-    font-size: var(--font-size-xs);
-  }
-  
-  .floating-element {
-    display: none;
+  .stat-number {
+    font-size: var(--font-size-base);
   }
 }
 
@@ -9269,72 +9117,52 @@ html {
     padding: var(--spacing-3xl) 0;
   }
   
-  .interactive-3d-cards {
+  .interactive-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
   }
   
-  .card-3d {
-    height: 320px;
-  }
-  
-  .card-3d-front,
-  .card-3d-back {
+  .grid-item {
     padding: var(--spacing-lg);
   }
   
-  .card-3d-icon {
-    width: 50px;
-    height: 50px;
+  .progress-ring-container {
+    width: 80px;
+    height: 80px;
   }
   
-  .card-3d-icon svg {
-    width: 25px;
-    height: 25px;
+  .progress-icon {
+    font-size: 1.25rem;
   }
   
-  .card-3d-front h3 {
-    font-size: var(--font-size-base);
-  }
-  
-  .card-3d-back h4 {
+  .progress-number {
     font-size: var(--font-size-sm);
   }
   
-  .card-3d-back p {
+  .grid-item h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .grid-item p {
     font-size: var(--font-size-xs);
   }
   
-  .card-3d-stats {
+  .grid-stats {
     flex-direction: column;
     gap: var(--spacing-sm);
   }
   
-  .stat-3d {
+  .stat {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  .stat-number-3d {
-    font-size: var(--font-size-base);
+  .stat-number {
+    font-size: var(--font-size-sm);
   }
   
-  .stat-label-3d {
+  .stat-label {
     font-size: var(--font-size-xs);
-  }
-  
-  .card-3d-features {
-    flex-direction: column;
-  }
-  
-  .feature-tag {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .card-3d-btn {
-    width: 100%;
-    padding: var(--spacing-md);
   }
 }
