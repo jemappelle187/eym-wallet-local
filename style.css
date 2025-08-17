@@ -8810,16 +8810,16 @@ html {
   right: 30px;
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-  color: white;
-  border: none;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px) scale(0.8);
@@ -8836,19 +8836,20 @@ html {
 
 .scroll-to-top:hover {
   transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(30, 64, 175, 0.4);
-  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-primary));
+  background: var(--background-tertiary);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .scroll-to-top:active {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .scroll-to-top svg {
   width: 20px;
   height: 20px;
   transition: transform 0.2s ease;
+  fill: var(--text-primary);
 }
 
 .scroll-to-top:hover svg {
@@ -8862,6 +8863,9 @@ html {
     right: 20px;
     width: 48px;
     height: 48px;
+    /* Ensure proper touch target size */
+    min-width: 48px;
+    min-height: 48px;
   }
   
   .scroll-to-top svg {
@@ -8876,6 +8880,9 @@ html {
     right: 16px;
     width: 44px;
     height: 44px;
+    /* Ensure proper touch target size */
+    min-width: 44px;
+    min-height: 44px;
   }
   
   .scroll-to-top svg {

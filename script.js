@@ -2286,6 +2286,7 @@ class ScrollToTop {
     this.button = document.getElementById('scrollToTop');
     this.scrollThreshold = 300; // Show button after scrolling 300px
     this.isVisible = false;
+    this.isMobile = window.innerWidth <= 768;
     
     this.init();
   }
@@ -2318,8 +2319,27 @@ class ScrollToTop {
     // Click event listener for smooth scroll to top
     this.button.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       this.scrollToTop();
     });
+    
+    // Touch events for mobile
+    if (this.isMobile) {
+      this.button.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        this.button.style.transform = 'translateY(0) scale(0.95)';
+      }, { passive: false });
+      
+      this.button.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        this.button.style.transform = 'translateY(0) scale(1)';
+        this.scrollToTop();
+      }, { passive: false });
+      
+      this.button.addEventListener('touchcancel', () => {
+        this.button.style.transform = 'translateY(0) scale(1)';
+      });
+    }
     
     // Keyboard accessibility
     this.button.addEventListener('keydown', (e) => {
@@ -2354,7 +2374,7 @@ class ScrollToTop {
     // Smooth scroll to top with easing
     const startPosition = window.pageYOffset || document.documentElement.scrollTop;
     const startTime = performance.now();
-    const duration = 800; // 800ms duration
+    const duration = this.isMobile ? 600 : 800; // Faster on mobile
     
     const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
     
@@ -2378,4 +2398,5 @@ class ScrollToTop {
 // Initialize scroll to top functionality
 document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
+});
 });
