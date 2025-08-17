@@ -2407,24 +2407,23 @@ document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
 
-// Statistics Dashboard Animation for "We Are Here For" Section
-class StatisticsDashboardAnimation {
+// 3D Cards and Parallax Animation for "We Are Here For" Section
+class Interactive3DCardsAnimation {
   constructor() {
-    this.statNumbers = document.querySelectorAll('.stat-number');
-    this.progressBars = document.querySelectorAll('.progress-bar');
-    this.communityCards = document.querySelectorAll('.community-card');
+    this.floatingElements = document.querySelectorAll('.floating-element');
+    this.cards3D = document.querySelectorAll('.card-3d');
     this.observer = null;
     this.init();
   }
   
   init() {
-    if (this.statNumbers.length === 0) return;
+    if (this.floatingElements.length === 0) return;
     
     // Set up intersection observer for animation triggers
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          this.animateStatistics(entry.target);
+          this.animateCards(entry.target);
         }
       });
     }, {
@@ -2432,66 +2431,53 @@ class StatisticsDashboardAnimation {
       rootMargin: '0px 0px -50px 0px'
     });
     
-    // Observe the stats dashboard container
-    const statsDashboard = document.querySelector('.stats-dashboard');
-    if (statsDashboard) {
-      this.observer.observe(statsDashboard);
+    // Observe the interactive 3D cards container
+    const cardsContainer = document.querySelector('.interactive-3d-cards');
+    if (cardsContainer) {
+      this.observer.observe(cardsContainer);
     }
+    
+    // Initialize parallax effect for floating elements
+    this.initParallax();
   }
   
-  animateStatistics(container) {
-    // Animate stat numbers
-    this.statNumbers.forEach((statNumber, index) => {
-      const target = parseFloat(statNumber.getAttribute('data-target'));
-      const duration = 2000; // 2 seconds
-      const startTime = performance.now();
+  initParallax() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
       
-      const animateNumber = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        // Easing function for smooth animation
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        const currentValue = target * easeOutQuart;
-        
-        // Format the number based on whether it's a decimal or integer
-        if (target % 1 !== 0) {
-          statNumber.textContent = currentValue.toFixed(1);
-        } else {
-          statNumber.textContent = Math.floor(currentValue);
-        }
-        
-        if (progress < 1) {
-          requestAnimationFrame(animateNumber);
-        }
-      };
-      
+      this.floatingElements.forEach((element, index) => {
+        const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.1}deg)`;
+      });
+    });
+  }
+  
+  animateCards(container) {
+    // Animate 3D cards with staggered entrance
+    this.cards3D.forEach((card, index) => {
       setTimeout(() => {
-        requestAnimationFrame(animateNumber);
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px) rotateX(20deg)';
+        
+        setTimeout(() => {
+          card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) rotateX(0deg)';
+        }, 100);
       }, index * 200); // Stagger the animations
     });
     
-    // Animate progress bars
-    this.progressBars.forEach((progressBar, index) => {
-      const width = progressBar.getAttribute('data-width');
+    // Add hover effects for 3D cards
+    this.cards3D.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+      });
       
-      setTimeout(() => {
-        progressBar.style.transform = `scaleX(${width / 100})`;
-      }, index * 200 + 500); // Start after number animations
-    });
-    
-    // Animate community cards
-    this.communityCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-          card.style.transition = 'all 0.8s ease-out';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, 100);
-      }, index * 300 + 1000); // Start after progress bars
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
     });
     
     // Stop observing after animation
@@ -2499,7 +2485,7 @@ class StatisticsDashboardAnimation {
   }
 }
 
-// Initialize statistics dashboard animations
+// Initialize 3D cards and parallax animations
 document.addEventListener('DOMContentLoaded', () => {
-  new StatisticsDashboardAnimation();
+  new Interactive3DCardsAnimation();
 });
