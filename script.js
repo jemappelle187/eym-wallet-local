@@ -2407,23 +2407,24 @@ document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
 
-// Timeline Animation for "We Are Here For" Section
-class TimelineAnimation {
+// Statistics Dashboard Animation for "We Are Here For" Section
+class StatisticsDashboardAnimation {
   constructor() {
-    this.timelineItems = document.querySelectorAll('.timeline-item');
-    this.floatingElements = document.querySelectorAll('.floating-element');
+    this.statNumbers = document.querySelectorAll('.stat-number');
+    this.progressBars = document.querySelectorAll('.progress-bar');
+    this.communityCards = document.querySelectorAll('.community-card');
     this.observer = null;
     this.init();
   }
   
   init() {
-    if (this.timelineItems.length === 0) return;
+    if (this.statNumbers.length === 0) return;
     
     // Set up intersection observer for animation triggers
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          this.animateTimelineItem(entry.target);
+          this.animateStatistics(entry.target);
         }
       });
     }, {
@@ -2431,38 +2432,74 @@ class TimelineAnimation {
       rootMargin: '0px 0px -50px 0px'
     });
     
-    // Observe each timeline item
-    this.timelineItems.forEach(item => {
-      this.observer.observe(item);
-    });
+    // Observe the stats dashboard container
+    const statsDashboard = document.querySelector('.stats-dashboard');
+    if (statsDashboard) {
+      this.observer.observe(statsDashboard);
+    }
   }
   
-  animateTimelineItem(item) {
-    // Add animation class to the timeline item
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(30px)';
-    
-    setTimeout(() => {
-      item.style.transition = 'all 0.8s ease-out';
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
-    }, 100);
-    
-    // Animate floating elements with staggered delays
-    const floatingElements = item.querySelectorAll('.floating-element');
-    floatingElements.forEach((element, index) => {
-      const delay = parseInt(element.getAttribute('data-delay')) || index * 200;
+  animateStatistics(container) {
+    // Animate stat numbers
+    this.statNumbers.forEach((statNumber, index) => {
+      const target = parseFloat(statNumber.getAttribute('data-target'));
+      const duration = 2000; // 2 seconds
+      const startTime = performance.now();
+      
+      const animateNumber = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentValue = target * easeOutQuart;
+        
+        // Format the number based on whether it's a decimal or integer
+        if (target % 1 !== 0) {
+          statNumber.textContent = currentValue.toFixed(1);
+        } else {
+          statNumber.textContent = Math.floor(currentValue);
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(animateNumber);
+        }
+      };
+      
       setTimeout(() => {
-        element.style.animation = 'floatIn 0.6s ease-out forwards';
-      }, delay);
+        requestAnimationFrame(animateNumber);
+      }, index * 200); // Stagger the animations
     });
     
-    // Stop observing this item after animation
-    this.observer.unobserve(item);
+    // Animate progress bars
+    this.progressBars.forEach((progressBar, index) => {
+      const width = progressBar.getAttribute('data-width');
+      
+      setTimeout(() => {
+        progressBar.style.transform = `scaleX(${width / 100})`;
+      }, index * 200 + 500); // Start after number animations
+    });
+    
+    // Animate community cards
+    this.communityCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+          card.style.transition = 'all 0.8s ease-out';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100);
+      }, index * 300 + 1000); // Start after progress bars
+    });
+    
+    // Stop observing after animation
+    this.observer.unobserve(container);
   }
 }
 
-// Initialize timeline animations
+// Initialize statistics dashboard animations
 document.addEventListener('DOMContentLoaded', () => {
-  new TimelineAnimation();
+  new StatisticsDashboardAnimation();
 });
