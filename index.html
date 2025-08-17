@@ -338,6 +338,98 @@
         <p class="receive-subtitle">Choose the method that suits your lifestyle. Send money instantly to bank accounts, mobile money, and digital asset wallets worldwide.</p>
         
         <div class="receive-grid">
+          <div class="receive-method stagger-item" style="background-image: url('images/backgrounds/cards/section_yourbridgetotheworld/bank - Edited.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+            <div class="method-overlay"></div>
+            <div class="method-content">
+              <div class="method-icon icon-animate">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                  <rect x="10" y="15" width="40" height="30" rx="5" fill="#1e40af" stroke="#fff" stroke-width="2"/>
+                  <rect x="15" y="20" width="30" height="4" fill="#fff"/>
+                  <rect x="15" y="28" width="20" height="4" fill="#fff"/>
+                  <rect x="15" y="36" width="25" height="4" fill="#fff"/>
+                </svg>
+              </div>
+              <h3>Bank Transfer</h3>
+              <p>Secure delivery to local bank accounts</p>
+              <ul class="method-features">
+                <li>No hidden fees</li>
+                <li>Instant delivery</li>
+                <li>Works with all major banks</li>
+                
+              </ul>
+            </div>
+          </div>
+          
+          <div class="receive-method stagger-item" style="background-image: url('images/backgrounds/cards/section_yourbridgetotheworld/mobilewallet - Edited.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+            <div class="method-overlay"></div>
+            <div class="method-content">
+              <div class="method-icon icon-animate">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                  <circle cx="30" cy="30" r="25" fill="#059669" stroke="#fff" stroke-width="2"/>
+                  <path d="M20 30L26 36L40 22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Mobile Money</h3>
+              <p>Instant transfer to MTN, Airtel, Vodafone & more</p>
+              <ul class="method-features">
+                <li>Available 24/7</li>
+                <li>Instant top-ups</li>
+                <li>No bank account required</li>
+                
+              </ul>
+            </div>
+          </div>
+          
+          <div class="receive-method stagger-item" style="background-image: url('images/backgrounds/cards/section_yourbridgetotheworld/bluechain.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+            <div class="method-overlay"></div>
+            <div class="method-content">
+              <div class="method-icon icon-animate">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                  <rect x="10" y="10" width="40" height="40" rx="8" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
+                  <path d="M20 25L30 35L40 25" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Blockchain</h3>
+              <p>Borderless payments anywhere in the world</p>
+              <ul class="method-features">
+                <li>Global reach</li>
+                <li>Own a virtual credit card</li>
+                <li>Spend stable coins like cash</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="receive-method stagger-item" style="background-image: url('images/backgrounds/cards/section_yourbridgetotheworld/cashpickup.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+            <div class="method-overlay"></div>
+            <div class="method-content">
+              <div class="method-icon icon-animate">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                  <rect x="15" y="20" width="30" height="20" rx="3" fill="#dc2626" stroke="#fff" stroke-width="2"/>
+                  <rect x="20" y="25" width="20" height="2" fill="#fff"/>
+                  <rect x="20" y="30" width="15" height="2" fill="#fff"/>
+                  <rect x="20" y="35" width="18" height="2" fill="#fff"/>
+                </svg>
+              </div>
+              <h3>Cash Pickup</h3>
+              <p>Pick up at nearby partner locations</p>
+              <ul class="method-features">
+                <li>Available in minutes</li>
+                <li>Get cash the same day</li>
+                <li>50,000+ pickup locations</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Duplicate section with original card design for comparison -->
+    <section class="receive-methods fade-in premium-section section-bg-light" id="receive-methods-comparison">
+      <div class="container">
+        <h2 class="text-center">YOUR BRIDGE TO THE WORLD (ORIGINAL DESIGN)</h2>
+        <p class="receive-subtitle">Choose the method that suits your lifestyle. Send money instantly to bank accounts, mobile money, and digital asset wallets worldwide.</p>
+        
+        <div class="receive-grid">
           <div class="receive-method stagger-item">
             <div class="method-icon icon-animate">
               <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -353,7 +445,6 @@
               <li>No hidden fees</li>
               <li>Instant delivery</li>
               <li>Works with all major banks</li>
-              
             </ul>
           </div>
           
@@ -370,7 +461,6 @@
               <li>Available 24/7</li>
               <li>Instant top-ups</li>
               <li>No bank account required</li>
-              
             </ul>
           </div>
           
@@ -565,60 +655,59 @@
 
         <form class="exchange-form">
           <div class="exchange-selects">
-            <!-- Top row: Amount field centered -->
-            <div class="amount-row">
-              <div class="input-group amount-group">
-                <label for="calcAmount">Amount</label>
-                <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required 
-                       inputmode="decimal" pattern="[0-9]*" />
-              </div>
-            </div>
-            
-            <!-- Bottom row: From and To currencies with swap button -->
-            <div class="currency-row">
-              <div class="input-group">
-                <label for="calcFrom">From</label>
-                <select class="currency-select" id="calcFrom">
-                  <option value="USD">🇺🇸 USD</option>
-                  <option value="EUR">🇪🇺 EUR</option>
-                  <option value="GBP">🇬🇧 GBP</option>
-                  <option value="GHS">🇬🇭 GHS</option>
-                  <option value="NGN">🇳🇬 NGN</option>
-                  <option value="KES">🇰🇪 KES</option>
-                  <option value="ZAR">🇿🇦 ZAR</option>
-                  <option value="CAD">🇨🇦 CAD</option>
-                </select>
-              </div>
-              
-              <button type="button" class="swap-btn" id="swapCurrencies" aria-label="Swap currencies">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
-                </svg>
-              </button>
-              
-              <div class="input-group">
-                <label for="calcTo">To</label>
-                <select class="currency-select" id="calcTo">
-                  <option value="GHS">🇬🇭 GHS</option>
-                  <option value="USD">🇺🇸 USD</option>
-                  <option value="EUR">🇪🇺 EUR</option>
-                  <option value="GBP">🇬🇧 GBP</option>
-                  <option value="NGN">🇳🇬 NGN</option>
-                  <option value="KES">🇰🇪 KES</option>
-                  <option value="ZAR">🇿🇦 ZAR</option>
-                  <option value="CAD">🇨🇦 CAD</option>
-                </select>
-              </div>
-            </div>
+            <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required aria-label="Amount to send" />
+            <select class="currency-select premium-select" id="calcFrom" aria-label="Currency to send from">
+              <option value="USD">🇺🇸 USD - US Dollar</option>
+              <option value="EUR">🇪🇺 EUR - Euro</option>
+              <option value="GBP">🇬🇧 GBP - British Pound</option>
+              <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
+              <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
+              <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
+              <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
+              <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
+              <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
+              <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+              <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+              <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+            </select>
+            <span class="exchange-arrow" aria-hidden="true">→</span>
+            <select class="currency-select premium-select" id="calcTo" aria-label="Currency to send to">
+              <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
+              <option value="USD">🇺🇸 USD - US Dollar</option>
+              <option value="EUR">🇪🇺 EUR - Euro</option>
+              <option value="GBP">🇬🇧 GBP - British Pound</option>
+              <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
+              <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
+              <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
+              <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
+              <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
+              <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+              <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+              <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+            </select>
+            <button type="submit" class="calc-submit-btn" aria-label="Calculate remittance amount">Calculate</button>
           </div>
 
           <div class="calc-results" id="calcResults">
-            <div class="result-card main-result">
-              <div class="result-amount" id="calcConverted">Calculating...</div>
-              <div class="result-details">
-                <div class="rate-info" id="rateInfo">Loading rates...</div>
-                <div class="result-subtitle">Zero fees • Instant transfer</div>
-              </div>
+            <div class="calc-main-result">
+              <div class="result-label">Recipient gets:</div>
+              <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
+            </div>
+            <div class="calc-compare">
+              <span class="calc-badge success">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                SendNReceive: <b>0% fee</b>
+              </span>
+              <span class="calc-badge warning">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M12 9V13M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                Typical Bank: <b id="calcBankFee">$7.99 fee</b>
+              </span>
+            </div>
+            <div class="calc-savings">
+              <span class="savings-text">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right: 8px; vertical-align: middle;"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                You save: <span id="calcSavings" class="savings-amount">$8.00</span> compared to a bank.
+              </span>
             </div>
           </div>
         </form>
@@ -657,7 +746,7 @@
     </div>
     
     <div class="testimonials-grid">
-      <div class="testimonial-card featured">
+      <div class="testimonial-card">
         <div class="testimonial-rating">★★★★★</div>
         <blockquote>"SendNReceive changed everything for my family. We can now send money home instantly without worrying about high fees or currency fluctuations."</blockquote>
         <div class="testimonial-author">
@@ -750,26 +839,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       const amountInput = document.getElementById('calcAmount');
 
-      // Currency Swap Button
-      const swapBtn = document.getElementById('swapCurrencies');
-      swapBtn.addEventListener('click', function() {
-        const fromSelect = document.getElementById('calcFrom');
-        const toSelect = document.getElementById('calcTo');
-        const tempValue = fromSelect.value;
-        
-        fromSelect.value = toSelect.value;
-        toSelect.value = tempValue;
-        
-        // Trigger calculation
-        calculateRemittance();
-        
-        // Add swap animation
-        this.classList.add('swapping');
-        setTimeout(() => {
-          this.classList.remove('swapping');
-        }, 300);
-      });
-
       // Real-time calculation on input change
       amountInput.addEventListener('input', function() {
         calculateRemittance();
@@ -778,6 +847,12 @@
       // Currency change handlers
       document.getElementById('calcFrom').addEventListener('change', calculateRemittance);
       document.getElementById('calcTo').addEventListener('change', calculateRemittance);
+
+      // Form submit handler
+      document.querySelector('.exchange-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        calculateRemittance();
+      });
 
       // Initial calculation
       calculateRemittance();
@@ -789,14 +864,18 @@
         
         // Enhanced exchange rates (in real app, this would come from API)
         const exchangeRates = {
-          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73, 'ZAR': 18.5, 'CAD': 1.35 },
-          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86, 'ZAR': 21.8, 'CAD': 1.59 },
-          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16, 'ZAR': 25.4, 'CAD': 1.85 },
-          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032, 'ZAR': 0.80, 'CAD': 0.058 },
-          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049, 'ZAR': 0.012, 'CAD': 0.0009 },
-          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049, 'ZAR': 0.123, 'CAD': 0.009 },
-          'ZAR': { 'USD': 0.054, 'GHS': 1.25, 'NGN': 81, 'EUR': 0.046, 'GBP': 0.039, 'KES': 8.1, 'CAD': 0.073 },
-          'CAD': { 'USD': 0.74, 'GHS': 17.1, 'NGN': 1111, 'EUR': 0.63, 'GBP': 0.54, 'KES': 111, 'ZAR': 13.7 }
+          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73, 'ZAR': 18.5, 'CAD': 1.35, 'UGX': 3800, 'ZMW': 25.5, 'AUD': 1.52, 'CHF': 0.88 },
+          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86, 'ZAR': 21.8, 'CAD': 1.59, 'UGX': 4470, 'ZMW': 30.0, 'AUD': 1.79, 'CHF': 1.04 },
+          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16, 'ZAR': 25.4, 'CAD': 1.85, 'UGX': 5200, 'ZMW': 35.0, 'AUD': 2.08, 'CHF': 1.21 },
+          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032, 'ZAR': 0.80, 'CAD': 0.058, 'UGX': 164, 'ZMW': 1.10, 'AUD': 0.066, 'CHF': 0.038 },
+          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049, 'ZAR': 0.012, 'CAD': 0.0009, 'UGX': 2.53, 'ZMW': 0.017, 'AUD': 0.001, 'CHF': 0.0006 },
+          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049, 'ZAR': 0.123, 'CAD': 0.009, 'UGX': 25.3, 'ZMW': 0.17, 'AUD': 0.010, 'CHF': 0.006 },
+          'ZAR': { 'USD': 0.054, 'GHS': 1.25, 'NGN': 81, 'EUR': 0.046, 'GBP': 0.039, 'KES': 8.1, 'CAD': 0.073, 'UGX': 205, 'ZMW': 1.38, 'AUD': 0.082, 'CHF': 0.048 },
+          'CAD': { 'USD': 0.74, 'GHS': 17.1, 'NGN': 1111, 'EUR': 0.63, 'GBP': 0.54, 'KES': 111, 'ZAR': 13.7, 'UGX': 2815, 'ZMW': 18.9, 'AUD': 1.13, 'CHF': 0.65 },
+          'UGX': { 'USD': 0.00026, 'GHS': 0.0061, 'NGN': 0.395, 'EUR': 0.00022, 'GBP': 0.00019, 'KES': 0.0395, 'ZAR': 0.0049, 'CAD': 0.00035, 'ZMW': 0.0067, 'AUD': 0.0004, 'CHF': 0.00023 },
+          'ZMW': { 'USD': 0.039, 'GHS': 0.91, 'NGN': 59, 'EUR': 0.033, 'GBP': 0.029, 'KES': 5.9, 'ZAR': 0.725, 'CAD': 0.053, 'UGX': 149, 'AUD': 0.059, 'CHF': 0.034 },
+          'AUD': { 'USD': 0.66, 'GHS': 15.2, 'NGN': 987, 'EUR': 0.56, 'GBP': 0.48, 'KES': 98.7, 'ZAR': 12.2, 'CAD': 0.88, 'UGX': 2500, 'ZMW': 16.8, 'CHF': 0.58 },
+          'CHF': { 'USD': 1.14, 'GHS': 26.3, 'NGN': 1705, 'EUR': 0.96, 'GBP': 0.83, 'KES': 170.5, 'ZAR': 20.9, 'CAD': 1.54, 'UGX': 4320, 'ZMW': 29.4, 'AUD': 1.73 }
         };
 
         // Get exchange rate
@@ -810,9 +889,14 @@
         // Calculate converted amount
         const convertedAmount = amount * rate;
         
+        // Calculate bank fee (typical 3-5% + fixed fee)
+        const bankFee = (amount * 0.04) + 7.99; // 4% + $7.99 fixed fee
+        const savings = bankFee;
+        
         // Update results
         document.getElementById('calcConverted').textContent = `${toCurrency} ${convertedAmount.toFixed(2)}`;
-        document.getElementById('rateInfo').textContent = `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
+        document.getElementById('calcBankFee').textContent = `$${bankFee.toFixed(2)} fee`;
+        document.getElementById('calcSavings').textContent = `$${savings.toFixed(2)}`;
         
         // Add updating animation
         const resultsElement = document.getElementById('calcResults');
@@ -821,30 +905,6 @@
           resultsElement.classList.remove('updating');
         }, 500);
       }
-
-      // Simulate real-time updates every 30 seconds
-      setInterval(() => {
-        // In real app, this would fetch latest rates from API
-        const rateElement = document.getElementById('exchangeRate');
-        const updateElement = document.querySelector('.rate-update');
-        
-        if (rateElement && updateElement) {
-          // Simulate small rate fluctuations
-          const currentText = rateElement.textContent;
-          const parts = currentText.split(' = ');
-          if (parts.length === 2) {
-            const currentRate = parseFloat(parts[1].split(' ')[0]);
-            const fluctuation = (Math.random() - 0.5) * 0.02; // ±1% fluctuation
-            const newRate = currentRate * (1 + fluctuation);
-            
-            rateElement.textContent = `${parts[0]} = ${newRate.toFixed(2)} ${parts[1].split(' ')[1]}`;
-            updateElement.textContent = 'Updated just now';
-            
-            // Trigger recalculation with new rate
-            setTimeout(calculateRemittance, 500);
-          }
-        }
-      }, 30000);
     });
   </script>
 
