@@ -2478,7 +2478,187 @@ class ProgressRingsAnimation {
   }
 }
 
-// Initialize progress rings animations
-document.addEventListener('DOMContentLoaded', () => {
-  new ProgressRingsAnimation();
-});
+        // Initialize progress rings animations
+        document.addEventListener('DOMContentLoaded', () => {
+          new ProgressRingsAnimation();
+          
+          // Initialize slider button functionality
+          initializeSliderButtons();
+          
+          // Initialize collapsible footer functionality
+          initializeCollapsibleFooter();
+        });
+        
+        // Slider Button Functionality
+        function initializeSliderButtons() {
+          const sliderButtons = document.querySelectorAll('.slider-btn');
+          
+          sliderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+              const cardType = this.getAttribute('data-card');
+              
+              // Remove active class from all buttons
+              sliderButtons.forEach(btn => btn.classList.remove('active'));
+              
+              // Add active class to clicked button
+              this.classList.add('active');
+              
+              // Show detailed information based on card type
+              showCardDetails(cardType);
+            });
+          });
+        }
+        
+        function showCardDetails(cardType) {
+          const details = {
+            families: {
+              title: 'Families Supporting Loved Ones',
+              details: [
+                'Instant money transfers for family support',
+                'Secure and transparent fee structure',
+                'Multi-currency support for global families',
+                '24/7 customer support in multiple languages',
+                'Mobile app for easy access anywhere'
+              ]
+            },
+            underbanked: {
+              title: 'Underbanked Communities',
+              details: [
+                'No traditional bank account required',
+                'Digital identity verification',
+                'Access to financial services worldwide',
+                'Educational resources for financial literacy',
+                'Partnership with local financial institutions'
+              ]
+            },
+            expats: {
+              title: 'Expats & Global Workers',
+              details: [
+                'Seamless salary receipt and management',
+                'Real-time currency conversion',
+                'Tax-compliant international transfers',
+                'Integration with global payroll systems',
+                'Dedicated expat support team'
+              ]
+            },
+            businesses: {
+              title: 'Businesses & Governments',
+              details: [
+                'Enterprise-grade security and compliance',
+                'Bulk payment processing capabilities',
+                'API integration for automated workflows',
+                'Custom reporting and analytics',
+                'Dedicated account management'
+              ]
+            }
+          };
+          
+          const cardInfo = details[cardType];
+          if (cardInfo) {
+            // Create and show a modal or expand the card with details
+            showDetailsModal(cardInfo);
+          }
+        }
+        
+        function showDetailsModal(cardInfo) {
+          // Remove existing modal if any
+          const existingModal = document.querySelector('.details-modal');
+          if (existingModal) {
+            existingModal.remove();
+          }
+          
+          // Create modal
+          const modal = document.createElement('div');
+          modal.className = 'details-modal';
+          modal.innerHTML = `
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>${cardInfo.title}</h3>
+                <button class="modal-close">&times;</button>
+              </div>
+              <div class="modal-body">
+                <ul class="details-list">
+                  ${cardInfo.details.map(detail => `<li>${detail}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          `;
+          
+          // Add modal to page
+          document.body.appendChild(modal);
+          
+          // Add event listeners
+          modal.querySelector('.modal-close').addEventListener('click', () => {
+            modal.remove();
+          });
+          
+          modal.querySelector('.modal-overlay').addEventListener('click', () => {
+            modal.remove();
+          });
+          
+          // Show modal with animation
+          setTimeout(() => {
+            modal.classList.add('show');
+          }, 10);
+        }
+        
+        // Collapsible Footer Functionality
+        function initializeCollapsibleFooter() {
+          const footerSections = document.querySelectorAll('.footer-section.collapsible');
+          
+          footerSections.forEach(section => {
+            const header = section.querySelector('.footer-header');
+            const toggle = section.querySelector('.footer-toggle');
+            const links = section.querySelector('.footer-links');
+            
+            // Set initial state - collapsed on mobile
+            if (window.innerWidth <= 768) {
+              section.classList.add('collapsed');
+            }
+            
+            // Toggle functionality
+            const toggleSection = () => {
+              if (window.innerWidth <= 768) {
+                if (section.classList.contains('collapsed')) {
+                  section.classList.remove('collapsed');
+                  section.classList.add('expanded');
+                  toggle.querySelector('.toggle-icon').textContent = '−';
+                } else {
+                  section.classList.remove('expanded');
+                  section.classList.add('collapsed');
+                  toggle.querySelector('.toggle-icon').textContent = '+';
+                }
+              }
+            };
+            
+            // Add event listeners
+            if (header) {
+              header.addEventListener('click', toggleSection);
+            }
+            
+            if (toggle) {
+              toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleSection();
+              });
+            }
+          });
+          
+          // Handle window resize
+          window.addEventListener('resize', () => {
+            footerSections.forEach(section => {
+              if (window.innerWidth > 768) {
+                // Desktop - always show
+                section.classList.remove('collapsed', 'expanded');
+                section.querySelector('.toggle-icon').textContent = '+';
+              } else {
+                // Mobile - start collapsed
+                if (!section.classList.contains('expanded')) {
+                  section.classList.add('collapsed');
+                  section.querySelector('.toggle-icon').textContent = '+';
+                }
+              }
+            });
+          });
+        }
