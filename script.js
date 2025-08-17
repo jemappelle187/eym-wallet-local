@@ -1,9 +1,157 @@
 // SendNReceive - 2026 Fintech Platform JavaScript
 console.log('SendNReceive script loaded successfully');
 
+// Dynamic Navbar Text Color System
+class DynamicNavbarColors {
+  constructor() {
+    this.navbar = document.querySelector('.navbar');
+    this.observer = null;
+    this.isInitialized = false;
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.navbar) {
+      console.warn('Navbar element not found for dynamic colors');
+      return;
+    }
+    
+    this.setupIntersectionObserver();
+    this.updateTextColors();
+    this.isInitialized = true;
+    
+    // Update colors on scroll and resize
+    window.addEventListener('scroll', () => this.updateTextColors());
+    window.addEventListener('resize', () => this.updateTextColors());
+    
+    console.log('Dynamic navbar colors initialized');
+  }
+  
+  setupIntersectionObserver() {
+    // Create a small element to detect background colors
+    const colorDetector = document.createElement('div');
+    colorDetector.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      pointer-events: none;
+      z-index: -1;
+    `;
+    document.body.appendChild(colorDetector);
+    
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.updateTextColors();
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -70px 0px' // Account for navbar height
+    });
+    
+    this.observer.observe(colorDetector);
+  }
+  
+  updateTextColors() {
+    if (!this.navbar) return;
+    
+    const navbarRect = this.navbar.getBoundingClientRect();
+    const centerX = navbarRect.left + navbarRect.width / 2;
+    const centerY = navbarRect.top + navbarRect.height / 2;
+    
+    // Get the background color at the navbar position
+    const backgroundColor = this.getBackgroundColorAt(centerX, centerY);
+    const brightness = this.calculateBrightness(backgroundColor);
+    
+    // Update CSS variables based on background brightness
+    this.updateNavbarColors(brightness);
+  }
+  
+  getBackgroundColorAt(x, y) {
+    // Create a temporary canvas to sample the background
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Use html2canvas or similar library if available
+    // For now, we'll use a simplified approach based on scroll position
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const viewportHeight = window.innerHeight;
+    
+    // Determine which section we're in based on scroll position
+    const sections = this.getPageSections();
+    const currentSection = this.getCurrentSection(scrollY, sections);
+    
+    return this.getSectionBackgroundColor(currentSection);
+  }
+  
+  getPageSections() {
+    // Define the main sections of the page and their background colors
+    return [
+      { id: 'hero', start: 0, end: 800, color: '#1e40af' }, // Dark blue hero
+      { id: 'features', start: 800, end: 1600, color: '#ffffff' }, // White features
+      { id: 'we-are-here-for', start: 1600, end: 2400, color: '#f8fafc' }, // Light blue
+      { id: 'your-bridge', start: 2400, end: 3200, color: '#ffffff' }, // White
+      { id: 'security', start: 3200, end: 4000, color: '#1e293b' }, // Dark security
+      { id: 'testimonials', start: 4000, end: 4800, color: '#ffffff' }, // White
+      { id: 'cta', start: 4800, end: 5600, color: '#1e40af' }, // Dark blue CTA
+      { id: 'footer', start: 5600, end: Infinity, color: '#0f172a' } // Dark footer
+    ];
+  }
+  
+  getCurrentSection(scrollY, sections) {
+    return sections.find(section => 
+      scrollY >= section.start && scrollY < section.end
+    ) || sections[0];
+  }
+  
+  getSectionBackgroundColor(section) {
+    return section ? section.color : '#ffffff';
+  }
+  
+  calculateBrightness(color) {
+    // Convert hex to RGB
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Calculate relative luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance;
+  }
+  
+  updateNavbarColors(brightness) {
+    const root = document.documentElement;
+    
+    if (brightness < 0.5) {
+      // Dark background - use light text
+      root.style.setProperty('--navbar-text-primary', '#ffffff');
+      root.style.setProperty('--navbar-text-secondary', '#e2e8f0');
+      root.style.setProperty('--navbar-text-hover', '#ffffff');
+      root.style.setProperty('--navbar-text-active', '#ffffff');
+      root.style.setProperty('--navbar-logo-color', '#ffffff');
+    } else {
+      // Light background - use dark text
+      root.style.setProperty('--navbar-text-primary', '#1f2937');
+      root.style.setProperty('--navbar-text-secondary', '#4b5563');
+      root.style.setProperty('--navbar-text-hover', '#1e40af');
+      root.style.setProperty('--navbar-text-active', '#1e40af');
+      root.style.setProperty('--navbar-logo-color', '#1e40af');
+    }
+  }
+}
+
 // Loading Screen Management
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded event fired');
+  
+  // Initialize dynamic navbar colors
+  const dynamicNavbar = new DynamicNavbarColors();
+  
   const loadingScreen = document.getElementById('loadingScreen');
   
   // Ensure loading screen exists
@@ -1925,6 +2073,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // Apply low-end device optimizations
   MobileOptimizer.optimizeForLowEnd();
   
+  // Mobile hamburger menu functionality
+  const mobileMenu = document.getElementById('nav-menu');
+  const hamburger = document.getElementById('navHamburger');
+  
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', 
+        hamburger.classList.contains('active').toString());
+      
+      // Prevent body scroll when menu is open
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close menu when clicking on a link
+    const navLinks = mobileMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
   // Mobile-specific scroll optimizations
   if (window.innerWidth <= 768) {
     // Use passive scroll listeners for better mobile performance
@@ -2411,126 +2600,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize functionality for "We Are Here For" Section
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize slider button functionality
-  initializeSliderButtons();
-  
   // Initialize collapsible footer functionality
   initializeCollapsibleFooter();
+  
+  // Initialize interactive stacked cards
+  initializeInteractiveStackedCards();
 });
+
+// Interactive Stacked Cards Functionality
+function initializeInteractiveStackedCards() {
+  const cardStack = document.querySelector(".card-stack");
+  if (!cardStack) return;
+  
+  let cards = [...document.querySelectorAll(".card")];
+  let isSwiping = false;
+  let startX = 0;
+  let currentX = 0;
+  let animationFrameId = null;
+
+  const getDurationFromCSS = (variableName, element = document.documentElement) => {
+    const value = getComputedStyle(element)?.getPropertyValue(variableName)?.trim();
+    if (!value) return 0;
+    if (value.endsWith("ms")) return parseFloat(value);
+    if (value.endsWith("s")) return parseFloat(value) * 1000;
+    return parseFloat(value) || 0;
+  };
+
+  const getActiveCard = () => cards[0];
+
+  const updatePositions = () => {
+    cards.forEach((card, i) => {
+      card.style.setProperty("--i", i + 1);
+      card.style.setProperty("--swipe-x", "0px");
+      card.style.setProperty("--swipe-rotate", "0deg");
+      card.style.opacity = "1";
+    });
+  };
+
+  const applySwipeStyles = (deltaX) => {
+    const card = getActiveCard();
+    if (!card) return;
+    card.style.setProperty("--swipe-x", `${deltaX}px`);
+    card.style.setProperty("--swipe-rotate", `${deltaX * 0.2}deg`);
+    card.style.opacity = 1 - Math.min(Math.abs(deltaX) / 100, 1) * 0.75;
+  };
+
+  const handleStart = (clientX) => {
+    if (isSwiping) return;
+    isSwiping = true;
+    startX = currentX = clientX;
+    const card = getActiveCard();
+    card && (card.style.transition = "none");
+  };
+
+  const handleMove = (clientX) => {
+    if (!isSwiping) return;
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(() => {
+      currentX = clientX;
+      const deltaX = currentX - startX;
+      applySwipeStyles(deltaX);
+      if (Math.abs(deltaX) > 50) handleEnd();
+    });
+  };
+
+  const handleEnd = () => {
+    if (!isSwiping) return;
+    cancelAnimationFrame(animationFrameId);
+    const deltaX = currentX - startX;
+    const threshold = 50;
+    const duration = getDurationFromCSS("--card-swap-duration");
+    const card = getActiveCard();
+
+    if (card) {
+      card.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
+      if (Math.abs(deltaX) > threshold) {
+        const direction = Math.sign(deltaX);
+        card.style.setProperty("--swipe-x", `${direction * 300}px`);
+        card.style.setProperty("--swipe-rotate", `${direction * 20}deg`);
+        setTimeout(() => {
+          card.style.setProperty("--swipe-rotate", `${-direction * 20}deg`);
+        }, duration * 0.5);
+        setTimeout(() => {
+          cards = [...cards.slice(1), card];
+          updatePositions();
+        }, duration);
+      } else {
+        applySwipeStyles(0);
+      }
+    }
+    isSwiping = false;
+    startX = currentX = 0;
+  };
+
+  const addEventListeners = () => {
+    cardStack?.addEventListener("pointerdown", ({ clientX }) => handleStart(clientX));
+    cardStack?.addEventListener("pointermove", ({ clientX }) => handleMove(clientX));
+    cardStack?.addEventListener("pointerup", handleEnd);
+  };
+
+  updatePositions();
+  addEventListeners();
+}
         
-        // Slider Button Functionality
-        function initializeSliderButtons() {
-          const sliderButtons = document.querySelectorAll('.slider-btn');
-          
-          sliderButtons.forEach(button => {
-            button.addEventListener('click', function() {
-              const cardType = this.getAttribute('data-card');
-              
-              // Remove active class from all buttons
-              sliderButtons.forEach(btn => btn.classList.remove('active'));
-              
-              // Add active class to clicked button
-              this.classList.add('active');
-              
-              // Show detailed information based on card type
-              showCardDetails(cardType);
-            });
-          });
-        }
-        
-        function showCardDetails(cardType) {
-          const details = {
-            families: {
-              title: 'Families Supporting Loved Ones',
-              details: [
-                'Instant money transfers for family support',
-                'Secure and transparent fee structure',
-                'Multi-currency support for global families',
-                '24/7 customer support in multiple languages',
-                'Mobile app for easy access anywhere'
-              ]
-            },
-            underbanked: {
-              title: 'Underbanked Communities',
-              details: [
-                'No traditional bank account required',
-                'Digital identity verification',
-                'Access to financial services worldwide',
-                'Educational resources for financial literacy',
-                'Partnership with local financial institutions'
-              ]
-            },
-            expats: {
-              title: 'Expats & Global Workers',
-              details: [
-                'Seamless salary receipt and management',
-                'Real-time currency conversion',
-                'Tax-compliant international transfers',
-                'Integration with global payroll systems',
-                'Dedicated expat support team'
-              ]
-            },
-            businesses: {
-              title: 'Businesses & Governments',
-              details: [
-                'Enterprise-grade security and compliance',
-                'Bulk payment processing capabilities',
-                'API integration for automated workflows',
-                'Custom reporting and analytics',
-                'Dedicated account management'
-              ]
-            }
-          };
-          
-          const cardInfo = details[cardType];
-          if (cardInfo) {
-            // Create and show a modal or expand the card with details
-            showDetailsModal(cardInfo);
-          }
-        }
-        
-        function showDetailsModal(cardInfo) {
-          // Remove existing modal if any
-          const existingModal = document.querySelector('.details-modal');
-          if (existingModal) {
-            existingModal.remove();
-          }
-          
-          // Create modal
-          const modal = document.createElement('div');
-          modal.className = 'details-modal';
-          modal.innerHTML = `
-            <div class="modal-overlay"></div>
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3>${cardInfo.title}</h3>
-                <button class="modal-close">&times;</button>
-              </div>
-              <div class="modal-body">
-                <ul class="details-list">
-                  ${cardInfo.details.map(detail => `<li>${detail}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-          `;
-          
-          // Add modal to page
-          document.body.appendChild(modal);
-          
-          // Add event listeners
-          modal.querySelector('.modal-close').addEventListener('click', () => {
-            modal.remove();
-          });
-          
-          modal.querySelector('.modal-overlay').addEventListener('click', () => {
-            modal.remove();
-          });
-          
-          // Show modal with animation
-          setTimeout(() => {
-            modal.classList.add('show');
-          }, 10);
-        }
+
         
         // Collapsible Footer Functionality
         function initializeCollapsibleFooter() {
