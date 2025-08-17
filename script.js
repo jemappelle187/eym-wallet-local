@@ -2278,4 +2278,104 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Loading screen hidden after initialization');
     }
   }, 1000);
-}); 
+});
+
+// ===== SCROLL TO TOP FUNCTIONALITY =====
+class ScrollToTop {
+  constructor() {
+    this.button = document.getElementById('scrollToTop');
+    this.scrollThreshold = 300; // Show button after scrolling 300px
+    this.isVisible = false;
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.button) {
+      console.warn('Scroll to top button not found');
+      return;
+    }
+    
+    this.setupEventListeners();
+    this.checkScrollPosition();
+  }
+  
+  setupEventListeners() {
+    // Scroll event listener with throttling for performance
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          this.checkScrollPosition();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Click event listener for smooth scroll to top
+    this.button.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.scrollToTop();
+    });
+    
+    // Keyboard accessibility
+    this.button.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.scrollToTop();
+      }
+    });
+  }
+  
+  checkScrollPosition() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > this.scrollThreshold && !this.isVisible) {
+      this.show();
+    } else if (scrollTop <= this.scrollThreshold && this.isVisible) {
+      this.hide();
+    }
+  }
+  
+  show() {
+    this.button.classList.add('visible');
+    this.isVisible = true;
+  }
+  
+  hide() {
+    this.button.classList.remove('visible');
+    this.isVisible = false;
+  }
+  
+  scrollToTop() {
+    // Smooth scroll to top with easing
+    const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+    const startTime = performance.now();
+    const duration = 800; // 800ms duration
+    
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+      
+      const newPosition = startPosition * (1 - easedProgress);
+      window.scrollTo(0, newPosition);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+    
+    requestAnimationFrame(animateScroll);
+  }
+}
+
+// Initialize scroll to top functionality
+document.addEventListener('DOMContentLoaded', () => {
+  new ScrollToTop();
+});
