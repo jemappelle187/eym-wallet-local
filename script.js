@@ -2406,3 +2406,55 @@ class ScrollToTop {
 document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
+
+// Progress Ring Animation for "We Are Here For" Section
+class ProgressRingAnimation {
+  constructor() {
+    this.progressRings = document.querySelectorAll('.progress-ring-circle');
+    this.observer = null;
+    this.init();
+  }
+  
+  init() {
+    if (this.progressRings.length === 0) return;
+    
+    // Set up intersection observer for animation triggers
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.animateProgressRing(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Observe each progress ring
+    this.progressRings.forEach(ring => {
+      this.observer.observe(ring);
+    });
+  }
+  
+  animateProgressRing(ring) {
+    // Get the stroke-dashoffset from the CSS
+    const computedStyle = getComputedStyle(ring);
+    const strokeDashoffset = computedStyle.strokeDashoffset;
+    
+    // Set initial state
+    ring.style.strokeDashoffset = '339.292';
+    
+    // Animate to final state
+    setTimeout(() => {
+      ring.style.strokeDashoffset = strokeDashoffset;
+    }, 100);
+    
+    // Stop observing this ring after animation
+    this.observer.unobserve(ring);
+  }
+}
+
+// Initialize progress ring animations
+document.addEventListener('DOMContentLoaded', () => {
+  new ProgressRingAnimation();
+});
