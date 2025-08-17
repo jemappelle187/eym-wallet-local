@@ -8778,6 +8778,10 @@ html {
     border-radius: 12px !important;
   }
   
+  #security-duplicate .security-card[style*="border-radius: 16px"] {
+    border-radius: 12px !important;
+  }
+  
   #security-duplicate .security-card h3 {
     font-size: 1.1rem;
     margin-bottom: 12px;
