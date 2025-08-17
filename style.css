@@ -8643,6 +8643,7 @@ html {
   background: rgba(0, 0, 0, 0.6);
   z-index: 1;
   transition: all var(--transition-normal);
+  border-radius: inherit;
 }
 
 .receive-method:hover .method-overlay {
@@ -8758,6 +8759,11 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+
+#security-duplicate .security-card .method-overlay {
+  border-radius: 16px !important;
 }
 
 #security-duplicate .security-card h3 {
@@ -8776,9 +8782,14 @@ html {
     min-height: 240px;
     padding: 24px 20px;
     border-radius: 12px !important;
+    overflow: hidden;
   }
   
   #security-duplicate .security-card[style*="border-radius: 16px"] {
+    border-radius: 12px !important;
+  }
+  
+  #security-duplicate .security-card .method-overlay {
     border-radius: 12px !important;
   }
   
