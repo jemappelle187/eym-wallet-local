@@ -2407,87 +2407,16 @@ document.addEventListener('DOMContentLoaded', () => {
   new ScrollToTop();
 });
 
-// Progress Rings Animation for "We Are Here For" Section
-class ProgressRingsAnimation {
-  constructor() {
-    this.progressRings = document.querySelectorAll('.progress-ring-circle');
-    this.observer = null;
-    this.init();
-  }
-  
-  init() {
-    if (this.progressRings.length === 0) return;
-    
-    // Set up intersection observer for animation triggers
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.animateProgressRing(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.3,
-      rootMargin: '0px 0px -50px 0px'
-    });
-    
-    // Observe each progress ring
-    this.progressRings.forEach(ring => {
-      this.observer.observe(ring);
-    });
-  }
-  
-  animateProgressRing(ring) {
-    const progress = parseInt(ring.getAttribute('data-progress'));
-    const circumference = 2 * Math.PI * 54; // r = 54
-    const offset = circumference - (progress / 100) * circumference;
-    
-    // Animate the progress ring
-    ring.style.strokeDashoffset = offset;
-    
-    // Animate the progress number
-    const progressNumber = ring.closest('.progress-ring-container').querySelector('.progress-number');
-    if (progressNumber) {
-      this.animateNumber(progressNumber, 0, progress, 2000);
-    }
-    
-    // Stop observing this ring after animation
-    this.observer.unobserve(ring);
-  }
-  
-  animateNumber(element, start, end, duration) {
-    const startTime = performance.now();
-    const startValue = start;
-    const endValue = end;
-    
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentValue = Math.round(startValue + (endValue - startValue) * easeOutQuart);
-      
-      element.textContent = currentValue + '%';
-      
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    
-    requestAnimationFrame(animate);
-  }
-}
+// Removed ProgressRingsAnimation class - no longer needed
 
-        // Initialize progress rings animations
-        document.addEventListener('DOMContentLoaded', () => {
-          new ProgressRingsAnimation();
-          
-          // Initialize slider button functionality
-          initializeSliderButtons();
-          
-          // Initialize collapsible footer functionality
-          initializeCollapsibleFooter();
-        });
+// Initialize functionality for "We Are Here For" Section
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize slider button functionality
+  initializeSliderButtons();
+  
+  // Initialize collapsible footer functionality
+  initializeCollapsibleFooter();
+});
         
         // Slider Button Functionality
         function initializeSliderButtons() {
