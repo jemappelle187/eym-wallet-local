@@ -8938,160 +8938,193 @@ html {
   }
 }
 
-/* ===== WE ARE HERE FOR SECTION - STYLE 1: TIMELINE/PROCESS FLOW ===== */
+/* ===== WE ARE HERE FOR SECTION - STYLE 2: INTERACTIVE GRID WITH HOVER EFFECTS ===== */
 .we-are-here-for {
   padding: var(--spacing-4xl) 0;
   background: var(--color-bg-light);
 }
 
-.timeline-flow {
+.interactive-grid {
   margin-top: var(--spacing-3xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-2xl);
   position: relative;
 }
 
-.timeline-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--spacing-3xl);
+.grid-item {
+  background: var(--color-bg-white);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-2xl);
   position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.timeline-item:nth-child(even) {
-  flex-direction: row-reverse;
+.grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
 }
 
-.timeline-icon {
-  width: 80px;
-  height: 80px;
+.grid-item:hover::before {
+  opacity: 0.05;
+}
+
+.grid-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+}
+
+.grid-icon {
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin-bottom: var(--spacing-xl);
   position: relative;
   z-index: 2;
-  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.2);
   transition: all var(--transition-normal);
 }
 
-.timeline-item:hover .timeline-icon {
-  transform: scale(1.1);
-  box-shadow: 0 12px 35px rgba(30, 64, 175, 0.3);
+.grid-item:hover .grid-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
 }
 
-.timeline-icon svg {
-  width: 40px;
-  height: 40px;
+.grid-icon svg {
+  width: 35px;
+  height: 35px;
   color: white;
 }
 
-.timeline-content {
-  background: var(--color-bg-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-2xl);
-  margin: 0 var(--spacing-xl);
-  flex: 1;
-  max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-normal);
+.grid-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.timeline-item:hover .timeline-content {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  border-color: var(--color-primary);
-}
-
-.timeline-content h3 {
+.grid-content h3 {
   font-size: var(--font-size-xl);
   font-weight: 600;
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-lg);
   line-height: 1.3;
+  transition: color var(--transition-normal);
 }
 
-.timeline-content p {
+.grid-item:hover .grid-content h3 {
+  color: var(--color-primary);
+}
+
+.grid-content p {
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin: 0;
+  margin-bottom: var(--spacing-lg);
+  transition: color var(--transition-normal);
 }
 
-.timeline-connector {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  width: 2px;
-  height: calc(100% + var(--spacing-3xl));
-  background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
-  z-index: 1;
+.grid-hover-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-normal);
 }
 
-.timeline-item:last-child .timeline-connector {
-  display: none;
+.grid-item:hover .grid-hover-info {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Dark mode styles for Timeline Flow */
+.hover-stat {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(30, 64, 175, 0.1);
+  border-radius: var(--border-radius-sm);
+  display: inline-block;
+  width: fit-content;
+}
+
+/* Dark mode styles for Interactive Grid */
 .dark-mode .we-are-here-for {
   background-color: var(--dark-bg-primary);
 }
 
-.dark-mode .timeline-content {
+.dark-mode .grid-item {
   background-color: var(--dark-bg-secondary);
   border-color: var(--dark-border-color);
-  color: var(--dark-text-primary);
 }
 
-.dark-mode .timeline-content:hover {
+.dark-mode .grid-item:hover {
   background-color: var(--dark-bg-tertiary);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-primary);
 }
 
-.dark-mode .timeline-content h3 {
+.dark-mode .grid-content h3 {
   color: var(--dark-text-primary);
 }
 
-.dark-mode .timeline-content p {
+.dark-mode .grid-content p {
   color: var(--dark-text-secondary);
 }
 
-/* Mobile responsive adjustments for Timeline Flow */
+.dark-mode .hover-stat {
+  background: rgba(30, 64, 175, 0.2);
+  color: var(--color-primary);
+}
+
+/* Mobile responsive adjustments for Interactive Grid */
 @media (max-width: 768px) {
-  .timeline-item {
-    flex-direction: column !important;
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
+  .interactive-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
   }
   
-  .timeline-content {
-    margin: var(--spacing-lg) 0 0 0;
-    max-width: 100%;
+  .grid-item {
+    padding: var(--spacing-xl);
   }
   
-  .timeline-connector {
-    display: none;
+  .grid-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-lg);
   }
   
-  .timeline-icon {
-    width: 64px;
-    height: 64px;
+  .grid-icon svg {
+    width: 30px;
+    height: 30px;
   }
   
-  .timeline-icon svg {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .timeline-content h3 {
+  .grid-content h3 {
     font-size: var(--font-size-lg);
   }
   
-  .timeline-content p {
+  .grid-content p {
     font-size: var(--font-size-sm);
+  }
+  
+  .hover-stat {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
   }
 }
 
@@ -9100,11 +9133,28 @@ html {
     padding: var(--spacing-3xl) 0;
   }
   
-  .timeline-content {
-    padding: var(--spacing-xl);
+  .grid-item {
+    padding: var(--spacing-lg);
   }
   
-  .timeline-icon {
+  .grid-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .grid-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .grid-content h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .grid-content p {
+    font-size: var(--font-size-xs);
+  }
+}
     width: 56px;
     height: 56px;
   }
