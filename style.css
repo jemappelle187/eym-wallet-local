@@ -5090,14 +5090,15 @@ input:focus, select:focus, textarea:focus{
   right: 24px;
   max-width: 400px;
   width: calc(100vw - 48px);
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  color: #1e293b;
   z-index: 10001;
   transform: translateX(100%) scale(0.9);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
   opacity: 0;
 }
@@ -5137,13 +5138,13 @@ input:focus, select:focus, textarea:focus{
   font-size: 20px;
   font-weight: 600;
   margin: 0;
-  color: #f8fafc;
+  color: #1e293b;
 }
 
 .cookie-content p {
   margin: 0 0 20px 0;
   line-height: 1.6;
-  color: #cbd5e1;
+  color: #475569;
   font-size: 14px;
 }
 
@@ -5154,16 +5155,16 @@ input:focus, select:focus, textarea:focus{
 }
 
 .cookie-option {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.1);
   border-radius: 12px;
   padding: 16px;
   transition: all 0.3s ease;
 }
 
 .cookie-option:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.2);
 }
 
 .cookie-checkbox {
@@ -5172,7 +5173,7 @@ input:focus, select:focus, textarea:focus{
   gap: 12px;
   cursor: pointer;
   font-weight: 500;
-  color: #f1f5f9;
+  color: #334155;
   margin-bottom: 8px;
 }
 
@@ -5249,14 +5250,15 @@ input:focus, select:focus, textarea:focus{
 }
 
 .cookie-btn.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f1f5f9;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.05);
+  color: #475569;
+  border: 1px solid rgba(15, 23, 42, 0.2);
 }
 
 .cookie-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(15, 23, 42, 0.1);
+  border-color: rgba(15, 23, 42, 0.3);
+  color: #1e293b;
 }
 
 /* Responsive Floating Cookie Banner */
