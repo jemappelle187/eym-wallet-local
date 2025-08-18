@@ -1,9 +1,11 @@
 // SendNReceive - 2026 Fintech Platform JavaScript
 console.log('SendNReceive script loaded successfully');
 
-// Typewriter Effect for Hero Subtitle
+// Typewriter Effect for Hero Subtitles
 function initializeTypewriter() {
+  // First hero typewriter
   const typewriterElement = document.getElementById('typewriter-subtitle');
+  const typewriterElement2 = document.getElementById('typewriter-subtitle-2');
   
   if (typewriterElement && window.Typewriter) {
     new Typewriter(typewriterElement, {
@@ -28,6 +30,33 @@ function initializeTypewriter() {
     // Fallback if TypewriterJS is not loaded
     if (typewriterElement) {
       typewriterElement.innerHTML = 'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.';
+    }
+  }
+  
+  // Second hero typewriter
+  if (typewriterElement2 && window.Typewriter) {
+    new Typewriter(typewriterElement2, {
+      strings: [
+        'The world\'s first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.'
+      ],
+      autoStart: true,
+      loop: false,
+      delay: 25, // Even faster typing speed for subtitle
+      deleteSpeed: 20, // Faster deletion speed
+      cursor: '<span style="color: #667eea;">|</span>',
+      html: true,
+      onComplete: function() {
+        // Add a subtle animation when typing is complete
+        setTimeout(() => {
+          typewriterElement2.style.animation = 'glow 2s ease-in-out infinite alternate';
+          typewriterElement2.classList.add('completed');
+        }, 300);
+      }
+    });
+  } else {
+    // Fallback if TypewriterJS is not loaded
+    if (typewriterElement2) {
+      typewriterElement2.innerHTML = 'The world\'s first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.';
     }
   }
 }
