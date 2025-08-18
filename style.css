@@ -8531,6 +8531,60 @@ html {
   z-index: 2;
 }
 
+/* Calculator Section with Video Background */
+.exchange-rate {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exchange-rate .hero-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.exchange-rate .hero-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.exchange-rate .hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  z-index: 2;
+}
+
+.exchange-rate .container {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+}
+
+.exchange-rate h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.exchange-rate .calculator-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+}
+
 .calculator-container {
   max-width: 800px;
   margin: 0 auto;
