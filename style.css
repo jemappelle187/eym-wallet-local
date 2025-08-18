@@ -9772,6 +9772,7 @@ html {
 }
 
 #security-duplicate .security-card .method-overlay {
+  background: rgba(0, 0, 0, 0.6) !important;
   border-radius: 16px !important;
 }
 
