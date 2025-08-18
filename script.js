@@ -2945,3 +2945,74 @@ function handleStyleParameter() {
 
 // Initialize style based on URL parameter
 handleStyleParameter();
+
+// Premium Calculator Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const calcAmount = document.getElementById('calcAmount');
+  const calcResult = document.getElementById('calcResult');
+  const currencyButtons = document.querySelectorAll('.inline-currency');
+  
+  // Sample exchange rates (in real app, these would come from API)
+  const exchangeRates = {
+    'USD-EUR': 0.925,
+    'USD-GBP': 0.785,
+    'EUR-USD': 1.081,
+    'EUR-GBP': 0.848,
+    'GBP-USD': 1.274,
+    'GBP-EUR': 1.179
+  };
+
+  let fromCurrency = 'USD';
+  let toCurrency = 'EUR';
+
+  // Set initial active state
+  if (currencyButtons.length > 0) {
+    currencyButtons[0].classList.add('active');
+  }
+
+  // Currency selection
+  currencyButtons.forEach((button, index) => {
+    button.addEventListener('click', function() {
+      // Remove active class from all buttons
+      currencyButtons.forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      this.classList.add('active');
+      
+      // Update currencies based on which button was clicked
+      if (index === 0) {
+        fromCurrency = 'USD';
+      } else if (index === 1) {
+        toCurrency = 'EUR';
+      }
+      
+      // Recalculate
+      calculateConversion();
+    });
+  });
+
+  // Amount input change
+  if (calcAmount) {
+    calcAmount.addEventListener('input', calculateConversion);
+  }
+
+  function calculateConversion() {
+    if (!calcAmount || !calcResult) return;
+    
+    const amount = parseFloat(calcAmount.value) || 0;
+    const rateKey = `${fromCurrency}-${toCurrency}`;
+    const rate = exchangeRates[rateKey] || 1;
+    
+    const result = amount * rate;
+    calcResult.value = result.toFixed(2);
+    
+    // Add subtle animation
+    calcResult.style.transform = 'scale(1.02)';
+    setTimeout(() => {
+      calcResult.style.transform = 'scale(1)';
+    }, 150);
+  }
+
+  // Initialize calculation
+  calculateConversion();
+});
