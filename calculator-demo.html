@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator Design Options - SendNReceive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25);
+    }
+
+    .option-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .option-description {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .calculator-demo {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: #f8fafc;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    /* Option 1: Glassmorphism Floating Calculator */
+    .calc-option-1 {
+      position: relative;
+    }
+
+    .floating-calculator {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+      width: 280px;
+      margin: 0 auto;
+    }
+
+    .calc-header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .calc-header h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .calc-input {
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px solid rgba(203, 213, 225, 0.5);
+      border-radius: 8px;
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .currency-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .currency-btn {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid rgba(203, 213, 225, 0.5);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+
+    .currency-btn:hover {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: #667eea;
+    }
+
+    .currency-btn.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+    }
+
+    .convert-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .convert-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Option 2: Inline Premium Calculator */
+    .calc-option-2 .calculator-demo {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border: none;
+      padding: 2rem;
+    }
+
+    .inline-calculator {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .inline-input {
+      flex: 1;
+      min-width: 200px;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .inline-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .inline-currency {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .inline-currency:hover {
+      border-color: #667eea;
+    }
+
+    .inline-arrow {
+      font-size: 1.5rem;
+      color: #667eea;
+      font-weight: 700;
+    }
+
+    /* Option 3: Modal Calculator */
+    .calc-option-3 .calculator-demo {
+      background: rgba(0, 0, 0, 0.8);
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-calculator {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .modal-input {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 100%;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Option 4: Sidebar Calculator */
+    .calc-option-4 .calculator-demo {
+      background: white;
+      border: none;
+      padding: 0;
+      position: relative;
+    }
+
+    .sidebar-calculator {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 280px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 16px 0 0 16px;
+    }
+
+    .sidebar-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 0.75rem;
+      width: 100%;
+      color: white;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Option 5: Hero Calculator */
+    .calc-option-5 .calculator-demo {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      padding: 2rem;
+    }
+
+    .hero-calculator {
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-calculator h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-inputs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      min-width: 150px;
+    }
+
+    .hero-input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .hero-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .hero-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Option 6: Card Calculator */
+    .calc-option-6 .calculator-demo {
+      background: #f8fafc;
+      border: none;
+      padding: 1rem;
+    }
+
+    .card-calculator {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .calc-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .calc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: #667eea;
+    }
+
+    .calc-card.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: #667eea;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .pros, .cons {
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .pros {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .cons {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .pros h4, .cons h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .pros h4 {
+      color: #059669;
+    }
+
+    .cons h4 {
+      color: #dc2626;
+    }
+
+    .pros ul, .cons ul {
+      font-size: 0.8rem;
+      padding-left: 1rem;
+    }
+
+    .pros li {
+      color: #047857;
+    }
+
+    .cons li {
+      color: #b91c1c;
+    }
+
+    .recommendation {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .recommendation h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .recommendation p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .test-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .test-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .inline-calculator {
+        flex-direction: column;
+      }
+      
+      .hero-inputs {
+        flex-direction: column;
+      }
+      
+      .card-calculator {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Calculator Design Options</h1>
+      <p>Choose the perfect calculator design for your SendNReceive website. Each option offers different benefits and user experiences.</p>
+    </div>
+
+    <div class="options-grid">
+      <!-- Option 1: Glassmorphism Floating Calculator -->
+      <div class="option-card calc-option-1">
+        <h3 class="option-title">Option 1: Glassmorphism Floating Calculator</h3>
+        <p class="option-description">Elegant floating calculator with backdrop blur effects and smooth animations. Perfect for premium feel.</p>
+        
+        <div class="calculator-demo">
+          <div class="floating-calculator">
+            <div class="calc-header">
+              <h3>Currency Converter</h3>
+              <p style="font-size: 0.9rem; opacity: 0.7;">Real-time rates</p>
+            </div>
+            <input type="number" class="calc-input" placeholder="100" value="100">
+            <div class="currency-selector">
+              <button class="currency-btn active">USD</button>
+              <button class="currency-btn">EUR</button>
+              <button class="currency-btn">GBP</button>
+            </div>
+            <button class="convert-btn">Convert to EUR</button>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Premium glassmorphism design</li>
+              <li>Non-intrusive placement</li>
+              <li>Smooth animations</li>
+              <li>Mobile-friendly</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Limited space for features</li>
+              <li>May be overlooked</li>
+              <li>Requires careful positioning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 2: Inline Premium Calculator -->
+      <div class="option-card calc-option-2">
+        <h3 class="option-title">Option 2: Inline Premium Calculator</h3>
+        <p class="option-description">Integrated calculator that flows naturally with the page content. Large and prominent.</p>
+        
+        <div class="calculator-demo">
+          <div class="inline-calculator">
+            <input type="number" class="inline-input" placeholder="100" value="100">
+            <div class="inline-currency">🇺🇸 USD</div>
+            <div class="inline-arrow">→</div>
+            <div class="inline-currency">🇪🇺 EUR</div>
+            <input type="number" class="inline-input" placeholder="0" value="92.50" readonly>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Highly visible</li>
+              <li>Large input fields</li>
+              <li>Natural page flow</li>
+              <li>Easy to use</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Takes up page space</li>
+              <li>Less portable</li>
+              <li>May disrupt layout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 3: Modal Calculator -->
+      <div class="option-card calc-option-3">
+        <h3 class="option-title">Option 3: Modal/Popup Calculator</h3>
+        <p class="option-description">Full-screen calculator experience with advanced features and detailed information.</p>
+        
+        <div class="calculator-demo">
+          <div class="modal-calculator">
+            <div class="modal-header">
+              <h3>Advanced Currency Converter</h3>
+              <button class="modal-close">×</button>
+            </div>
+            <input type="number" class="modal-input" placeholder="Enter amount" value="100">
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+              <select style="flex: 1; padding: 0.5rem; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <option>USD - US Dollar</option>
+                <option>EUR - Euro</option>
+                <option>GBP - British Pound</option>
+              </select>
+              <select style="flex: 1; padding: 0.5rem; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <option>EUR - Euro</option>
+                <option>USD - US Dollar</option>
+                <option>GBP - British Pound</option>
+              </select>
+            </div>
+            <button class="convert-btn">Convert Now</button>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Full feature set</li>
+              <li>Detailed information</li>
+              <li>Advanced options</li>
+              <li>Focused experience</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Requires user action</li>
+              <li>Disrupts flow</li>
+              <li>Mobile unfriendly</li>
+              <li>Higher friction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 4: Sidebar Calculator -->
+      <div class="option-card calc-option-4">
+        <h3 class="option-title">Option 4: Sidebar Calculator</h3>
+        <p class="option-description">Fixed position calculator that's always accessible. Compact but functional.</p>
+        
+        <div class="calculator-demo">
+          <div class="sidebar-calculator">
+            <div class="sidebar-header">
+              <h3>Quick Convert</h3>
+            </div>
+            <input type="number" class="sidebar-input" placeholder="Amount" value="100">
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+              <button class="currency-btn active" style="flex: 1; background: rgba(255,255,255,0.2); color: white;">USD</button>
+              <button class="currency-btn" style="flex: 1; background: rgba(255,255,255,0.1); color: white;">EUR</button>
+            </div>
+            <button class="convert-btn" style="background: rgba(255,255,255,0.2); color: white;">Convert</button>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Always accessible</li>
+              <li>Doesn't take page space</li>
+              <li>Quick access</li>
+              <li>Consistent placement</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Limited space</li>
+              <li>May be ignored</li>
+              <li>Mobile challenges</li>
+              <li>Fixed positioning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 5: Hero Calculator -->
+      <div class="option-card calc-option-5">
+        <h3 class="option-title">Option 5: Hero-Integrated Calculator</h3>
+        <p class="option-description">Built into the hero section for immediate value demonstration and engagement.</p>
+        
+        <div class="calculator-demo">
+          <div class="hero-calculator">
+            <h3>Send Money Globally</h3>
+            <p style="margin-bottom: 1.5rem; opacity: 0.9;">See how much you'll save with SendNReceive</p>
+            <div class="hero-inputs">
+              <input type="number" class="hero-input" placeholder="Amount" value="100">
+              <div class="hero-btn">🇺🇸 USD</div>
+              <div class="hero-btn">🇪🇺 EUR</div>
+              <input type="number" class="hero-input" placeholder="Result" value="92.50" readonly>
+            </div>
+            <button class="hero-btn" style="background: rgba(255,255,255,0.3);">Start Sending</button>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Immediate value demo</li>
+              <li>High engagement</li>
+              <li>Clear value prop</li>
+              <li>Hero placement</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Hero space usage</li>
+              <li>May overwhelm</li>
+              <li>Limited features</li>
+              <li>Design complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 6: Card Calculator -->
+      <div class="option-card calc-option-6">
+        <h3 class="option-title">Option 6: Card-Based Calculator</h3>
+        <p class="option-description">Multiple calculator cards for different use cases. Swipeable and mobile-optimized.</p>
+        
+        <div class="calculator-demo">
+          <div class="card-calculator">
+            <div class="calc-card active">
+              <div class="card-icon">💸</div>
+              <div class="card-title">Send Money</div>
+            </div>
+            <div class="calc-card">
+              <div class="card-icon">📥</div>
+              <div class="card-title">Receive</div>
+            </div>
+            <div class="calc-card">
+              <div class="card-icon">💱</div>
+              <div class="card-title">Convert</div>
+            </div>
+            <div class="calc-card">
+              <div class="card-icon">📊</div>
+              <div class="card-title">Rates</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h4>✅ Pros</h4>
+            <ul>
+              <li>Multiple use cases</li>
+              <li>Mobile-friendly</li>
+              <li>Interactive design</li>
+              <li>Feature organization</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>❌ Cons</h4>
+            <ul>
+              <li>Complex implementation</li>
+              <li>Multiple interactions</li>
+              <li>Space requirements</li>
+              <li>User confusion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation">
+      <h2>🎯 Our Recommendation</h2>
+      <p>We recommend <strong>Option 1: Glassmorphism Floating Calculator</strong> for the best balance of premium design, user experience, and functionality.</p>
+      <a href="#" class="test-btn">Test Live Version</a>
+    </div>
+  </div>
+
+  <script>
+    // Interactive demo functionality
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.currency-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.calc-card').forEach(card => {
+      card.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.calc-card').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Simulate conversion
+    document.querySelectorAll('.convert-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.textContent = 'Converting...';
+        setTimeout(() => {
+          this.textContent = 'Converted!';
+          setTimeout(() => {
+            this.textContent = 'Convert';
+          }, 1000);
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

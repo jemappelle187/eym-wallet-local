@@ -8446,7 +8446,13 @@ html {
 /* Add Send Receive Showcase Section - Premium */
 .addsendreceive-showcase {
   padding: 6rem 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #ffffff 10%, 
+    #e6f3ff 50%, 
+    #ffffff 90%, 
+    #ffffff 100%
+  ) !important;
   position: relative;
   overflow: hidden;
 }
@@ -8464,10 +8470,56 @@ html {
 
 .addsendreceive-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 4rem;
   position: relative;
   z-index: 2;
+  gap: 3rem;
+}
+
+.premium-mockup-display {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-mockup-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(15, 23, 42, 0.2),
+    0 8px 32px rgba(102, 126, 234, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.hero-mockup-image:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 30px 80px rgba(15, 23, 42, 0.3),
+    0 12px 40px rgba(102, 126, 234, 0.25);
+}
+
+.mockup-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
 }
 
 .addsendreceive-mockup {
