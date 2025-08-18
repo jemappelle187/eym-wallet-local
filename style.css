@@ -1,3 +1,16 @@
+/* removed short regulatory status block per request */
+
+/* removed collapsible regulatory details under socials per request */
+/* FAQ section removed per request */
+/* Tighten spacing before WE STAND FOR section to match 'WE BRIDGE BORDERS' */
+#we-are-here-for { 
+  margin-top: 0 !important; 
+  padding-top: clamp(16px, 2.5vh, 28px) !important;
+}
+.currency-showcase { 
+  margin-bottom: 0 !important; 
+  padding-bottom: clamp(12px, 2vh, 24px) !important; 
+}
 /* Hide the top navbar on desktop; use pill bar instead */
 @media (min-width: 769px) {
   .navbar { display: none !important; }
@@ -17,10 +30,10 @@
     left: 50%;
     transform: translateX(-50%);
     bottom: 16px;
-    width: calc(100% - 48px);
-    max-width: 900px;
-    padding: 10px 12px;
-    border-radius: 28px;
+    width: fit-content;
+    max-width: none;
+    padding: 6px 28px;
+    border-radius: 24px;
     background: rgba(255,255,255,0.75);
     backdrop-filter: blur(16px) saturate(1.2);
     -webkit-backdrop-filter: blur(16px) saturate(1.2);
@@ -30,23 +43,26 @@
   }
   .pill-tabbar-desktop .pill-items {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 28px;
   }
   .pill-tabbar-desktop .pill-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 8px 6px;
+    gap: 4px;
+    padding: 6px 4px;
     text-decoration: none;
     color: #0f172a;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
   }
-  .pill-tabbar-desktop .pill-icon { width: 22px; height: 22px; display: block; }
+  .pill-tabbar-desktop .pill-icon { width: 18px; height: 18px; display: block; }
   .pill-tabbar-desktop .pill-item.active { color: #1e40af; }
 }
 /* Remove redundant whitespace below footer (desktop) */
@@ -167,23 +183,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
   .press-logo { height: 16px; }
 }
 
-/* Telecom logos row in social proof */
-.trusted-logos {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-.trusted-logos img {
-  height: 28px;
-  opacity: 0.85;
-  filter: grayscale(1);
-}
-.trusted-logos img:hover { opacity: 1; filter: grayscale(0); }
-
-.trusted-logos .telco-logo { height: 28px; width: auto; }
+/* removed telecom providers mockup section */
 /* --- PREMIUM 2026 FINTECH WEBSITE STYLES --- */
 
 /* CSS Variables & Premium Design System */
@@ -391,6 +391,9 @@ body {
   to {
     text-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(102, 126, 234, 0.4);
   }
+  /* ensure footer content is not covered by desktop pill bar */
+  body { padding-bottom: 140px; }
+  footer.footer, .footer { padding-bottom: 120px !important; }
 }
 
 /* Loading Screen */
@@ -2363,6 +2366,25 @@ body {
   color: var(--gray-400);
   line-height: 1.6;
   margin-bottom: var(--spacing-sm);
+}
+
+.footer-section.regulatory-col p {
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+/* Make regulatory column wider and aligned to the far right on desktop */
+.footer-content .footer-section.regulatory-col {
+  grid-column: 3 / -1;
+}
+
+@media (max-width: 768px) {
+  .footer-section.regulatory-col p {
+    font-size: 10px;
+  }
+  .footer-content .footer-section.regulatory-col {
+    grid-column: auto;
+  }
 }
 
 .footer-section h4 {

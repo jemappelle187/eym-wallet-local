@@ -2709,7 +2709,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize interactive stacked cards
   initializeInteractiveStackedCards();
+  
+  // FAQ section removed; no auto-open needed
 });
+
+// Removed auto-expand logic for regulatory disclosures (section deleted)
 
 // Interactive Stacked Cards Functionality
 function initializeInteractiveStackedCards() {
