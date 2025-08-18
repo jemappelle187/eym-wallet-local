@@ -32,6 +32,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20250808143733">
   <link rel="stylesheet" href="mobile-optimizations.css">
+  <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -105,54 +106,34 @@
       <!-- Mobile Hamburger Menu Button -->
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
       </button>
       <div class="nav-menu" id="nav-menu">
-        <div class="nav-item">
-          <a href="#home" class="nav-link active" aria-current="page">Home</a>
+        <!-- Desktop links -->
+        <div class="nav-links-desktop">
+          <div class="nav-item"><a href="#individuals" class="nav-link">Individuals</a></div>
+          <div class="nav-item"><a href="#businesses" class="nav-link">Businesses</a></div>
+          <div class="nav-item"><a href="#virtual-cards" class="nav-link">Virtual Credit Card</a></div>
+          <div class="nav-item"><a href="#company" class="nav-link">Company</a></div>
         </div>
-        <div class="nav-item dropdown">
-          <a href="#individuals" class="nav-link">Individuals</a>
-          <div class="dropdown-menu">
-            <a href="#send-money" class="dropdown-item">Send Money</a>
-            <a href="#receive-money" class="dropdown-item">Receive Money</a>
-            <a href="#currency-hedging" class="dropdown-item">Currency Hedging</a>
-            <a href="#virtual-cards" class="dropdown-item">Virtual Cards</a>
-            <a href="#savings" class="dropdown-item">Savings</a>
+        <div class="nav-cards">
+          <div class="nav-card">
+            <span class="nav-icon">👤</span>
+            <a href="#individuals" class="nav-link">Individuals</a>
+          </div>
+          <div class="nav-card">
+            <span class="nav-icon">🏢</span>
+            <a href="#businesses" class="nav-link">Businesses</a>
+          </div>
+          <div class="nav-card">
+            <span class="nav-icon">💳</span>
+            <a href="#virtual-cards" class="nav-link">Virtual Credit Card</a>
+          </div>
+          <div class="nav-card">
+            <span class="nav-icon">🏛️</span>
+            <a href="#company" class="nav-link">Company</a>
           </div>
         </div>
-        <div class="nav-item dropdown">
-          <a href="#businesses" class="nav-link">Businesses</a>
-          <div class="dropdown-menu">
-            <a href="#business-payments" class="dropdown-item">Business Payments</a>
-            <a href="#merchant-services" class="dropdown-item">Merchant Services</a>
-            <a href="#api-integration" class="dropdown-item">API Integration</a>
-            <a href="#analytics" class="dropdown-item">Analytics</a>
-            <a href="#contact-sales" class="dropdown-item">Contact Sales</a>
-          </div>
-        </div>
-        <div class="nav-item dropdown">
-          <a href="#company" class="nav-link">Company</a>
-          <div class="dropdown-menu">
-            <a href="#about-us" class="dropdown-item">About Us</a>
-            <a href="#careers" class="dropdown-item">Careers</a>
-            <a href="#press" class="dropdown-item">Press</a>
-            <a href="#contact" class="dropdown-item">Contact</a>
-          </div>
-        </div>
-
-        <div class="nav-item dropdown">
-          <a href="#security" class="nav-link">Security</a>
-          <div class="dropdown-menu">
-            <a href="#encryption" class="dropdown-item">Bank-Level Encryption</a>
-            <a href="#compliance" class="dropdown-item">Regulatory Compliance</a>
-            <a href="#fraud-protection" class="dropdown-item">Fraud Protection</a>
-          </div>
-        </div>
-        <div class="nav-item">
-          <a href="#we-are-here-for" class="nav-link">We Stand For</a>
-        </div>
+        
         <!-- Navbar Controls -->
         <div class="nav-controls">
           <button class="nav-btn dark-mode-btn" id="darkModeBtn" aria-label="Toggle dark mode">
@@ -267,7 +248,7 @@
             </h1>
           
           <p class="hero-subtitle">
-            The world's first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.
+            <div id="typewriter-subtitle"></div>
           </p>
           <div class="hero-cta">
             <button class="btn btn-primary btn-large download-app-btn bounce-in" onclick="showDownloadOptions()">
@@ -291,6 +272,20 @@
         </div>
       </div>
     </section>
+
+    <!-- Mentioned In Bar (clean) moved up for early visibility -->
+    <div class="press-bar press-clean" aria-label="Press logos (clean)">
+      <div class="press-ticker">
+        <div class="press-track">
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
+          <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
+          <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
+        </div>
+      </div>
+    </div>
 
   <!-- HERO WITH VIDEO BACKGROUND - DUPLICATE FOR COMPARISON -->
   <section id="home-comparison" class="hero fade-in">
@@ -411,83 +406,6 @@
       </div>
     </section>
 
-    <!-- Duplicate section with original card design for comparison -->
-    <section class="receive-methods fade-in premium-section section-bg-light" id="receive-methods-comparison">
-      <div class="container">
-        <h2 class="text-center">YOUR BRIDGE TO THE WORLD (ORIGINAL DESIGN)</h2>
-        <p class="receive-subtitle">Choose the method that suits your lifestyle. Send money instantly to bank accounts, mobile money, and digital asset wallets worldwide.</p>
-        
-        <div class="receive-grid">
-          <div class="receive-method stagger-item">
-            <div class="method-icon icon-animate">
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <rect x="10" y="15" width="40" height="30" rx="5" fill="#1e40af" stroke="#fff" stroke-width="2"/>
-                <rect x="15" y="20" width="30" height="4" fill="#fff"/>
-                <rect x="15" y="28" width="20" height="4" fill="#fff"/>
-                <rect x="15" y="36" width="25" height="4" fill="#fff"/>
-              </svg>
-            </div>
-            <h3>Bank Transfer</h3>
-            <p>Secure delivery to local bank accounts</p>
-            <ul class="method-features">
-              <li>No hidden fees</li>
-              <li>Instant delivery</li>
-              <li>Works with all major banks</li>
-            </ul>
-          </div>
-          
-          <div class="receive-method stagger-item">
-            <div class="method-icon icon-animate">
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <circle cx="30" cy="30" r="25" fill="#059669" stroke="#fff" stroke-width="2"/>
-                <path d="M20 30L26 36L40 22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Mobile Money</h3>
-            <p>Instant transfer to MTN, Airtel, Vodafone & more</p>
-            <ul class="method-features">
-              <li>Available 24/7</li>
-              <li>Instant top-ups</li>
-              <li>No bank account required</li>
-            </ul>
-          </div>
-          
-          <div class="receive-method stagger-item">
-            <div class="method-icon icon-animate">
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <rect x="10" y="10" width="40" height="40" rx="8" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
-                <path d="M20 25L30 35L40 25" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3>Blockchain</h3>
-            <p>Borderless payments anywhere in the world</p>
-            <ul class="method-features">
-              <li>Global reach</li>
-              <li>Own a virtual credit card</li>
-              <li>Spend stable coins like cash</li>
-            </ul>
-          </div>
-          
-          <div class="receive-method stagger-item">
-            <div class="method-icon icon-animate">
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <rect x="15" y="20" width="30" height="20" rx="3" fill="#dc2626" stroke="#fff" stroke-width="2"/>
-                <rect x="20" y="25" width="20" height="2" fill="#fff"/>
-                <rect x="20" y="30" width="15" height="2" fill="#fff"/>
-                <rect x="20" y="35" width="18" height="2" fill="#fff"/>
-              </svg>
-            </div>
-            <h3>Cash Pickup</h3>
-            <p>Pick up at nearby partner locations</p>
-            <ul class="method-features">
-              <li>Available in minutes</li>
-              <li>Get cash the same day</li>
-              <li>50,000+ pickup locations</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
 
@@ -623,6 +541,8 @@
       </div>
     </section>
 
+  <!-- Removed per request: First WE GUARD YOUR TRUST section -->
+  <!--
   <section id="security" class="security fade-in section-bg-light">
       <div class="container">
         <div class="section-header">
@@ -682,6 +602,7 @@
         </div>
       </div>
     </section>
+  -->
 
     <!-- Duplicate Enterprise-Grade Security Section -->
     <section id="security-duplicate" class="security fade-in section-bg-light">
@@ -812,6 +733,22 @@
       <h2>WE'RE TRUSTED WORLDWIDE</h2>
       <p>From local communities to global enterprises - trust built on transparency and results.</p>
     </div>
+
+    <!-- Mentioned In Bar (removed default; using clean variant below) -->
+
+    <!-- Clean variant for comparison -->
+    <div class="press-bar press-clean" aria-label="Press logos (clean)">
+      <div class="press-ticker">
+        <div class="press-track">
+          <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
+          <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
+        </div>
+      </div>
+    </div>
     
     <div class="proof-stats">
       <div class="stat-card">
@@ -834,6 +771,27 @@
         <div class="stat-label">Value Protected</div>
         <div class="stat-trend positive">From inflation</div>
       </div>
+    </div>
+    
+    <!-- Trusted by telecoms -->
+    <div class="trusted-logos" aria-label="Trusted by">
+      <!-- Inline mock SVGs so they always load (replace later with official assets) -->
+      <svg class="telco-logo" viewBox="0 0 120 28" role="img" aria-label="Airtel">
+        <rect x="0" y="0" width="120" height="28" rx="4" fill="none"/>
+        <text x="8" y="19" fill="#e11d48" font-size="16" font-family="Montserrat, Arial" font-weight="700">AIRTEL</text>
+      </svg>
+      <svg class="telco-logo" viewBox="0 0 120 28" role="img" aria-label="MTN">
+        <rect x="0" y="0" width="120" height="28" rx="4" fill="none"/>
+        <text x="12" y="19" fill="#f59e0b" font-size="16" font-family="Montserrat, Arial" font-weight="800">MTN</text>
+      </svg>
+      <svg class="telco-logo" viewBox="0 0 120 28" role="img" aria-label="M-Pesa">
+        <rect x="0" y="0" width="120" height="28" rx="4" fill="none"/>
+        <text x="8" y="19" fill="#10b981" font-size="16" font-family="Montserrat, Arial" font-weight="700">M‑PESA</text>
+      </svg>
+      <svg class="telco-logo" viewBox="0 0 140 28" role="img" aria-label="Vodafone">
+        <rect x="0" y="0" width="140" height="28" rx="4" fill="none"/>
+        <text x="8" y="19" fill="#ef4444" font-size="16" font-family="Montserrat, Arial" font-weight="700">VODAFONE</text>
+      </svg>
     </div>
     
     <div class="testimonials-grid">
@@ -892,7 +850,7 @@
           <input type="hidden" name="source" value="website_newsletter" />
           <input type="hidden" name="timestamp" id="timestamp" />
           <input type="hidden" name="user_agent" id="userAgent" />
-          <button type="submit">Subscribe</button>
+          <button type="submit" class="btn-subscribe-glass">Subscribe</button>
         </form>
 
         <div class="receive-app-buttons">
@@ -1008,6 +966,51 @@
     </div>
     
 </main>
+
+  <!-- Mobile pill-style tab bar -->
+  <nav class="pill-tabbar" aria-label="Primary">
+    <div class="pill-items">
+      <a href="#individuals" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg>
+        <span>Personal</span>
+      </a>
+      <a href="#businesses" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13h18v8H3v-8zm2-2h14V3H5v8z"/></svg>
+        <span>Businesses</span>
+      </a>
+      <a href="#company" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 21V3h8v6h10v12H3zm10-2h6v-8h-6v8zM5 19h4V5H5v14z"/></svg>
+        <span>Company</span>
+      </a>
+      <a href="#nav-menu" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        <span>More</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Desktop pill-style tab bar -->
+  <nav class="pill-tabbar-desktop" aria-label="Primary Desktop">
+    <div class="pill-items">
+      <a href="#individuals" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg>
+        <span>Personal</span>
+      </a>
+      <a href="#businesses" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13h18v8H3v-8zm2-2h14V3H5v8z"/></svg>
+        <span>Businesses</span>
+      </a>
+      <a href="#company" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 21V3h8v6h10v12H3zm10-2h6v-8h-6v8zM5 19h4V5H5v14z"/></svg>
+        <span>Company</span>
+      </a>
+      <a href="#nav-menu" class="pill-item">
+        <svg class="pill-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        <span>More</span>
+      </a>
+    </div>
+  </nav>
+
   <footer class="footer fade-in">
     <div class="container">
       <div class="footer-content">

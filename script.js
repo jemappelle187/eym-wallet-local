@@ -1,6 +1,37 @@
 // SendNReceive - 2026 Fintech Platform JavaScript
 console.log('SendNReceive script loaded successfully');
 
+// Typewriter Effect for Hero Subtitle
+function initializeTypewriter() {
+  const typewriterElement = document.getElementById('typewriter-subtitle');
+  
+  if (typewriterElement && window.Typewriter) {
+    new Typewriter(typewriterElement, {
+      strings: [
+        'Send money instantly to Africa, Asia, and beyond.'
+      ],
+      autoStart: true,
+      loop: false,
+      delay: 25, // Even faster typing speed for subtitle
+      deleteSpeed: 20, // Faster deletion speed
+      cursor: '<span style="color: #667eea;">|</span>',
+      html: true,
+      onComplete: function() {
+        // Add a subtle animation when typing is complete
+        setTimeout(() => {
+          typewriterElement.style.animation = 'glow 2s ease-in-out infinite alternate';
+          typewriterElement.classList.add('completed');
+        }, 300);
+      }
+    });
+  } else {
+    // Fallback if TypewriterJS is not loaded
+    if (typewriterElement) {
+      typewriterElement.innerHTML = 'Send money instantly to Africa, Asia, and beyond.';
+    }
+  }
+}
+
 // Dynamic Navbar Text Color System
 class DynamicNavbarColors {
   constructor() {
@@ -152,6 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize dynamic navbar colors
   const dynamicNavbar = new DynamicNavbarColors();
   
+  // Initialize typewriter effect
+  initializeTypewriter();
+  
   const loadingScreen = document.getElementById('loadingScreen');
   
   // Ensure loading screen exists
@@ -292,8 +326,17 @@ class MobileNavigation {
     this.hamburger.setAttribute('aria-expanded', 'true');
     this.isMenuOpen = true;
     
+    // Add body class for drawer open state
+    document.body.classList.add('drawer-open');
+    
     // Prevent body scroll when menu is open
     document.body.style.overflow = 'hidden';
+    
+    // Update hamburger text label
+    const textLabel = this.hamburger.querySelector('text');
+    if (textLabel) {
+      textLabel.textContent = 'close';
+    }
     
     // Focus management
     const firstLink = this.navMenu.querySelector('a');
@@ -308,8 +351,17 @@ class MobileNavigation {
     this.hamburger.setAttribute('aria-expanded', 'false');
     this.isMenuOpen = false;
     
+    // Remove body class for drawer open state
+    document.body.classList.remove('drawer-open');
+    
     // Restore body scroll
     document.body.style.overflow = '';
+    
+    // Update hamburger text label
+    const textLabel = this.hamburger.querySelector('text');
+    if (textLabel) {
+      textLabel.textContent = 'menu';
+    }
     
     // Return focus to hamburger
     this.hamburger.focus();
@@ -2092,14 +2144,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Close menu when clicking on a link
-    const navLinks = mobileMenu.querySelectorAll('.nav-link');
+    // Enhanced mobile dropdown functionality
+    const dropdownItems = mobileMenu.querySelectorAll('.dropdown');
+    dropdownItems.forEach(dropdown => {
+      const dropdownLink = dropdown.querySelector('.nav-link');
+      const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+      
+      if (dropdownLink && dropdownMenu) {
+        dropdownLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Close other dropdowns
+          dropdownItems.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+            }
+          });
+          
+          // Toggle current dropdown
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+    
+    // Close menu when clicking on a non-dropdown link
+    const navLinks = mobileMenu.querySelectorAll('.nav-link:not(.dropdown .nav-link)');
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
         hamburger.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        
+        // Close all dropdowns
+        dropdownItems.forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
       });
     });
     
@@ -2110,8 +2190,32 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        
+        // Close all dropdowns
+        dropdownItems.forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
       }
     });
+    
+    // Mobile language dropdown functionality
+    const languageBtn = mobileMenu.querySelector('.language-btn');
+    const languageDropdown = mobileMenu.querySelector('.nav-language-dropdown');
+    
+    if (languageBtn && languageDropdown) {
+      languageBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        languageDropdown.classList.toggle('active');
+      });
+      
+      // Close language dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+          languageDropdown.classList.remove('active');
+        }
+      });
+    }
   }
   
   // Mobile-specific scroll optimizations
@@ -2764,3 +2868,76 @@ function initializeInteractiveStackedCards() {
             });
           });
         }
+
+// Handle URL parameters for style switching
+function handleStyleParameter() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const style = urlParams.get('style');
+    const isMobile = window.innerWidth <= 768;
+    
+    const hamburger = document.getElementById('navHamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        // Remove all style classes
+        hamburger.className = 'nav-hamburger';
+        navMenu.className = 'nav-menu';
+        
+        // Default to Style 6 on mobile only; keep desktop default
+        const selectedStyle = style || (isMobile ? '6' : null);
+        if (!selectedStyle) {
+            // Ensure default desktop nav remains unaffected
+            hamburger.style.display = '';
+            return;
+        }
+        
+        // Hide original hamburger for custom styles (2-8 and liquid variants)
+        if ((selectedStyle >= '2' && selectedStyle <= '8') || selectedStyle === '8-liquid') {
+            hamburger.style.display = 'none';
+        } else {
+            hamburger.style.display = 'flex';
+        }
+        
+        // Apply specific style
+        switch(selectedStyle) {
+            case '1':
+                // Style 1: Slide-Down Overlay
+                break;
+            case '2':
+                hamburger.className = 'nav-hamburger-style2';
+                navMenu.className = 'nav-menu-style2';
+                break;
+            case '3':
+                hamburger.className = 'nav-hamburger-style3';
+                navMenu.className = 'nav-menu-style3';
+                break;
+            case '4':
+                hamburger.className = 'nav-hamburger-style4';
+                navMenu.className = 'nav-menu-style4';
+                break;
+            case '5':
+                hamburger.className = 'nav-hamburger-style5';
+                navMenu.className = 'nav-menu-style5';
+                break;
+            case '6':
+                hamburger.className = 'nav-hamburger-style6';
+                navMenu.className = 'nav-menu-style6';
+                break;
+            case '7':
+                hamburger.className = 'nav-hamburger-style7';
+                navMenu.className = 'nav-menu-style7';
+                break;
+            case '8':
+                hamburger.className = 'nav-hamburger-style8';
+                navMenu.className = 'nav-menu-style8';
+                break;
+            case '8-liquid':
+                hamburger.className = 'nav-hamburger-style8-liquid';
+                navMenu.className = 'nav-menu-style8-liquid';
+                break;
+        }
+    }
+}
+
+// Initialize style based on URL parameter
+handleStyleParameter();
