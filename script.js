@@ -13,18 +13,11 @@ function initializeTypewriter() {
         'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.'
       ],
       autoStart: true,
-      loop: false,
+      loop: true,
       delay: 25, // Even faster typing speed for subtitle
       deleteSpeed: 20, // Faster deletion speed
       cursor: '<span style="color: #667eea;">|</span>',
-      html: true,
-      onComplete: function() {
-        // Add a subtle animation when typing is complete
-        setTimeout(() => {
-          typewriterElement.style.animation = 'glow 2s ease-in-out infinite alternate';
-          typewriterElement.classList.add('completed');
-        }, 300);
-      }
+      html: true
     });
   } else {
     // Fallback if TypewriterJS is not loaded
@@ -37,26 +30,19 @@ function initializeTypewriter() {
   if (typewriterElement2 && window.Typewriter) {
     new Typewriter(typewriterElement2, {
       strings: [
-        'The world\'s first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.'
+        'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.'
       ],
       autoStart: true,
-      loop: false,
+      loop: true,
       delay: 25, // Even faster typing speed for subtitle
       deleteSpeed: 20, // Faster deletion speed
       cursor: '<span style="color: #667eea;">|</span>',
-      html: true,
-      onComplete: function() {
-        // Add a subtle animation when typing is complete
-        setTimeout(() => {
-          typewriterElement2.style.animation = 'glow 2s ease-in-out infinite alternate';
-          typewriterElement2.classList.add('completed');
-        }, 300);
-      }
+      html: true
     });
   } else {
     // Fallback if TypewriterJS is not loaded
     if (typewriterElement2) {
-      typewriterElement2.innerHTML = 'The world\'s first social payment platform that automatically protects your wealth while connecting you to global financial infrastructure.';
+      typewriterElement2.innerHTML = 'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.';
     }
   }
 }
