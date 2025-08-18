@@ -1,10 +1,16 @@
 /* Mobile: use floating pill-style tab bar; hide original navbar */
 @media (max-width: 768px) {
   .navbar { display: none !important; }
-  body { padding-bottom: 88px; }
+  body { 
+    padding-bottom: 40px; 
+    background: var(--gray-900, #0f172a);
+  }
   /* keep footer fully visible above the floating pill bar */
   footer.footer,
-  .footer { padding-bottom: calc(env(safe-area-inset-bottom) + 120px) !important; }
+  .footer { 
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px) !important; 
+    background: var(--gray-900, #0f172a);
+  }
 }
 
 /* Pill-style bottom tab bar (mobile only) */
