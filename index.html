@@ -248,7 +248,7 @@
             </h1>
           
           <p class="hero-subtitle">
-            <div id="typewriter-subtitle"></div>
+            <div id="typewriter-subtitle">Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.</div>
           </p>
           <div class="hero-cta">
             <button class="btn btn-primary btn-large download-app-btn bounce-in" onclick="showDownloadOptions()">
@@ -279,9 +279,13 @@
         <div class="press-track">
           <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
           <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock TechCrunch"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#ff6600" font-size="12" font-family="Montserrat, Arial" font-weight="700">TECHCRUNCH</text></svg>
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock CNBC"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#ff0000" font-size="12" font-family="Montserrat, Arial" font-weight="700">CNBC</text></svg>
           <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
           <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Forbes"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#0f172a" font-size="12" font-family="Montserrat, Arial" font-weight="700">FORBES</text></svg>
           <svg class="press-logo" viewBox="0 0 160 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Bloomberg"><rect width="160" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#1e40af" font-size="12" font-family="Montserrat, Arial" font-weight="700">BLOOMBERG</text></svg>
+          <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock TechCrunch"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#ff6600" font-size="12" font-family="Montserrat, Arial" font-weight="700">TECHCRUNCH</text></svg>
+          <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock CNBC"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#ff0000" font-size="12" font-family="Montserrat, Arial" font-weight="700">CNBC</text></svg>
           <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
         </div>
       </div>
@@ -421,59 +425,84 @@
         
         <div class="addsendreceive-container">
           <div class="flow-diagram" data-aos="fade-up" data-aos-delay="200">
-            <div class="flow-step add-step">
+            <div class="flow-step add-step premium-card">
               <div class="step-icon">
-                <div class="icon-circle">
-                  <span class="step-emoji">💰</span>
+                <div class="icon-circle premium-gradient">
+                  <svg class="step-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                 </div>
                 <div class="step-number">1</div>
               </div>
               <div class="step-content">
                 <h3>Add Money</h3>
-                <p>Multiple funding options. Add money in seconds.</p>
-                <div class="step-highlight"></div>
+                <p>Multiple funding options. Add money in seconds with bank transfers, cards, or mobile money.</p>
+                <div class="step-highlight premium-glow"></div>
+              </div>
+              <div class="step-mockup">
+                <img src="images/screenshots/homescreen_mockuphand.svg" alt="Add Money Screen" class="app-mockup">
               </div>
             </div>
             
-            <div class="flow-arrow">
+            <div class="flow-arrow premium-arrow">
               <svg viewBox="0 0 100 20" fill="none">
-                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="currentColor" stroke-width="2" class="arrow-path"/>
-                <circle cx="50" cy="10" r="3" class="arrow-dot"/>
+                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="url(#arrowGradient)" stroke-width="3" class="arrow-path"/>
+                <circle cx="50" cy="10" r="4" class="arrow-dot" fill="url(#dotGradient)"/>
+                <defs>
+                  <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#667eea"/>
+                    <stop offset="100%" style="stop-color:#764ba2"/>
+                  </linearGradient>
+                  <linearGradient id="dotGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#f093fb"/>
+                    <stop offset="100%" style="stop-color:#f5576c"/>
+                  </linearGradient>
+                </defs>
               </svg>
             </div>
             
-            <div class="flow-step send-step">
+            <div class="flow-step send-step premium-card">
               <div class="step-icon">
-                <div class="icon-circle">
-                  <span class="step-emoji">💸</span>
+                <div class="icon-circle premium-gradient">
+                  <svg class="step-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                 </div>
                 <div class="step-number">2</div>
               </div>
               <div class="step-content">
                 <h3>Send Money</h3>
-                <p>Transfer funds globally with real-time tracking.</p>
-                <div class="step-highlight"></div>
+                <p>Transfer funds globally with real-time tracking and instant notifications.</p>
+                <div class="step-highlight premium-glow"></div>
+              </div>
+              <div class="step-mockup">
+                <img src="images/screenshots/iphone18mockup_sendscreen.PNG" alt="Send Money Screen" class="app-mockup">
               </div>
             </div>
             
-            <div class="flow-arrow">
+            <div class="flow-arrow premium-arrow">
               <svg viewBox="0 0 100 20" fill="none">
-                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="currentColor" stroke-width="2" class="arrow-path"/>
-                <circle cx="50" cy="10" r="3" class="arrow-dot"/>
+                <path d="M0 10 L80 10 M80 10 L70 5 M80 10 L70 15" stroke="url(#arrowGradient)" stroke-width="3" class="arrow-path"/>
+                <circle cx="50" cy="10" r="4" class="arrow-dot" fill="url(#dotGradient)"/>
               </svg>
             </div>
             
-            <div class="flow-step receive-step">
+            <div class="flow-step receive-step premium-card">
               <div class="step-icon">
-                <div class="icon-circle">
-                  <span class="step-emoji">📥</span>
+                <div class="icon-circle premium-gradient">
+                  <svg class="step-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                 </div>
                 <div class="step-number">3</div>
               </div>
               <div class="step-content">
                 <h3>Receive Money</h3>
-                <p>Get paid instantly with multiple receiving options.</p>
-                <div class="step-highlight"></div>
+                <p>Get paid instantly with multiple receiving options including bank accounts and mobile wallets.</p>
+                <div class="step-highlight premium-glow"></div>
+              </div>
+              <div class="step-mockup">
+                <img src="images/screenshots/iphone18mockup_receivescreen.PNG" alt="Receive Money Screen" class="app-mockup">
               </div>
             </div>
           </div>
@@ -556,8 +585,8 @@
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
             </div>
-            <h3>Quantum-Resistant Encryption</h3>
-            <p>Next-generation encryption protocols that protect against quantum computing threats, ensuring your data remains secure for decades to come.</p>
+            <h3>Bank-Grade Encryption</h3>
+            <p>Encryption protocols that protect against threats, ensuring your data remains secure.</p>
           </div>
           <div class="security-card" data-aos="fade-up" data-aos-delay="100">
             <div class="security-icon">
@@ -740,14 +769,14 @@
     
     <div class="proof-stats">
       <div class="stat-card">
-        <div class="stat-number" data-count="50000000">0</div>
-        <div class="stat-label">Active Users</div>
-        <div class="stat-trend positive">+127% this year</div>
+        <div class="stat-number" data-count="10000">0</div>
+        <div class="stat-label">Early Users</div>
+        <div class="stat-trend positive">Growing fast</div>
             </div>
       <div class="stat-card">
-        <div class="stat-number" data-count="150" data-format="+">0</div>
+        <div class="stat-number" data-count="5" data-format="+">0</div>
         <div class="stat-label">Countries Served</div>
-        <div class="stat-trend positive">Global reach</div>
+        <div class="stat-trend positive">Expanding rapidly</div>
           </div>
       <div class="stat-card">
         <div class="stat-number" data-count="99" data-format="%">0</div>
@@ -755,7 +784,7 @@
         <div class="stat-trend positive">4.9/5 rating</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number" data-count="5000000" data-format="$">0</div>
+        <div class="stat-number" data-count="500000" data-format="$">0</div>
         <div class="stat-label">Value Protected</div>
         <div class="stat-trend positive">From inflation</div>
       </div>

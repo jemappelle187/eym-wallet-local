@@ -8,7 +8,7 @@ function initializeTypewriter() {
   if (typewriterElement && window.Typewriter) {
     new Typewriter(typewriterElement, {
       strings: [
-        'Send money instantly to Africa, Asia, and beyond.'
+        'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.'
       ],
       autoStart: true,
       loop: false,
@@ -27,7 +27,7 @@ function initializeTypewriter() {
   } else {
     // Fallback if TypewriterJS is not loaded
     if (typewriterElement) {
-      typewriterElement.innerHTML = 'Send money instantly to Africa, Asia, and beyond.';
+      typewriterElement.innerHTML = 'Send money instantly to Africa, Asia, the UAE & beyond. No hidden fees.';
     }
   }
 }
