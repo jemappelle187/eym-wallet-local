@@ -8728,6 +8728,39 @@ html {
   }
 }
 
+/* Partnered With Slider */
+.partnered-slider {
+  margin: 3rem 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-top: 1px solid rgba(203, 213, 225, 0.3);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+}
+
+.partnered-slider .press-track {
+  animation: press-slide 25s linear infinite;
+}
+
+.partnered-slider .press-logo {
+  height: 28px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.partnered-slider .press-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .partnered-slider {
+    margin: 2rem 0;
+  }
+  
+  .partnered-slider .press-logo {
+    height: 24px;
+  }
+}
+
 .addsendreceive-mockup {
   display: flex;
   justify-content: center;

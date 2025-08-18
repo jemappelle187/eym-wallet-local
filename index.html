@@ -714,70 +714,28 @@
         </div>
       </section>
 
-<!-- Enhanced Compact Remittance Calculator Section -->
+<!-- Premium Calculator Section -->
 <section class="exchange-rate fade-in premium-section section-bg-light" id="exchange-rate">
       <div class="container">
         <h2>WE SAVE YOU MONEY</h2>
         <p class="calculator-subtitle">Why pay more? We believe in fair pricing that benefits you, not us.</p>
 
-        <form class="exchange-form">
-          <div class="exchange-selects">
-            <input type="number" min="1" step="1" value="100" id="calcAmount" class="calc-amount" required aria-label="Amount to send" />
-            <select class="currency-select premium-select" id="calcFrom" aria-label="Currency to send from">
-              <option value="USD">🇺🇸 USD - US Dollar</option>
-              <option value="EUR">🇪🇺 EUR - Euro</option>
-              <option value="GBP">🇬🇧 GBP - British Pound</option>
-              <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-              <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-              <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-              <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-              <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-              <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-              <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-              <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-              <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-            </select>
-            <span class="exchange-arrow" aria-hidden="true">→</span>
-            <select class="currency-select premium-select" id="calcTo" aria-label="Currency to send to">
-              <option value="GHS">🇬🇭 GHS - Ghanaian Cedi</option>
-              <option value="USD">🇺🇸 USD - US Dollar</option>
-              <option value="EUR">🇪🇺 EUR - Euro</option>
-              <option value="GBP">🇬🇧 GBP - British Pound</option>
-              <option value="NGN">🇳🇬 NGN - Nigerian Naira</option>
-              <option value="KES">🇰🇪 KES - Kenyan Shilling</option>
-              <option value="UGX">🇺🇬 UGX - Ugandan Shilling</option>
-              <option value="ZAR">🇿🇦 ZAR - South African Rand</option>
-              <option value="ZMW">🇿🇲 ZMW - Zambian Kwacha</option>
-              <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
-              <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
-              <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
-            </select>
-            <button type="submit" class="calc-submit-btn" aria-label="Calculate remittance amount">Calculate</button>
+        <div class="calculator-container">
+          <div class="calculator-header">
+            <h3>Calculate Your Savings</h3>
+            <p>See how much you'll save with SendNReceive's competitive rates</p>
           </div>
-
-          <div class="calc-results" id="calcResults">
-            <div class="calc-main-result">
-              <div class="result-label">Recipient gets:</div>
-              <div class="result-amount" id="calcConverted">GHS 2,311.75</div>
-            </div>
-            <div class="calc-compare">
-              <span class="calc-badge success">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
-                SendNReceive: <b>0% fee</b>
-              </span>
-              <span class="calc-badge warning">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right: 6px;"><path d="M12 9V13M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
-                Typical Bank: <b id="calcBankFee">$7.99 fee</b>
-              </span>
-            </div>
-            <div class="calc-savings">
-              <span class="savings-text">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right: 8px; vertical-align: middle;"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                You save: <span id="calcSavings" class="savings-amount">$8.00</span> compared to a bank.
-              </span>
-            </div>
+          <div class="inline-calculator">
+            <input type="number" class="inline-input" placeholder="100" value="100" id="calcAmount">
+            <div class="inline-currency" data-currency="USD">🇺🇸 USD</div>
+            <div class="inline-arrow">→</div>
+            <div class="inline-currency" data-currency="EUR">🇪🇺 EUR</div>
+            <input type="number" class="inline-input" placeholder="0" value="92.50" readonly id="calcResult">
           </div>
-        </form>
+          <div class="calculator-savings">
+            💰 Save up to 7.5% vs traditional banks
+          </div>
+        </div>
       </div>
     </section>
 
@@ -858,7 +816,131 @@
       </div>
     </section>
 
-
+    <!-- Partnered With Slider -->
+    <div class="press-bar press-clean partnered-slider">
+      <div class="press-track">
+        <!-- Airtel -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E60000">AIRTEL</text>
+            <circle cx="30" cy="30" r="15" fill="#E60000"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">A</text>
+          </svg>
+        </div>
+        
+        <!-- Vodafone -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E60000">VODAFONE</text>
+            <circle cx="30" cy="30" r="15" fill="#E60000"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">V</text>
+          </svg>
+        </div>
+        
+        <!-- MTN -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFCC00">MTN</text>
+            <circle cx="30" cy="30" r="15" fill="#FFCC00"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">M</text>
+          </svg>
+        </div>
+        
+        <!-- M-Pesa -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00A651">M-PESA</text>
+            <circle cx="30" cy="30" r="15" fill="#00A651"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">M</text>
+          </svg>
+        </div>
+        
+        <!-- Standard Chartered -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E4DB7">STANDARD CHARTERED</text>
+            <circle cx="30" cy="30" r="15" fill="#1E4DB7"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">SC</text>
+          </svg>
+        </div>
+        
+        <!-- Barclays -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00A651">BARCLAYS</text>
+            <circle cx="30" cy="30" r="15" fill="#00A651"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">B</text>
+          </svg>
+        </div>
+        
+        <!-- Duplicate logos for seamless loop -->
+        <!-- Airtel -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E60000">AIRTEL</text>
+            <circle cx="30" cy="30" r="15" fill="#E60000"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">A</text>
+          </svg>
+        </div>
+        
+        <!-- Vodafone -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E60000">VODAFONE</text>
+            <circle cx="30" cy="30" r="15" fill="#E60000"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">V</text>
+          </svg>
+        </div>
+        
+        <!-- MTN -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFCC00">MTN</text>
+            <circle cx="30" cy="30" r="15" fill="#FFCC00"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">M</text>
+          </svg>
+        </div>
+        
+        <!-- M-Pesa -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00A651">M-PESA</text>
+            <circle cx="30" cy="30" r="15" fill="#00A651"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">M</text>
+          </svg>
+        </div>
+        
+        <!-- Standard Chartered -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E4DB7">STANDARD CHARTERED</text>
+            <circle cx="30" cy="30" r="15" fill="#1E4DB7"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">SC</text>
+          </svg>
+        </div>
+        
+        <!-- Barclays -->
+        <div class="press-logo">
+          <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="60" fill="none"/>
+            <text x="100" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#00A651">BARCLAYS</text>
+            <circle cx="30" cy="30" r="15" fill="#00A651"/>
+            <text x="30" y="37" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">B</text>
+          </svg>
+        </div>
+      </div>
+    </div>
 
 <!-- FAQ Section removed per request -->
 
@@ -909,79 +991,7 @@
       </div>
     </section>
 
-  <!-- Enhanced Compact Remittance Calculator JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const amountInput = document.getElementById('calcAmount');
 
-      // Real-time calculation on input change
-      amountInput.addEventListener('input', function() {
-        calculateRemittance();
-      });
-
-      // Currency change handlers
-      document.getElementById('calcFrom').addEventListener('change', calculateRemittance);
-      document.getElementById('calcTo').addEventListener('change', calculateRemittance);
-
-      // Form submit handler
-      document.querySelector('.exchange-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        calculateRemittance();
-      });
-
-      // Initial calculation
-      calculateRemittance();
-
-      function calculateRemittance() {
-        const amount = parseFloat(amountInput.value) || 0;
-        const fromCurrency = document.getElementById('calcFrom').value;
-        const toCurrency = document.getElementById('calcTo').value;
-        
-        // Enhanced exchange rates (in real app, this would come from API)
-        const exchangeRates = {
-          'USD': { 'GHS': 23.12, 'NGN': 1500, 'KES': 150, 'EUR': 0.85, 'GBP': 0.73, 'ZAR': 18.5, 'CAD': 1.35, 'UGX': 3800, 'ZMW': 25.5, 'AUD': 1.52, 'CHF': 0.88 },
-          'EUR': { 'GHS': 27.20, 'NGN': 1765, 'KES': 176, 'USD': 1.18, 'GBP': 0.86, 'ZAR': 21.8, 'CAD': 1.59, 'UGX': 4470, 'ZMW': 30.0, 'AUD': 1.79, 'CHF': 1.04 },
-          'GBP': { 'GHS': 31.67, 'NGN': 2055, 'KES': 205, 'USD': 1.37, 'EUR': 1.16, 'ZAR': 25.4, 'CAD': 1.85, 'UGX': 5200, 'ZMW': 35.0, 'AUD': 2.08, 'CHF': 1.21 },
-          'GHS': { 'USD': 0.043, 'NGN': 64.9, 'KES': 6.5, 'EUR': 0.037, 'GBP': 0.032, 'ZAR': 0.80, 'CAD': 0.058, 'UGX': 164, 'ZMW': 1.10, 'AUD': 0.066, 'CHF': 0.038 },
-          'NGN': { 'USD': 0.00067, 'GHS': 0.015, 'KES': 6.5, 'EUR': 0.00057, 'GBP': 0.00049, 'ZAR': 0.012, 'CAD': 0.0009, 'UGX': 2.53, 'ZMW': 0.017, 'AUD': 0.001, 'CHF': 0.0006 },
-          'KES': { 'USD': 0.0067, 'GHS': 0.154, 'NGN': 10, 'EUR': 0.0057, 'GBP': 0.0049, 'ZAR': 0.123, 'CAD': 0.009, 'UGX': 25.3, 'ZMW': 0.17, 'AUD': 0.010, 'CHF': 0.006 },
-          'ZAR': { 'USD': 0.054, 'GHS': 1.25, 'NGN': 81, 'EUR': 0.046, 'GBP': 0.039, 'KES': 8.1, 'CAD': 0.073, 'UGX': 205, 'ZMW': 1.38, 'AUD': 0.082, 'CHF': 0.048 },
-          'CAD': { 'USD': 0.74, 'GHS': 17.1, 'NGN': 1111, 'EUR': 0.63, 'GBP': 0.54, 'KES': 111, 'ZAR': 13.7, 'UGX': 2815, 'ZMW': 18.9, 'AUD': 1.13, 'CHF': 0.65 },
-          'UGX': { 'USD': 0.00026, 'GHS': 0.0061, 'NGN': 0.395, 'EUR': 0.00022, 'GBP': 0.00019, 'KES': 0.0395, 'ZAR': 0.0049, 'CAD': 0.00035, 'ZMW': 0.0067, 'AUD': 0.0004, 'CHF': 0.00023 },
-          'ZMW': { 'USD': 0.039, 'GHS': 0.91, 'NGN': 59, 'EUR': 0.033, 'GBP': 0.029, 'KES': 5.9, 'ZAR': 0.725, 'CAD': 0.053, 'UGX': 149, 'AUD': 0.059, 'CHF': 0.034 },
-          'AUD': { 'USD': 0.66, 'GHS': 15.2, 'NGN': 987, 'EUR': 0.56, 'GBP': 0.48, 'KES': 98.7, 'ZAR': 12.2, 'CAD': 0.88, 'UGX': 2500, 'ZMW': 16.8, 'CHF': 0.58 },
-          'CHF': { 'USD': 1.14, 'GHS': 26.3, 'NGN': 1705, 'EUR': 0.96, 'GBP': 0.83, 'KES': 170.5, 'ZAR': 20.9, 'CAD': 1.54, 'UGX': 4320, 'ZMW': 29.4, 'AUD': 1.73 }
-        };
-
-        // Get exchange rate
-        let rate = 1;
-        if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
-          rate = exchangeRates[fromCurrency][toCurrency];
-        } else if (exchangeRates[toCurrency] && exchangeRates[toCurrency][fromCurrency]) {
-          rate = 1 / exchangeRates[toCurrency][fromCurrency];
-        }
-
-        // Calculate converted amount
-        const convertedAmount = amount * rate;
-        
-        // Calculate bank fee (typical 3-5% + fixed fee)
-        const bankFee = (amount * 0.04) + 7.99; // 4% + $7.99 fixed fee
-        const savings = bankFee;
-        
-        // Update results
-        document.getElementById('calcConverted').textContent = `${toCurrency} ${convertedAmount.toFixed(2)}`;
-        document.getElementById('calcBankFee').textContent = `$${bankFee.toFixed(2)} fee`;
-        document.getElementById('calcSavings').textContent = `$${savings.toFixed(2)}`;
-        
-        // Add updating animation
-        const resultsElement = document.getElementById('calcResults');
-        resultsElement.classList.add('updating');
-        setTimeout(() => {
-          resultsElement.classList.remove('updating');
-        }, 500);
-      }
-    });
-  </script>
 
   </main>
 
