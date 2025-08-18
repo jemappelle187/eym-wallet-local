@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Styles Demo - EYM Wallet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile-optimizations.css">
+    <style>
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .style-demo {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            background: #f8fafc;
+        }
+        
+        .style-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .style-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .demo-frame {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .demo-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .style-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-tag {
+            background: #1e40af;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .comparison-table {
+            margin-top: 2rem;
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table th {
+            background: #1e40af;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .pros {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .cons {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+        
+        .pros h4, .cons h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .pros h4 {
+            color: #166534;
+        }
+        
+        .cons h4 {
+            color: #dc2626;
+        }
+        
+        .pros ul, .cons ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .pros li, .cons li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .pros li {
+            color: #166534;
+        }
+        
+        .cons li {
+            color: #dc2626;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e40af 0%, #6366f1 100%);
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .demo-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-header p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+        
+        .test-button {
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .test-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🎨 Navigation Styles Comparison</h1>
+            <p style="text-align: center; color: #1e40af; font-weight: 600; margin-bottom: 2rem; padding: 1rem; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border-radius: 12px; border: 2px solid #3b82f6;">
+                🎉 <strong>Style 6 (Floating Cards) is now the default navigation style!</strong> 🎉
+            </p>
+            <p>Compare all three mobile navigation styles for the EYM Wallet website</p>
+            <button class="test-button" onclick="window.open('index.html', '_blank')">Test Live Version</button>
+        </div>
+
+        <!-- Style 1: Slide-Down Overlay -->
+        <div class="style-demo">
+            <div class="style-title">🎯 Style 1: Slide-Down Overlay</div>
+            <div class="style-description">
+                Premium gradient overlay that slides down from the top with staggered animations
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=1" title="Style 1 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Gradient Background</span>
+                <span class="feature-tag">Staggered Animation</span>
+                <span class="feature-tag">Full Screen</span>
+                <span class="feature-tag">Premium Look</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Premium, modern appearance</li>
+                        <li>Beautiful gradient background</li>
+                        <li>Smooth staggered animations</li>
+                        <li>Immersive full-screen experience</li>
+                        <li>Perfect for premium brands</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Takes full screen</li>
+                        <li>Might feel overwhelming</li>
+                        <li>Less content visible</li>
+                        <li>Not traditional navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 2: Slide-Left Drawer -->
+        <div class="style-demo">
+            <div class="style-title">📱 Style 2: Slide-Left Drawer</div>
+            <div class="style-description">
+                Classic drawer that slides in from the left with professional glassmorphism
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=2" title="Style 2 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Glassmorphism</span>
+                <span class="feature-tag">Traditional UX</span>
+                <span class="feature-tag">Professional</span>
+                <span class="feature-tag">Familiar</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Familiar user experience</li>
+                        <li>Professional appearance</li>
+                        <li>Doesn't block content</li>
+                        <li>Glassmorphism effect</li>
+                        <li>Traditional navigation</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Less modern feel</li>
+                        <li>More traditional</li>
+                        <li>Limited visual impact</li>
+                        <li>Standard approach</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 3: Bottom Sheet -->
+        <div class="style-demo">
+            <div class="style-title">📲 Style 3: Bottom Sheet</div>
+            <div class="style-description">
+                Modern bottom sheet that slides up from the bottom, optimized for thumb navigation
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=3" title="Style 3 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Mobile-First</span>
+                <span class="feature-tag">Thumb Navigation</span>
+                <span class="feature-tag">Native App Feel</span>
+                <span class="feature-tag">Modern UX</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Modern mobile-first design</li>
+                        <li>Thumb-friendly navigation</li>
+                        <li>Native app feel</li>
+                        <li>Intuitive for mobile users</li>
+                        <li>Contemporary UX</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Might feel too "app-like"</li>
+                        <li>Less traditional for websites</li>
+                        <li>Could confuse desktop users</li>
+                        <li>Not standard web navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 4: Circular Menu -->
+        <div class="style-demo">
+            <div class="style-title">⭕ Style 4: Circular Menu</div>
+            <div class="style-description">
+                Elegant circular menu that expands from the center with smooth scaling animations
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=4" title="Style 4 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Circular Design</span>
+                <span class="feature-tag">Center Expansion</span>
+                <span class="feature-tag">Smooth Scaling</span>
+                <span class="feature-tag">Elegant Animation</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Unique and elegant design</li>
+                        <li>Smooth scaling animations</li>
+                        <li>Centered focus</li>
+                        <li>Modern circular layout</li>
+                        <li>Eye-catching presentation</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Limited menu items</li>
+                        <li>Not space-efficient</li>
+                        <li>May feel gimmicky</li>
+                        <li>Less practical for many items</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 5: Side Panel with Tabs -->
+        <div class="style-demo">
+            <div class="style-title">📋 Style 5: Side Panel with Tabs</div>
+            <div class="style-description">
+                Professional side panel with tabbed navigation for organized content structure
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=5" title="Style 5 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Tabbed Navigation</span>
+                <span class="feature-tag">Organized Content</span>
+                <span class="feature-tag">Professional Look</span>
+                <span class="feature-tag">Structured Layout</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Organized content structure</li>
+                        <li>Professional appearance</li>
+                        <li>Good for complex navigation</li>
+                        <li>Clear content separation</li>
+                        <li>Scalable for many items</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>More complex implementation</li>
+                        <li>Requires more screen space</li>
+                        <li>May be overwhelming</li>
+                        <li>Not suitable for simple menus</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 6: Floating Cards -->
+        <div class="style-demo">
+            <div class="style-title">🃏 Style 6: Floating Cards (DEFAULT)</div>
+            <div class="style-description">
+                Modern card-based navigation with floating cards that rotate and scale into view. This is now the default navigation style for the website.
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=6" title="Style 6 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Card-Based Design</span>
+                <span class="feature-tag">Rotation Animation</span>
+                <span class="feature-tag">Floating Effect</span>
+                <span class="feature-tag">Modern Cards</span>
+                <span class="feature-tag">Default Style</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Modern card-based design</li>
+                        <li>Engaging rotation animations</li>
+                        <li>Visual appeal</li>
+                        <li>Good for featured items</li>
+                        <li>Contemporary feel</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Limited to 4 main items</li>
+                        <li>May be distracting</li>
+                        <li>Not suitable for long lists</li>
+                        <li>Animation heavy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 7: Minimal Slide-Up -->
+        <div class="style-demo">
+            <div class="style-title">📱 Style 7: Minimal Slide-Up</div>
+            <div class="style-description">
+                Clean and minimal slide-up menu with subtle animations and arrow indicators
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=7" title="Style 7 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Minimal Design</span>
+                <span class="feature-tag">Clean Interface</span>
+                <span class="feature-tag">Arrow Indicators</span>
+                <span class="feature-tag">Subtle Animations</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Clean and minimal design</li>
+                        <li>Subtle animations</li>
+                        <li>Clear visual hierarchy</li>
+                        <li>Professional appearance</li>
+                        <li>Good for content-heavy sites</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>Less visually exciting</li>
+                        <li>May feel basic</li>
+                        <li>Limited visual impact</li>
+                        <li>Not premium feeling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style 8: Expanding Grid -->
+        <div class="style-demo">
+            <div class="style-title">🔲 Style 8: Expanding Grid</div>
+            <div class="style-description">
+                Dynamic grid layout that expands with staggered animations for each menu item
+            </div>
+            <div class="demo-frame">
+                <iframe src="index.html?style=8" title="Style 8 Demo"></iframe>
+            </div>
+            <div class="style-features">
+                <span class="feature-tag">Grid Layout</span>
+                <span class="feature-tag">Staggered Animation</span>
+                <span class="feature-tag">Dynamic Expansion</span>
+                <span class="feature-tag">Modern Grid</span>
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ Pros</h4>
+                    <ul>
+                        <li>Dynamic grid layout</li>
+                        <li>Staggered animations</li>
+                        <li>Good for many items</li>
+                        <li>Modern grid design</li>
+                        <li>Visual organization</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ Cons</h4>
+                    <ul>
+                        <li>May feel overwhelming</li>
+                        <li>Complex animation timing</li>
+                        <li>Not suitable for few items</li>
+                        <li>Grid can feel rigid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="style-demo">
+            <div class="style-title">📊 Quick Comparison</div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Style 1: Overlay</th>
+                        <th>Style 2: Drawer</th>
+                        <th>Style 3: Bottom Sheet</th>
+                        <th>Style 4: Circular</th>
+                        <th>Style 5: Tabs</th>
+                        <th>Style 6: Cards</th>
+                        <th>Style 7: Minimal</th>
+                        <th>Style 8: Grid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Animation</strong></td>
+                        <td>Slide Down</td>
+                        <td>Slide Left</td>
+                        <td>Slide Up</td>
+                        <td>Scale Center</td>
+                        <td>Slide Right</td>
+                        <td>Rotate Scale</td>
+                        <td>Slide Up</td>
+                        <td>Grid Expand</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Background</strong></td>
+                        <td>Gradient Blur</td>
+                        <td>White Glass</td>
+                        <td>Dark Glass</td>
+                        <td>Radial Gradient</td>
+                        <td>Dark Gradient</td>
+                        <td>Black Overlay</td>
+                        <td>White Glass</td>
+                        <td>Dark Gradient</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Button Position</strong></td>
+                        <td>Top-Right</td>
+                        <td>Top-Left</td>
+                        <td>Bottom-Right</td>
+                        <td>Top-Right</td>
+                        <td>Top-Right</td>
+                        <td>Bottom-Right</td>
+                        <td>Bottom-Left</td>
+                        <td>Top-Left</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Layout</strong></td>
+                        <td>Centered List</td>
+                        <td>Vertical List</td>
+                        <td>Vertical List</td>
+                        <td>Circular</td>
+                        <td>Tabbed Panel</td>
+                        <td>2x2 Grid</td>
+                        <td>Vertical List</td>
+                        <td>3x3 Grid</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Premium Brands</td>
+                        <td>Professional</td>
+                        <td>Mobile Apps</td>
+                        <td>Creative Sites</td>
+                        <td>Complex Nav</td>
+                        <td>Featured Items</td>
+                        <td>Content Sites</td>
+                        <td>Many Items</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="style-demo">
+            <div class="style-title">💡 Recommendation</div>
+            <div class="style-description">
+                Based on your premium remittance app brand, here's our recommendation:
+            </div>
+            <div style="background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); border: 2px solid #3b82f6; border-radius: 12px; padding: 2rem; margin-top: 1rem; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);">
+                <h3 style="color: #1e40af; margin: 0 0 1.5rem 0; font-size: 1.5rem; text-align: center;">🏆 Premium Navigation Recommendations</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+                    <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #1e40af; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                        <h4 style="color: #1e40af; margin: 0 0 0.8rem 0; font-size: 1.2rem;">🥇 Style 1: Premium Overlay</h4>
+                        <p style="color: #374151; margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                            <strong>Perfect for:</strong> Ultra-premium positioning<br>
+                            • Multi-layer gradient backgrounds<br>
+                            • Advanced glassmorphism effects<br>
+                            • Smooth staggered animations<br>
+                            • Premium financial app feel
+                        </p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #6366f1; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                        <h4 style="color: #6366f1; margin: 0 0 0.8rem 0; font-size: 1.2rem;">🥈 Style 6: Premium Cards (DEFAULT)</h4>
+                        <p style="color: #374151; margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                            <strong>Perfect for:</strong> Modern premium appeal<br>
+                            • Advanced card animations<br>
+                            • Multi-gradient backgrounds<br>
+                            • Sophisticated hover effects<br>
+                            • Premium service showcase<br>
+                            • <strong>Now the default navigation style!</strong>
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid rgba(59, 130, 246, 0.2);">
+                    <h4 style="color: #1e40af; margin: 0 0 1rem 0; font-size: 1.1rem;">✨ Enhanced Premium Features:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div style="background: rgba(255, 255, 255, 0.7); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: #1e40af;">Style 5 (Tabs):</strong><br>
+                            • Professional tabbed interface<br>
+                            • Advanced glassmorphism<br>
+                            • Smooth slide animations
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.7); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: #1e40af;">Style 8 (Grid):</strong><br>
+                            • Dynamic grid expansion<br>
+                            • Premium gradient backgrounds<br>
+                            • Sophisticated animations
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity to the demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for the demo frames
+            const demoFrames = document.querySelectorAll('.demo-frame iframe');
+            demoFrames.forEach(frame => {
+                frame.addEventListener('click', function() {
+                    // Open the demo in a new tab
+                    window.open(frame.src, '_blank');
+                });
+            });
+            
+            // Add hover effects to demo containers
+            const styleDemos = document.querySelectorAll('.style-demo');
+            styleDemos.forEach(demo => {
+                demo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+                });
+                
+                demo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
