@@ -480,26 +480,26 @@ function setupMobileCookieBanner() {
     });
     
     cookieCustomize.addEventListener('click', () => {
-      // Show cookie customization modal
-      showCookieModal();
+      // Customize functionality is handled within the floating banner
+      // No need for separate modal
     });
   }
 }
 
-// Mobile Cookie Modal
-function showCookieModal() {
-  const modal = document.getElementById('cookieModalOverlay');
-  if (modal) {
-    modal.style.display = 'flex';
-    
-    // Close modal when clicking outside
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  }
-}
+// Mobile Cookie Modal - Removed old modal functionality
+// function showCookieModal() {
+//   const modal = document.getElementById('cookieModalOverlay');
+//   if (modal) {
+//     modal.style.display = 'flex';
+//     
+//     // Close modal when clicking outside
+//     modal.addEventListener('click', (e) => {
+//       if (e.target === modal) {
+//         modal.style.display = 'none';
+//       }
+//     });
+//   }
+// }
 
 // Navigation Management
 class Navigation {
