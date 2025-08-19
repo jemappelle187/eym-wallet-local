@@ -3009,3 +3009,205 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize calculation
   calculateConversion();
 });
+
+// Comprehensive Remittance Calculator Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize remittance calculator if it exists
+  const remittanceCalculator = document.getElementById('remittance-calculator');
+  if (!remittanceCalculator) return;
+
+  // Elements
+  const amountInput = document.getElementById('remittanceAmount');
+  const resultAmount = document.getElementById('resultAmount');
+  const resultCurrency = document.getElementById('resultCurrency');
+  const feeAmount = document.getElementById('feeAmount');
+  const fxRate = document.getElementById('fxRate');
+  const savingsHighlight = document.getElementById('savingsHighlight');
+  const sendCurrencyDropdown = document.getElementById('sendCurrency');
+  const receiveCurrencyDropdown = document.getElementById('receiveCurrency');
+  const toggleTabs = document.querySelectorAll('.toggle-tab');
+
+  // Exchange rates and fees for different providers
+  const rates = {
+    'our-price': {
+      'USD-EUR': { rate: 0.925, fee: 0, savings: '7.5%' },
+      'USD-GBP': { rate: 0.785, fee: 0, savings: '8.2%' },
+      'USD-GHS': { rate: 12.5, fee: 0, savings: '6.8%' },
+      'USD-NGN': { rate: 850, fee: 0, savings: '9.1%' },
+      'EUR-USD': { rate: 1.081, fee: 0, savings: '7.2%' },
+      'EUR-GBP': { rate: 0.848, fee: 0, savings: '8.5%' },
+      'GBP-USD': { rate: 1.274, fee: 0, savings: '6.9%' },
+      'GBP-EUR': { rate: 1.179, fee: 0, savings: '7.8%' }
+    },
+    'bank-price': {
+      'USD-EUR': { rate: 0.855, fee: 25, savings: '0%' },
+      'USD-GBP': { rate: 0.725, fee: 30, savings: '0%' },
+      'USD-GHS': { rate: 11.8, fee: 35, savings: '0%' },
+      'USD-NGN': { rate: 780, fee: 40, savings: '0%' },
+      'EUR-USD': { rate: 1.008, fee: 25, savings: '0%' },
+      'EUR-GBP': { rate: 0.782, fee: 30, savings: '0%' },
+      'GBP-USD': { rate: 1.189, fee: 30, savings: '0%' },
+      'GBP-EUR': { rate: 1.092, fee: 25, savings: '0%' }
+    },
+    'western-union': {
+      'USD-EUR': { rate: 0.875, fee: 15, savings: '0%' },
+      'USD-GBP': { rate: 0.745, fee: 18, savings: '0%' },
+      'USD-GHS': { rate: 12.0, fee: 20, savings: '0%' },
+      'USD-NGN': { rate: 800, fee: 22, savings: '0%' },
+      'EUR-USD': { rate: 1.042, fee: 15, savings: '0%' },
+      'EUR-GBP': { rate: 0.815, fee: 18, savings: '0%' },
+      'GBP-USD': { rate: 1.221, fee: 18, savings: '0%' },
+      'GBP-EUR': { rate: 1.127, fee: 15, savings: '0%' }
+    }
+  };
+
+  let currentProvider = 'our-price';
+  let fromCurrency = 'USD';
+  let toCurrency = 'EUR';
+
+  // Initialize calculator
+  function initCalculator() {
+    updateResult();
+    setupEventListeners();
+  }
+
+  // Setup event listeners
+  function setupEventListeners() {
+    // Amount input
+    if (amountInput) {
+      amountInput.addEventListener('input', updateResult);
+    }
+
+    // Currency dropdowns
+    setupCurrencyDropdown(sendCurrencyDropdown, 'send');
+    setupCurrencyDropdown(receiveCurrencyDropdown, 'receive');
+
+    // Toggle tabs
+    toggleTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const option = this.getAttribute('data-option');
+        setActiveProvider(option);
+      });
+    });
+  }
+
+  // Setup currency dropdown functionality
+  function setupCurrencyDropdown(dropdown, type) {
+    if (!dropdown) return;
+
+    const display = dropdown.querySelector('.currency-display');
+    const options = dropdown.querySelectorAll('.currency-option');
+
+    // Show/hide options on click
+    display.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      
+      // Close all dropdowns
+      document.querySelectorAll('.currency-dropdown').forEach(d => d.classList.remove('open'));
+      
+      if (!isOpen) {
+        dropdown.classList.add('open');
+      }
+    });
+
+    // Handle option selection
+    options.forEach(option => {
+      option.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const currency = this.getAttribute('data-currency');
+        const flag = this.getAttribute('data-flag');
+        
+        // Update display
+        const flagSpan = display.querySelector('.currency-flag');
+        const codeSpan = display.querySelector('.currency-code');
+        
+        if (flagSpan) flagSpan.textContent = flag;
+        if (codeSpan) codeSpan.textContent = currency;
+        
+        // Update currency variables
+        if (type === 'send') {
+          fromCurrency = currency;
+        } else {
+          toCurrency = currency;
+        }
+        
+        // Close dropdown
+        dropdown.classList.remove('open');
+        
+        // Update result
+        updateResult();
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+      dropdown.classList.remove('open');
+    });
+  }
+
+  // Set active provider
+  function setActiveProvider(provider) {
+    currentProvider = provider;
+    
+    // Update active tab
+    toggleTabs.forEach(tab => {
+      tab.classList.remove('active');
+      if (tab.getAttribute('data-option') === provider) {
+        tab.classList.add('active');
+      }
+    });
+    
+    updateResult();
+  }
+
+  // Update calculation result
+  function updateResult() {
+    if (!amountInput || !resultAmount || !resultCurrency) return;
+    
+    const amount = parseFloat(amountInput.value) || 0;
+    const rateKey = `${fromCurrency}-${toCurrency}`;
+    const providerRates = rates[currentProvider];
+    
+    if (!providerRates || !providerRates[rateKey]) {
+      // Fallback to 1:1 if rate not found
+      resultAmount.textContent = amount.toFixed(2);
+      resultCurrency.textContent = toCurrency;
+      feeAmount.textContent = '$0';
+      fxRate.textContent = `1 ${fromCurrency} = 1.0000 ${toCurrency}`;
+      savingsHighlight.textContent = 'Rate not available';
+      return;
+    }
+    
+    const { rate, fee, savings } = providerRates[rateKey];
+    const totalReceived = (amount * rate) - fee;
+    
+    // Update result display
+    resultAmount.textContent = totalReceived.toFixed(2);
+    resultCurrency.textContent = toCurrency;
+    
+    // Update fee display
+    const feeSymbol = fromCurrency === 'USD' ? '$' : fromCurrency === 'EUR' ? '€' : fromCurrency === 'GBP' ? '£' : '';
+    feeAmount.textContent = fee > 0 ? `${feeSymbol}${fee}` : '$0';
+    
+    // Update FX rate display
+    fxRate.textContent = `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
+    
+    // Update savings highlight
+    if (currentProvider === 'our-price') {
+      savingsHighlight.textContent = `Save up to ${savings} vs traditional banks`;
+      savingsHighlight.style.display = 'block';
+    } else {
+      savingsHighlight.style.display = 'none';
+    }
+    
+    // Add animation effect
+    resultAmount.style.transform = 'scale(1.05)';
+    setTimeout(() => {
+      resultAmount.style.transform = 'scale(1)';
+    }, 200);
+  }
+
+  // Initialize calculator
+  initCalculator();
+});

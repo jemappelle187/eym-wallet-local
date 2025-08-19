@@ -397,12 +397,15 @@ body {
   to {
     text-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(102, 126, 234, 0.4);
   }
-  /* ensure footer content is not covered by desktop pill bar */
+}
+
+/* ensure footer content is not covered by desktop pill bar */
+@media (min-width: 769px) {
   body { padding-bottom: 140px; }
   footer.footer, .footer { 
-  padding-bottom: 160px !important; 
-  background: var(--gray-900, #0f172a);
-}
+    padding-bottom: 160px !important; 
+    background: var(--gray-900, #0f172a);
+  }
 }
 
 /* Loading Screen */
@@ -8796,6 +8799,480 @@ html {
   
   .inline-arrow {
     transform: rotate(90deg);
+  }
+}
+
+/* Comprehensive Remittance Calculator Styles */
+.remittance-calculator {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.remittance-calculator .calculator-header {
+  margin-bottom: 3rem;
+}
+
+.remittance-calculator .calculator-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.remittance-calculator .calculator-subtitle {
+  font-size: 1.2rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Comparison Toggle */
+.comparison-toggle {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.toggle-tabs {
+  display: inline-flex;
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 16px;
+  padding: 4px;
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.toggle-tab {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toggle-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+.toggle-tab:hover:not(.active) {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+/* Calculator Input Row */
+.calculator-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.amount-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.amount-input-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.amount-input {
+  background: rgba(248, 250, 252, 0.9);
+  border: 2px solid rgba(203, 213, 225, 0.5);
+  border-radius: 16px;
+  padding: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: #1e293b;
+  width: 100%;
+  max-width: 300px;
+}
+
+.amount-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.currency-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.currency-dropdown {
+  position: relative;
+  background: rgba(248, 250, 252, 0.9);
+  border: 2px solid rgba(203, 213, 225, 0.5);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.currency-dropdown:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.currency-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.currency-flag {
+  font-size: 1.2rem;
+}
+
+.currency-code {
+  font-size: 0.9rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: #64748b;
+  transition: transform 0.3s ease;
+}
+
+.currency-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.currency-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  margin-top: 4px;
+}
+
+.currency-dropdown:hover .currency-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.currency-option {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.currency-option:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+}
+
+.transfer-arrow {
+  font-size: 1.5rem;
+  color: #667eea;
+  font-weight: 700;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Result Box */
+.result-box {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="resultGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(102,126,234,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23resultGrid)"/></svg>');
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.result-main {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+.result-label {
+  display: block;
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.result-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-right: 0.5rem;
+}
+
+.result-currency {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.result-breakdown {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.breakdown-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.breakdown-value {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.fee-amount {
+  color: #059669;
+}
+
+.fx-rate {
+  color: #667eea;
+}
+
+.savings-highlight {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+}
+
+/* Payout Methods */
+.payout-methods {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.method-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.method-icon:hover {
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.method-emoji {
+  font-size: 2rem;
+}
+
+.method-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+}
+
+/* Speed Badge */
+.speed-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.speed-icon {
+  font-size: 1rem;
+}
+
+.speed-separator {
+  color: #cbd5e1;
+  margin: 0 0.5rem;
+}
+
+/* CTA Section */
+.calculator-cta {
+  text-align: center;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.35);
+}
+
+.cta-icon {
+  font-size: 1.2rem;
+}
+
+.cta-subtext {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.app-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-badge {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.app-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .remittance-calculator {
+    padding: 2rem 0;
+  }
+  
+  .remittance-calculator .calculator-header h2 {
+    font-size: 2rem;
+  }
+  
+  .remittance-calculator .calculator-subtitle {
+    font-size: 1rem;
+  }
+  
+  .calculator-input-row {
+    gap: 1.5rem;
+  }
+  
+  .currency-selector {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .transfer-arrow {
+    transform: rotate(90deg);
+  }
+  
+  .result-amount {
+    font-size: 2.5rem;
+  }
+  
+  .result-currency {
+    font-size: 1.5rem;
+  }
+  
+  .payout-methods {
+    gap: 1rem;
+  }
+  
+  .method-icon {
+    padding: 0.75rem;
+  }
+  
+  .method-emoji {
+    font-size: 1.5rem;
+  }
+  
+  .speed-badge {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .app-badges {
+    flex-direction: column;
+    align-items: center;
   }
 }
 

@@ -658,33 +658,147 @@
         </div>
       </section>
 
-<!-- Premium Calculator Section -->
-<section class="exchange-rate fade-in premium-section" id="exchange-rate">
-      <!-- Calculator Background Video -->
-      <div class="hero-video-wrap" aria-hidden="true">
-        <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata"
-               poster="images/Online Payment MockupCOVER.jpg">
-          <source src="videos/hero_worldhand.mp4" type="video/mp4">
-          <source src="images/Online Payment MockupCOVER.jpg" type="image/jpeg">
-          Your browser does not support the video tag.
-        </video>
-        <div class="hero-bg-overlay"></div>
-      </div>
+<!-- Comprehensive Remittance Calculator Section -->
+<section class="remittance-calculator fade-in premium-section" id="remittance-calculator">
+      <!-- Background with globe network lines -->
+      <div class="calculator-bg" style="background-image: url('images/backgrounds/bank_building_premium_2026.svg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: absolute; top: 0; left: 0; right: 0; bottom: 0; filter: blur(2px); opacity: 0.3; z-index: 1;"></div>
+      <div class="calculator-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); z-index: 2;"></div>
       
-      <div class="container">
-        <h2>WE SAVE YOU MONEY</h2>
-        <p class="calculator-subtitle">Why pay more? We believe in fair pricing that benefits you, not us.</p>
+      <div class="container" style="position: relative; z-index: 3; max-width: 800px;">
+        <div class="calculator-header text-center">
+          <h2>See How Much More Your Family Receives</h2>
+          <p class="calculator-subtitle">Transparent pricing. Instant delivery. No hidden fees.</p>
+        </div>
 
-        <div class="calculator-container glassmorphism-card">
-          <div class="inline-calculator">
-            <input type="number" class="inline-input" placeholder="100" value="100" id="calcAmount">
-            <div class="inline-currency" data-currency="USD">🇺🇸 USD</div>
-            <div class="inline-arrow">→</div>
-            <div class="inline-currency" data-currency="EUR">🇪🇺 EUR</div>
-            <input type="number" class="inline-input" placeholder="0" value="92.50" readonly id="calcResult">
+        <!-- Comparison Toggle -->
+        <div class="comparison-toggle">
+          <div class="toggle-tabs">
+            <button class="toggle-tab active" data-option="our-price">Our Price</button>
+            <button class="toggle-tab" data-option="bank-price">Bank Price</button>
+            <button class="toggle-tab" data-option="western-union">Western Union</button>
           </div>
-          <div class="calculator-savings">
-            💰 Save up to 7.5% vs traditional banks
+        </div>
+
+        <!-- Calculator Container -->
+        <div class="calculator-container glassmorphism-card">
+          <!-- Top Row: Amount & Currency Selector -->
+          <div class="calculator-input-row">
+            <div class="amount-input-group">
+              <label for="remittanceAmount">You send:</label>
+              <input type="number" id="remittanceAmount" class="amount-input" value="100" min="1" step="1">
+            </div>
+            
+            <div class="currency-selector">
+              <div class="currency-dropdown" id="sendCurrency">
+                <div class="currency-display">
+                  <span class="currency-flag">🇺🇸</span>
+                  <span class="currency-code">USD</span>
+                  <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="currency-options">
+                  <div class="currency-option" data-currency="USD" data-flag="🇺🇸">🇺🇸 USD</div>
+                  <div class="currency-option" data-currency="EUR" data-flag="🇪🇺">🇪🇺 EUR</div>
+                  <div class="currency-option" data-currency="GBP" data-flag="🇬🇧">🇬🇧 GBP</div>
+                  <div class="currency-option" data-currency="GHS" data-flag="🇬🇭">🇬🇭 GHS</div>
+                  <div class="currency-option" data-currency="NGN" data-flag="🇳🇬">🇳🇬 NGN</div>
+                  <div class="currency-option" data-currency="INR" data-flag="🇮🇳">🇮🇳 INR</div>
+                </div>
+              </div>
+              
+              <div class="transfer-arrow">→</div>
+              
+              <div class="currency-dropdown" id="receiveCurrency">
+                <div class="currency-display">
+                  <span class="currency-flag">🇪🇺</span>
+                  <span class="currency-code">EUR</span>
+                  <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="currency-options">
+                  <div class="currency-option" data-currency="EUR" data-flag="🇪🇺">🇪🇺 EUR</div>
+                  <div class="currency-option" data-currency="USD" data-flag="🇺🇸">🇺🇸 USD</div>
+                  <div class="currency-option" data-currency="GBP" data-flag="🇬🇧">🇬🇧 GBP</div>
+                  <div class="currency-option" data-currency="GHS" data-flag="🇬🇭">🇬🇭 GHS</div>
+                  <div class="currency-option" data-currency="NGN" data-flag="🇳🇬">🇳🇬 NGN</div>
+                  <div class="currency-option" data-currency="INR" data-flag="🇮🇳">🇮🇳 INR</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Row: Result Box -->
+          <div class="result-box">
+            <div class="result-main">
+              <span class="result-label">They receive:</span>
+              <span class="result-amount" id="resultAmount">92.50</span>
+              <span class="result-currency" id="resultCurrency">EUR</span>
+            </div>
+            
+            <div class="result-breakdown">
+              <div class="breakdown-item">
+                <span class="breakdown-label">Transfer fee:</span>
+                <span class="breakdown-value fee-amount" id="feeAmount">$0</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">FX rate:</span>
+                <span class="breakdown-value fx-rate" id="fxRate">1 USD = 0.9250 EUR</span>
+              </div>
+              <div class="savings-highlight" id="savingsHighlight">
+                Save up to 7.5% vs traditional banks
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Payout Methods & Speed -->
+          <div class="payout-methods">
+            <div class="method-icon" title="Bank Deposit">
+              <span class="method-emoji">🏦</span>
+              <span class="method-label">Bank Deposit</span>
+            </div>
+            <div class="method-icon" title="Mobile Money">
+              <span class="method-emoji">📲</span>
+              <span class="method-label">Mobile Money</span>
+            </div>
+            <div class="method-icon" title="Cash Pickup">
+              <span class="method-emoji">💵</span>
+              <span class="method-label">Cash Pickup</span>
+            </div>
+            <div class="method-icon" title="Blockchain Wallet">
+              <span class="method-emoji">🔗</span>
+              <span class="method-label">Blockchain</span>
+            </div>
+          </div>
+
+          <div class="speed-badge">
+            <span class="speed-icon">⚡</span>
+            <span class="speed-text">Instant to Mobile Money</span>
+            <span class="speed-separator">|</span>
+            <span class="speed-icon">⏱</span>
+            <span class="speed-text">24h to Bank</span>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="calculator-cta">
+          <button class="cta-button" onclick="showDownloadOptions()">
+            <span class="cta-icon">💸</span>
+            <span class="cta-text">Start Your Transfer</span>
+          </button>
+          <p class="cta-subtext">Download the app to send now.</p>
+          
+          <!-- App Store Badges -->
+          <div class="app-badges">
+            <a href="#" class="app-badge" title="Download on App Store">
+              <svg width="120" height="40" viewBox="0 0 120 40">
+                <rect width="120" height="40" rx="8" fill="#000"/>
+                <text x="60" y="25" fill="#fff" text-anchor="middle" font-size="10" font-family="Arial">App Store</text>
+              </svg>
+            </a>
+            <a href="#" class="app-badge" title="Get it on Google Play">
+              <svg width="120" height="40" viewBox="0 0 120 40">
+                <rect width="120" height="40" rx="8" fill="#000"/>
+                <text x="60" y="25" fill="#fff" text-anchor="middle" font-size="10" font-family="Arial">Google Play</text>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

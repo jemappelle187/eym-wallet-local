@@ -2465,3 +2465,78 @@ body.drawer-open {
     display: none !important;
   }
 }
+
+/* ========================================
+   REMITTANCE CALCULATOR MOBILE ENHANCEMENTS
+   ======================================== */
+@media (max-width: 768px) {
+  .remittance-calculator {
+    padding: 1rem 0;
+  }
+  
+  .remittance-calculator .calculator-header h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  
+  .toggle-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .toggle-tab {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .calculator-container {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+  
+  .amount-input {
+    font-size: 1.3rem;
+    padding: 1rem;
+  }
+  
+  .currency-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .result-amount {
+    font-size: 2rem;
+  }
+  
+  .result-currency {
+    font-size: 1.3rem;
+  }
+  
+  .payout-methods {
+    gap: 1rem;
+  }
+  
+  .method-icon {
+    flex: 1;
+    min-width: 80px;
+  }
+  
+  .method-emoji {
+    font-size: 1.5rem;
+  }
+  
+  .method-label {
+    font-size: 0.7rem;
+  }
+  
+  .speed-badge {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
