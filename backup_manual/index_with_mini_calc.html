@@ -1660,7 +1660,101 @@
     setError(""); setLoading(true);
     getQuote({ from, to, amount, signal: aborter.signal })
       .then((q) => { els.receive.textContent = fmt(q.receiveAmount); els.rate.textContent = `1 ${from} = ${q.rate.toFixed(4)} ${to}`; els.fee.textContent = fmt(q.fee); els.eta.textContent = q.etaLabel ? `• ${q.etaLabel}` : ""; })
-      .catch((e) => { if (e?.name !== "AbortError") setError("Couldn't load rate. Try again."); })
+      .catch((e) => { if (e?.name !== "AbortError") setError("Couldn’t load rate. Try again."); })
+      .finally(() => setLoading(false));
+  }
+  buildList(els.fromList, from, setFrom);
+  buildList(els.toList, to, setTo);
+  els.fromBtn.addEventListener("click", () => toggleList(els.fromBtn, els.fromList));
+  els.toBtn.addEventListener("click", () => toggleList(els.toBtn, els.toList));
+  document.addEventListener("click", (e) => { if (!root.contains(e.target)) { document.querySelectorAll(".mini-select__list").forEach(u => (u.hidden = true)); } });
+  els.swap.addEventListener("click", () => { const prev = from; setFrom(to); setTo(prev); });
+  els.amount.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(quote, 400); });
+  els.cta.addEventListener("click", () => { const raw = (els.amount.value || "").replace(/,/g, ""); const amount = Number(raw); window.location.href = `/start-transfer?from=${from}&to=${to}&amount=${amount}`; });
+  quote();
+})();
+</script>
+
+</body>
+</html>
+
+<script>
+(function () {
+  const currencies = [
+    { code: "USD", symbol: "$" },
+    { code: "EUR", symbol: "€" },
+    { code: "GBP", symbol: "£" },
+    { code: "GHS" },
+    { code: "NGN" },
+    { code: "KES" },
+    { code: "INR" }
+  ];
+  const $ = (sel) => document.querySelector(sel);
+  const root = $("#mini-remit");
+  if (!root) return;
+  const els = {
+    amount: $("#mr-amount"),
+    fromBtn: $("#mr-from-btn"),
+    toBtn: $("#mr-to-btn"),
+    fromList: $("#mr-from-list"),
+    toList: $("#mr-to-list"),
+    swap: $("#mr-swap"),
+    receive: $("#mr-receive"),
+    toCode: $("#mr-to-code"),
+    rate: $("#mr-rate"),
+    fee: $("#mr-fee"),
+    feeCode: $("#mr-fee-code"),
+    eta: $("#mr-eta"),
+    loading: $("#mr-loading"),
+    error: $("#mr-error"),
+    cta: $("#mr-cta"),
+    fromLabel: $("#mr-from-label"),
+    toLabel: $("#mr-to-label"),
+  };
+  let from = "USD"; let to = "EUR"; let aborter = null; let debounceTimer = null;
+  const fmt = (n, opts={ maximumFractionDigits: 2 }) =>
+    new Intl.NumberFormat(undefined, opts).format(Number(n || 0));
+  function buildList(ul, current, onPick) {
+    ul.innerHTML = "";
+    currencies.forEach((c) => {
+      const li = document.createElement("li");
+      li.role = "option";
+      li.dataset.code = c.code;
+      li.setAttribute("aria-selected", c.code === current ? "true" : "false");
+      li.textContent = c.symbol ? `${c.code} · ${c.symbol}` : c.code;
+      li.addEventListener("click", () => { onPick(c.code); ul.hidden = true; });
+      ul.appendChild(li);
+    });
+  }
+  function toggleList(btn, ul) {
+    const isOpen = !ul.hidden;
+    document.querySelectorAll(".mini-select__list").forEach(u => (u.hidden = true));
+    ul.hidden = isOpen;
+    btn.setAttribute("aria-expanded", (!isOpen).toString());
+    if (!isOpen) ul.focus();
+  }
+  function setFrom(code) { from = code; els.fromLabel.textContent = code; els.feeCode.textContent = code; quote(); }
+  function setTo(code) { to = code; els.toLabel.textContent = code; els.toCode.textContent = code; quote(); }
+  async function getQuote({ from, to, amount, signal }) {
+    await new Promise(r => setTimeout(r, 280));
+    const base = 1 + (from.charCodeAt(0) % 5) / 100;
+    const rate = +(base * 0.9 + (to.charCodeAt(1) % 7) / 100).toFixed(4);
+    const fee = +(Math.max(0.99, Math.min(9.99, amount * 0.01))).toFixed(2);
+    return { rate, fee, receiveAmount: +(((amount - fee) * rate).toFixed(2)), etaLabel: amount > 500 ? "~24h" : "Instant" };
+  }
+  function setLoading(v) { els.loading.hidden = !v; }
+  function setError(msg) { els.error.hidden = !msg; if (msg) els.error.textContent = msg; }
+  function quote() {
+    const raw = (els.amount.value || "").replace(/,/g, "");
+    const amount = Number(raw);
+    const valid = Number.isFinite(amount) && amount > 0;
+    els.cta.disabled = !valid;
+    if (!valid) { els.receive.textContent = "—"; els.rate.textContent = "Live rate"; els.fee.textContent = "—"; els.eta.textContent = ""; return; }
+    if (aborter) aborter.abort(); aborter = new AbortController();
+    setError(""); setLoading(true);
+    getQuote({ from, to, amount, signal: aborter.signal })
+      .then((q) => { els.receive.textContent = fmt(q.receiveAmount); els.rate.textContent = `1 ${from} = ${q.rate.toFixed(4)} ${to}`; els.fee.textContent = fmt(q.fee); els.eta.textContent = q.etaLabel ? `• ${q.etaLabel}` : ""; })
+      .catch((e) => { if (e?.name !== "AbortError") setError("Couldn’t load rate. Try again."); })
       .finally(() => setLoading(false));
   }
   buildList(els.fromList, from, setFrom);
