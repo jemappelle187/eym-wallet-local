@@ -130,10 +130,10 @@ main > section:last-of-type { margin-bottom: 0 !important; }
   transform: translateX(-50%);
 }
 
-/* Clean variant: no border, transparent background */
+/* Clean variant: no border, white background */
 .press-bar.press-clean {
   border: 0;
-  background: transparent;
+  background: #ffffff;
   margin-top: 8px;
   margin-bottom: 8px;
   padding: 4px 0;
