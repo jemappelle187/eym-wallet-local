@@ -11480,25 +11480,7 @@ html {
   box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
 }
 
-/* Background icons (muted) */
-.toggle-bg-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  z-index: 0;
-  pointer-events: none;
-}
 
-.toggle-bg-icon {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #64748b;
-}
 
 /* Sliding pill */
 .toggle-pill {
@@ -11533,18 +11515,7 @@ html {
   border-radius: 18px;
 }
 
-.toggle-pill-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  color: white;
-}
+
 
 /* Clickable areas */
 .toggle-btn {
