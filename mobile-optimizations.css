@@ -620,6 +620,27 @@ body.drawer-open {
   }
 }
 
+/* Fix "We Are Here For" section background */
+.we-are-here-for {
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #ffffff 10%, 
+    #e6f3ff 50%, 
+    #ffffff 90%, 
+    #ffffff 100%
+  ) !important;
+}
+
+.we-are-here-for.section-bg-light {
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #ffffff 10%, 
+    #e6f3ff 50%, 
+    #ffffff 90%, 
+    #ffffff 100%
+  ) !important;
+}
+
 .hero-title {
   font-size: 2.5rem !important;
   line-height: 1.2 !important;
