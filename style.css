@@ -11591,7 +11591,7 @@ html {
 /* Calculator Row */
 .calculator-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-bottom: 12px;
   width: 100%;
@@ -11607,8 +11607,10 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 140px;
+  height: 60px;
 }
 
 /* Calculator Label */
@@ -11617,8 +11619,10 @@ html {
   font-size: 11px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 3px;
+  margin-bottom: 6px;
   text-align: center;
+  height: 14px;
+  line-height: 14px;
 }
 
 /* Currency Selector Row */
