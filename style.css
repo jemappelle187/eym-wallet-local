@@ -11593,13 +11593,13 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   width: 100%;
   gap: 10px;
 }
 
-.calculator-row:first-child {
-  margin-bottom: 8px;
+.calculator-row:last-child {
+  margin-bottom: 0;
 }
 
 .calculator-input-group {
