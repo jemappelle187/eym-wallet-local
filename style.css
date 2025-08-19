@@ -11805,6 +11805,21 @@ html {
   box-shadow: none !important;
 }
 
+/* Override global focus styles for calculator input fields */
+.calculator-container input:focus,
+.calculator-container input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.calculator-input:focus,
+.calculator-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 /* Calculator Input */
 .calculator-input {
   font-family: 'Montserrat', sans-serif;
