@@ -738,7 +738,15 @@
                 </div>
                 <div class="calculator-input-group">
                   <div class="calculator-label">Amount</div>
-                  <input type="text" class="calculator-input" placeholder="$ 0.00" value="100" />
+                  <input type="number" 
+                         class="calculator-input" 
+                         placeholder="0.00" 
+                         value="100" 
+                         step="0.01" 
+                         min="0" 
+                         id="amount1"
+                         oninput="validateAmount(this)" 
+                         onchange="convertCurrency('calculator1')" />
                 </div>
               </div>
 
@@ -765,7 +773,7 @@
                 <div class="calculator-input-group">
                   <div class="calculator-label">Result</div>
                   <div class="calculation-item result-item">
-                    <div class="calculator-value">€92.00</div>
+                    <div class="calculator-value" id="result1">€92.00</div>
                   </div>
                 </div>
               </div>
@@ -854,7 +862,15 @@
                 </div>
                 <div class="calculator-input-group">
                   <div class="calculator-label">Amount</div>
-                  <input type="text" class="calculator-input" placeholder="$ 0.00" value="100" />
+                  <input type="number" 
+                         class="calculator-input" 
+                         placeholder="0.00" 
+                         value="100" 
+                         step="0.01" 
+                         min="0" 
+                         id="amount2"
+                         oninput="validateAmount(this)" 
+                         onchange="convertCurrency('calculator2')" />
                 </div>
               </div>
 
@@ -881,7 +897,7 @@
                 <div class="calculator-input-group">
                   <div class="calculator-label">Result</div>
                   <div class="calculation-item result-item">
-                    <div class="calculator-value">€92.00</div>
+                    <div class="calculator-value" id="result2">€92.00</div>
                   </div>
                 </div>
               </div>
@@ -1931,6 +1947,12 @@ function selectCurrency(selectorId, optionElement) {
     option.classList.remove('selected');
   });
   optionElement.classList.add('selected');
+  
+  // Trigger conversion if this is a currency selector
+  if (selectorId.startsWith('from') || selectorId.startsWith('to')) {
+    const calculatorId = selectorId.endsWith('1') ? 'calculator1' : 'calculator2';
+    convertCurrency(calculatorId);
+  }
 }
 
 // Close dropdowns when clicking outside
@@ -1941,6 +1963,70 @@ document.addEventListener('click', function(event) {
       dropdown.style.display = 'none';
     });
   }
+});
+
+// Amount validation function
+function validateAmount(input) {
+  // Remove any non-numeric characters except decimal point
+  let value = input.value.replace(/[^0-9.]/g, '');
+  
+  // Ensure only one decimal point
+  const parts = value.split('.');
+  if (parts.length > 2) {
+    value = parts[0] + '.' + parts.slice(1).join('');
+  }
+  
+  // Limit to 2 decimal places
+  if (parts.length === 2 && parts[1].length > 2) {
+    value = parts[0] + '.' + parts[1].substring(0, 2);
+  }
+  
+  // Ensure value is not negative
+  if (parseFloat(value) < 0) {
+    value = '0';
+  }
+  
+  input.value = value;
+}
+
+// Currency conversion function with real API
+async function convertCurrency(calculatorId) {
+  const fromCurrency = document.getElementById(`${calculatorId.replace('calculator', 'from')}-currency`).textContent;
+  const toCurrency = document.getElementById(`${calculatorId.replace('calculator', 'to')}-currency`).textContent;
+  const amount = parseFloat(document.getElementById(`amount${calculatorId.slice(-1)}`).value) || 0;
+  const resultElement = document.getElementById(`result${calculatorId.slice(-1)}`);
+  
+  if (amount <= 0) {
+    resultElement.textContent = '€0.00';
+    return;
+  }
+  
+  try {
+    // Use ExchangeRate-API (free tier, no API key required)
+    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+    const data = await response.json();
+    
+    if (data.rates && data.rates[toCurrency]) {
+      const rate = data.rates[toCurrency];
+      const convertedAmount = (amount * rate).toFixed(2);
+      const symbol = document.getElementById(`${calculatorId.replace('calculator', 'to')}-symbol`).textContent;
+      resultElement.textContent = `${symbol}${convertedAmount}`;
+    } else {
+      resultElement.textContent = 'Error';
+    }
+  } catch (error) {
+    console.error('Conversion error:', error);
+    resultElement.textContent = 'Error';
+  }
+}
+
+// Initialize conversions on page load
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial conversions
+  setTimeout(() => {
+    convertCurrency('calculator1');
+    convertCurrency('calculator2');
+  }, 1000);
 });
 </script>
 
