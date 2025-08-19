@@ -3979,7 +3979,6 @@ body {
   justify-content: center;
   gap: 8px;
 }
-
 .method-features li::before {
   content: "✓";
   color: #22c55e;
@@ -4774,7 +4773,6 @@ body {
 .hero.section-bg-light::before {
   display: none;
 }
-
 .section-bg-light::before {
   content: '';
   position: absolute;
@@ -5571,7 +5569,6 @@ input:focus, select:focus, textarea:focus{
   max-width: 800px;
   margin: 0 auto;
 }
-
 .urgency-badge {
   display: inline-flex;
   align-items: center;
@@ -6362,6 +6359,13 @@ html {
     width: 240px !important;
     height: 480px !important;
   }
+}
+
+/* Ensure calculator section overlays previous hero video and stays solid */
+.remittance-calculator {
+  background: #ffffff !important;
+  position: relative;
+  z-index: 5;
 }
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
