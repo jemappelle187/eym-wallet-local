@@ -3173,38 +3173,53 @@ document.addEventListener('DOMContentLoaded', function() {
       resultAmount.style.opacity = '0.6';
     }
 
+    const accessKey = (window.FX_ACCESS_KEY || '').trim();
+
+    // Helper to normalize various API responses to a common shape
+    const normalize = (rate, amountConverted) => ({
+      success: true,
+      query: { from, to, amount: parseFloat(amount) },
+      info: { rate: parseFloat(rate) },
+      result: parseFloat(amountConverted)
+    });
+
     try {
-      const response = await fetch(
-        `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`
-      );
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // 1) Try ExchangeRate.host (optionally with access_key)
+      const baseUrl = 'https://api.exchangerate.host/convert';
+      const url = new URL(baseUrl);
+      url.searchParams.set('from', from);
+      url.searchParams.set('to', to);
+      url.searchParams.set('amount', String(amount));
+      if (accessKey) url.searchParams.set('access_key', accessKey);
+
+      let response = await fetch(url.toString());
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      let data = await response.json();
+
+      if (data && data.success) {
+        // Cache and return
+        rateCache.set(cacheKey, { data, timestamp: now });
+        return data;
       }
-      
-      const data = await response.json();
-      
-      if (!data.success) {
-        throw new Error('API returned unsuccessful response');
-      }
-      
-      // Cache the result
-      rateCache.set(cacheKey, {
-        data: data,
-        timestamp: now
-      });
-      
-      return data;
+
+      // 2) Fallback to Frankfurter (free, no key) for most fiat pairs
+      // Docs: https://www.frankfurter.app/docs/
+      // Frankfurter converts via latest rates; to get converted amount, we fetch rate then apply amount.
+      const frankUrl = `https://api.frankfurter.app/latest?from=${from}&to=${to}`;
+      response = await fetch(frankUrl);
+      if (!response.ok) throw new Error(`Frankfurter error status: ${response.status}`);
+      const frank = await response.json();
+      const rate = frank && frank.rates && frank.rates[to];
+      if (!rate) throw new Error('Frankfurter: rate not available');
+      const converted = parseFloat(amount) * parseFloat(rate);
+      const normalized = normalize(rate, converted);
+      rateCache.set(cacheKey, { data: normalized, timestamp: now });
+      return normalized;
+
     } catch (error) {
-      console.error('Error fetching exchange rate:', error);
-      
-      // Return fallback data
-      return {
-        success: true,
-        query: { from: from, to: to, amount: parseFloat(amount) },
-        info: { rate: 1.0 },
-        result: parseFloat(amount)
-      };
+      console.error('Error fetching exchange rate (with fallback):', error);
+      // Final fallback: placeholder
+      return normalize(1.0, parseFloat(amount));
     }
   }
 
