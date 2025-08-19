@@ -11593,9 +11593,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
-  gap: 12px;
+  gap: 10px;
 }
 
 .calculator-input-group {
@@ -11608,10 +11608,10 @@ html {
 /* Calculator Label */
 .calculator-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   text-align: center;
 }
 
@@ -11622,9 +11622,9 @@ html {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  padding: 12px;
-  min-width: 120px;
-  height: 48px;
+  padding: 8px 12px;
+  min-width: 100px;
+  height: 40px;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -11636,28 +11636,30 @@ html {
 }
 
 .currency-selector-flag {
-  font-size: 18px;
-  margin-right: 8px;
+  font-size: 16px;
+  margin-right: 6px;
 }
 
 .currency-selector-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #1e293b;
 }
 
 .currency-selector-symbol {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: #64748b;
   font-weight: 400;
-  margin-left: 4px;
+  margin-left: 3px;
 }
 
 .currency-selector-chevron {
-  margin-left: 6px;
+  margin-left: 4px;
   color: #64748b;
+  width: 16px;
+  height: 16px;
 }
 
 /* Calculator Input */
@@ -11669,9 +11671,9 @@ html {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px;
+  padding: 8px 12px;
   min-width: 70px;
-  height: 48px;
+  height: 40px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   transition: all 0.2s ease;
@@ -11693,7 +11695,7 @@ html {
   flex-direction: column;
   align-items: center;
   flex: 1;
-  padding: 8px 12px;
+  padding: 6px 10px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -11701,12 +11703,12 @@ html {
 }
 
 .calculation-divider {
-  width: 16px;
+  width: 12px;
 }
 
 .calculator-value {
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: #1e293b;
   text-align: center;
