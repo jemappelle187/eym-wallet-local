@@ -2177,9 +2177,32 @@ document.addEventListener('DOMContentLoaded', function() {
         calculatorView.classList.remove('active');
         ratesView.classList.add('active');
         togglePill.classList.remove('active');
+        
+        // Apply scrolling animation to long provider names
+        setTimeout(() => {
+          applyTextScrolling();
+        }, 100);
       }
     });
   });
+  
+  // Function to apply scrolling animation to long text
+  function applyTextScrolling() {
+    const providerElements = document.querySelectorAll('.competitor-provider');
+    providerElements.forEach(element => {
+      // Check if text is overflowing
+      if (element.scrollWidth > element.clientWidth) {
+        element.classList.add('scroll-text');
+      } else {
+        element.classList.remove('scroll-text');
+      }
+    });
+  }
+  
+  // Apply scrolling on page load for rates view
+  setTimeout(() => {
+    applyTextScrolling();
+  }, 2000);
 });
 </script>
 

@@ -11998,6 +11998,36 @@ html {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* Provider text scrolling animation */
+.competitor-provider {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.competitor-provider.scroll-text {
+  animation: scrollText 8s linear infinite;
+}
+
+.competitor-provider.scroll-text:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .column-row:last-child {
   border-bottom: none;
 }
