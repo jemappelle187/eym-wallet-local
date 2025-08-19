@@ -3979,6 +3979,7 @@ body {
   justify-content: center;
   gap: 8px;
 }
+
 .method-features li::before {
   content: "✓";
   color: #22c55e;
@@ -4773,6 +4774,7 @@ body {
 .hero.section-bg-light::before {
   display: none;
 }
+
 .section-bg-light::before {
   content: '';
   position: absolute;
@@ -5569,6 +5571,7 @@ input:focus, select:focus, textarea:focus{
   max-width: 800px;
   margin: 0 auto;
 }
+
 .urgency-badge {
   display: inline-flex;
   align-items: center;
@@ -6360,18 +6363,6 @@ html {
     height: 480px !important;
   }
 }
-
-/* Micro-polish for compact calculator */
-.compact-toggle .tab-icon { font-size: 12px; margin-right: 6px; }
-.calc-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent); margin: 10px 0; }
-
-/* Pill-like currency chip effect */
-.calculator-card.compact .currency-dropdown { border-radius: 9999px; padding: 8px 12px; }
-.calculator-card.compact .currency-display { font-weight: 700; }
-
-/* Helper copy */
-.calculator-card.compact .helper-copy { color: #94a3b8; font-size: 11px; text-align: center; margin-top: 6px; }
-.calculator-card.compact .helper-copy .helper-link { color: #93c5fd; text-decoration: underline; }
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   /* Remove hover effects on touch devices */
