@@ -11794,6 +11794,9 @@ html {
 .competitor-comparison {
   margin-top: 12px;
   width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .competitor-header h3 {
@@ -11816,6 +11819,8 @@ html {
   align-items: center;
   gap: 6px;
   height: 32px;
+  width: 100%;
+  max-width: 280px;
 }
 
 .competitor-item.our-service {
@@ -11826,8 +11831,9 @@ html {
 .competitor-header-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
+  min-width: 0;
 }
 
 .competitor-logo {
@@ -11840,6 +11846,8 @@ html {
   flex-direction: column;
   justify-content: center;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .competitor-name {
@@ -11849,6 +11857,9 @@ html {
   color: #1e293b;
   margin-bottom: 0;
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .competitor-badge {
