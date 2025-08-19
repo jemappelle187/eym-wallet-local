@@ -11520,7 +11520,7 @@ html {
 }
 
 .toggle-pill:not(.active) {
-  left: calc(312px - 148px - 3px);
+  left: 164px;
 }
 
 .toggle-pill-gradient {
@@ -12090,7 +12090,7 @@ html {
   }
   
   .toggle-pill:not(.active) {
-    left: calc(280px - 132px - 2px);
+    left: 148px;
   }
   
   .toggle-bg-icon svg,
@@ -12294,7 +12294,7 @@ html {
   }
   
   .toggle-pill:not(.active) {
-    left: calc(260px - 120px - 4px);
+    left: 140px;
   }
   
   .toggle-text {
