@@ -11825,6 +11825,13 @@ html {
   color: #10b981;
 }
 
+.rate-status-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+}
+
 .rate-status-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;

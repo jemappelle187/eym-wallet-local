@@ -782,20 +782,20 @@
               <div class="rate-status-container">
                 <div class="rate-status-row">
                   <div class="rate-status-left">
-                    <div class="rate-status-success">
+                    <div class="rate-status-success" id="rate-status">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>
-                      <span class="rate-status-text">Live rates</span>
+                      <span class="rate-status-text" id="rate-status-text">Live rates</span>
                     </div>
                   </div>
-                  <button class="refresh-button">
+                  <button class="refresh-button" onclick="refreshRates()" id="refresh-button">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
                     </svg>
                   </button>
                 </div>
-                <div class="last-updated-text">Updated 2 minutes ago</div>
+                <div class="last-updated-text" id="last-updated-text">Updated just now</div>
               </div>
             </div>
           </div>
@@ -1989,6 +1989,11 @@ function validateAmount(input) {
   input.value = value;
 }
 
+// Global variables for rate tracking
+let lastUpdateTime = null;
+let isRatesLive = true;
+let rateUpdateInterval = null;
+
 // Currency conversion function with real API
 async function convertCurrency(calculatorId) {
   const fromCurrency = document.getElementById(`${calculatorId.replace('calculator', 'from')}-currency`).textContent;
@@ -2011,17 +2016,102 @@ async function convertCurrency(calculatorId) {
       const convertedAmount = (amount * rate).toFixed(2);
       const symbol = document.getElementById(`${calculatorId.replace('calculator', 'to')}-symbol`).textContent;
       resultElement.textContent = `${symbol}${convertedAmount}`;
+      
+      // Update rate status and timestamp
+      updateRateStatus(true, new Date());
     } else {
       resultElement.textContent = 'Error';
+      updateRateStatus(false, new Date());
     }
   } catch (error) {
     console.error('Conversion error:', error);
     resultElement.textContent = 'Error';
+    updateRateStatus(false, new Date());
   }
+}
+
+// Update rate status display
+function updateRateStatus(success, timestamp) {
+  const statusElement = document.getElementById('rate-status');
+  const statusTextElement = document.getElementById('rate-status-text');
+  const lastUpdatedElement = document.getElementById('last-updated-text');
+  
+  if (success) {
+    statusElement.className = 'rate-status-success';
+    statusTextElement.textContent = 'Live rates';
+    isRatesLive = true;
+  } else {
+    statusElement.className = 'rate-status-error';
+    statusTextElement.textContent = 'Rate error';
+    isRatesLive = false;
+  }
+  
+  lastUpdateTime = timestamp;
+  updateLastUpdatedText();
+}
+
+// Update the "last updated" text
+function updateLastUpdatedText() {
+  const lastUpdatedElement = document.getElementById('last-updated-text');
+  
+  if (!lastUpdateTime) {
+    lastUpdatedElement.textContent = 'Updated just now';
+    return;
+  }
+  
+  const now = new Date();
+  const diffMs = now - lastUpdateTime;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffSecs = Math.floor((diffMs % 60000) / 1000);
+  
+  if (diffMins === 0) {
+    if (diffSecs < 30) {
+      lastUpdatedElement.textContent = 'Updated just now';
+    } else {
+      lastUpdatedElement.textContent = `Updated ${diffSecs} seconds ago`;
+    }
+  } else if (diffMins === 1) {
+    lastUpdatedElement.textContent = 'Updated 1 minute ago';
+  } else {
+    lastUpdatedElement.textContent = `Updated ${diffMins} minutes ago`;
+  }
+}
+
+// Refresh rates manually
+async function refreshRates() {
+  const refreshButton = document.getElementById('refresh-button');
+  const svg = refreshButton.querySelector('svg');
+  
+  // Add spinning animation
+  svg.style.transform = 'rotate(360deg)';
+  svg.style.transition = 'transform 0.5s ease';
+  
+  // Convert both calculators to refresh rates
+  await convertCurrency('calculator1');
+  await convertCurrency('calculator2');
+  
+  // Stop spinning animation
+  setTimeout(() => {
+    svg.style.transform = 'rotate(0deg)';
+  }, 500);
+}
+
+// Update the "last updated" text every minute
+function startUpdateTimer() {
+  if (rateUpdateInterval) {
+    clearInterval(rateUpdateInterval);
+  }
+  
+  rateUpdateInterval = setInterval(() => {
+    updateLastUpdatedText();
+  }, 60000); // Update every minute
 }
 
 // Initialize conversions on page load
 document.addEventListener('DOMContentLoaded', function() {
+  // Start the update timer
+  startUpdateTimer();
+  
   // Initial conversions
   setTimeout(() => {
     convertCurrency('calculator1');
