@@ -11480,7 +11480,25 @@ html {
   box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
 }
 
+/* Background icons (muted) */
+.toggle-bg-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 0;
+  pointer-events: none;
+}
 
+.toggle-bg-icon {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #64748b;
+}
 
 /* Sliding pill */
 .toggle-pill {
@@ -11515,7 +11533,18 @@ html {
   border-radius: 18px;
 }
 
-
+.toggle-pill-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  color: white;
+}
 
 /* Clickable areas */
 .toggle-btn {
@@ -11531,40 +11560,12 @@ html {
   transition: all 0.2s ease;
 }
 
-.toggle-text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
-  pointer-events: none;
-}
-
-.toggle-btn:hover .toggle-text {
-  color: rgba(255, 255, 255, 0.9);
-}
-
 .toggle-btn:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
 .toggle-btn:active {
   background: rgba(255, 255, 255, 0.1);
-}
-
-.toggle-btn:focus {
-  outline: none;
-}
-
-.toggle-btn:focus-visible {
-  outline: none !important;
-}
-
-.toggle-btn:focus {
-  outline: none !important;
-  box-shadow: none !important;
 }
 
 /* ==== Calculator Views ==== */
@@ -11724,60 +11725,6 @@ html {
   overflow: visible;
 }
 
-/* Currency Swap Button */
-.currency-swap-container {
-  display: flex;
-  justify-content: center;
-  margin: 8px 0;
-}
-
-.currency-swap-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.currency-swap-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: scale(1.05);
-  color: rgba(255, 255, 255, 1);
-}
-
-.currency-swap-button:active {
-  transform: scale(0.95);
-}
-
-.currency-swap-button:focus {
-  outline: none;
-}
-
-.currency-swap-button:focus-visible {
-  outline: none !important;
-}
-
-.currency-swap-button:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.currency-swap-button svg {
-  transition: transform 0.3s ease;
-}
-
-.currency-swap-button:hover svg {
-  transform: rotate(180deg);
-}
-
 .mobile-calculator {
   position: relative;
   overflow: visible;
@@ -11786,38 +11733,6 @@ html {
 .calculator-container {
   position: relative;
   overflow: visible;
-}
-
-/* Override global focus styles for calculator buttons */
-.calculator-container button:focus,
-.calculator-container button:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.calculator-container .toggle-btn:focus,
-.calculator-container .toggle-btn:focus-visible,
-.calculator-container .refresh-button:focus,
-.calculator-container .refresh-button:focus-visible,
-.calculator-container .currency-swap-button:focus,
-.calculator-container .currency-swap-button:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Override global focus styles for calculator input fields */
-.calculator-container input:focus,
-.calculator-container input:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-}
-
-.calculator-input:focus,
-.calculator-input:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Calculator Input */
@@ -11889,18 +11804,23 @@ html {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .rate-status-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 4px;
+  gap: 12px;
 }
 
 .rate-status-left {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .rate-status-success {
@@ -11938,24 +11858,11 @@ html {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.refresh-button:focus {
-  outline: none;
-}
-
-.refresh-button:focus-visible {
-  outline: none !important;
-}
-
-.refresh-button:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
 .last-updated-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
-  text-align: left;
+  text-align: center;
 }
 
 /* Competitor Comparison */
