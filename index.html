@@ -690,34 +690,29 @@
         <div class="calculator-container glassmorphism-card">
           <!-- Top Row: Amount & Currency Selector -->
           <div class="calculator-input-row">
-            <div class="amount-input-group">
-              <label for="remittanceAmount">You send:</label>
-              <input type="number" id="remittanceAmount" class="amount-input" value="100" min="1" step="1">
-              <button id="calculateBtn" class="calculate-btn">
-                <span class="calculate-text">Calculate</span>
-                <span class="calculate-loading" style="display: none;">Calculating...</span>
-              </button>
+            <div class="field-group">
+              <label class="field-label" for="remittanceAmount">You send</label>
+              <div class="field-row">
+                <div class="currency-dropdown" id="sendCurrency">
+                  <div class="currency-display">
+                    <span class="currency-flag">🇺🇸</span>
+                    <span class="currency-code">USD</span>
+                    <span class="dropdown-arrow">▼</span>
+                  </div>
+                  <div class="currency-options">
+                    <div class="currency-option" data-currency="USD" data-flag="🇺🇸">🇺🇸 USD</div>
+                    <div class="currency-option" data-currency="EUR" data-flag="🇪🇺">🇪🇺 EUR</div>
+                    <div class="currency-option" data-currency="GBP" data-flag="🇬🇧">🇬🇧 GBP</div>
+                    <div class="currency-option" data-currency="GHS" data-flag="🇬🇭">🇬🇭 GHS</div>
+                    <div class="currency-option" data-currency="NGN" data-flag="🇳🇬">🇳🇬 NGN</div>
+                    <div class="currency-option" data-currency="INR" data-flag="🇮🇳">🇮🇳 INR</div>
+                  </div>
+                </div>
+                <input type="number" id="remittanceAmount" class="amount-input" value="100" min="1" step="1">
+              </div>
             </div>
             
             <div class="currency-selector">
-              <div class="currency-dropdown" id="sendCurrency">
-                <div class="currency-display">
-                  <span class="currency-flag">🇺🇸</span>
-                  <span class="currency-code">USD</span>
-                  <span class="dropdown-arrow">▼</span>
-                </div>
-                <div class="currency-options">
-                  <div class="currency-option" data-currency="USD" data-flag="🇺🇸">🇺🇸 USD</div>
-                  <div class="currency-option" data-currency="EUR" data-flag="🇪🇺">🇪🇺 EUR</div>
-                  <div class="currency-option" data-currency="GBP" data-flag="🇬🇧">🇬🇧 GBP</div>
-                  <div class="currency-option" data-currency="GHS" data-flag="🇬🇭">🇬🇭 GHS</div>
-                  <div class="currency-option" data-currency="NGN" data-flag="🇳🇬">🇳🇬 NGN</div>
-                  <div class="currency-option" data-currency="INR" data-flag="🇮🇳">🇮🇳 INR</div>
-                </div>
-              </div>
-              
-              <div class="transfer-arrow">→</div>
-              
               <div class="currency-dropdown" id="receiveCurrency">
                 <div class="currency-display">
                   <span class="currency-flag">🇪🇺</span>
