@@ -11598,11 +11598,17 @@ html {
   gap: 10px;
 }
 
+.calculator-row:first-child {
+  margin-bottom: 8px;
+}
+
 .calculator-input-group {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 70px;
 }
 
 /* Calculator Label */
@@ -11623,7 +11629,7 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 8px 12px;
-  min-width: 70px;
+  width: 100%;
   height: 40px;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   cursor: pointer;
@@ -11672,7 +11678,7 @@ html {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 8px 12px;
-  min-width: 70px;
+  width: 100%;
   height: 40px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
@@ -11702,7 +11708,8 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   height: 40px;
-  min-width: 70px;
+  width: 100%;
+  max-width: 70px;
 }
 
 .calculation-divider {
