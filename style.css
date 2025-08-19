@@ -134,7 +134,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 .press-bar.press-clean {
   border: 0 !important;
   background: #ffffff !important;
-  margin-top: 8px;
+  margin-top: 0;
   margin-bottom: 8px;
   padding: 4px 0;
 }
@@ -879,7 +879,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding-top: 60px;
   background: transparent; /* Transparent to show video background */
 }
