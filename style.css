@@ -178,6 +178,12 @@ main > section:last-of-type { margin-bottom: 0 !important; }
     margin-top: 8px;
     margin-bottom: 8px;
     padding: 6px 0;
+    /* Fix mobile positioning to prevent overlap with hero */
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    left: 0;
+    transform: none;
   }
   .press-track { gap: 20px; }
   .press-logo { height: 20px; }
