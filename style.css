@@ -646,7 +646,6 @@ body {
 .navbar {
   transition: transform var(--transition-normal);
 }
-
 .navbar.nav-hidden {
   transform: translateY(-100%);
 }
@@ -1293,7 +1292,6 @@ body {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   animation: iconBounce 2s ease-in-out infinite;
 }
-
 .feature-item:nth-child(1) .feature-icon { animation-delay: 0s; }
 .feature-item:nth-child(2) .feature-icon { animation-delay: 0.5s; }
 .feature-item:nth-child(3) .feature-icon { animation-delay: 1s; }
@@ -1945,7 +1943,6 @@ body {
   color: var(--text-primary);
   margin-bottom: var(--spacing-sm);
 }
-
 .benefit-item p {
   color: var(--text-secondary);
   font-size: var(--font-size-base);
@@ -2591,7 +2588,6 @@ body {
   flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
-
 .footer-legal {
   display: flex;
   align-items: center;
@@ -3242,7 +3238,6 @@ body {
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
 .results-header h3 {
   margin: 0;
   color: var(--color-text-primary);
@@ -3888,7 +3883,6 @@ body {
   font-size: 18px;
   opacity: 0.9;
 }
-
 .receive-description {
   text-align: center;
   margin-top: 16px;
@@ -4537,7 +4531,6 @@ body {
 .receive-options {
   margin-bottom: var(--spacing-lg);
 }
-
 .receive-option {
   display: flex;
   align-items: center;
@@ -5185,7 +5178,6 @@ input:focus, select:focus, textarea:focus{
   color: #334155;
   margin-bottom: 8px;
 }
-
 .cookie-checkbox input[type="checkbox"] {
   display: none;
 }
@@ -5832,7 +5824,6 @@ input:focus, select:focus, textarea:focus{
   margin-bottom: var(--spacing-lg);
   text-align: center;
 }
-
 /* ===== SCROLL ANIMATIONS ===== */
 
 /* Base animation classes */
@@ -6414,7 +6405,6 @@ html {
     display: none !important;
   }
 }
-
 /* Mobile performance optimizations */
 @media (max-width: 768px) {
   /* Reduce motion for better mobile performance */
@@ -7061,7 +7051,6 @@ html {
 .dark-mode .testimonial-role {
   color: var(--dark-text-muted) !important;
 }
-
 /* Dark mode for newsletter form */
 .dark-mode .newsletter-form input[type="email"] {
   background: var(--dark-bg-tertiary) !important;
@@ -7711,7 +7700,6 @@ html {
   font-size: 16px;
   margin-bottom: 4px;
 }
-
 .download-option-subtitle {
   font-size: 14px;
   color: var(--text-secondary);
@@ -8359,7 +8347,6 @@ html {
     height: 10px;
   }
 }
-
 /* Animation Classes */
 .slider-slide.fade-in {
   animation: slideFadeIn 0.6s ease-out;
@@ -9010,7 +8997,6 @@ html {
   transition: all 0.3s ease;
   margin-top: 4px;
 }
-
 .currency-dropdown:hover .currency-options {
   opacity: 1;
   visibility: visible;
@@ -9568,7 +9554,6 @@ html {
     font-size: 1.1rem;
   }
 }
-
 /* Mobile Optimizations - Enhanced Mobile Experience */
 
 /* Improved Mobile Navbar */
@@ -10188,7 +10173,6 @@ html {
     height: 360px;
   }
 }
-
 /* Mobile Overflow Fixes - Prevent Horizontal Scrolling */
 @media (max-width: 768px) {
   html, body {
@@ -10819,7 +10803,6 @@ html {
 .flow-step.premium-card:hover .app-mockup {
   transform: scale(1.05);
 }
-
 /* ===== SCROLL TO TOP BUTTON ===== */
 .scroll-to-top {
   position: fixed;
