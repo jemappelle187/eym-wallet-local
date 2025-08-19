@@ -10,5 +10,7 @@
 			"path": "../eym-wallet-website-feat-sendnreceive-mobile-mvp"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "eym-wallet-website"
+	}
 }
