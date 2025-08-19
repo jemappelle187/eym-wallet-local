@@ -750,6 +750,15 @@
                 </div>
               </div>
 
+              <!-- Currency Swap Button -->
+              <div class="currency-swap-container">
+                <button class="currency-swap-button" onclick="swapCurrencies('calculator1')" title="Swap currencies">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/>
+                  </svg>
+                </button>
+              </div>
+
               <!-- To Currency and Result -->
               <div class="calculator-row">
                 <div class="calculator-input-group">
@@ -872,6 +881,15 @@
                          oninput="validateAmount(this)" 
                          onchange="convertCurrency('calculator2')" />
                 </div>
+              </div>
+
+              <!-- Currency Swap Button -->
+              <div class="currency-swap-container">
+                <button class="currency-swap-button" onclick="swapCurrencies('calculator2')" title="Swap currencies">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/>
+                  </svg>
+                </button>
               </div>
 
               <!-- To Currency and Result -->
@@ -2105,6 +2123,59 @@ function startUpdateTimer() {
   rateUpdateInterval = setInterval(() => {
     updateLastUpdatedText();
   }, 60000); // Update every minute
+}
+
+// Swap currencies function
+function swapCurrencies(calculatorId) {
+  const fromFlag = document.getElementById(`${calculatorId.replace('calculator', 'from')}-flag`);
+  const fromCurrency = document.getElementById(`${calculatorId.replace('calculator', 'from')}-currency`);
+  const fromSymbol = document.getElementById(`${calculatorId.replace('calculator', 'from')}-symbol`);
+  
+  const toFlag = document.getElementById(`${calculatorId.replace('calculator', 'to')}-flag`);
+  const toCurrency = document.getElementById(`${calculatorId.replace('calculator', 'to')}-currency`);
+  const toSymbol = document.getElementById(`${calculatorId.replace('calculator', 'to')}-symbol`);
+  
+  // Store current values
+  const tempFlag = fromFlag.textContent;
+  const tempCurrency = fromCurrency.textContent;
+  const tempSymbol = fromSymbol.textContent;
+  
+  // Swap the values
+  fromFlag.textContent = toFlag.textContent;
+  fromCurrency.textContent = toCurrency.textContent;
+  fromSymbol.textContent = toSymbol.textContent;
+  
+  toFlag.textContent = tempFlag;
+  toCurrency.textContent = tempCurrency;
+  toSymbol.textContent = tempSymbol;
+  
+  // Update selected states in dropdowns
+  updateDropdownSelection(`${calculatorId.replace('calculator', 'from')}`, tempCurrency);
+  updateDropdownSelection(`${calculatorId.replace('calculator', 'to')}`, tempCurrency);
+  
+  // Trigger conversion with new currencies
+  convertCurrency(calculatorId);
+  
+  // Add visual feedback
+  const swapButton = document.querySelector(`[onclick="swapCurrencies('${calculatorId}')"]`);
+  const svg = swapButton.querySelector('svg');
+  svg.style.transform = 'rotate(360deg)';
+  setTimeout(() => {
+    svg.style.transform = 'rotate(0deg)';
+  }, 300);
+}
+
+// Update dropdown selection after swap
+function updateDropdownSelection(selectorId, currency) {
+  const dropdown = document.getElementById(`${selectorId}-dropdown`);
+  if (dropdown) {
+    dropdown.querySelectorAll('.currency-option').forEach(option => {
+      option.classList.remove('selected');
+      if (option.getAttribute('data-currency') === currency) {
+        option.classList.add('selected');
+      }
+    });
+  }
 }
 
 // Initialize conversions on page load
