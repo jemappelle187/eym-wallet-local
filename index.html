@@ -2153,6 +2153,36 @@ document.addEventListener('DOMContentLoaded', function() {
     convertCurrency('calculator1');
     convertCurrency('calculator2');
   }, 1000);
+  
+  // Add toggle functionality for calculator views
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const view = this.getAttribute('data-view');
+      const position = this.getAttribute('data-position');
+      
+      // Find the calculator container
+      const calculatorContainer = this.closest('.calculator-container');
+      if (!calculatorContainer) return;
+      
+      // Get the views
+      const calculatorView = calculatorContainer.querySelector('#calculator-view');
+      const ratesView = calculatorContainer.querySelector('#rates-view');
+      const togglePill = calculatorContainer.querySelector('#toggle-pill');
+      
+      if (view === 'calculator') {
+        // Show calculator view
+        calculatorView.classList.add('active');
+        ratesView.classList.remove('active');
+        togglePill.classList.add('active');
+      } else if (view === 'rates') {
+        // Show rates view
+        calculatorView.classList.remove('active');
+        ratesView.classList.add('active');
+        togglePill.classList.remove('active');
+      }
+    });
+  });
 });
 </script>
 
