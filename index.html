@@ -1877,6 +1877,37 @@ function toggleCurrencyDropdown(selectorId) {
   const dropdown = document.getElementById(`${selectorId}-dropdown`);
   if (dropdown) {
     const isVisible = dropdown.style.display === 'block';
+    
+    if (!isVisible) {
+      // Position the dropdown to fit within calculator container
+      const selector = document.querySelector(`[onclick="toggleCurrencyDropdown('${selectorId}')"]`);
+      const calculatorContainer = selector.closest('.calculator-container');
+      
+      if (calculatorContainer) {
+        const containerRect = calculatorContainer.getBoundingClientRect();
+        const selectorRect = selector.getBoundingClientRect();
+        const dropdownRect = dropdown.getBoundingClientRect();
+        
+        // Check if dropdown would extend beyond bottom of calculator
+        const spaceBelow = containerRect.bottom - selectorRect.bottom;
+        const dropdownHeight = 160; // max-height of dropdown
+        
+        if (spaceBelow < dropdownHeight) {
+          // Position dropdown above the selector
+          dropdown.style.top = 'auto';
+          dropdown.style.bottom = '100%';
+          dropdown.style.marginTop = '0';
+          dropdown.style.marginBottom = '4px';
+        } else {
+          // Position dropdown below the selector (default)
+          dropdown.style.top = '100%';
+          dropdown.style.bottom = 'auto';
+          dropdown.style.marginTop = '4px';
+          dropdown.style.marginBottom = '0';
+        }
+      }
+    }
+    
     dropdown.style.display = isVisible ? 'none' : 'block';
   }
 }
