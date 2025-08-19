@@ -12337,4 +12337,163 @@ html {
   .competitor-recipient-value {
     font-size: 9px;
   }
+  
+  /* Mobile Light Background Override */
+  .remittance-calculator {
+    background: #f8fafc !important;
+  }
+  
+  .remittance-calculator .calculator-header h2 {
+    color: #1e293b !important;
+  }
+  
+  .remittance-calculator .calculator-subtitle {
+    color: #64748b !important;
+  }
+  
+  .calculator-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(30, 64, 175, 0.1) !important;
+    box-shadow: 
+      0 20px 60px rgba(15, 23, 42, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .calculator-container .calc-video-bg {
+    display: none !important;
+  }
+  
+  .mobile-calculator {
+    color: #1e293b !important;
+  }
+  
+  .calculator-label {
+    color: #64748b !important;
+  }
+  
+  .currency-selector-row {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    color: #1e293b !important;
+  }
+  
+  .calculator-input {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    color: #1e293b !important;
+  }
+  
+  .calculator-input::placeholder {
+    color: #94a3b8 !important;
+  }
+  
+  .calculation-item {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    color: #1e293b !important;
+  }
+  
+  .currency-swap-button {
+    background: rgba(30, 64, 175, 0.1) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    color: #1e40af !important;
+  }
+  
+  .currency-swap-button:hover {
+    background: rgba(30, 64, 175, 0.15) !important;
+    color: #1e40af !important;
+  }
+  
+  .rate-status-container {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(30, 64, 175, 0.1) !important;
+  }
+  
+  .rate-status-success {
+    color: #059669 !important;
+  }
+  
+  .rate-status-error {
+    color: #dc2626 !important;
+  }
+  
+  .refresh-button {
+    background: rgba(30, 64, 175, 0.1) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    color: #1e40af !important;
+  }
+  
+  .refresh-button:hover {
+    background: rgba(30, 64, 175, 0.15) !important;
+  }
+  
+  .last-updated-text {
+    color: #64748b !important;
+  }
+  
+  .competitor-column-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(30, 64, 175, 0.1) !important;
+  }
+  
+  .column-header {
+    background: rgba(30, 64, 175, 0.05) !important;
+    border-bottom: 1px solid rgba(30, 64, 175, 0.1) !important;
+  }
+  
+  .column-title {
+    color: #1e293b !important;
+  }
+  
+  .column-row {
+    border-bottom: 1px solid rgba(30, 64, 175, 0.05) !important;
+  }
+  
+  .column-row.best-option {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  }
+  
+  .competitor-provider {
+    color: #1e293b !important;
+  }
+  
+  .competitor-name {
+    color: #1e293b !important;
+  }
+  
+  .competitor-rate-value,
+  .competitor-fee-value,
+  .competitor-recipient-value {
+    color: #1e293b !important;
+  }
+  
+  .column-row.best-option .competitor-name {
+    color: #059669 !important;
+  }
+  
+  .column-row.best-option .competitor-fee-value {
+    color: #059669 !important;
+  }
+  
+  .currency-dropdown {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1) !important;
+  }
+  
+  .currency-option {
+    color: #1e293b !important;
+  }
+  
+  .currency-option:hover {
+    background: rgba(30, 64, 175, 0.1) !important;
+  }
+  
+  .currency-option.selected {
+    background: rgba(30, 64, 175, 0.15) !important;
+    color: #1e40af !important;
+  }
 }
