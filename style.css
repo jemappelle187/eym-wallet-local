@@ -11996,6 +11996,11 @@ html {
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+.column-row:hover .competitor-provider.scroll-text {
+  animation-play-state: paused;
 }
 
 /* Provider text scrolling animation */
@@ -12003,13 +12008,15 @@ html {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .competitor-provider.scroll-text {
   animation: scrollText 8s linear infinite;
 }
 
-.competitor-provider.scroll-text:hover {
+.competitor-provider.scroll-text:hover,
+.competitor-provider.scroll-text:hover * {
   animation-play-state: paused;
 }
 
