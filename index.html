@@ -1546,11 +1546,33 @@
   function setFrom(code) { from = code; els.fromLabel.textContent = code; els.feeCode.textContent = code; quote(); }
   function setTo(code) { to = code; els.toLabel.textContent = code; els.toCode.textContent = code; quote(); }
   async function getQuote({ from, to, amount, signal }) {
-    await new Promise(r => setTimeout(r, 280));
-    const base = 1 + (from.charCodeAt(0) % 5) / 100;
-    const rate = +(base * 0.9 + (to.charCodeAt(1) % 7) / 100).toFixed(4);
-    const fee = +(Math.max(0.99, Math.min(9.99, amount * 0.01))).toFixed(2);
-    return { rate, fee, receiveAmount: +(((amount - fee) * rate).toFixed(2)), etaLabel: amount > 500 ? "~24h" : "Instant" };
+    // Try Frankfurter (free, no key)
+    try {
+      const frankUrl = `https://api.frankfurter.app/latest?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+      const res = await fetch(frankUrl, { signal });
+      if (!res.ok) throw new Error(`Frankfurter status ${res.status}`);
+      const data = await res.json();
+      const rawRate = data && data.rates && data.rates[to];
+      if (!rawRate) throw new Error('Frankfurter rate missing');
+      const rate = Number(rawRate);
+      const fee = +(Math.max(0.99, Math.min(9.99, amount * 0.01))).toFixed(2);
+      const receiveAmount = +(((amount - fee) * rate).toFixed(2));
+      return { rate: +rate.toFixed(4), fee, receiveAmount, etaLabel: amount > 500 ? "~24h" : "Instant" };
+    } catch (_) {
+      // Fallback to exchangerate.host convert endpoint
+      const url = new URL('https://api.exchangerate.host/convert');
+      url.searchParams.set('from', from);
+      url.searchParams.set('to', to);
+      url.searchParams.set('amount', String(amount));
+      const res2 = await fetch(url.toString(), { signal });
+      if (!res2.ok) throw new Error(`exchangerate.host status ${res2.status}`);
+      const data2 = await res2.json();
+      const rate2 = Number(data2 && data2.info && data2.info.rate);
+      if (!rate2) throw new Error('exchangerate.host rate missing');
+      const fee = +(Math.max(0.99, Math.min(9.99, amount * 0.01))).toFixed(2);
+      const receiveAmount = +((((amount - fee) * rate2)).toFixed(2));
+      return { rate: +rate2.toFixed(4), fee, receiveAmount, etaLabel: amount > 500 ? "~24h" : "Instant" };
+    }
   }
   function setLoading(v) { els.loading.hidden = !v; }
   function setError(msg) { els.error.hidden = !msg; if (msg) els.error.textContent = msg; }
