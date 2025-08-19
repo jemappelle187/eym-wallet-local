@@ -132,8 +132,8 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 
 /* Clean variant: no border, white background */
 .press-bar.press-clean {
-  border: 0;
-  background: #ffffff;
+  border: 0 !important;
+  background: #ffffff !important;
   margin-top: 8px;
   margin-bottom: 8px;
   padding: 4px 0;

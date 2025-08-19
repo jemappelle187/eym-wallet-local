@@ -589,6 +589,8 @@ body.drawer-open {
   left: 0 !important;
   transform: none !important;
   margin: 8px 0 !important;
+  border: 0 !important;
+  background: #ffffff !important;
 }
 
 .hero-title {
