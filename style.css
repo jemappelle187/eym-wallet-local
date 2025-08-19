@@ -11694,12 +11694,15 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex: 1;
-  padding: 6px 10px;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
+  height: 40px;
+  min-width: 70px;
 }
 
 .calculation-divider {
