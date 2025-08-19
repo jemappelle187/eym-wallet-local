@@ -663,8 +663,8 @@
       
       <div class="container" style="position: relative; z-index: 3; max-width: 800px;">
         <div class="calculator-header text-center">
-          <h2>WE SAVE YOU MONEY</h2>
-          <p class="calculator-subtitle">Why pay more? We believe in fair pricing that benefits you, not us.</p>
+        <h2>WE SAVE YOU MONEY</h2>
+        <p class="calculator-subtitle">Why pay more? We believe in fair pricing that benefits you, not us.</p>
           </div>
 
         <!-- Calculator Container -->
@@ -674,23 +674,42 @@
               <source src="videos/hero_world.mp4" type="video/mp4" />
             </video>
           </div>
-          
+
           <!-- Calculator View -->
           <div class="calc-view active" id="calculator-view">
-            <!-- Toggle Slider -->
+                        <!-- Toggle Slider -->
             <div class="calc-toggle">
               <div class="toggle-slider">
-                <button class="toggle-btn active" data-view="calculator">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                  </svg>
-                  Calculator
+                <!-- Background icons (muted) -->
+                <div class="toggle-bg-icons">
+                  <div class="toggle-bg-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                  </div>
+                  <div class="toggle-bg-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Sliding pill -->
+                <div class="toggle-pill active" id="toggle-pill">
+                  <div class="toggle-pill-gradient"></div>
+                  <div class="toggle-pill-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Clickable areas -->
+                <button class="toggle-btn" data-view="calculator" data-position="left">
+                  <span class="sr-only">Calculator</span>
                 </button>
-                <button class="toggle-btn" data-view="rates">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
-                  </svg>
-                  Compare Rates
+                <button class="toggle-btn" data-view="rates" data-position="right">
+                  <span class="sr-only">Compare Rates</span>
                 </button>
               </div>
             </div>
@@ -708,7 +727,7 @@
       </button>
       <ul id="mr-from-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
             </div>
-            </div>
+          </div>
 
   <button id="mr-swap" class="mini-swap" aria-label="Swap currencies">⇄</button>
 
@@ -751,17 +770,36 @@
             <!-- Toggle Slider -->
             <div class="calc-toggle">
               <div class="toggle-slider">
-                <button class="toggle-btn" data-view="calculator">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                  </svg>
-                  Calculator
+                <!-- Background icons (muted) -->
+                <div class="toggle-bg-icons">
+                  <div class="toggle-bg-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                  </div>
+                  <div class="toggle-bg-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Sliding pill -->
+                <div class="toggle-pill" id="toggle-pill">
+                  <div class="toggle-pill-gradient"></div>
+                  <div class="toggle-pill-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Clickable areas -->
+                <button class="toggle-btn" data-view="calculator" data-position="left">
+                  <span class="sr-only">Calculator</span>
                 </button>
-                <button class="toggle-btn active" data-view="rates">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
-                  </svg>
-                  Compare Rates
+                <button class="toggle-btn" data-view="rates" data-position="right">
+                  <span class="sr-only">Compare Rates</span>
                 </button>
               </div>
             </div>
@@ -1711,14 +1749,30 @@
 document.addEventListener('DOMContentLoaded', function() {
   const toggleBtns = document.querySelectorAll('.toggle-btn');
   const calcViews = document.querySelectorAll('.calc-view');
+  const togglePills = document.querySelectorAll('.toggle-pill');
   
   toggleBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetView = btn.getAttribute('data-view');
+      const position = btn.getAttribute('data-position');
       
-      // Update toggle buttons
-      toggleBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      // Update toggle pills
+      togglePills.forEach(pill => {
+        pill.classList.remove('active');
+        if (position === 'left') {
+          pill.classList.add('active');
+        }
+      });
+      
+      // Update pill icon based on view
+      togglePills.forEach(pill => {
+        const pillIcon = pill.querySelector('.toggle-pill-icon svg');
+        if (targetView === 'calculator') {
+          pillIcon.innerHTML = '<path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>';
+        } else {
+          pillIcon.innerHTML = '<path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>';
+        }
+      });
       
       // Update views
       calcViews.forEach(view => {
