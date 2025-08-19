@@ -11808,6 +11808,23 @@ html {
   text-align: center;
 }
 
+.competitor-columns {
+  margin-bottom: 6px;
+}
+
+.competitor-column-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 8px;
+  padding: 4px 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .competitor-item {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 6px;
@@ -11815,9 +11832,10 @@ html {
   margin-bottom: 4px;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   height: 32px;
   width: 100%;
   max-width: 280px;
@@ -11828,26 +11846,15 @@ html {
   border: 1px solid #10b981;
 }
 
-.competitor-header-row {
+.competitor-provider {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex: 1;
+  gap: 4px;
   min-width: 0;
 }
 
 .competitor-logo {
   font-size: 14px;
-  margin-right: 4px;
-}
-
-.competitor-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
 }
 
 .competitor-name {
@@ -11855,69 +11862,23 @@ html {
   font-size: 11px;
   font-weight: 600;
   color: #1e293b;
-  margin-bottom: 0;
   line-height: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.competitor-badge {
-  background: #10b981;
-  border-radius: 4px;
-  padding: 1px 4px;
-  align-self: flex-start;
-  margin-top: 1px;
-  margin-bottom: 0;
-}
-
-.competitor-badge::before {
-  content: "Best";
-  color: #fff;
+.competitor-rate-value,
+.competitor-fee-value,
+.competitor-recipient-value {
   font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
-}
-
-.competitor-details {
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  margin-top: 0;
-}
-
-.competitor-rate,
-.competitor-fee {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
-  color: #64748b;
-}
-
-.competitor-result {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex-shrink: 1;
-  min-width: 0;
-}
-
-.competitor-amount {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  text-align: right;
-}
-
-.competitor-item.our-service .competitor-amount {
-  color: #10b981;
-}
-
-.competitor-label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 8px;
-  color: #64748b;
-  text-align: right;
+  color: #1e293b;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Mobile Responsive for Calculator */
