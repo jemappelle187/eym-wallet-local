@@ -156,7 +156,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
   animation: press-slide 30s linear infinite;
   will-change: transform;
 }
-.press-logo { height: 40px; }
+.press-logo { height: 24px; }
 /* Keep mock SVGs subdued */
 .press-bar svg.press-logo { opacity: 0.8; filter: grayscale(1); }
 .press-bar svg.press-logo:hover { opacity: 1; filter: grayscale(0); }
@@ -175,15 +175,12 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 /* Responsive spacing adjustments */
 @media (max-width: 768px) {
   .press-bar.press-clean {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    padding: 12px 0;
-    position: relative;
-    z-index: 10;
-    background: white;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 6px 0;
   }
-  .press-track { gap: 24px; }
-  .press-logo { height: 36px; }
+  .press-track { gap: 20px; }
+  .press-logo { height: 20px; }
 }
 
 /* removed telecom providers mockup section */
