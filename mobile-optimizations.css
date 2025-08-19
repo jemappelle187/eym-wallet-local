@@ -595,12 +595,29 @@ body.drawer-open {
 }
 
 /* Increase press bar content size on mobile */
-.press-bar .press-logo {
+.press-bar .press-logo,
+.press-bar svg.press-logo,
+.press-bar img.press-logo {
   height: 32px !important;
+  width: auto !important;
 }
 
 .press-bar .press-track {
   gap: 32px !important;
+}
+
+/* Override the media query in main CSS */
+@media (max-width: 768px) {
+  .press-bar .press-logo,
+  .press-bar svg.press-logo,
+  .press-bar img.press-logo {
+    height: 32px !important;
+    width: auto !important;
+  }
+  
+  .press-bar .press-track {
+    gap: 32px !important;
+  }
 }
 
 .hero-title {
