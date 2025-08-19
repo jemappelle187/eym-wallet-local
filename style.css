@@ -11623,7 +11623,7 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 8px 12px;
-  min-width: 100px;
+  min-width: 70px;
   height: 40px;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   cursor: pointer;
