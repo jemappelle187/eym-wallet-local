@@ -11461,9 +11461,11 @@ html {
 
 /* ==== Calculator Toggle Slider ==== */
 .calc-toggle {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .toggle-slider {
