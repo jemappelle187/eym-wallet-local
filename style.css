@@ -11808,21 +11808,20 @@ html {
   text-align: center;
 }
 
-.competitor-columns {
+.header-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   margin-bottom: 6px;
 }
 
-.competitor-column-header {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 8px;
-  padding: 4px 8px;
+.column-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .competitor-item {
