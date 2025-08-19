@@ -11564,6 +11564,31 @@ html {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.toggle-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.toggle-btn:hover .toggle-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.toggle-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.toggle-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .toggle-btn:active {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -11733,6 +11758,57 @@ html {
 .calculator-container {
   position: relative;
   overflow: visible;
+}
+
+/* Currency Swap Button */
+.currency-swap-container {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.currency-swap-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.currency-swap-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+  color: rgba(255, 255, 255, 1);
+}
+
+.currency-swap-button:active {
+  transform: scale(0.95);
+}
+
+.currency-swap-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.currency-swap-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.currency-swap-button svg {
+  transition: transform 0.3s ease;
+}
+
+.currency-swap-button:hover svg {
+  transform: rotate(180deg);
 }
 
 /* Calculator Input */
