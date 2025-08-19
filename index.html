@@ -674,6 +674,27 @@
               <source src="videos/hero_world.mp4" type="video/mp4" />
             </video>
           </div>
+          
+          <!-- Toggle Slider -->
+          <div class="calc-toggle">
+            <div class="toggle-slider">
+              <button class="toggle-btn active" data-view="calculator">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </svg>
+                Calculator
+              </button>
+              <button class="toggle-btn" data-view="rates">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                </svg>
+                Compare Rates
+              </button>
+            </div>
+          </div>
+          
+          <!-- Calculator View -->
+          <div class="calc-view active" id="calculator-view">
 <!-- Compact Remittance Calculator -->
 <div id="mini-remit" class="mini-calc" role="form" aria-label="Remittance calculator">
   <div class="mini-calc__head">Rates calculator</div>
@@ -724,7 +745,72 @@
 
   <button id="mr-cta" class="mini-cta" disabled>Start transfer</button>
 </div>
-</div>
+          </div>
+          
+          <!-- Rates Comparison View -->
+          <div class="calc-view" id="rates-view">
+            <div class="rates-comparison">
+              <div class="rates-header">
+                <h3>Our Rates vs Competitors</h3>
+                <p>See how much more your family receives with us</p>
+              </div>
+              
+              <div class="rates-table">
+                <div class="rate-row header">
+                  <div class="rate-provider">Provider</div>
+                  <div class="rate-fee">Fee</div>
+                  <div class="rate-exchange">Exchange Rate</div>
+                  <div class="rate-received">You Receive</div>
+                </div>
+                
+                <div class="rate-row our-rate">
+                  <div class="rate-provider">
+                    <div class="provider-name">SendNReceive</div>
+                    <div class="provider-badge">Best Value</div>
+                  </div>
+                  <div class="rate-fee">$2.99</div>
+                  <div class="rate-exchange">1 USD = 0.92 EUR</div>
+                  <div class="rate-received">€91.81</div>
+                </div>
+                
+                <div class="rate-row competitor">
+                  <div class="rate-provider">
+                    <div class="provider-name">Western Union</div>
+                  </div>
+                  <div class="rate-fee">$8.99</div>
+                  <div class="rate-exchange">1 USD = 0.89 EUR</div>
+                  <div class="rate-received">€85.11</div>
+                </div>
+                
+                <div class="rate-row competitor">
+                  <div class="rate-provider">
+                    <div class="provider-name">MoneyGram</div>
+                  </div>
+                  <div class="rate-fee">$7.99</div>
+                  <div class="rate-exchange">1 USD = 0.90 EUR</div>
+                  <div class="rate-received">€86.01</div>
+                </div>
+                
+                <div class="rate-row competitor">
+                  <div class="rate-provider">
+                    <div class="provider-name">Bank Transfer</div>
+                  </div>
+                  <div class="rate-fee">$25.00</div>
+                  <div class="rate-exchange">1 USD = 0.88 EUR</div>
+                  <div class="rate-received">€79.00</div>
+                </div>
+              </div>
+              
+              <div class="rates-summary">
+                <div class="savings-highlight">
+                  <span class="savings-amount">Save up to €12.81</span>
+                  <span class="savings-label">vs traditional providers</span>
+                </div>
+                <button class="start-transfer-btn">Start Transfer</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1604,6 +1690,30 @@
   els.cta.addEventListener("click", () => { const raw = (els.amount.value || "").replace(/,/g, ""); const amount = Number(raw); window.location.href = `/start-transfer?from=${from}&to=${to}&amount=${amount}`; });
   quote();
 })();
+
+// Calculator Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const calcViews = document.querySelectorAll('.calc-view');
+  
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetView = btn.getAttribute('data-view');
+      
+      // Update toggle buttons
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Update views
+      calcViews.forEach(view => {
+        view.classList.remove('active');
+        if (view.id === `${targetView}-view`) {
+          view.classList.add('active');
+        }
+      });
+    });
+  });
+});
 </script>
 
 </body>
