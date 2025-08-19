@@ -8807,12 +8807,12 @@ html {
 .remittance-calculator .calculator-header h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #000000; /* Force black title */
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
 }
 
 .remittance-calculator .calculator-subtitle {
@@ -9272,6 +9272,9 @@ html {
   
   .remittance-calculator .calculator-header h2 {
     font-size: 2rem;
+    color: #000000; /* ensure black on mobile too */
+    background: none;
+    -webkit-text-fill-color: initial;
   }
   
   .remittance-calculator .calculator-subtitle {
