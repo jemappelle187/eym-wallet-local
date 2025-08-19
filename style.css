@@ -365,8 +365,7 @@ body {
 }
 
 /* Typewriter Effect Styles */
-#typewriter-subtitle,
-#typewriter-subtitle-2 {
+#typewriter-subtitle {
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
@@ -374,8 +373,7 @@ body {
   min-height: 1.2em;
 }
 
-#typewriter-subtitle .Typewriter__cursor,
-#typewriter-subtitle-2 .Typewriter__cursor {
+#typewriter-subtitle .Typewriter__cursor {
   color: var(--brand-primary) !important;
   font-weight: bold;
   animation: blink 1s infinite;
