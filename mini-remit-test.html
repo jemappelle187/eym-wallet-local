@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini Remittance Calculator - Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: #111827;
+      display: grid;
+      place-items: center;
+    }
+    .wrap { width: 100%; max-width: 420px; padding: 24px; }
+    h1 { font-size: 18px; font-weight: 800; margin: 0 0 12px; }
+
+    /* Mini Remittance Calculator (embedded styles) */
+    .mini-calc {
+      --brand-primary: #667eea; /* indigo */
+      --brand-secondary: #764ba2; /* purple */
+      --muted: #64748b;
+      --border: #e5e7eb;
+      --panel: rgba(255,255,255,.96);
+      --radius: 16px;
+
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255,255,255,.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px;
+    }
+    .mini-calc__head { font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+
+    .mini-calc__row { display: grid; grid-template-columns: 1fr 110px; gap: 8px; align-items: center; }
+    .mini-input {
+      height: 44px; border: 1.5px solid var(--border); border-radius: 12px; padding: 0 12px;
+      font-weight: 800; font-size: 16px; background: #fff;
+    }
+    .mini-input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 4px rgba(102,126,234,.2); }
+
+    .mini-select { position: relative; }
+    .mini-select__btn {
+      height: 44px; width: 100%; border: 1.5px solid var(--border); border-radius: 12px; background: #fff;
+      font-weight: 800; display: flex; align-items: center; justify-content: space-between; padding: 0 10px;
+    }
+    .mini-caret { opacity: .6; }
+    .mini-select__list {
+      position: absolute; top: calc(100% + 6px); right: 0; left: 0; background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; box-shadow: 0 25px 80px rgba(0,0,0,.1), 0 8px 32px rgba(102,126,234,.1);
+      max-height: 240px; overflow: auto; padding: 4px; z-index: 20;
+    }
+    .mini-select__list li { list-style: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+    .mini-select__list li:hover, .mini-select__list li[aria-selected="true"] { background: rgba(102,126,234,.08); }
+
+    .mini-swap { display: block; margin: 8px auto; height: 32px; width: 32px; border-radius: 999px; border: 1px solid var(--border); background: #fff; }
+
+    .mini-receive { border: 1px dashed var(--border); background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(102,126,234,.06)); border-radius: 12px; padding: 8px 10px; }
+    .mini-receive__label { color: var(--muted); font-size: 12px; margin-bottom: 2px; }
+    .mini-receive__value { font-size: 20px; font-weight: 900; display: flex; gap: 6px; align-items: baseline; }
+    .mini-muted { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .mini-loading { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .mini-spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(102,126,234,.2); border-top-color: var(--brand-primary); animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .mini-error { color: #dc2626; font-size: 12px; margin-top: 6px; }
+
+    .mini-meta { margin-top: 8px; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+    .mini-strong { font-weight: 800; }
+    .mini-dot::before { content: "• "; opacity: .6; }
+
+    .mini-cta { margin-top: 10px; width: 100%; height: 44px; border: 0; border-radius: 12px; color: #fff; font-weight: 800;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary)); box-shadow: 0 10px 18px rgba(0,0,0,.12); }
+    .mini-cta:disabled { opacity: .6; filter: grayscale(.2); cursor: not-allowed; }
+
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Mini Remittance Calculator (Test)</h1>
+    <div id="mini-remit" class="mini-calc" role="form" aria-label="Remittance calculator">
+      <div class="mini-calc__head">Rates calculator</div>
+
+      <div class="mini-calc__row">
+        <label for="mr-amount" class="sr-only">You send amount</label>
+        <input id="mr-amount" class="mini-input" inputmode="decimal" placeholder="0.00" value="100" />
+        <div class="mini-select">
+          <button id="mr-from-btn" class="mini-select__btn" aria-haspopup="listbox" aria-expanded="false">
+            <span id="mr-from-label">USD</span>
+            <span class="mini-caret">▾</span>
+          </button>
+          <ul id="mr-from-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
+        </div>
+      </div>
+
+      <button id="mr-swap" class="mini-swap" aria-label="Swap currencies">⇄</button>
+
+      <div class="mini-calc__row">
+        <div class="mini-receive" aria-live="polite" aria-atomic="true">
+          <div class="mini-receive__label">Individual receives</div>
+          <div class="mini-receive__value">
+            <span id="mr-receive">—</span>
+            <span id="mr-to-code" class="mini-muted">EUR</span>
+          </div>
+          <div id="mr-loading" class="mini-loading" hidden><span class="mini-spinner"></span> Getting rate…</div>
+          <div id="mr-error" class="mini-error" hidden>Couldn't load rate. Try again.</div>
+        </div>
+        <div class="mini-select">
+          <button id="mr-to-btn" class="mini-select__btn" aria-haspopup="listbox" aria-expanded="false">
+            <span id="mr-to-label">EUR</span>
+            <span class="mini-caret">▾</span>
+          </button>
+          <ul id="mr-to-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
+        </div>
+      </div>
+
+      <div class="mini-meta">
+        <div class="mini-meta__rate" id="mr-rate">Live rate</div>
+        <div class="mini-meta__fee">Fee: <span id="mr-fee" class="mini-strong">—</span> <span id="mr-fee-code">USD</span> <span id="mr-eta" class="mini-dot"></span></div>
+      </div>
+
+      <button id="mr-cta" class="mini-cta" disabled>Start transfer</button>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const currencies = [
+      { code: "USD", symbol: "$" }, { code: "EUR", symbol: "€" }, { code: "GBP", symbol: "£" },
+      { code: "GHS" }, { code: "NGN" }, { code: "KES" }, { code: "INR" }
+    ];
+    const $ = (sel) => document.querySelector(sel);
+    const root = $("#mini-remit");
+    if (!root) return;
+    const els = {
+      amount: $("#mr-amount"), fromBtn: $("#mr-from-btn"), toBtn: $("#mr-to-btn"),
+      fromList: $("#mr-from-list"), toList: $("#mr-to-list"), swap: $("#mr-swap"),
+      receive: $("#mr-receive"), toCode: $("#mr-to-code"), rate: $("#mr-rate"), fee: $("#mr-fee"), feeCode: $("#mr-fee-code"),
+      eta: $("#mr-eta"), loading: $("#mr-loading"), error: $("#mr-error"), cta: $("#mr-cta"),
+      fromLabel: $("#mr-from-label"), toLabel: $("#mr-to-label")
+    };
+    let from = "USD"; let to = "EUR"; let aborter = null; let debounceTimer = null;
+    const fmt = (n, opts={ maximumFractionDigits: 2 }) => new Intl.NumberFormat(undefined, opts).format(Number(n || 0));
+
+    function buildList(ul, current, onPick) {
+      ul.innerHTML = "";
+      currencies.forEach((c) => {
+        const li = document.createElement("li");
+        li.role = "option"; li.dataset.code = c.code; li.setAttribute("aria-selected", c.code === current ? "true" : "false");
+        li.textContent = c.symbol ? `${c.code} · ${c.symbol}` : c.code;
+        li.addEventListener("click", () => { onPick(c.code); ul.hidden = true; });
+        ul.appendChild(li);
+      });
+    }
+    function toggleList(btn, ul) {
+      const isOpen = !ul.hidden; document.querySelectorAll(".mini-select__list").forEach(u => (u.hidden = true));
+      ul.hidden = isOpen; btn.setAttribute("aria-expanded", (!isOpen).toString()); if (!isOpen) ul.focus();
+    }
+    function setFrom(code) { from = code; els.fromLabel.textContent = code; els.feeCode.textContent = code; quote(); }
+    function setTo(code) { to = code; els.toLabel.textContent = code; els.toCode.textContent = code; quote(); }
+
+    async function getQuote({ from, to, amount, signal }) {
+      // Simulated quote (replace with live API when ready)
+      await new Promise(r => setTimeout(r, 250));
+      const base = 1 + (from.charCodeAt(0) % 5) / 100;
+      const rate = +(base * 0.9 + (to.charCodeAt(1) % 7) / 100).toFixed(4);
+      const fee = +(Math.max(0.99, Math.min(9.99, amount * 0.01))).toFixed(2);
+      return { rate, fee, receiveAmount: +(((amount - fee) * rate).toFixed(2)), etaLabel: amount > 500 ? "~24h" : "Instant" };
+    }
+
+    function setLoading(v) { els.loading.hidden = !v; }
+    function setError(msg) { els.error.hidden = !msg; if (msg) els.error.textContent = msg; }
+    function quote() {
+      const raw = (els.amount.value || "").replace(/,/g, "");
+      const amount = Number(raw);
+      const valid = Number.isFinite(amount) && amount > 0;
+      els.cta.disabled = !valid;
+      if (!valid) { els.receive.textContent = "—"; els.rate.textContent = "Live rate"; els.fee.textContent = "—"; els.eta.textContent = ""; return; }
+
+      if (aborter) aborter.abort(); aborter = new AbortController();
+      setError(""); setLoading(true);
+      getQuote({ from, to, amount, signal: aborter.signal })
+        .then((q) => {
+          els.receive.textContent = fmt(q.receiveAmount);
+          els.rate.textContent = `1 ${from} = ${q.rate.toFixed(4)} ${to}`;
+          els.fee.textContent = fmt(q.fee);
+          els.eta.textContent = q.etaLabel ? `• ${q.etaLabel}` : "";
+        })
+        .catch((e) => { if (e?.name !== "AbortError") setError("Couldn’t load rate. Try again."); })
+        .finally(() => setLoading(false));
+    }
+
+    // Init
+    buildList(els.fromList, from, setFrom);
+    buildList(els.toList, to, setTo);
+    els.fromBtn.addEventListener("click", () => toggleList(els.fromBtn, els.fromList));
+    els.toBtn.addEventListener("click", () => toggleList(els.toBtn, els.toList));
+    document.addEventListener("click", (e) => { if (!root.contains(e.target)) { document.querySelectorAll(".mini-select__list").forEach(u => (u.hidden = true)); } });
+    els.swap.addEventListener("click", () => { const prev = from; setFrom(to); setTo(prev); });
+    els.amount.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(quote, 400); });
+    els.cta.addEventListener("click", () => {
+      const raw = (els.amount.value || "").replace(/,/g, "");
+      const amount = Number(raw);
+      alert(`Starting transfer: ${amount} ${from} → ${to}`);
+    });
+
+    quote();
+  })();
+  </script>
+</body>
+</html>
