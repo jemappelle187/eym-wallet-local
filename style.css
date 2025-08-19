@@ -12134,4 +12134,207 @@ html {
   .competitor-result {
     align-items: flex-start;
   }
+  
+  /* Enhanced Mobile Calculator Styles */
+  .calculator-container {
+    padding: 16px;
+    margin: 0 8px;
+  }
+  
+  .calc-toggle {
+    margin-bottom: 20px;
+  }
+  
+  .toggle-text {
+    font-size: 11px;
+  }
+  
+  .calculator-row {
+    margin-bottom: 16px;
+  }
+  
+  .calculator-input-group {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+  }
+  
+  .currency-selector-row {
+    height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .currency-selector-flag {
+    font-size: 16px;
+  }
+  
+  .currency-selector-text {
+    font-size: 13px;
+  }
+  
+  .currency-selector-symbol {
+    font-size: 13px;
+  }
+  
+  .calculator-input {
+    height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .currency-swap-container {
+    margin: 12px 0;
+  }
+  
+  .currency-swap-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .rate-status-container {
+    margin-top: 16px;
+    padding: 12px;
+  }
+  
+  .rate-status-row {
+    gap: 16px;
+  }
+  
+  .rate-status-text {
+    font-size: 11px;
+  }
+  
+  .refresh-button {
+    padding: 8px;
+  }
+  
+  .last-updated-text {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+  
+  .competitor-comparison {
+    margin-top: 16px;
+    max-width: 100%;
+  }
+  
+  .competitor-column-card {
+    max-width: 100%;
+    padding: 12px;
+  }
+  
+  .column-header {
+    grid-template-columns: 2.5fr 1fr 1fr 1.2fr;
+    gap: 6px;
+    padding: 6px 0;
+  }
+  
+  .column-row {
+    grid-template-columns: 2.5fr 1fr 1fr 1.2fr;
+    gap: 6px;
+    padding: 8px 0;
+  }
+  
+  .column-title {
+    font-size: 9px;
+  }
+  
+  .competitor-provider {
+    font-size: 10px;
+    line-height: 1.1;
+  }
+  
+  .competitor-rate-value,
+  .competitor-fee-value,
+  .competitor-recipient-value {
+    font-size: 10px;
+  }
+  
+  .column-row.best-option {
+    margin: 4px 0;
+    padding: 6px 8px;
+  }
+  
+  .currency-dropdown {
+    max-height: 140px;
+  }
+  
+  .currency-option {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .calculation-item {
+    height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .calculator-value {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .calculator-container {
+    padding: 12px;
+    margin: 0 4px;
+  }
+  
+  .toggle-slider {
+    width: 260px;
+    height: 40px;
+  }
+  
+  .toggle-pill {
+    width: 120px;
+    height: 32px;
+  }
+  
+  .toggle-pill:not(.active) {
+    left: calc(260px - 120px - 4px);
+  }
+  
+  .toggle-text {
+    font-size: 10px;
+  }
+  
+  .calculator-row {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .currency-selector-row,
+  .calculator-input,
+  .calculation-item {
+    height: 40px;
+    font-size: 13px;
+  }
+  
+  .currency-swap-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .column-header,
+  .column-row {
+    grid-template-columns: 2.8fr 0.8fr 0.8fr 1fr;
+    gap: 4px;
+  }
+  
+  .column-title {
+    font-size: 8px;
+  }
+  
+  .competitor-provider {
+    font-size: 9px;
+  }
+  
+  .competitor-rate-value,
+  .competitor-fee-value,
+  .competitor-recipient-value {
+    font-size: 9px;
+  }
 }
