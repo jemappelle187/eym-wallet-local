@@ -156,7 +156,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
   animation: press-slide 30s linear infinite;
   will-change: transform;
 }
-.press-logo { height: 24px; }
+.press-logo { height: 32px; }
 /* Keep mock SVGs subdued */
 .press-bar svg.press-logo { opacity: 0.8; filter: grayscale(1); }
 .press-bar svg.press-logo:hover { opacity: 1; filter: grayscale(0); }
@@ -180,7 +180,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
     padding: 6px 0;
   }
   .press-track { gap: 20px; }
-  .press-logo { height: 20px; }
+  .press-logo { height: 28px; }
 }
 
 /* removed telecom providers mockup section */
