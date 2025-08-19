@@ -675,9 +675,9 @@
             </video>
           </div>
 
-          <!-- Calculator View -->
+                    <!-- Calculator View -->
           <div class="calc-view active" id="calculator-view">
-                        <!-- Toggle Slider -->
+            <!-- Toggle Slider -->
             <div class="calc-toggle">
               <div class="toggle-slider">
                 <!-- Background icons (muted) -->
@@ -713,56 +713,61 @@
                 </button>
               </div>
             </div>
-<!-- Compact Remittance Calculator -->
-<div id="mini-remit" class="mini-calc" role="form" aria-label="Remittance calculator">
-  <div class="mini-calc__head">Rates calculator</div>
 
-  <div class="mini-calc__row">
-    <label for="mr-amount" class="sr-only">You send amount</label>
-    <input id="mr-amount" class="mini-input" inputmode="decimal" placeholder="0.00" value="100" />
-    <div class="mini-select">
-      <button id="mr-from-btn" class="mini-select__btn" aria-haspopup="listbox" aria-expanded="false">
-        <span id="mr-from-label">USD</span>
-        <span class="mini-caret">▾</span>
-      </button>
-      <ul id="mr-from-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
+            <!-- Mobile App Style Calculator -->
+            <div class="mobile-calculator">
+              <!-- First Calculator: Currency & Amount -->
+              <div class="calculator-row">
+                <div class="calculator-input-group">
+                  <div class="calculator-label">Currency</div>
+                  <div class="currency-selector-row">
+                    <span class="currency-selector-flag">🇺🇸</span>
+                    <span class="currency-selector-text">USD</span>
+                    <span class="currency-selector-symbol">$</span>
+                    <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="calculator-input-group">
+                  <div class="calculator-label">Amount</div>
+                  <input type="text" class="calculator-input" placeholder="$ 0.00" value="100" />
+                </div>
+              </div>
+
+              <!-- USDC/EURC Conversion -->
+              <div class="calculator-row">
+                <div class="calculation-item">
+                  <div class="calculator-label">USDC</div>
+                  <div class="calculator-value">$100.00</div>
+                </div>
+                <div class="calculation-divider"></div>
+                <div class="calculation-item">
+                  <div class="calculator-label">EURC</div>
+                  <div class="calculator-value">€92.00</div>
+                </div>
+              </div>
+
+              <!-- Rate Status -->
+              <div class="rate-status-container">
+                <div class="rate-status-row">
+                  <div class="rate-status-left">
+                    <div class="rate-status-success">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                      <span class="rate-status-text">Live rates</span>
+                    </div>
+                  </div>
+                  <button class="refresh-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="last-updated-text">Updated 2 minutes ago</div>
+              </div>
             </div>
-          </div>
-
-  <button id="mr-swap" class="mini-swap" aria-label="Swap currencies">⇄</button>
-
-  <div class="mini-calc__row">
-    <div class="mini-receive" aria-live="polite" aria-atomic="true">
-      <div class="mini-receive__label">Individual receives</div>
-      <div class="mini-receive__value">
-        <span id="mr-receive">—</span>
-        <span id="mr-to-code" class="mini-muted">EUR</span>
-            </div>
-      <div id="mr-loading" class="mini-loading" hidden>
-        <span class="mini-spinner"></span> Getting rate…
-          </div>
-      <div id="mr-error" class="mini-error" hidden>Couldn't load rate. Try again.</div>
-    </div>
-
-    <div class="mini-select">
-      <button id="mr-to-btn" class="mini-select__btn" aria-haspopup="listbox" aria-expanded="false">
-        <span id="mr-to-label">EUR</span>
-        <span class="mini-caret">▾</span>
-      </button>
-      <ul id="mr-to-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
-    </div>
-  </div>
-
-  <div class="mini-meta">
-    <div class="mini-meta__rate" id="mr-rate">Live rate</div>
-    <div class="mini-meta__fee">
-      Fee: <span id="mr-fee" class="mini-strong">—</span> <span id="mr-fee-code">USD</span>
-      <span id="mr-eta" class="mini-dot"></span>
-    </div>
-  </div>
-
-  <button id="mr-cta" class="mini-cta" disabled>Start transfer</button>
-</div>
           </div>
           
           <!-- Rates Comparison View -->
@@ -803,65 +808,107 @@
                 </button>
               </div>
             </div>
-            <div class="rates-comparison">
-              <div class="rates-header">
-                <h3>Our Rates vs Competitors</h3>
-                <p>See how much more your family receives with us</p>
-              </div>
-              
-              <div class="rates-table">
-                <div class="rate-row header">
-                  <div class="rate-provider">Provider</div>
-                  <div class="rate-fee">Fee</div>
-                  <div class="rate-exchange">Exchange Rate</div>
-                  <div class="rate-received">You Receive</div>
-                </div>
-                
-                <div class="rate-row our-rate">
-                  <div class="rate-provider">
-                    <div class="provider-name">SendNReceive</div>
-                    <div class="provider-badge">Best Value</div>
+            <!-- Second Calculator: Conversion Calculator -->
+            <div class="mobile-calculator">
+              <!-- Input Section -->
+              <div class="calculator-row">
+                <div class="calculator-input-group">
+                  <div class="calculator-label">From</div>
+                  <div class="currency-selector-row">
+                    <span class="currency-selector-flag">🇺🇸</span>
+                    <span class="currency-selector-text">USD</span>
+                    <span class="currency-selector-symbol">$</span>
+                    <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M7 10l5 5 5-5z"/>
+                    </svg>
                   </div>
-                  <div class="rate-fee">$2.99</div>
-                  <div class="rate-exchange">1 USD = 0.92 EUR</div>
-                  <div class="rate-received">€91.81</div>
                 </div>
-                
-                <div class="rate-row competitor">
-                  <div class="rate-provider">
-                    <div class="provider-name">Western Union</div>
-                  </div>
-                  <div class="rate-fee">$8.99</div>
-                  <div class="rate-exchange">1 USD = 0.89 EUR</div>
-                  <div class="rate-received">€85.11</div>
-                </div>
-                
-                <div class="rate-row competitor">
-                  <div class="rate-provider">
-                    <div class="provider-name">MoneyGram</div>
-                  </div>
-                  <div class="rate-fee">$7.99</div>
-                  <div class="rate-exchange">1 USD = 0.90 EUR</div>
-                  <div class="rate-received">€86.01</div>
-                </div>
-                
-                <div class="rate-row competitor">
-                  <div class="rate-provider">
-                    <div class="provider-name">Bank Transfer</div>
-                  </div>
-                  <div class="rate-fee">$25.00</div>
-                  <div class="rate-exchange">1 USD = 0.88 EUR</div>
-                  <div class="rate-received">€79.00</div>
+                <div class="calculator-input-group">
+                  <div class="calculator-label">Amount</div>
+                  <input type="text" class="calculator-input" placeholder="$ 0.00" value="100" />
                 </div>
               </div>
-              
-              <div class="rates-summary">
-                <div class="savings-highlight">
-                  <span class="savings-amount">Save up to €12.81</span>
-                  <span class="savings-label">vs traditional providers</span>
+
+              <!-- To Currency and Result -->
+              <div class="calculator-row">
+                <div class="calculator-input-group">
+                  <div class="calculator-label">To</div>
+                  <div class="currency-selector-row">
+                    <span class="currency-selector-flag">🇪🇺</span>
+                    <span class="currency-selector-text">EUR</span>
+                    <span class="currency-selector-symbol">€</span>
+                    <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                  </div>
                 </div>
-                <button class="start-transfer-btn">Start Transfer</button>
+                <div class="calculator-input-group">
+                  <div class="calculator-label">Result</div>
+                  <div class="calculation-item result-item">
+                    <div class="calculator-value">€92.00</div>
+                  </div>
+                </div>
               </div>
+
+              <!-- Competitor Comparison -->
+              <div class="competitor-comparison">
+                <div class="competitor-header">
+                  <h3>Compare Fees</h3>
+                </div>
+                
+                <div class="competitor-item our-service">
+                  <div class="competitor-header-row">
+                    <span class="competitor-logo">🏦</span>
+                    <div class="competitor-info">
+                      <div class="competitor-name">SendNReceive</div>
+                      <div class="competitor-badge">Best Deal</div>
+                    </div>
+                  </div>
+                  <div class="competitor-details">
+                    <div class="competitor-rate">Rate: 0.920</div>
+                    <div class="competitor-fee">Fee: FREE</div>
+                  </div>
+                  <div class="competitor-result">
+                    <div class="competitor-amount">€92.00</div>
+                    <div class="competitor-label">You Get</div>
+                  </div>
+                </div>
+
+                <div class="competitor-item">
+                  <div class="competitor-header-row">
+                    <span class="competitor-logo">💳</span>
+                    <div class="competitor-info">
+                      <div class="competitor-name">Western Union</div>
+                    </div>
+                  </div>
+                  <div class="competitor-details">
+                    <div class="competitor-rate">Rate: 0.890</div>
+                    <div class="competitor-fee">Fee: $8.99</div>
+                  </div>
+                  <div class="competitor-result">
+                    <div class="competitor-amount">€85.11</div>
+                    <div class="competitor-label">You Get</div>
+                  </div>
+                </div>
+
+                <div class="competitor-item">
+                  <div class="competitor-header-row">
+                    <span class="competitor-logo">💸</span>
+                    <div class="competitor-info">
+                      <div class="competitor-name">MoneyGram</div>
+                    </div>
+                  </div>
+                  <div class="competitor-details">
+                    <div class="competitor-rate">Rate: 0.900</div>
+                    <div class="competitor-fee">Fee: $7.99</div>
+                  </div>
+                  <div class="competitor-result">
+                    <div class="competitor-amount">€86.01</div>
+                    <div class="competitor-label">You Get</div>
+                  </div>
+                </div>
+              </div>
+            
             </div>
           </div>
         </div>
