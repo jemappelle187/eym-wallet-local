@@ -11554,6 +11554,14 @@ html {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.toggle-btn:focus {
+  outline: none;
+}
+
+.toggle-btn:focus-visible {
+  outline: none;
+}
+
 /* ==== Calculator Views ==== */
 .calc-view {
   display: none;
@@ -11744,6 +11752,14 @@ html {
   transform: scale(0.95);
 }
 
+.currency-swap-button:focus {
+  outline: none;
+}
+
+.currency-swap-button:focus-visible {
+  outline: none;
+}
+
 .currency-swap-button svg {
   transition: transform 0.3s ease;
 }
@@ -11878,6 +11894,14 @@ html {
 
 .refresh-button:hover {
   background: rgba(255, 255, 255, 0.15);
+}
+
+.refresh-button:focus {
+  outline: none;
+}
+
+.refresh-button:focus-visible {
+  outline: none;
 }
 
 .last-updated-text {
