@@ -686,6 +686,10 @@
             <div class="amount-input-group">
               <label for="remittanceAmount">You send:</label>
               <input type="number" id="remittanceAmount" class="amount-input" value="100" min="1" step="1">
+              <button id="calculateBtn" class="calculate-btn">
+                <span class="calculate-text">Calculate</span>
+                <span class="calculate-loading" style="display: none;">Calculating...</span>
+              </button>
             </div>
             
             <div class="currency-selector">
@@ -731,6 +735,10 @@
               <span class="result-label">They receive:</span>
               <span class="result-amount" id="resultAmount">92.50</span>
               <span class="result-currency" id="resultCurrency">EUR</span>
+              <div class="loading-indicator" id="loadingIndicator" style="display: none;">
+                <div class="loading-spinner"></div>
+                <span>Fetching live rates...</span>
+              </div>
             </div>
             
             <div class="result-breakdown">

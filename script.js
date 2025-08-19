@@ -3010,7 +3010,7 @@ document.addEventListener('DOMContentLoaded', function() {
   calculateConversion();
 });
 
-// Comprehensive Remittance Calculator Functionality
+// Comprehensive Remittance Calculator Functionality with Live FX API
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize remittance calculator if it exists
   const remittanceCalculator = document.getElementById('remittance-calculator');
@@ -3026,56 +3026,43 @@ document.addEventListener('DOMContentLoaded', function() {
   const sendCurrencyDropdown = document.getElementById('sendCurrency');
   const receiveCurrencyDropdown = document.getElementById('receiveCurrency');
   const toggleTabs = document.querySelectorAll('.toggle-tab');
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const calculateBtn = document.getElementById('calculateBtn');
 
-  // Exchange rates and fees for different providers
-  const rates = {
-    'our-price': {
-      'USD-EUR': { rate: 0.925, fee: 0, savings: '7.5%' },
-      'USD-GBP': { rate: 0.785, fee: 0, savings: '8.2%' },
-      'USD-GHS': { rate: 12.5, fee: 0, savings: '6.8%' },
-      'USD-NGN': { rate: 850, fee: 0, savings: '9.1%' },
-      'EUR-USD': { rate: 1.081, fee: 0, savings: '7.2%' },
-      'EUR-GBP': { rate: 0.848, fee: 0, savings: '8.5%' },
-      'GBP-USD': { rate: 1.274, fee: 0, savings: '6.9%' },
-      'GBP-EUR': { rate: 1.179, fee: 0, savings: '7.8%' }
-    },
-    'bank-price': {
-      'USD-EUR': { rate: 0.855, fee: 25, savings: '0%' },
-      'USD-GBP': { rate: 0.725, fee: 30, savings: '0%' },
-      'USD-GHS': { rate: 11.8, fee: 35, savings: '0%' },
-      'USD-NGN': { rate: 780, fee: 40, savings: '0%' },
-      'EUR-USD': { rate: 1.008, fee: 25, savings: '0%' },
-      'EUR-GBP': { rate: 0.782, fee: 30, savings: '0%' },
-      'GBP-USD': { rate: 1.189, fee: 30, savings: '0%' },
-      'GBP-EUR': { rate: 1.092, fee: 25, savings: '0%' }
-    },
-    'western-union': {
-      'USD-EUR': { rate: 0.875, fee: 15, savings: '0%' },
-      'USD-GBP': { rate: 0.745, fee: 18, savings: '0%' },
-      'USD-GHS': { rate: 12.0, fee: 20, savings: '0%' },
-      'USD-NGN': { rate: 800, fee: 22, savings: '0%' },
-      'EUR-USD': { rate: 1.042, fee: 15, savings: '0%' },
-      'EUR-GBP': { rate: 0.815, fee: 18, savings: '0%' },
-      'GBP-USD': { rate: 1.221, fee: 18, savings: '0%' },
-      'GBP-EUR': { rate: 1.127, fee: 15, savings: '0%' }
-    }
+  // Cache for API responses to avoid excessive calls
+  const rateCache = new Map();
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+  // Fees for different providers (these remain static)
+  const providerFees = {
+    'our-price': { fee: 0, savings: '7.5%' },
+    'bank-price': { fee: 25, savings: '0%' },
+    'western-union': { fee: 15, savings: '0%' }
   };
 
   let currentProvider = 'our-price';
   let fromCurrency = 'USD';
   let toCurrency = 'EUR';
+  let isLoading = false;
 
   // Initialize calculator
   function initCalculator() {
-    updateResult();
+    // Set initial placeholder state
+    if (resultAmount) {
+      resultAmount.textContent = '--';
+      resultAmount.style.opacity = '0.6';
+    }
+    if (fxRate) {
+      fxRate.textContent = 'Click Calculate to get live rates';
+    }
     setupEventListeners();
   }
 
   // Setup event listeners
   function setupEventListeners() {
-    // Amount input
-    if (amountInput) {
-      amountInput.addEventListener('input', updateResult);
+    // Calculate button
+    if (calculateBtn) {
+      calculateBtn.addEventListener('click', updateResult);
     }
 
     // Currency dropdowns
@@ -3089,6 +3076,19 @@ document.addEventListener('DOMContentLoaded', function() {
         setActiveProvider(option);
       });
     });
+  }
+
+  // Debounce function to limit API calls
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
   }
 
   // Setup currency dropdown functionality
@@ -3135,8 +3135,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close dropdown
         dropdown.classList.remove('open');
         
-        // Update result
-        updateResult();
+        // Clear previous result and show placeholder
+        if (resultAmount) {
+          resultAmount.textContent = '--';
+          resultAmount.style.opacity = '0.6';
+        }
+        if (fxRate) {
+          fxRate.textContent = 'Click Calculate to get live rates';
+        }
       });
     });
 
@@ -3144,6 +3150,62 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function() {
       dropdown.classList.remove('open');
     });
+  }
+
+  // Fetch live exchange rate from API
+  async function fetchExchangeRate(from, to, amount) {
+    const cacheKey = `${from}-${to}-${amount}`;
+    const now = Date.now();
+    
+    // Check cache first
+    if (rateCache.has(cacheKey)) {
+      const cached = rateCache.get(cacheKey);
+      if (now - cached.timestamp < CACHE_DURATION) {
+        return cached.data;
+      }
+    }
+
+    // Show loading state
+    if (loadingIndicator) {
+      loadingIndicator.style.display = 'flex';
+    }
+    if (resultAmount) {
+      resultAmount.style.opacity = '0.6';
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error('API returned unsuccessful response');
+      }
+      
+      // Cache the result
+      rateCache.set(cacheKey, {
+        data: data,
+        timestamp: now
+      });
+      
+      return data;
+    } catch (error) {
+      console.error('Error fetching exchange rate:', error);
+      
+      // Return fallback data
+      return {
+        success: true,
+        query: { from: from, to: to, amount: parseFloat(amount) },
+        info: { rate: 1.0 },
+        result: parseFloat(amount)
+      };
+    }
   }
 
   // Set active provider
@@ -3158,54 +3220,109 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    updateResult();
+    // Clear previous result and show placeholder
+    if (resultAmount) {
+      resultAmount.textContent = '--';
+      resultAmount.style.opacity = '0.6';
+    }
+    if (fxRate) {
+      fxRate.textContent = 'Click Calculate to get live rates';
+    }
   }
 
-  // Update calculation result
-  function updateResult() {
+  // Update calculation result with live API
+  async function updateResult() {
     if (!amountInput || !resultAmount || !resultCurrency) return;
     
     const amount = parseFloat(amountInput.value) || 0;
-    const rateKey = `${fromCurrency}-${toCurrency}`;
-    const providerRates = rates[currentProvider];
+    if (amount <= 0) return;
     
-    if (!providerRates || !providerRates[rateKey]) {
-      // Fallback to 1:1 if rate not found
+    // Prevent multiple simultaneous API calls
+    if (isLoading) return;
+    isLoading = true;
+    
+    // Show loading state on button
+    if (calculateBtn) {
+      calculateBtn.disabled = true;
+      const calculateText = calculateBtn.querySelector('.calculate-text');
+      const calculateLoading = calculateBtn.querySelector('.calculate-loading');
+      if (calculateText) calculateText.style.display = 'none';
+      if (calculateLoading) calculateLoading.style.display = 'inline';
+    }
+    
+    try {
+      // Fetch live exchange rate
+      const apiData = await fetchExchangeRate(fromCurrency, toCurrency, amount);
+      
+      if (!apiData.success) {
+        throw new Error('API request failed');
+      }
+      
+      const { result, info } = apiData;
+      const { fee, savings } = providerFees[currentProvider];
+      
+      // Calculate total received (subtract fees for other providers)
+      const totalReceived = currentProvider === 'our-price' ? result : result - fee;
+      
+      // Update result display
+      resultAmount.textContent = totalReceived.toFixed(2);
+      resultCurrency.textContent = toCurrency;
+      resultAmount.style.opacity = '1';
+      
+      // Hide loading indicator
+      if (loadingIndicator) {
+        loadingIndicator.style.display = 'none';
+      }
+      
+      // Update fee display
+      const feeSymbol = fromCurrency === 'USD' ? '$' : fromCurrency === 'EUR' ? '€' : fromCurrency === 'GBP' ? '£' : '';
+      feeAmount.textContent = fee > 0 ? `${feeSymbol}${fee}` : '$0';
+      
+      // Update FX rate display
+      fxRate.textContent = `1 ${fromCurrency} = ${info.rate.toFixed(4)} ${toCurrency}`;
+      
+      // Update savings highlight
+      if (currentProvider === 'our-price') {
+        savingsHighlight.textContent = `Save up to ${savings} vs traditional banks`;
+        savingsHighlight.style.display = 'block';
+      } else {
+        savingsHighlight.style.display = 'none';
+      }
+      
+      // Add animation effect
+      resultAmount.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        resultAmount.style.transform = 'scale(1)';
+      }, 200);
+      
+    } catch (error) {
+      console.error('Error updating result:', error);
+      
+      // Show fallback data
       resultAmount.textContent = amount.toFixed(2);
       resultCurrency.textContent = toCurrency;
+      resultAmount.style.opacity = '1';
       feeAmount.textContent = '$0';
       fxRate.textContent = `1 ${fromCurrency} = 1.0000 ${toCurrency}`;
-      savingsHighlight.textContent = 'Rate not available';
-      return;
-    }
-    
-    const { rate, fee, savings } = providerRates[rateKey];
-    const totalReceived = (amount * rate) - fee;
-    
-    // Update result display
-    resultAmount.textContent = totalReceived.toFixed(2);
-    resultCurrency.textContent = toCurrency;
-    
-    // Update fee display
-    const feeSymbol = fromCurrency === 'USD' ? '$' : fromCurrency === 'EUR' ? '€' : fromCurrency === 'GBP' ? '£' : '';
-    feeAmount.textContent = fee > 0 ? `${feeSymbol}${fee}` : '$0';
-    
-    // Update FX rate display
-    fxRate.textContent = `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
-    
-    // Update savings highlight
-    if (currentProvider === 'our-price') {
-      savingsHighlight.textContent = `Save up to ${savings} vs traditional banks`;
+      savingsHighlight.textContent = 'Live rates temporarily unavailable';
       savingsHighlight.style.display = 'block';
-    } else {
-      savingsHighlight.style.display = 'none';
+      
+      // Hide loading indicator
+      if (loadingIndicator) {
+        loadingIndicator.style.display = 'none';
+      }
+    } finally {
+      isLoading = false;
+      
+      // Reset button state
+      if (calculateBtn) {
+        calculateBtn.disabled = false;
+        const calculateText = calculateBtn.querySelector('.calculate-text');
+        const calculateLoading = calculateBtn.querySelector('.calculate-loading');
+        if (calculateText) calculateText.style.display = 'inline';
+        if (calculateLoading) calculateLoading.style.display = 'none';
+      }
     }
-    
-    // Add animation effect
-    resultAmount.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-      resultAmount.style.transform = 'scale(1)';
-    }, 200);
   }
 
   // Initialize calculator
