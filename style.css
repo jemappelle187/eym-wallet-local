@@ -11972,7 +11972,7 @@ html {
 
 .column-header {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2.5fr 1fr 1fr 1.2fr;
   gap: 8px;
   padding: 4px 0;
   margin-bottom: 6px;
@@ -11991,40 +11991,23 @@ html {
 
 .column-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2.5fr 1fr 1fr 1.2fr;
   align-items: center;
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  cursor: pointer;
 }
 
 .column-row:hover .competitor-provider.scroll-text {
   animation-play-state: paused;
 }
 
-/* Provider text hover expand */
+/* Provider text - wider column for better readability */
 .competitor-provider {
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.competitor-provider:hover {
-  overflow: visible;
-  white-space: normal;
-  position: absolute;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  min-width: 200px;
-  max-width: 300px;
-  word-wrap: break-word;
+  font-size: 11px;
+  line-height: 1.2;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .column-row:last-child {
