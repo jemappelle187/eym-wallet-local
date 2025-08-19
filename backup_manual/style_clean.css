@@ -786,6 +786,7 @@ body {
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -6px);
 }
+
 /* Premium Buttons */
 .btn {
   display: inline-flex;
@@ -1584,6 +1585,9 @@ body {
   background: white;
   border-radius: 1px;
 }
+
+
+
 /* Home Indicator */
 .home-indicator {
   position: absolute;
@@ -2382,6 +2386,7 @@ body {
 .footer-content .footer-section.regulatory-col {
   grid-column: 3 / -1;
 }
+
 @media (max-width: 768px) {
   .footer-section.regulatory-col p {
     font-size: 10px;
@@ -3178,6 +3183,7 @@ body {
   margin-bottom: 16px;
   flex-wrap: wrap;
 }
+
 .calc-badge {
   display: flex;
   align-items: center;
@@ -3970,6 +3976,7 @@ body {
   margin: 0;
   text-align: center;
 }
+
 .method-features li {
   padding: 0;
   font-size: 14px;
@@ -4766,6 +4773,7 @@ body {
   color: var(--color-text-primary);
   position: relative;
 }
+
 /* Special handling for hero section to keep video visible */
 .hero.section-bg-light {
   background: none;
@@ -5565,6 +5573,7 @@ input:focus, select:focus, textarea:focus{
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(180deg); }
 }
+
 .cta-content {
   position: relative;
   z-index: 2;
@@ -6363,6 +6372,7 @@ html {
     height: 480px !important;
   }
 }
+
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   /* Remove hover effects on touch devices */
@@ -7162,6 +7172,7 @@ html {
 .dark-mode .footer-legal p {
   color: var(--dark-text-muted) !important;
 }
+
 .dark-mode .legal-links a {
   color: var(--dark-text-secondary) !important;
 }
@@ -7960,6 +7971,7 @@ html {
   transform: translateX(-100%);
   z-index: 1;
 }
+
 .slide-content {
   display: flex;
   flex-direction: column;
@@ -8738,6 +8750,7 @@ html {
   border-radius: 12px;
   border: 1px solid rgba(34, 197, 94, 0.2);
 }
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .calculator-container {
@@ -8785,7 +8798,6 @@ html {
   justify-content: center;
   padding: 4rem 0;
   overflow: hidden;
-  background: #ffffff;
 }
 
 .remittance-calculator .calculator-header {
@@ -9516,6 +9528,7 @@ html {
     gap: 20px;
   }
 }
+
 /* Mobile responsive styles for Add Send Receive section */
 @media (max-width: 768px) {
   .addsendreceive-container {
@@ -10312,6 +10325,7 @@ html {
   width: 80px;
   height: 20px;
 }
+
 .arrow-path {
   stroke: currentColor;
   stroke-width: 2;
@@ -11038,6 +11052,7 @@ html {
     font-size: 0.75rem;
   }
 }
+        
         /* Slider Button Styles */
         .slider-btn {
           display: inline-flex;

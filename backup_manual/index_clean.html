@@ -118,22 +118,22 @@
         <div class="nav-cards">
           <div class="nav-card">
             <span class="nav-icon">👤</span>
-          <a href="#individuals" class="nav-link">Individuals</a>
+            <a href="#individuals" class="nav-link">Individuals</a>
           </div>
           <div class="nav-card">
             <span class="nav-icon">🏢</span>
-          <a href="#businesses" class="nav-link">Businesses</a>
+            <a href="#businesses" class="nav-link">Businesses</a>
           </div>
           <div class="nav-card">
             <span class="nav-icon">💳</span>
             <a href="#virtual-cards" class="nav-link">Virtual Credit Card</a>
-        </div>
+          </div>
           <div class="nav-card">
             <span class="nav-icon">🏛️</span>
-          <a href="#company" class="nav-link">Company</a>
+            <a href="#company" class="nav-link">Company</a>
           </div>
         </div>
-
+        
         <!-- Navbar Controls -->
         <div class="nav-controls">
           <button class="nav-btn dark-mode-btn" id="darkModeBtn" aria-label="Toggle dark mode">
@@ -294,8 +294,8 @@
           <svg class="press-logo" viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock CNBC"><rect width="120" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#ff0000" font-size="12" font-family="Montserrat, Arial" font-weight="700">CNBC</text></svg>
           <svg class="press-logo" viewBox="0 0 140 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mock Yahoo Finance"><rect width="140" height="24" rx="4" fill="none"/><text x="12" y="16" fill="#6366f1" font-size="12" font-family="Montserrat, Arial" font-weight="700">YAHOO FINANCE</text></svg>
         </div>
-          </div>
-        </div>
+      </div>
+    </div>
 
 
 
@@ -675,7 +675,7 @@
         <div class="calculator-header text-center">
           <h2>See How Much More Your Family Receives</h2>
           <p class="calculator-subtitle">Transparent pricing. Instant delivery. No hidden fees.</p>
-          </div>
+        </div>
 
         <!-- Comparison Toggle -->
         <div class="comparison-toggle">
@@ -683,8 +683,8 @@
             <button class="toggle-tab active" data-option="our-price">Our Price</button>
             <button class="toggle-tab" data-option="bank-price">Bank Price</button>
             <button class="toggle-tab" data-option="western-union">Western Union</button>
-            </div>
-            </div>
+          </div>
+        </div>
 
         <!-- Calculator Container -->
         <div class="calculator-container glassmorphism-card">
@@ -701,8 +701,8 @@
         <span class="mini-caret">▾</span>
       </button>
       <ul id="mr-from-list" class="mini-select__list" role="listbox" tabindex="-1" hidden></ul>
-            </div>
-          </div>
+    </div>
+  </div>
 
   <button id="mr-swap" class="mini-swap" aria-label="Swap currencies">⇄</button>
 
@@ -716,7 +716,7 @@
       <div id="mr-loading" class="mini-loading" hidden>
         <span class="mini-spinner"></span> Getting rate…
       </div>
-      <div id="mr-error" class="mini-error" hidden>Couldn't load rate. Try again.</div>
+      <div id="mr-error" class="mini-error" hidden>Couldn’t load rate. Try again.</div>
     </div>
 
     <div class="mini-select">
@@ -936,8 +936,8 @@
         </div>
       </div>
     </section>
-      </div>
-    </section>
+  </div>
+</section>
 
 <!-- Partnered With Slider -->
 <section class="partnered-section">
@@ -1793,7 +1793,7 @@
     setError(""); setLoading(true);
     getQuote({ from, to, amount, signal: aborter.signal })
       .then((q) => { els.receive.textContent = fmt(q.receiveAmount); els.rate.textContent = `1 ${from} = ${q.rate.toFixed(4)} ${to}`; els.fee.textContent = fmt(q.fee); els.eta.textContent = q.etaLabel ? `• ${q.etaLabel}` : ""; })
-      .catch((e) => { if (e?.name !== "AbortError") setError("Couldn't load rate. Try again."); })
+      .catch((e) => { if (e?.name !== "AbortError") setError("Couldn’t load rate. Try again."); })
       .finally(() => setLoading(false));
   }
   buildList(els.fromList, from, setFrom);
