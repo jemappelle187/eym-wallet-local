@@ -8595,10 +8595,10 @@ html {
 }
 
 .glassmorphism-card {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: #1e40af !important; /* test: brand blue */
   backdrop-filter: blur(30px) !important;
   -webkit-backdrop-filter: blur(30px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.1),
     0 8px 32px rgba(102, 126, 234, 0.1),
