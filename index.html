@@ -720,13 +720,20 @@
               <div class="calculator-row">
                 <div class="calculator-input-group">
                   <div class="calculator-label">From</div>
-                  <div class="currency-selector-row">
-                    <span class="currency-selector-flag">🇺🇸</span>
-                    <span class="currency-selector-text">USD</span>
-                    <span class="currency-selector-symbol">$</span>
+                  <div class="currency-selector-row" onclick="toggleCurrencyDropdown('from1')">
+                    <span class="currency-selector-flag" id="from1-flag">🇺🇸</span>
+                    <span class="currency-selector-text" id="from1-currency">USD</span>
+                    <span class="currency-selector-symbol" id="from1-symbol">$</span>
                     <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
                     </svg>
+                  </div>
+                  <div class="currency-dropdown" id="from1-dropdown">
+                    <div class="currency-option" data-currency="USD" data-flag="🇺🇸" data-symbol="$" onclick="selectCurrency('from1', this)">🇺🇸 USD $</div>
+                    <div class="currency-option" data-currency="EUR" data-flag="🇪🇺" data-symbol="€" onclick="selectCurrency('from1', this)">🇪🇺 EUR €</div>
+                    <div class="currency-option" data-currency="GBP" data-flag="🇬🇧" data-symbol="£" onclick="selectCurrency('from1', this)">🇬🇧 GBP £</div>
+                    <div class="currency-option" data-currency="GHS" data-flag="🇬🇭" data-symbol="₵" onclick="selectCurrency('from1', this)">🇬🇭 GHS ₵</div>
+                    <div class="currency-option" data-currency="NGN" data-flag="🇳🇬" data-symbol="₦" onclick="selectCurrency('from1', this)">🇳🇬 NGN ₦</div>
                   </div>
                 </div>
                 <div class="calculator-input-group">
@@ -739,13 +746,20 @@
               <div class="calculator-row">
                 <div class="calculator-input-group">
                   <div class="calculator-label">To</div>
-                  <div class="currency-selector-row">
-                    <span class="currency-selector-flag">🇪🇺</span>
-                    <span class="currency-selector-text">EUR</span>
-                    <span class="currency-selector-symbol">€</span>
+                  <div class="currency-selector-row" onclick="toggleCurrencyDropdown('to1')">
+                    <span class="currency-selector-flag" id="to1-flag">🇪🇺</span>
+                    <span class="currency-selector-text" id="to1-currency">EUR</span>
+                    <span class="currency-selector-symbol" id="to1-symbol">€</span>
                     <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
                     </svg>
+                  </div>
+                  <div class="currency-dropdown" id="to1-dropdown">
+                    <div class="currency-option" data-currency="USD" data-flag="🇺🇸" data-symbol="$" onclick="selectCurrency('to1', this)">🇺🇸 USD $</div>
+                    <div class="currency-option" data-currency="EUR" data-flag="🇪🇺" data-symbol="€" onclick="selectCurrency('to1', this)">🇪🇺 EUR €</div>
+                    <div class="currency-option" data-currency="GBP" data-flag="🇬🇧" data-symbol="£" onclick="selectCurrency('to1', this)">🇬🇧 GBP £</div>
+                    <div class="currency-option" data-currency="GHS" data-flag="🇬🇭" data-symbol="₵" onclick="selectCurrency('to1', this)">🇬🇭 GHS ₵</div>
+                    <div class="currency-option" data-currency="NGN" data-flag="🇳🇬" data-symbol="₦" onclick="selectCurrency('to1', this)">🇳🇬 NGN ₦</div>
                   </div>
                 </div>
                 <div class="calculator-input-group">
@@ -822,13 +836,20 @@
               <div class="calculator-row">
                 <div class="calculator-input-group">
                   <div class="calculator-label">From</div>
-                  <div class="currency-selector-row">
-                    <span class="currency-selector-flag">🇺🇸</span>
-                    <span class="currency-selector-text">USD</span>
-                    <span class="currency-selector-symbol">$</span>
+                  <div class="currency-selector-row" onclick="toggleCurrencyDropdown('from2')">
+                    <span class="currency-selector-flag" id="from2-flag">🇺🇸</span>
+                    <span class="currency-selector-text" id="from2-currency">USD</span>
+                    <span class="currency-selector-symbol" id="from2-symbol">$</span>
                     <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
                     </svg>
+                  </div>
+                  <div class="currency-dropdown" id="from2-dropdown">
+                    <div class="currency-option" data-currency="USD" data-flag="🇺🇸" data-symbol="$" onclick="selectCurrency('from2', this)">🇺🇸 USD $</div>
+                    <div class="currency-option" data-currency="EUR" data-flag="🇪🇺" data-symbol="€" onclick="selectCurrency('from2', this)">🇪🇺 EUR €</div>
+                    <div class="currency-option" data-currency="GBP" data-flag="🇬🇧" data-symbol="£" onclick="selectCurrency('from2', this)">🇬🇧 GBP £</div>
+                    <div class="currency-option" data-currency="GHS" data-flag="🇬🇭" data-symbol="₵" onclick="selectCurrency('from2', this)">🇬🇭 GHS ₵</div>
+                    <div class="currency-option" data-currency="NGN" data-flag="🇳🇬" data-symbol="₦" onclick="selectCurrency('from2', this)">🇳🇬 NGN ₦</div>
                   </div>
                 </div>
                 <div class="calculator-input-group">
@@ -841,13 +862,20 @@
               <div class="calculator-row">
                 <div class="calculator-input-group">
                   <div class="calculator-label">To</div>
-                  <div class="currency-selector-row">
-                    <span class="currency-selector-flag">🇪🇺</span>
-                    <span class="currency-selector-text">EUR</span>
-                    <span class="currency-selector-symbol">€</span>
+                  <div class="currency-selector-row" onclick="toggleCurrencyDropdown('to2')">
+                    <span class="currency-selector-flag" id="to2-flag">🇪🇺</span>
+                    <span class="currency-selector-text" id="to2-currency">EUR</span>
+                    <span class="currency-selector-symbol" id="to2-symbol">€</span>
                     <svg class="currency-selector-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
                     </svg>
+                  </div>
+                  <div class="currency-dropdown" id="to2-dropdown">
+                    <div class="currency-option" data-currency="USD" data-flag="🇺🇸" data-symbol="$" onclick="selectCurrency('to2', this)">🇺🇸 USD $</div>
+                    <div class="currency-option" data-currency="EUR" data-flag="🇪🇺" data-symbol="€" onclick="selectCurrency('to2', this)">🇪🇺 EUR €</div>
+                    <div class="currency-option" data-currency="GBP" data-flag="🇬🇧" data-symbol="£" onclick="selectCurrency('to2', this)">🇬🇧 GBP £</div>
+                    <div class="currency-option" data-currency="GHS" data-flag="🇬🇭" data-symbol="₵" onclick="selectCurrency('to2', this)">🇬🇭 GHS ₵</div>
+                    <div class="currency-option" data-currency="NGN" data-flag="🇳🇬" data-symbol="₦" onclick="selectCurrency('to2', this)">🇳🇬 NGN ₦</div>
                   </div>
                 </div>
                 <div class="calculator-input-group">
@@ -1833,6 +1861,55 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+});
+
+// Currency Dropdown Functionality
+function toggleCurrencyDropdown(selectorId) {
+  // Close all other dropdowns first
+  const allDropdowns = document.querySelectorAll('.currency-dropdown');
+  allDropdowns.forEach(dropdown => {
+    if (dropdown.id !== `${selectorId}-dropdown`) {
+      dropdown.style.display = 'none';
+    }
+  });
+  
+  // Toggle the clicked dropdown
+  const dropdown = document.getElementById(`${selectorId}-dropdown`);
+  if (dropdown) {
+    const isVisible = dropdown.style.display === 'block';
+    dropdown.style.display = isVisible ? 'none' : 'block';
+  }
+}
+
+function selectCurrency(selectorId, optionElement) {
+  const currency = optionElement.getAttribute('data-currency');
+  const flag = optionElement.getAttribute('data-flag');
+  const symbol = optionElement.getAttribute('data-symbol');
+  
+  // Update the selector display
+  document.getElementById(`${selectorId}-flag`).textContent = flag;
+  document.getElementById(`${selectorId}-currency`).textContent = currency;
+  document.getElementById(`${selectorId}-symbol`).textContent = symbol;
+  
+  // Close the dropdown
+  document.getElementById(`${selectorId}-dropdown`).style.display = 'none';
+  
+  // Update selected state
+  const dropdown = document.getElementById(`${selectorId}-dropdown`);
+  dropdown.querySelectorAll('.currency-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+  optionElement.classList.add('selected');
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.currency-selector-row') && !event.target.closest('.currency-dropdown')) {
+    const allDropdowns = document.querySelectorAll('.currency-dropdown');
+    allDropdowns.forEach(dropdown => {
+      dropdown.style.display = 'none';
+    });
+  }
 });
 </script>
 
