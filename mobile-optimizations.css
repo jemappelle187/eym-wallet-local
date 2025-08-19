@@ -598,12 +598,12 @@ body.drawer-open {
 .press-bar .press-logo,
 .press-bar svg.press-logo,
 .press-bar img.press-logo {
-  height: 16px !important;
+  height: 8px !important;
   width: auto !important;
 }
 
 .press-bar .press-track {
-  gap: 16px !important;
+  gap: 8px !important;
 }
 
 /* Override the media query in main CSS */
@@ -611,12 +611,12 @@ body.drawer-open {
   .press-bar .press-logo,
   .press-bar svg.press-logo,
   .press-bar img.press-logo {
-    height: 16px !important;
+    height: 8px !important;
     width: auto !important;
   }
   
   .press-bar .press-track {
-    gap: 16px !important;
+    gap: 8px !important;
   }
 }
 
