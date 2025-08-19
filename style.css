@@ -11559,7 +11559,12 @@ html {
 }
 
 .toggle-btn:focus-visible {
-  outline: none;
+  outline: none !important;
+}
+
+.toggle-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ==== Calculator Views ==== */
@@ -11757,7 +11762,12 @@ html {
 }
 
 .currency-swap-button:focus-visible {
-  outline: none;
+  outline: none !important;
+}
+
+.currency-swap-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .currency-swap-button svg {
@@ -11776,6 +11786,23 @@ html {
 .calculator-container {
   position: relative;
   overflow: visible;
+}
+
+/* Override global focus styles for calculator buttons */
+.calculator-container button:focus,
+.calculator-container button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.calculator-container .toggle-btn:focus,
+.calculator-container .toggle-btn:focus-visible,
+.calculator-container .refresh-button:focus,
+.calculator-container .refresh-button:focus-visible,
+.calculator-container .currency-swap-button:focus,
+.calculator-container .currency-swap-button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Calculator Input */
@@ -11901,7 +11928,12 @@ html {
 }
 
 .refresh-button:focus-visible {
-  outline: none;
+  outline: none !important;
+}
+
+.refresh-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .last-updated-text {
