@@ -1764,14 +1764,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      // Update pill icon based on view
+      // Update pill icon based on view with smooth transition
       togglePills.forEach(pill => {
         const pillIcon = pill.querySelector('.toggle-pill-icon svg');
-        if (targetView === 'calculator') {
-          pillIcon.innerHTML = '<path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>';
-        } else {
-          pillIcon.innerHTML = '<path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>';
-        }
+        
+        // Add transition class for smooth icon change
+        pillIcon.style.transition = 'opacity 0.15s ease';
+        pillIcon.style.opacity = '0';
+        
+        setTimeout(() => {
+          if (targetView === 'calculator') {
+            pillIcon.innerHTML = '<path d="M9 7h6v10H9V7zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>';
+          } else {
+            pillIcon.innerHTML = '<path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>';
+          }
+          pillIcon.style.opacity = '1';
+        }, 150);
       });
       
       // Update views
