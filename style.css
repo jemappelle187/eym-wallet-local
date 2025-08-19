@@ -11807,14 +11807,15 @@ html {
 
 .competitor-item {
   background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-bottom: 6px;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
   box-shadow: 0 1px 4px rgba(99, 102, 241, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  height: 32px;
 }
 
 .competitor-item.our-service {
@@ -11830,8 +11831,8 @@ html {
 }
 
 .competitor-logo {
-  font-size: 18px;
-  margin-right: 6px;
+  font-size: 14px;
+  margin-right: 4px;
 }
 
 .competitor-info {
@@ -11843,40 +11844,41 @@ html {
 
 .competitor-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   color: #1e293b;
-  margin-bottom: 2px;
+  margin-bottom: 0;
+  line-height: 1;
 }
 
 .competitor-badge {
   background: #10b981;
-  border-radius: 6px;
-  padding: 1px 6px;
+  border-radius: 4px;
+  padding: 1px 4px;
   align-self: flex-start;
-  margin-top: 2px;
-  margin-bottom: 1px;
+  margin-top: 1px;
+  margin-bottom: 0;
 }
 
 .competitor-badge::before {
   content: "Best";
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
 }
 
 .competitor-details {
   display: flex;
   flex-direction: row;
-  gap: 8px;
-  margin-top: 1px;
+  gap: 6px;
+  margin-top: 0;
 }
 
 .competitor-rate,
 .competitor-fee {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 9px;
   color: #64748b;
 }
 
@@ -11890,7 +11892,7 @@ html {
 
 .competitor-amount {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: #334155;
   text-align: right;
@@ -11902,7 +11904,7 @@ html {
 
 .competitor-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 8px;
   color: #64748b;
   text-align: right;
 }
