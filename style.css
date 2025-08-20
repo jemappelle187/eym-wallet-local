@@ -11554,12 +11554,14 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   z-index: 2;
   height: 48px;
   border: none;
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .toggle-btn:hover {
@@ -11576,6 +11578,12 @@ html {
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
   pointer-events: none;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
 }
 
 .toggle-btn:hover .toggle-text {
@@ -12149,6 +12157,12 @@ html {
   
   .toggle-text {
     font-size: 11px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
   }
   
   .calculator-row {
@@ -12310,6 +12324,12 @@ html {
   
   .toggle-text {
     font-size: 10px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
   }
   
   .calculator-row {
