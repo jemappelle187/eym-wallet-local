@@ -589,21 +589,38 @@ body.drawer-open {
   left: 0 !important;
   transform: none !important;
   margin: 0 !important;
-  border: 0 !important;
+  border: none !important;
   background: #ffffff !important;
   padding: 12px 0 !important;
+  overflow: visible !important;
+  /* Remove any potential visual separation */
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* Increase press bar content size on mobile */
 .press-bar .press-logo,
 .press-bar svg.press-logo,
 .press-bar img.press-logo {
-  height: 36px !important;
+  height: 60px !important;
   width: auto !important;
+  min-width: 120px !important;
 }
 
 .press-bar .press-track {
-  gap: 36px !important;
+  gap: 48px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.press-bar .press-ticker {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
 }
 
 /* Override the media query in main CSS */
@@ -611,13 +628,103 @@ body.drawer-open {
   .press-bar .press-logo,
   .press-bar svg.press-logo,
   .press-bar img.press-logo {
-    height: 36px !important;
+    height: 60px !important;
     width: auto !important;
+    min-width: 120px !important;
+  }
+  
+  .press-bar .press-track {
+    gap: 48px !important;
+  }
+  
+  /* Increase padding for better spacing */
+  .press-bar {
+    padding: 20px 0 !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .press-bar .press-logo,
+  .press-bar svg.press-logo,
+  .press-bar img.press-logo {
+    height: 50px !important;
+    min-width: 100px !important;
   }
   
   .press-bar .press-track {
     gap: 36px !important;
   }
+}
+
+/* Enhanced press bar styling for better visibility */
+.press-bar.press-clean {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 20px 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  /* Ensure no visual separation from hero section */
+  border-top: none !important;
+  border-bottom: none !important;
+  outline: none !important;
+}
+
+/* Mobile-specific press bar fixes */
+@media (max-width: 768px) {
+  .press-bar.press-clean {
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 20px 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 10 !important;
+    /* Remove any potential top border/shadow */
+    border-top: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  /* Ensure no dark edges from parent containers */
+  .press-bar.press-clean * {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Remove any potential spacing issues */
+  .press-bar.press-clean::before,
+  .press-bar.press-clean::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.press-bar .press-logo {
+  filter: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.press-bar .press-logo:hover {
+  transform: scale(1.05) !important;
+  filter: none !important;
+}
+
+/* Improve animation smoothness */
+.press-track {
+  animation: press-slide 40s linear infinite !important;
+}
+
+@keyframes press-slide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* Fix "We Are Here For" section background */
