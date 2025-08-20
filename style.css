@@ -12483,31 +12483,12 @@ html {
       inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
   }
   
-  .calculator-container .calc-video-bg {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-  
+  /* Ensure calculator background video is visible on all viewports, including iOS */
+  .calculator-container .calc-video-bg,
   .calculator-container .calc-video-bg video {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-  
-  /* Ensure video continues playing on desktop */
-  @media (min-width: 769px) {
-    .calculator-container .calc-video-bg {
-      display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-    
-    .calculator-container .calc-video-bg video {
-      display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   
   .mobile-calculator {
