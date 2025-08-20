@@ -2234,6 +2234,12 @@ document.addEventListener('DOMContentLoaded', function() {
         ratesView.classList.add('active');
         togglePill.classList.remove('active');
       }
+      
+      // Ensure video continues playing smoothly
+      const video = calculatorContainer.querySelector('.calc-video-bg video');
+      if (video && video.paused) {
+        video.play().catch(e => console.log('Video autoplay prevented'));
+      }
     });
   });
 });

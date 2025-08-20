@@ -12343,6 +12343,10 @@ html {
     background: #f8fafc !important;
   }
   
+  .remittance-calculator .container {
+    background: #f8fafc !important;
+  }
+  
   .remittance-calculator .calculator-header h2 {
     color: #1e293b !important;
   }
@@ -12363,6 +12367,13 @@ html {
   
   .calculator-container .calc-video-bg {
     display: none !important;
+  }
+  
+  /* Ensure video continues playing on desktop */
+  @media (min-width: 769px) {
+    .calculator-container .calc-video-bg {
+      display: block !important;
+    }
   }
   
   .mobile-calculator {
