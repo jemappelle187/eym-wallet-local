@@ -12278,11 +12278,13 @@ html {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    justify-content: center;
   }
   
   .rate-status-row {
-    gap: 16px;
-    justify-content: space-between;
+    gap: 12px;
+    justify-content: center;
+    width: auto;
   }
   
   .rate-status-text {
@@ -12299,6 +12301,7 @@ html {
   .last-updated-text {
     font-size: 9px;
     margin-top: 0;
+    text-align: center !important;
   }
   
   .competitor-comparison {
