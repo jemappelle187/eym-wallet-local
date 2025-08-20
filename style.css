@@ -12369,50 +12369,48 @@ html {
     font-size: 9px;
   }
   
-  /* Mobile Light Background Override */
-  .remittance-calculator {
-    background: #f8fafc !important;
+  /* Mobile Light Background Override - Use same as section-bg-light */
+  .remittance-calculator.section-bg-light {
+    background: linear-gradient(180deg, 
+      #ffffff 0%, 
+      #ffffff 10%, 
+      #e6f3ff 50%, 
+      #ffffff 90%, 
+      #ffffff 100%
+    ) !important;
     position: relative;
   }
   
-  .remittance-calculator::before {
+  .remittance-calculator.section-bg-light::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #f8fafc !important;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0) 10%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(255, 255, 255, 0) 90%, 
+      rgba(255, 255, 255, 0) 100%
+    ) !important;
+    pointer-events: none;
     z-index: 1;
   }
   
-  .remittance-calculator .container {
-    background: #f8fafc !important;
+  .remittance-calculator.section-bg-light .container {
+    background: transparent !important;
     position: relative;
     z-index: 2;
   }
   
-  /* Override any dark backgrounds */
-  .remittance-calculator * {
-    background-color: transparent !important;
+  .remittance-calculator.section-bg-light .calculator-header h2 {
+    color: var(--color-text-primary) !important;
   }
   
-  .remittance-calculator {
-    background-color: #f8fafc !important;
-    background-image: none !important;
-  }
-  
-  .remittance-calculator .container {
-    background-color: #f8fafc !important;
-    background-image: none !important;
-  }
-  
-  .remittance-calculator .calculator-header h2 {
-    color: #1e293b !important;
-  }
-  
-  .remittance-calculator .calculator-subtitle {
-    color: #64748b !important;
+  .remittance-calculator.section-bg-light .calculator-subtitle {
+    color: var(--color-text-secondary) !important;
   }
   
   .calculator-container {
