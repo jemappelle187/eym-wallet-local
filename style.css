@@ -12623,16 +12623,11 @@ html {
     color: #1e40af !important;
   }
   
-  /* Ensure video is hidden on small mobile */
-  .calculator-container .calc-video-bg {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-  
+  /* Keep calculator video visible on all mobile sizes (including small iPhones) */
+  .calculator-container .calc-video-bg,
   .calculator-container .calc-video-bg video {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
