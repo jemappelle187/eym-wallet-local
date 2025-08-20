@@ -11950,22 +11950,24 @@ html {
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .rate-status-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 0;
   gap: 12px;
+  width: 100%;
 }
 
 .rate-status-left {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .rate-status-success {
@@ -12007,7 +12009,8 @@ html {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
-  text-align: center;
+  text-align: right;
+  margin-left: auto;
 }
 
 /* Competitor Comparison */
@@ -12268,11 +12271,12 @@ html {
   
   .rate-status-container {
     margin-top: 16px;
-    padding: 12px;
+    padding: 0;
   }
   
   .rate-status-row {
     gap: 16px;
+    justify-content: space-between;
   }
   
   .rate-status-text {
