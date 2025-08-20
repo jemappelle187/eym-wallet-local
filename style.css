@@ -11995,7 +11995,7 @@ html {
 }
 
 .refresh-button {
-  padding: 6px;
+  padding: 4px 6px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -12282,7 +12282,7 @@ html {
   }
   
   .rate-status-row {
-    gap: 12px;
+    gap: 8px;
     justify-content: center;
     width: auto;
   }
