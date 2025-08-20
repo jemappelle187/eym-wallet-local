@@ -11953,6 +11953,9 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .rate-status-row {
@@ -12272,6 +12275,9 @@ html {
   .rate-status-container {
     margin-top: 16px;
     padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   
   .rate-status-row {
@@ -12284,12 +12290,15 @@ html {
   }
   
   .refresh-button {
-    padding: 8px;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   
   .last-updated-text {
     font-size: 9px;
-    margin-top: 4px;
+    margin-top: 0;
   }
   
   .competitor-comparison {
@@ -12537,8 +12546,8 @@ html {
   }
   
   .rate-status-container {
-    background: rgba(255, 255, 255, 0.8) !important;
-    border: 1px solid rgba(30, 64, 175, 0.1) !important;
+    background: transparent !important;
+    border: none !important;
   }
   
   .rate-status-success {
@@ -12550,13 +12559,13 @@ html {
   }
   
   .refresh-button {
-    background: rgba(30, 64, 175, 0.1) !important;
-    border: 1px solid rgba(30, 64, 175, 0.2) !important;
+    background: transparent !important;
+    border: none !important;
     color: #1e40af !important;
   }
   
   .refresh-button:hover {
-    background: rgba(30, 64, 175, 0.15) !important;
+    background: transparent !important;
   }
   
   .last-updated-text {
