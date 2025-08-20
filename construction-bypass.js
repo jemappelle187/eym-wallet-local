@@ -110,15 +110,16 @@
     // Expose clearBypass function globally for testing
     window.clearBypass = clearBypass;
     
-    // Initialize when DOM is ready
+    // Run immediately for faster redirect
+    redirectToAppropriatePage();
+    addBypassLink();
+    
+    // Also run when DOM is ready as backup
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             redirectToAppropriatePage();
             addBypassLink();
         });
-    } else {
-        redirectToAppropriatePage();
-        addBypassLink();
     }
     
     // Also run on page load for SPA-like behavior
