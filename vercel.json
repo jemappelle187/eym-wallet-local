@@ -17,6 +17,12 @@
       }
     },
     {
+      "src": "/index.html",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0"
+      }
+    },
+    {
       "src": "/service-worker.js",
       "headers": {
         "Content-Type": "application/javascript",
@@ -42,9 +48,15 @@
       }
     },
     {
+      "src": "/mobile-optimizations.css",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
       "src": "/script.js",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "Cache-Control": "public, max-age=0, must-revalidate"
       }
     },
     {
