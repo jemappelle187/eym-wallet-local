@@ -12012,8 +12012,8 @@ html {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
-  text-align: right;
-  margin-left: auto;
+  text-align: center;
+  margin-left: 0;
 }
 
 /* Competitor Comparison */
@@ -12302,6 +12302,7 @@ html {
     font-size: 9px;
     margin-top: 0;
     text-align: center !important;
+    margin-left: 0 !important;
   }
   
   .competitor-comparison {
