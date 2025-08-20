@@ -2235,9 +2235,9 @@ document.addEventListener('DOMContentLoaded', function() {
         togglePill.classList.remove('active');
       }
       
-      // Ensure video continues playing smoothly
+      // Ensure video continues playing smoothly (desktop only)
       const video = calculatorContainer.querySelector('.calc-video-bg video');
-      if (video && video.paused) {
+      if (video && video.paused && window.innerWidth > 768) {
         video.play().catch(e => console.log('Video autoplay prevented'));
       }
     });

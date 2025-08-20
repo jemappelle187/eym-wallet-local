@@ -12278,6 +12278,15 @@ html {
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
+  /* Ensure light background on small mobile */
+  .remittance-calculator {
+    background: #f8fafc !important;
+  }
+  
+  .remittance-calculator .container {
+    background: #f8fafc !important;
+  }
+  
   .calculator-container {
     padding: 12px;
     margin: 0 4px;
@@ -12506,5 +12515,10 @@ html {
   .currency-option.selected {
     background: rgba(30, 64, 175, 0.15) !important;
     color: #1e40af !important;
+  }
+  
+  /* Ensure video is hidden on small mobile */
+  .calculator-container .calc-video-bg {
+    display: none !important;
   }
 }
