@@ -411,10 +411,11 @@ body {
 
 /* ensure footer content is not covered by desktop pill bar */
 @media (min-width: 769px) {
-  body { padding-bottom: 140px; }
+  body { 
+    padding-bottom: 60px; 
+  }
   footer.footer, .footer { 
-    padding-bottom: 160px !important; 
-    background: var(--gray-900, #0f172a);
+    padding-bottom: 20px !important; 
   }
 }
 
@@ -2399,10 +2400,27 @@ body {
 
 @media (max-width: 768px) {
   .footer-section.regulatory-col p {
-    font-size: 10px;
+    font-size: 12px;
   }
   .footer-content .footer-section.regulatory-col {
     grid-column: auto;
+  }
+  
+  /* Ensure regulatory section is always visible on mobile */
+  .footer-section.regulatory-col .footer-links {
+    max-height: none !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    padding-top: var(--spacing-sm) !important;
+  }
+  
+  /* Remove any collapsible styling from regulatory section */
+  .footer-section.regulatory-col .footer-toggle {
+    display: none !important;
+  }
+  
+  .footer-section.regulatory-col .footer-header {
+    display: none !important;
   }
 }
 
@@ -2432,6 +2450,12 @@ body {
   align-items: center;
   cursor: pointer;
   padding: var(--spacing-sm) 0;
+  position: relative;
+}
+
+.footer-header h4 {
+  flex: 1;
+  margin-right: auto;
 }
 
 .footer-toggle {
@@ -2444,7 +2468,12 @@ body {
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
   display: none;
+  margin-left: auto;
+  position: absolute;
+  right: 0;
 }
+
+
 
 .footer-toggle:hover {
   color: var(--white);
@@ -2601,10 +2630,11 @@ body {
 .footer-legal {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: var(--spacing-md);
   flex-wrap: wrap;
-  text-align: center;
+  text-align: left;
+  width: 100%;
 }
 
 /* Navbar Controls Styling */
@@ -2710,8 +2740,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -2723,7 +2752,7 @@ body {
   background: var(--gray-800);
   border: 1px solid var(--gray-700);
   border-radius: 50%;
-  color: var(--gray-300);
+  color: var(--white);
   cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
@@ -2749,19 +2778,23 @@ body {
 
 .dark-mode-btn .moon-icon {
   display: none;
+  color: var(--white);
 }
 
 .dark-mode-btn .sun-icon {
   display: block;
+  color: var(--white);
 }
 
 /* Dark mode active state */
 .dark-mode-btn.active .moon-icon {
   display: block;
+  color: var(--white);
 }
 
 .dark-mode-btn.active .sun-icon {
   display: none;
+  color: var(--white);
 }
 
 /* Language Selector */
@@ -2811,6 +2844,11 @@ body {
   margin-right: 4px;
 }
 
+/* Language button icon styling */
+.language-btn svg {
+  color: var(--white);
+}
+
 /* Language dropdown positioning for footer */
 .footer-section .language-dropdown {
   bottom: 100%;
@@ -2847,7 +2885,7 @@ body {
 .legal-links {
   display: flex;
   gap: var(--spacing-md);
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -6324,7 +6362,7 @@ html {
   .footer-content {
     grid-template-columns: 1fr !important;
     gap: 30px !important;
-    text-align: center !important;
+    text-align: left !important;
   }
   
   .footer-section {
@@ -6766,6 +6804,8 @@ html {
   background-color: var(--dark-bg-primary);
   color: var(--dark-text-primary);
 }
+
+
 
 .dark-mode .navbar {
   background: rgba(15, 23, 42, 0.95);
@@ -7496,7 +7536,8 @@ html {
 /* Compact Social Media Links in Footer */
 .social-links-compact {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 4px;
   margin: 12px 0 12px 0;
   padding: 8px 0 8px 0;
@@ -7545,6 +7586,13 @@ html {
 
 .social-link-compact.tiktok:hover svg {
   color: #000000;
+}
+
+/* Social Media Group */
+.social-media-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 /* Download App Button Styling - Glassmorphism */
