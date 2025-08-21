@@ -156,18 +156,20 @@ async function sendViaSendGrid(accessLog) {
     return;
   }
   
+  const status = accessLog.isAuthorized ? '✅ ACCESS GRANTED' : '❌ ACCESS DENIED';
   const emailContent = `
 🚨 SendNReceive Website Access Alert
 
-✅ Access Granted
+${status}
 📍 IP Address: ${accessLog.ip}
-🌍 Location: ${accessLog.geoInfo.city}, ${accessLog.geoInfo.country}
+🌍 Location: ${accessLog.geoInfo.city}, ${accessLog.geoInfo.country} (${accessLog.geoInfo.countryCode})
 ⏰ Time: ${new Date(accessLog.timestamp).toLocaleString()}
-🌐 Browser: ${accessLog.userAgent}
-🔑 Password: ${accessLog.password}
+🌐 Browser: ${accessLog.userAgent?.substring(0, 100) || 'Unknown'}
+🔑 Password Attempt: ${accessLog.passwordAttempt || '[NOT PROVIDED]'}
+🕐 Timezone: ${accessLog.geoInfo.timezone}
 
 ---
-Sent from SendNReceive Construction Page
+Sent from SendNReceive Security System
   `;
   
   const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
@@ -199,18 +201,20 @@ async function sendViaResend(accessLog) {
     return;
   }
   
+  const status = accessLog.isAuthorized ? '✅ ACCESS GRANTED' : '❌ ACCESS DENIED';
   const emailContent = `
 🚨 SendNReceive Website Access Alert
 
-✅ Access Granted
+${status}
 📍 IP Address: ${accessLog.ip}
-🌍 Location: ${accessLog.geoInfo.city}, ${accessLog.geoInfo.country}
+🌍 Location: ${accessLog.geoInfo.city}, ${accessLog.geoInfo.country} (${accessLog.geoInfo.countryCode})
 ⏰ Time: ${new Date(accessLog.timestamp).toLocaleString()}
-🌐 Browser: ${accessLog.userAgent}
-🔑 Password: ${accessLog.password}
+🌐 Browser: ${accessLog.userAgent?.substring(0, 100) || 'Unknown'}
+🔑 Password Attempt: ${accessLog.passwordAttempt || '[NOT PROVIDED]'}
+🕐 Timezone: ${accessLog.geoInfo.timezone}
 
 ---
-Sent from SendNReceive Construction Page
+Sent from SendNReceive Security System
   `;
   
   const response = await fetch('https://api.resend.com/emails', {
