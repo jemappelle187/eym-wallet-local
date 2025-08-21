@@ -1,7 +1,7 @@
 // Vercel API function for tracking website access
 // Located at: /api/access-log
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   console.log('API endpoint called:', req.method, req.url);
   
   // Only allow POST requests

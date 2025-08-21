@@ -1,56 +1,16 @@
 {
   "name": "sendnreceive-website",
-  "version": "2.0.0",
-  "description": "Premium fintech website for SendNReceive - Send money to Africa instantly with zero fees",
+  "version": "1.0.0",
+  "description": "SendNReceive website with secure access control",
   "main": "index.html",
   "scripts": {
-    "start": "serve . -p 3000",
-    "dev": "live-server --port=3000 --open=/",
-    "build": "echo 'Static site - no build step required'",
-    "vercel-build": "echo 'Static site - no build step required'",
-    "test": "echo 'No tests specified'",
-    "lint": "echo 'No linting configured'",
-    "optimize-images": "echo 'Run image optimization manually'",
-    "deploy": "vercel --prod"
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "vercel dev"
   },
-  "keywords": [
-    "fintech",
-    "remittance",
-    "africa",
-    "mobile-money",
-    "pwa",
-    "responsive",
-    "premium"
-  ],
-  "author": "SendNReceive Team",
-  "license": "PROPRIETARY",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sendnreceive/website.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sendnreceive/website/issues"
-  },
-  "homepage": "https://sendnreceive.com",
-  "devDependencies": {
-    "serve": "^14.2.0",
-    "live-server": "^1.2.2"
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "engines": {
-    "node": ">=14.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "pwa": {
-    "name": "SendNReceive",
-    "short_name": "SendNReceive",
-    "description": "Send money to Africa instantly with zero fees",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#1e40af",
-    "theme_color": "#1e40af"
+    "node": ">=18.0.0"
   }
 }
