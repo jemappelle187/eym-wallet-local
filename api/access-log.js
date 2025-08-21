@@ -21,16 +21,6 @@ export default async function handler(req, res) {
                req.socket.remoteAddress ||
                'Unknown';
     
-    // Rate limiting check
-    const rateLimitResult = await checkRateLimit(ip);
-    if (!rateLimitResult.allowed) {
-      console.log('Rate limit exceeded for IP:', ip);
-      return res.status(429).json({ 
-        error: 'Too many attempts. Please try again later.',
-        retryAfter: rateLimitResult.retryAfter
-      });
-    }
-    
     // Get geographic info from IP
     const geoInfo = await getGeoInfo(ip);
     
@@ -79,7 +69,7 @@ export default async function handler(req, res) {
   }
 }
 
-// Rate limiting storage (in production, use Redis or database)
+// Simple rate limiting (in production, use Redis or database)
 const rateLimitStore = new Map();
 
 // Rate limiting function
