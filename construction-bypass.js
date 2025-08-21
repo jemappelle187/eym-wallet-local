@@ -142,8 +142,38 @@
             }
         });
         
-        // Focus on input when modal loads
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        
+        // Focus on input when modal opens
         input.focus();
+    }
+    
+    // Close modal function
+    function closeModal() {
+        const modal = document.getElementById('passwordModal');
+        const input = document.getElementById('passwordInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        
+        if (modal) {
+            modal.classList.add('hidden');
+            // Clear form
+            if (input) input.value = '';
+            if (errorMessage) errorMessage.classList.remove('show');
+            if (successMessage) successMessage.classList.remove('show');
+        }
     }
     
     // Add developer access button to construction page
@@ -199,8 +229,9 @@
         console.log('Authorization cleared. Refresh to see construction page.');
     }
     
-    // Expose clearAuthorization function globally for testing
+    // Expose functions globally for testing and modal control
     window.clearAuthorization = clearAuthorization;
+    window.closeModal = closeModal;
     
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
