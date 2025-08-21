@@ -1,44 +1,26 @@
-// Construction Page Bypass System
-// This script handles showing the construction page or bypassing to the main site
+// Enhanced Construction Page with IP Tracking and Email Notifications
+// This script handles secure password-based access with tracking
 
 (function() {
     'use strict';
     
     // Configuration
     const CONFIG = {
-        // Secret parameter to bypass construction page
-        BYPASS_PARAM: 'preview',
-        BYPASS_VALUE: '2026',
-        
         // URLs
         CONSTRUCTION_PAGE: 'under-construction.html',
         MAIN_PAGE: 'index.html',
         
-        // Local storage key to remember bypass
-        STORAGE_KEY: 'sendnreceive_bypass'
+        // Local storage key to remember access
+        STORAGE_KEY: 'sendnreceive_authorized_access',
+        
+        // API endpoint
+        API_ENDPOINT: '/api/access-log'
     };
     
-    // Check if user should see construction page
-    function shouldShowConstructionPage() {
-        // Check URL parameters first
-        const urlParams = new URLSearchParams(window.location.search);
-        const bypassParam = urlParams.get(CONFIG.BYPASS_PARAM);
-        
-        // If bypass parameter is correct, allow access
-        if (bypassParam === CONFIG.BYPASS_VALUE) {
-            // Store bypass in localStorage for future visits
-            localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
-            return false;
-        }
-        
-        // Check if user has previously bypassed
-        const hasBypassed = localStorage.getItem(CONFIG.STORAGE_KEY) === 'true';
-        if (hasBypassed) {
-            return false;
-        }
-        
-        // Show construction page by default
-        return true;
+    // Check if user is already authorized
+    function isAuthorized() {
+        const hasAccess = localStorage.getItem(CONFIG.STORAGE_KEY) === 'true';
+        return hasAccess;
     }
     
     // Redirect to appropriate page
@@ -50,82 +32,183 @@
             return;
         }
         
-        // If we should show construction page and we're not on it
-        if (shouldShowConstructionPage() && currentPage !== CONFIG.CONSTRUCTION_PAGE) {
+        // If user is not authorized and not on construction page
+        if (!isAuthorized() && currentPage !== CONFIG.CONSTRUCTION_PAGE) {
             // Redirect to construction page
             window.location.href = CONFIG.CONSTRUCTION_PAGE;
             return;
         }
         
-        // If we shouldn't show construction page and we're on it
-        if (!shouldShowConstructionPage() && currentPage === CONFIG.CONSTRUCTION_PAGE) {
+        // If user is authorized and on construction page
+        if (isAuthorized() && currentPage === CONFIG.CONSTRUCTION_PAGE) {
             // Redirect to main page
             window.location.href = CONFIG.MAIN_PAGE;
             return;
         }
     }
     
-    // Add bypass link to construction page
-    function addBypassLink() {
-        if (window.location.pathname.includes(CONFIG.CONSTRUCTION_PAGE)) {
-            // Create a subtle bypass link
-            const bypassLink = document.createElement('a');
-            bypassLink.href = `${CONFIG.MAIN_PAGE}?${CONFIG.BYPASS_PARAM}=${CONFIG.BYPASS_VALUE}`;
-            bypassLink.textContent = 'Developer Access';
-            bypassLink.style.cssText = `
-                position: fixed;
-                bottom: 10px;
-                right: 10px;
-                font-size: 10px;
-                color: rgba(255, 255, 255, 0.3);
-                text-decoration: none;
-                padding: 5px 8px;
-                border-radius: 4px;
-                background: rgba(0, 0, 0, 0.2);
-                transition: all 0.3s ease;
-                z-index: 1000;
-                font-family: monospace;
-            `;
-            
-            bypassLink.addEventListener('mouseenter', function() {
-                this.style.color = 'rgba(255, 255, 255, 0.6)';
-                this.style.background = 'rgba(0, 0, 0, 0.4)';
+    // Handle password submission
+    async function handlePasswordSubmit(password) {
+        const button = document.getElementById('passwordButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Disable button and show loading
+        button.disabled = true;
+        button.textContent = 'Verifying...';
+        errorMessage.classList.remove('show');
+        successMessage.classList.remove('show');
+        
+        try {
+            // Send password to API for verification and tracking
+            const response = await fetch(CONFIG.API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    password: password,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString()
+                })
             });
             
-            bypassLink.addEventListener('mouseleave', function() {
-                this.style.color = 'rgba(255, 255, 255, 0.3)';
-                this.style.background = 'rgba(0, 0, 0, 0.2)';
-            });
+            const data = await response.json();
             
-            document.body.appendChild(bypassLink);
+            if (data.success) {
+                // Password correct - grant access
+                successMessage.classList.add('show');
+                localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
+                
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = CONFIG.MAIN_PAGE;
+                }, 1500);
+                
+            } else {
+                // Password incorrect
+                errorMessage.classList.add('show');
+                button.textContent = 'Access Website';
+                button.disabled = false;
+                
+                // Clear password input
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+            
+        } catch (error) {
+            console.error('Password verification error:', error);
+            errorMessage.textContent = 'Network error. Please try again.';
+            errorMessage.classList.add('show');
+            button.textContent = 'Access Website';
+            button.disabled = false;
         }
     }
     
-    // Clear bypass (for testing)
-    function clearBypass() {
-        localStorage.removeItem(CONFIG.STORAGE_KEY);
-        console.log('Bypass cleared. Refresh to see construction page.');
+    // Initialize password modal
+    function initializePasswordModal() {
+        const modal = document.getElementById('passwordModal');
+        const form = document.getElementById('passwordForm');
+        const input = document.getElementById('passwordInput');
+        
+        if (!modal || !form || !input) {
+            console.error('Password modal elements not found');
+            return;
+        }
+        
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = input.value.trim();
+            
+            if (password) {
+                handlePasswordSubmit(password);
+            }
+        });
+        
+        // Handle Enter key
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const password = input.value.trim();
+                
+                if (password) {
+                    handlePasswordSubmit(password);
+                }
+            }
+        });
+        
+        // Focus on input when modal loads
+        input.focus();
     }
     
-    // Expose clearBypass function globally for testing
-    window.clearBypass = clearBypass;
+    // Add developer access button to construction page
+    function addDeveloperAccessButton() {
+        if (window.location.pathname.includes(CONFIG.CONSTRUCTION_PAGE)) {
+            // Create developer access button
+            const accessButton = document.createElement('button');
+            accessButton.textContent = '🔐 Developer Access';
+            accessButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.7);
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 8px 12px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                font-family: 'Inter', sans-serif;
+                backdrop-filter: blur(10px);
+            `;
+            
+            accessButton.addEventListener('mouseenter', function() {
+                this.style.color = 'rgba(255, 255, 255, 0.9)';
+                this.style.background = 'rgba(0, 0, 0, 0.5)';
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            accessButton.addEventListener('mouseleave', function() {
+                this.style.color = 'rgba(255, 255, 255, 0.7)';
+                this.style.background = 'rgba(0, 0, 0, 0.3)';
+                this.style.transform = 'translateY(0)';
+            });
+            
+            accessButton.addEventListener('click', function() {
+                const modal = document.getElementById('passwordModal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    document.getElementById('passwordInput').focus();
+                }
+            });
+            
+            document.body.appendChild(accessButton);
+        }
+    }
     
-    // Run immediately for faster redirect
-    redirectToAppropriatePage();
-    addBypassLink();
+    // Clear authorization (for testing)
+    function clearAuthorization() {
+        localStorage.removeItem(CONFIG.STORAGE_KEY);
+        console.log('Authorization cleared. Refresh to see construction page.');
+    }
     
-    // Also run when DOM is ready as backup
+    // Expose clearAuthorization function globally for testing
+    window.clearAuthorization = clearAuthorization;
+    
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             redirectToAppropriatePage();
-            addBypassLink();
+            addDeveloperAccessButton();
+            initializePasswordModal();
         });
-    }
-    
-    // Also run on page load for SPA-like behavior
-    window.addEventListener('load', function() {
+    } else {
         redirectToAppropriatePage();
-        addBypassLink();
-    });
+        addDeveloperAccessButton();
+        initializePasswordModal();
+    }
     
 })();
