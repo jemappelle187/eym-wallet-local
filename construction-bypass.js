@@ -14,13 +14,68 @@
         STORAGE_KEY: 'sendnreceive_authorized_access',
         
         // API endpoint
-        API_ENDPOINT: '/api/access-log'
+        API_ENDPOINT: '/api/access-log',
+        
+        // Security settings
+        MAX_ATTEMPTS: 3,
+        LOCKOUT_DURATION: 30 * 60 * 1000, // 30 minutes
+        SESSION_TIMEOUT: 24 * 60 * 60 * 1000 // 24 hours
     };
     
-    // Check if user is already authorized
+    // Check if user is already authorized with session timeout
     function isAuthorized() {
-        const hasAccess = localStorage.getItem(CONFIG.STORAGE_KEY) === 'true';
-        return hasAccess;
+        const accessData = localStorage.getItem(CONFIG.STORAGE_KEY);
+        if (!accessData) return false;
+        
+        try {
+            const data = JSON.parse(accessData);
+            const now = Date.now();
+            
+            // Check if session has expired
+            if (now - data.timestamp > CONFIG.SESSION_TIMEOUT) {
+                localStorage.removeItem(CONFIG.STORAGE_KEY);
+                return false;
+            }
+            
+            return true;
+        } catch (error) {
+            // Invalid data, remove it
+            localStorage.removeItem(CONFIG.STORAGE_KEY);
+            return false;
+        }
+    }
+    
+    // Get failed attempts count
+    function getFailedAttempts() {
+        const attempts = localStorage.getItem('failed_attempts') || '0';
+        return parseInt(attempts);
+    }
+    
+    // Set failed attempts count
+    function setFailedAttempts(count) {
+        localStorage.setItem('failed_attempts', count.toString());
+        localStorage.setItem('last_attempt', Date.now().toString());
+    }
+    
+    // Check if account is locked
+    function isAccountLocked() {
+        const lastAttempt = localStorage.getItem('last_attempt');
+        if (!lastAttempt) return false;
+        
+        const now = Date.now();
+        const timeSinceLastAttempt = now - parseInt(lastAttempt);
+        
+        if (timeSinceLastAttempt < CONFIG.LOCKOUT_DURATION && getFailedAttempts() >= CONFIG.MAX_ATTEMPTS) {
+            return true;
+        }
+        
+        // Reset if lockout period has passed
+        if (timeSinceLastAttempt >= CONFIG.LOCKOUT_DURATION) {
+            setFailedAttempts(0);
+            return false;
+        }
+        
+        return false;
     }
     
     // Redirect to appropriate page
@@ -102,7 +157,15 @@
             if (isValidPassword) {
                 // Password correct - grant access
                 successMessage.classList.add('show');
-                localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
+                
+                // Store access with timestamp
+                localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({
+                    authorized: true,
+                    timestamp: Date.now()
+                }));
+                
+                // Reset failed attempts
+                setFailedAttempts(0);
                 
                 // Log access attempt (without API)
                 console.log('Access granted via fallback:', {
@@ -119,6 +182,15 @@
                 
             } else {
                 // Password incorrect
+                const failedAttempts = getFailedAttempts() + 1;
+                setFailedAttempts(failedAttempts);
+                
+                if (failedAttempts >= CONFIG.MAX_ATTEMPTS) {
+                    errorMessage.textContent = `Too many failed attempts. Please try again in ${Math.ceil(CONFIG.LOCKOUT_DURATION / 60000)} minutes.`;
+                } else {
+                    errorMessage.textContent = `Incorrect password. ${CONFIG.MAX_ATTEMPTS - failedAttempts} attempts remaining.`;
+                }
+                
                 errorMessage.classList.add('show');
                 button.textContent = 'Access Website';
                 button.disabled = false;
@@ -154,6 +226,15 @@
             const password = input.value.trim();
             
             if (password) {
+                // Check if account is locked
+                if (isAccountLocked()) {
+                    const remainingTime = Math.ceil((CONFIG.LOCKOUT_DURATION - (Date.now() - parseInt(localStorage.getItem('last_attempt') || '0'))) / 60000);
+                    const errorMessage = document.getElementById('errorMessage');
+                    errorMessage.textContent = `Account temporarily locked. Please try again in ${remainingTime} minutes.`;
+                    errorMessage.classList.add('show');
+                    return;
+                }
+                
                 handlePasswordSubmit(password);
             }
         });
@@ -165,6 +246,15 @@
                 const password = input.value.trim();
                 
                 if (password) {
+                    // Check if account is locked
+                    if (isAccountLocked()) {
+                        const remainingTime = Math.ceil((CONFIG.LOCKOUT_DURATION - (Date.now() - parseInt(localStorage.getItem('last_attempt') || '0'))) / 60000);
+                        const errorMessage = document.getElementById('errorMessage');
+                        errorMessage.textContent = `Account temporarily locked. Please try again in ${remainingTime} minutes.`;
+                        errorMessage.classList.add('show');
+                        return;
+                    }
+                    
                     handlePasswordSubmit(password);
                 }
             }

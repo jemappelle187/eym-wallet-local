@@ -13,26 +13,38 @@ export default async function handler(req, res) {
   try {
     const { password, userAgent, timestamp } = req.body;
     
-    // Get IP address
-    const ip = req.headers['x-forwarded-for'] || 
+    // Get IP address with multiple fallbacks
+    const ip = req.headers['x-forwarded-for']?.split(',')[0] || 
                req.headers['x-real-ip'] || 
+               req.headers['cf-connecting-ip'] ||
                req.connection.remoteAddress ||
                req.socket.remoteAddress ||
                'Unknown';
     
-    // Get geographic info from IP (optional)
+    // Rate limiting check
+    const rateLimitResult = await checkRateLimit(ip);
+    if (!rateLimitResult.allowed) {
+      console.log('Rate limit exceeded for IP:', ip);
+      return res.status(429).json({ 
+        error: 'Too many attempts. Please try again later.',
+        retryAfter: rateLimitResult.retryAfter
+      });
+    }
+    
+    // Get geographic info from IP
     const geoInfo = await getGeoInfo(ip);
     
-    // Validate password (you can change this to your preferred password)
+    // Validate password with environment variable
     const validPassword = process.env.ACCESS_PASSWORD || 'sendnreceive2026';
     const isAuthorized = password === validPassword;
     
-    // Debug logging
-    console.log('Password attempt:', {
-      provided: password,
-      expected: validPassword,
-      match: isAuthorized,
-      envSet: !!process.env.ACCESS_PASSWORD
+    // Security logging
+    console.log('Access attempt:', {
+      ip,
+      authorized: isAuthorized,
+      geoInfo,
+      userAgent: userAgent?.substring(0, 100), // Truncate for security
+      timestamp: new Date().toISOString()
     });
     
     // Log access attempt
@@ -65,6 +77,40 @@ export default async function handler(req, res) {
     console.error('Access log error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
+}
+
+// Rate limiting storage (in production, use Redis or database)
+const rateLimitStore = new Map();
+
+// Rate limiting function
+async function checkRateLimit(ip) {
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000; // 15 minutes
+  const maxAttempts = 5; // Max 5 attempts per 15 minutes
+  
+  const key = `rate_limit_${ip}`;
+  const attempts = rateLimitStore.get(key) || [];
+  
+  // Remove old attempts outside the window
+  const recentAttempts = attempts.filter(timestamp => now - timestamp < windowMs);
+  
+  if (recentAttempts.length >= maxAttempts) {
+    const oldestAttempt = Math.min(...recentAttempts);
+    const retryAfter = Math.ceil((oldestAttempt + windowMs - now) / 1000);
+    return { allowed: false, retryAfter };
+  }
+  
+  // Add current attempt
+  recentAttempts.push(now);
+  rateLimitStore.set(key, recentAttempts);
+  
+  // Clean up old entries (prevent memory leaks)
+  if (rateLimitStore.size > 1000) {
+    const oldestKey = rateLimitStore.keys().next().value;
+    rateLimitStore.delete(oldestKey);
+  }
+  
+  return { allowed: true };
 }
 
 // Get geographic information from IP
