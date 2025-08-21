@@ -60,6 +60,8 @@
         successMessage.classList.remove('show');
         
         try {
+            console.log('Attempting to verify password:', password);
+            
             // Send password to API for verification and tracking
             const response = await fetch(CONFIG.API_ENDPOINT, {
                 method: 'POST',
@@ -73,7 +75,9 @@
                 })
             });
             
+            console.log('API Response status:', response.status);
             const data = await response.json();
+            console.log('API Response data:', data);
             
             if (data.success) {
                 // Password correct - grant access

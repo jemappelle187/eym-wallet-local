@@ -24,6 +24,14 @@ export default async function handler(req, res) {
     const validPassword = process.env.ACCESS_PASSWORD || 'sendnreceive2026';
     const isAuthorized = password === validPassword;
     
+    // Debug logging
+    console.log('Password attempt:', {
+      provided: password,
+      expected: validPassword,
+      match: isAuthorized,
+      envSet: !!process.env.ACCESS_PASSWORD
+    });
+    
     // Log access attempt
     const accessLog = {
       ip,
