@@ -62,27 +62,55 @@
         try {
             console.log('Attempting to verify password:', password);
             
-            // Send password to API for verification and tracking
-            const response = await fetch(CONFIG.API_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    password: password,
-                    userAgent: navigator.userAgent,
-                    timestamp: new Date().toISOString()
-                })
-            });
+            // Try API first, fallback to static check
+            try {
+                // Send password to API for verification and tracking
+                const response = await fetch(CONFIG.API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        password: password,
+                        userAgent: navigator.userAgent,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                console.log('API Response status:', response.status);
+                const data = await response.json();
+                console.log('API Response data:', data);
+                
+                if (data.success) {
+                    // Password correct - grant access
+                    successMessage.classList.add('show');
+                    localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
+                    
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = CONFIG.MAIN_PAGE;
+                    }, 1500);
+                    return;
+                }
+            } catch (apiError) {
+                console.log('API not available, using fallback:', apiError);
+            }
             
-            console.log('API Response status:', response.status);
-            const data = await response.json();
-            console.log('API Response data:', data);
+            // Fallback: Static password check
+            const isValidPassword = password === 'sendnreceive2026';
             
-            if (data.success) {
+            if (isValidPassword) {
                 // Password correct - grant access
                 successMessage.classList.add('show');
                 localStorage.setItem(CONFIG.STORAGE_KEY, 'true');
+                
+                // Log access attempt (without API)
+                console.log('Access granted via fallback:', {
+                    password: '[CORRECT]',
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString(),
+                    ip: 'Unknown (fallback mode)'
+                });
                 
                 // Redirect after a short delay
                 setTimeout(() => {
