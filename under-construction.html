@@ -10,7 +10,7 @@
   <meta name="description" content="SendNReceive is coming soon. Empowering underbanked communities with global payment infrastructure and currency hedging.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
-  <script src="https://unpkg.com/typewriter-effect@latest/dist/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typewriter-effect@2.19.0/dist/index.js"></script>
   <style>
     * {
       margin: 0;
@@ -1029,6 +1029,12 @@
 
     // Typewriter Effect
     function initializeTypewriter() {
+      // Check if TypewriterJS is loaded
+      if (typeof Typewriter === 'undefined') {
+        console.log('TypewriterJS not loaded, showing text normally');
+        return;
+      }
+      
       // Clear the text initially
       document.getElementById('typewriter-title').textContent = '';
       document.getElementById('typewriter-subtitle').textContent = '';
@@ -1077,6 +1083,23 @@
       // Wait a bit for the page to fully load
       setTimeout(initializeTypewriter, 500);
     });
+    
+    // Fallback: If typewriter doesn't work, show text after 2 seconds
+    setTimeout(() => {
+      const title = document.getElementById('typewriter-title');
+      const subtitle = document.getElementById('typewriter-subtitle');
+      const description = document.getElementById('typewriter-description');
+      
+      if (title && title.textContent === '') {
+        title.textContent = 'Coming Soon';
+      }
+      if (subtitle && subtitle.textContent === '') {
+        subtitle.textContent = 'SendNReceive is building the future of global financial inclusion.';
+      }
+      if (description && description.textContent === '') {
+        description.textContent = 'We\'re working hard to bring you instant and secure transfers globally.';
+      }
+    }, 2000);
 
     // Performance optimization: Pause animations when tab is not visible
     document.addEventListener('visibilitychange', function() {
