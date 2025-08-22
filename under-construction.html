@@ -10,6 +10,7 @@
   <meta name="description" content="SendNReceive is coming soon. Empowering underbanked communities with global payment infrastructure and currency hedging.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+  <script src="https://unpkg.com/typewriter-effect@latest/dist/index.js"></script>
   <style>
     * {
       margin: 0;
@@ -895,9 +896,9 @@
     </div>
 
     <!-- Main Content -->
-    <h1>Coming Soon</h1>
-    <p class="subtitle">SendNReceive is building the future of global financial inclusion.</p>
-    <p class="description">We're working hard to bring you instant and secure transfers globally.</p>
+    <h1 id="typewriter-title">Coming Soon</h1>
+    <p class="subtitle" id="typewriter-subtitle">SendNReceive is building the future of global financial inclusion.</p>
+    <p class="description" id="typewriter-description">We're working hard to bring you instant and secure transfers globally.</p>
 
     <!-- Stepped Progress Bar -->
     <div class="progress-container">
@@ -1025,6 +1026,57 @@
       // Here you would typically send the email to your backend
       console.log('Newsletter signup:', email);
     }
+
+    // Typewriter Effect
+    function initializeTypewriter() {
+      // Clear the text initially
+      document.getElementById('typewriter-title').textContent = '';
+      document.getElementById('typewriter-subtitle').textContent = '';
+      document.getElementById('typewriter-description').textContent = '';
+      
+      // Title typewriter
+      new Typewriter('#typewriter-title', {
+        strings: ['Coming Soon'],
+        autoStart: true,
+        loop: false,
+        delay: 100,
+        deleteSpeed: null,
+        cursor: '<span style="color: #ffffff;">|</span>',
+        html: true
+      });
+      
+      // Wait for title to complete, then start subtitle
+      setTimeout(() => {
+        new Typewriter('#typewriter-subtitle', {
+          strings: ['SendNReceive is building the future of global financial inclusion.'],
+          autoStart: true,
+          loop: false,
+          delay: 50,
+          deleteSpeed: null,
+          cursor: '<span style="color: #ffffff;">|</span>',
+          html: true
+        });
+      }, 1500);
+      
+      // Wait for subtitle to complete, then start description
+      setTimeout(() => {
+        new Typewriter('#typewriter-description', {
+          strings: ['We\'re working hard to bring you instant and secure transfers globally.'],
+          autoStart: true,
+          loop: false,
+          delay: 40,
+          deleteSpeed: null,
+          cursor: '<span style="color: #ffffff;">|</span>',
+          html: true
+        });
+      }, 4000);
+    }
+    
+    // Initialize typewriter when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait a bit for the page to fully load
+      setTimeout(initializeTypewriter, 500);
+    });
 
     // Performance optimization: Pause animations when tab is not visible
     document.addEventListener('visibilitychange', function() {
