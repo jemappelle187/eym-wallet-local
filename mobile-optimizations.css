@@ -618,6 +618,21 @@ body.drawer-open {
   overflow: visible !important;
 }
 
+/* Featured In Section - Mobile */
+.featured-in-section {
+  text-align: center !important;
+  margin: 16px 0 4px !important;
+  padding: 0 16px !important;
+}
+
+.featured-in-text {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #6b7280 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
 /* Fix press bar positioning on mobile */
 .press-bar {
   position: relative !important;

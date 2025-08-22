@@ -109,6 +109,23 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 @media (min-width: 769px) {
   .nav-menu .nav-cards { display: none; }
 }
+/* Featured In Section */
+.featured-in-section {
+  text-align: center;
+  margin: 32px 0 8px;
+  padding: 0 16px;
+}
+
+.featured-in-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
 /* Press bar (Mentioned in) */
 .press-bar:not(.press-clean){display:none;}
 .press-bar {
