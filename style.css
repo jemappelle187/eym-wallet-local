@@ -2419,7 +2419,7 @@ body {
 
 @media (max-width: 768px) {
   .footer-section.regulatory-col p {
-    font-size: 12px;
+    font-size: 10px;
   }
   .footer-content .footer-section.regulatory-col {
     grid-column: auto;
