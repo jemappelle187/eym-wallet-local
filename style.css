@@ -118,8 +118,8 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 
 .featured-in-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.5px;

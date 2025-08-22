@@ -626,8 +626,8 @@ body.drawer-open {
 }
 
 .featured-in-text {
-  font-size: 12px !important;
-  font-weight: 500 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
   color: #6b7280 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
