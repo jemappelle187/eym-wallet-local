@@ -2410,24 +2410,7 @@ body {
   margin-bottom: 6px;
 }
 
-.regulatory-info {
-  margin-top: 16px;
-}
 
-.regulatory-info p {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--gray-400);
-  margin-bottom: 8px;
-  text-align: left;
-}
-
-@media (max-width: 768px) {
-  .regulatory-info p {
-    font-size: 11px;
-    margin-bottom: 6px;
-  }
-}
 
 /* Make regulatory column wider and aligned to the far right on desktop */
 .footer-content .footer-section.regulatory-col {
