@@ -112,7 +112,7 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 /* Featured In Section */
 .featured-in-section {
   text-align: center;
-  margin: 32px 0 8px;
+  margin: 16px 0 4px;
   padding: 0 16px;
 }
 
@@ -135,8 +135,8 @@ main > section:last-of-type { margin-bottom: 0 !important; }
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 0;
-  padding: 16px 0;
-  margin: 20px 0 32px;
+  padding: 8px 0;
+  margin: 8px 0 16px;
   overflow: hidden;
   /* Remove full-bleed styling */
   width: 100%;
@@ -151,9 +151,9 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 .press-bar.press-clean {
   border: none !important;
   background: #ffffff !important;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  padding: 4px 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 2px 0;
   box-shadow: none !important;
 }
 .press-label {
