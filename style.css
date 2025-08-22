@@ -118,8 +118,8 @@ main > section:last-of-type { margin-bottom: 0 !important; }
 
 .featured-in-text {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2410,8 +2410,6 @@ body {
   margin-bottom: 6px;
 }
 
-
-
 /* Make regulatory column wider and aligned to the far right on desktop */
 .footer-content .footer-section.regulatory-col {
   grid-column: 3 / -1;
@@ -2419,7 +2417,7 @@ body {
 
 @media (max-width: 768px) {
   .footer-section.regulatory-col p {
-    font-size: 10px;
+    font-size: 12px;
   }
   .footer-content .footer-section.regulatory-col {
     grid-column: auto;
