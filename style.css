@@ -2415,7 +2415,7 @@ body {
 }
 
 .regulatory-info p {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   color: var(--gray-400);
   margin-bottom: 8px;
@@ -2424,7 +2424,7 @@ body {
 
 @media (max-width: 768px) {
   .regulatory-info p {
-    font-size: 9px;
+    font-size: 11px;
     margin-bottom: 6px;
   }
 }
