@@ -1055,16 +1055,11 @@
       subtitle.textContent = '';
       description.textContent = '';
       
-      // Start with title
-      typeWriter(title, 'Coming Soon', 100, () => {
-        // After title completes, start subtitle
+      // Start with subtitle (skip title)
+      typeWriter(subtitle, 'SendNReceive is building the future of global financial inclusion.', 50, () => {
+        // After subtitle completes, start description
         setTimeout(() => {
-          typeWriter(subtitle, 'SendNReceive is building the future of global financial inclusion.', 50, () => {
-            // After subtitle completes, start description
-            setTimeout(() => {
-              typeWriter(description, 'We\'re working hard to bring you instant and secure transfers globally.', 40);
-            }, 500);
-          });
+          typeWriter(description, 'We\'re working hard to bring you instant and secure transfers globally.', 40);
         }, 500);
       });
     }
