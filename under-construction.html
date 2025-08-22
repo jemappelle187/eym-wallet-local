@@ -10,7 +10,7 @@
   <meta name="description" content="SendNReceive is coming soon. Empowering underbanked communities with global payment infrastructure and currency hedging.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
-  <script src="https://cdn.jsdelivr.net/npm/typewriter-effect@2.19.0/dist/index.js"></script>
+
   <style>
     * {
       margin: 0;
@@ -1027,79 +1027,52 @@
       console.log('Newsletter signup:', email);
     }
 
-    // Typewriter Effect
-    function initializeTypewriter() {
-      // Check if TypewriterJS is loaded
-      if (typeof Typewriter === 'undefined') {
-        console.log('TypewriterJS not loaded, showing text normally');
-        return;
+    // Custom Typewriter Effect
+    function typeWriter(element, text, speed = 50, callback = null) {
+      let i = 0;
+      element.innerHTML = '';
+      
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          if (callback) callback();
+        }
       }
       
-      // Clear the text initially
-      document.getElementById('typewriter-title').textContent = '';
-      document.getElementById('typewriter-subtitle').textContent = '';
-      document.getElementById('typewriter-description').textContent = '';
-      
-      // Title typewriter
-      new Typewriter('#typewriter-title', {
-        strings: ['Coming Soon'],
-        autoStart: true,
-        loop: false,
-        delay: 100,
-        deleteSpeed: null,
-        cursor: '<span style="color: #ffffff;">|</span>',
-        html: true
-      });
-      
-      // Wait for title to complete, then start subtitle
-      setTimeout(() => {
-        new Typewriter('#typewriter-subtitle', {
-          strings: ['SendNReceive is building the future of global financial inclusion.'],
-          autoStart: true,
-          loop: false,
-          delay: 50,
-          deleteSpeed: null,
-          cursor: '<span style="color: #ffffff;">|</span>',
-          html: true
-        });
-      }, 1500);
-      
-      // Wait for subtitle to complete, then start description
-      setTimeout(() => {
-        new Typewriter('#typewriter-description', {
-          strings: ['We\'re working hard to bring you instant and secure transfers globally.'],
-          autoStart: true,
-          loop: false,
-          delay: 40,
-          deleteSpeed: null,
-          cursor: '<span style="color: #ffffff;">|</span>',
-          html: true
-        });
-      }, 4000);
+      type();
     }
     
-    // Initialize typewriter when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Wait a bit for the page to fully load
-      setTimeout(initializeTypewriter, 500);
-    });
-    
-    // Fallback: If typewriter doesn't work, show text after 2 seconds
-    setTimeout(() => {
+    function initializeTypewriter() {
       const title = document.getElementById('typewriter-title');
       const subtitle = document.getElementById('typewriter-subtitle');
       const description = document.getElementById('typewriter-description');
       
-      if (title && title.textContent === '') {
-        title.textContent = 'Coming Soon';
-      }
-      if (subtitle && subtitle.textContent === '') {
-        subtitle.textContent = 'SendNReceive is building the future of global financial inclusion.';
-      }
-      if (description && description.textContent === '') {
-        description.textContent = 'We\'re working hard to bring you instant and secure transfers globally.';
-      }
-    }, 2000);
+      // Clear text initially
+      title.textContent = '';
+      subtitle.textContent = '';
+      description.textContent = '';
+      
+      // Start with title
+      typeWriter(title, 'Coming Soon', 100, () => {
+        // After title completes, start subtitle
+        setTimeout(() => {
+          typeWriter(subtitle, 'SendNReceive is building the future of global financial inclusion.', 50, () => {
+            // After subtitle completes, start description
+            setTimeout(() => {
+              typeWriter(description, 'We\'re working hard to bring you instant and secure transfers globally.', 40);
+            }, 500);
+          });
+        }, 500);
+      });
+    }
+    
+    // Initialize typewriter when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(initializeTypewriter, 1000);
+    });
 
     // Performance optimization: Pause animations when tab is not visible
     document.addEventListener('visibilitychange', function() {
