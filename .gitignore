@@ -75,3 +75,34 @@ logs
 # Temporary files
 *.tmp
 *.temp
+
+# macOS
+.DS_Store
+
+# Node/React/Expo
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.env*
+
+# Web build systems
+dist/
+build/
+.next/
+out/
+.turbo/
+coverage/
+
+# Expo / RN
+.expo/
+.expo-shared/
+android/.gradle/
+android/app/build/
+ios/Pods/
+
+# Tooling
+.vscode/
+.idea/
+*.swp
