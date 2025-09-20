@@ -111,3 +111,7 @@ ios/Pods/
 .DS_Store
 ._*
 
+
+# Editor state
+.cursor/
+
