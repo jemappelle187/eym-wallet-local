@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYM Wallet Auto-Convert Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #6366f1 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #1e40af 0%, #6366f1 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+        .balance {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .balance-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1f2937;
+            border-radius: 8px;
+            color: white;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .info { color: #60a5fa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>EYM Wallet Auto-Convert Demo</h1>
+            <p>Test deposit conversion to stablecoins (No accounts needed!)</p>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="USD">USD to USDC (1:1)</option>
+                    <option value="EUR">EUR to EURC (1:1)</option>
+                    <option value="GHS">GHS to USD to USDC (with FX)</option>
+                    <option value="AED">AED to USD to USDC (with FX)</option>
+                    <option value="NGN">NGN to USD to USDC (with FX)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" value="100" step="0.01" placeholder="Enter amount">
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod">
+                    <option value="card">Card</option>
+                    <option value="mobile_money">Mobile Money</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <button class="btn" id="testButton">Test Auto-Convert</button>
+
+            <div id="results" class="results" style="display: none;">
+                <h3>Conversion Results</h3>
+                <div id="resultContent"></div>
+            </div>
+
+            <div class="balance">
+                <div class="balance-card">
+                    <h4>USDC Balance</h4>
+                    <div style="font-size: 24px; font-weight: 700; color: #10b981;" id="usdcBalance">0.00</div>
+                </div>
+                <div class="balance-card">
+                    <h4>EURC Balance</h4>
+                    <div style="font-size: 24px; font-weight: 700; color: #10b981;" id="eurcBalance">0.00</div>
+                </div>
+            </div>
+
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let usdcBalance = 0;
+        let eurcBalance = 0;
+        let logs = [];
+
+        // Logging function
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${message}`);
+            document.getElementById('log').innerHTML = logs.map(log =>
+                `<span class="${type}">${log}</span>`
+            ).join('\n');
+        }
+
+        // Update balance display
+        function updateBalance() {
+            document.getElementById('usdcBalance').textContent = usdcBalance.toFixed(2);
+            document.getElementById('eurcBalance').textContent = eurcBalance.toFixed(2);
+        }
+
+        // Get FX rates for local currencies
+        function getFXRate(fromCurrency) {
+            const rates = {
+                'GHS': 15.0,
+                'AED': 3.67,
+                'NGN': 750
+            };
+            return rates[fromCurrency] || 1;
+        }
+
+        // Main conversion function
+        async function testConversion() {
+            console.log('testConversion called');
+            
+            const currency = document.getElementById('currency').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            const btn = document.getElementById('testButton');
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+
+            log(`Processing ${amount} ${currency} deposit via ${paymentMethod}`, 'info');
+
+            try {
+                let stablecoin, amountToMint, fxInfo;
+
+                if (currency === 'USD') {
+                    stablecoin = 'USDC';
+                    amountToMint = amount;
+                    log(`Direct USD to USDC conversion: ${amount} USD`, 'info');
+                } else if (currency === 'EUR') {
+                    stablecoin = 'EURC';
+                    amountToMint = amount;
+                    log(`Direct EUR to EURC conversion: ${amount} EUR`, 'info');
+                } else if (['GHS', 'AED', 'NGN'].includes(currency)) {
+                    const fxRate = getFXRate(currency);
+                    const spreadBps = 40;
+                    const effectiveRate = fxRate * (1 + spreadBps / 10000);
+                    const usdReceived = amount / effectiveRate;
+
+                    fxInfo = {
+                        rate: effectiveRate,
+                        usdReceived: usdReceived
+                    };
+
+                    log(`FX conversion: ${amount} ${currency} = ${usdReceived.toFixed(2)} USD (rate: ${effectiveRate.toFixed(4)})`, 'info');
+
+                    stablecoin = 'USDC';
+                    amountToMint = usdReceived;
+                }
+
+                log(`Minting ${amountToMint} ${stablecoin} via Circle API...`, 'info');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                log(`Successfully minted ${amountToMint} ${stablecoin}`, 'success');
+
+                if (stablecoin === 'USDC') {
+                    usdcBalance += amountToMint;
+                } else {
+                    eurcBalance += amountToMint;
+                }
+                updateBalance();
+
+                log(`Credited ${amountToMint} ${stablecoin} to user balance`, 'success');
+                log(`Auto-conversion completed successfully!`, 'success');
+
+                displayResults({
+                    success: true,
+                    currency,
+                    amount,
+                    stablecoin,
+                    amountToMint,
+                    fxInfo
+                });
+
+            } catch (error) {
+                log(`Conversion failed: ${error.message}`, 'error');
+                displayResults({
+                    success: false,
+                    error: error.message
+                });
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Test Auto-Convert';
+            }
+        }
+
+        // Display results
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+
+            let html = '';
+
+            if (result.success) {
+                html += `
+                    <p><strong>Original Amount:</strong> ${result.amount} ${result.currency}</p>
+                    <p><strong>Stablecoin:</strong> ${result.stablecoin}</p>
+                    <p><strong>Amount Minted:</strong> ${result.amountToMint.toFixed(2)} ${result.stablecoin}</p>
+                `;
+
+                if (result.fxInfo) {
+                    html += `
+                        <p><strong>FX Rate:</strong> ${result.fxInfo.rate.toFixed(4)}</p>
+                        <p><strong>USD Received:</strong> $${result.fxInfo.usdReceived.toFixed(2)}</p>
+                    `;
+                }
+            } else {
+                html += `<p style="color: #ef4444;"><strong>Error:</strong> ${result.error}</p>`;
+            }
+
+            resultContent.innerHTML = html;
+            resultsDiv.style.display = 'block';
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, adding event listener');
+            document.getElementById('testButton').addEventListener('click', testConversion);
+            log('EYM Wallet Auto-Convert Demo Ready', 'success');
+            log('Test different currencies to see the conversion process', 'info');
+            updateBalance();
+        });
+    </script>
+</body>
+</html>

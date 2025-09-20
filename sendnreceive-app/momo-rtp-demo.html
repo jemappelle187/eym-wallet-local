@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoMo RTP Demo – EYM Wallet</title>
+  <style>
+    :root {
+      --pri:#2563eb; /* primary blue (matches app CTA) */
+      --pri-2:#1e40af;
+      --ok:#10b981; --err:#ef4444; --mut:#9ca3af;
+      --bg:#0b0f19; --card:#0f172a; --stroke:#1f2937; --ink:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui; margin:0; padding:24px; background:var(--bg); color:var(--ink)}
+    .card{max-width:760px; margin:0 auto; background:var(--card); border:1px solid var(--stroke); border-radius:16px; overflow:hidden}
+    .head{padding:20px 24px; background:linear-gradient(135deg,var(--pri-2) 0%, var(--pri) 100%)}
+    .head h1{margin:0; font-size:20px; color:#fff}
+    .body{padding:24px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    label{display:block; font-size:13px; color:#93c5fd; margin-bottom:6px}
+    input,select{width:100%; padding:10px 12px; border:1px solid #334155; background:#0b1220; color:var(--ink); border-radius:8px; font-size:15px}
+    .btn{display:inline-flex; align-items:center; gap:8px; background:var(--pri); color:#fff; border:none; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer; box-shadow:0 8px 24px rgba(37,99,235,.25)}
+    .btn:disabled{opacity:.7; cursor:not-allowed}
+    .btn.secondary{background:transparent; color:var(--ink); border:1px solid #334155; box-shadow:none}
+    .mut{color:var(--mut); font-size:13px}
+    .sec{margin-top:20px; padding:16px; border:1px solid #1f2937; border-radius:12px; background:#0a0f1a}
+    .step{display:flex; align-items:center; gap:10px; margin:8px 0; opacity:.7}
+    .step.active{opacity:1}
+    .dot{width:10px; height:10px; border-radius:5px; background:#334155}
+    .step.active .dot{background:#3b82f6}
+    .step.done .dot{background:#10b981}
+    .log{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; white-space:pre-wrap; background:#020617; border:1px solid #111827; border-radius:8px; padding:12px; max-height:200px; overflow:auto}
+    .ok{color:var(--ok)} .err{color:var(--err)} .pill{padding:2px 8px; border-radius:999px; background:#0b1220; border:1px solid #1f2937; font-size:12px}
+  </style>
+  <script>
+    const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
+    function parseAmount(input){
+      if(typeof input==='number') return input;
+      const s=String(input).trim().replace(/\s/g,'').replace(/,/g,'.').replace(/(\..*)\./,'$1');
+      return Number(s);
+    }
+    function fmtCurrency(n, currency, locale){
+      try { return new Intl.NumberFormat(locale||navigator.language,{style:'currency', currency}).format(n); }
+      catch{ return `${n.toFixed(2)} ${currency}` }
+    }
+  </script>
+</head>
+<body>
+  <div class="card">
+    <div class="head"><h1>MTN MoMo – Request To Pay Demo</h1></div>
+    <div class="body">
+      <div class="row">
+        <div>
+          <label>API Base URL</label>
+          <input id="apiBase" value="http://localhost:4000" />
+        </div>
+        <div>
+          <label>Currency</label>
+          <select id="currency">
+            <option value="GHS">GHS (Ghana)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <div>
+          <label>Amount</label>
+          <input id="amount" value="10.00" />
+        </div>
+        <div>
+          <label>Payer MSISDN (E.164 without +)</label>
+          <input id="msisdn" placeholder="23324xxxxxxx" />
+        </div>
+      </div>
+      <div style="margin-top:16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+        <button class="btn" id="btnSend">
+          <span id="btnSpinner" style="display:none; width:14px; height:14px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .9s linear infinite"></span>
+          Confirm and send
+        </button>
+        <button class="btn secondary" id="btnCancel" type="button">Cancel</button>
+        <span class="mut">We’ll request approval from MTN; usually ~45s.</span>
+      </div>
+
+      <div class="sec">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px">
+          <strong>Progress</strong>
+          <span class="pill" id="eta">ETA ~45s</span>
+          <span class="pill" id="refPill" style="display:none"></span>
+        </div>
+        <div id="steps">
+          <div class="step" id="s1"><div class="dot"></div><div>Initiated</div></div>
+          <div class="step" id="s2"><div class="dot"></div><div>Waiting for approval</div></div>
+          <div class="step" id="s3"><div class="dot"></div><div>Deposited</div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <strong>Status</strong>
+        <div id="status" class="mut">Idle</div>
+      </div>
+
+      <div class="sec">
+        <strong>Log</strong>
+        <div id="log" class="log"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const el = id => document.getElementById(id);
+    const log = (m, cls='') => { const L = el('log'); L.innerHTML += (cls?`<span class="${cls}">`:'')+m+(cls?'</span>':'')+'\n'; L.scrollTop = L.scrollHeight; };
+    const setStep = (idx) => {
+      [el('s1'),el('s2'),el('s3')].forEach((s,i)=>{ s.className='step'+(i<idx?' done':'')+(i===idx?' active':''); });
+    };
+    async function healthCheck(){
+      try{ const r = await fetch(el('apiBase').value + '/v1/momo/health'); const d=await r.json(); if(r.ok) log('Health OK','ok'); else log('Health error: '+JSON.stringify(d),'err'); }catch(e){ log('Health request failed: '+e,'err'); }
+    }
+    healthCheck();
+
+    async function start(){
+      const base = el('apiBase').value.replace(/\/$/,'');
+      const currency = el('currency').value;
+      const amtRaw = el('amount').value;
+      const msisdn = el('msisdn').value.trim();
+      const amtNum = parseAmount(amtRaw);
+      if(!msisdn){ alert('Enter MSISDN (e.g., 23324xxxxxxx)'); return; }
+      if(!Number.isFinite(amtNum) || amtNum<=0){ alert('Enter a valid amount'); return; }
+      const amount = amtNum.toFixed(2);
+
+      const btn = el('btnSend'); const spin=el('btnSpinner'); btn.disabled = true; spin.style.display='inline-block'; el('status').textContent = 'Initiating…'; setStep(0);
+      log(`POST /v1/momo/request-to-pay ${amount} ${currency} to ${msisdn}`);
+      try{
+        const res = await fetch(base + '/v1/momo/request-to-pay', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ payerMsisdn: msisdn, amount, currency })
+        });
+        const body = await res.json();
+        if(!res.ok){ log('Initiate error: '+JSON.stringify(body),'err'); el('status').textContent='Failed to initiate'; btn.disabled=false; return; }
+        const ref = body.referenceId; el('refPill').style.display='inline-block'; el('refPill').textContent = 'Ref ' + ref;
+        el('status').textContent = 'Initiated'; setStep(1);
+        await poll(base, ref);
+      }catch(e){ log('Request failed: '+e,'err'); el('status').textContent='Network error'; }
+      finally{ btn.disabled=false; el('btnSpinner').style.display='none'; }
+    }
+
+    async function poll(base, ref){
+      const started = Date.now();
+      while(true){
+        await sleep(2500);
+        log('GET /v1/momo/status/'+ref);
+        try{
+          const r = await fetch(base + '/v1/momo/status/' + ref);
+          const d = await r.json();
+          const st = String(d?.data?.status||'').toUpperCase();
+          el('status').textContent = st || 'PENDING';
+          if(st==='SUCCESSFUL'){ setStep(2); log('SUCCESS','ok'); return; }
+          if(st==='FAILED'){ log('FAILED: '+(d?.data?.reason||'unknown'),'err'); return; }
+          if(Date.now()-started > 90000){ log('Timed out waiting for approval','err'); return; }
+        }catch(e){ log('Poll error: '+e,'err'); return; }
+      }
+    }
+
+    el('btnSend').addEventListener('click', start);
+    el('btnCancel').addEventListener('click', ()=>{ setStep(-1); el('status').textContent='Cancelled'; log('User cancelled','err'); });
+
+    /* spinner */
+    const style=document.createElement('style'); style.textContent='@keyframes spin{to{transform:rotate(360deg)}}'; document.head.appendChild(style);
+  </script>
+</body>
+</html>

@@ -1284,144 +1284,173 @@ document.addEventListener('languageChanged', function(e) {
   // For example, loading translated content, updating meta tags, etc.
 });
 
-// Real-time exchange rates from mobile app APIs
+// Aligned FX system matching transaction flow setup
 let calcRates = {};
 let lastRatesUpdate = null;
+const FX_CACHE = new Map();
+const FX_MARGIN_BPS = 40; // 40 basis points spread (0.40%)
+const FX_CACHE_TTL_SEC = 60; // 60 second cache
 
-// Fetch real-time exchange rates from the same APIs used in mobile app
+// Conservative fallback rates (matching auto-convert-api)
+function getFallbackRate(base, target) {
+  const b = base.toUpperCase(), t = target.toUpperCase();
+  if (b === "EUR" && t === "USD") return 1.08;
+  if (b === "USD" && t === "EUR") return 0.93;
+  if (b === "USD" && t === "AED") return 3.67;
+  if (b === "AED" && t === "USD") return 0.2725;
+  if (b === "GHS" && t === "USD") return 0.08;       // ~12.5 GHS per USD
+  if (b === "USD" && t === "GHS") return 12.5;
+  if (b === "EUR" && t === "GHS") return 13.5;        // rough cross
+  if (b === "GHS" && t === "EUR") return 0.074;      // rough cross
+  if (b === "NGN" && t === "USD") return 0.00067;    // ~1500 NGN per USD
+  if (b === "USD" && t === "NGN") return 1500;
+  if (b === "NGN" && t === "EUR") return 0.00061;
+  if (b === "EUR" && t === "NGN") return 1630;
+  return 1.0;
+}
+
+// Get FX rate using same hierarchy as transaction flow
+async function getFxRate(base, target) {
+  const baseUpper = base.toUpperCase();
+  const targetUpper = target.toUpperCase();
+  const cacheKey = `${baseUpper}_${targetUpper}`;
+  const now = Date.now();
+  
+  // Check cache first
+  const cached = FX_CACHE.get(cacheKey);
+  if (cached && cached.until > now) {
+    return cached;
+  }
+  
+  let rate, source = "live";
+  
+  try {
+    if (baseUpper === "EUR") {
+      // Direct Frankfurter for EUR base
+      const f = await (await fetch(`https://api.frankfurter.app/latest?from=EUR&to=${encodeURIComponent(targetUpper)}`)).json();
+      const fr = f?.rates?.[targetUpper];
+      if (typeof fr === "number") {
+        rate = fr;
+        source = "frankfurter";
+      } else {
+        throw new Error("Frankfurter missing rate");
+      }
+    } else {
+      // Try Open ER API direct
+      const erDirectRes = await fetch(`https://open.er-api.com/v6/latest/${encodeURIComponent(baseUpper)}`);
+      if (erDirectRes.ok) {
+        const erDirect = await erDirectRes.json();
+        const directRate = erDirect?.rates?.[targetUpper];
+        if (erDirect?.result === "success" && typeof directRate === "number") {
+          rate = directRate;
+          source = "open-er-api";
+        } else {
+          // EUR pivot fallback
+          const erBase = await (await fetch(`https://open.er-api.com/v6/latest/${encodeURIComponent(baseUpper)}`)).json();
+          const r1 = erBase?.rates?.EUR;
+          const frEurToTarget = await (await fetch(`https://api.frankfurter.app/latest?from=EUR&to=${encodeURIComponent(targetUpper)}`)).json();
+          const r2 = frEurToTarget?.rates?.[targetUpper];
+          if (erBase?.result === "success" && typeof r1 === "number" && typeof r2 === "number") {
+            rate = r1 * r2;
+            source = "eur-pivot";
+          } else {
+            throw new Error("EUR pivot failed");
+          }
+        }
+      } else {
+        throw new Error(`open.er-api.com HTTP ${erDirectRes.status}`);
+      }
+    }
+  } catch {
+    rate = getFallbackRate(baseUpper, targetUpper);
+    source = "fallback";
+  }
+  
+  const result = { rate, source, until: now + (FX_CACHE_TTL_SEC * 1000) };
+  FX_CACHE.set(cacheKey, result);
+  return result;
+}
+
+// Fetch exchange rates using aligned transaction flow APIs
 async function fetchExchangeRates() {
   try {
-    // Fetch traditional rates from exchangerate-api.com
-    const traditionalResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-    const traditionalData = await traditionalResponse.json();
+    console.log('Fetching aligned exchange rates...');
     
-    // Fetch stablecoin rates from CoinGecko
-    const stablecoinResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=usd-coin,euro-coin,solana&vs_currencies=usd,eur,ghs,ngn,aed');
-    const stablecoinData = await stablecoinResponse.json();
+    // Get rates for major currency pairs
+    const ratePromises = [
+      getFxRate('USD', 'EUR'),
+      getFxRate('USD', 'GBP'),
+      getFxRate('USD', 'GHS'),
+      getFxRate('USD', 'NGN'),
+      getFxRate('USD', 'AED'),
+      getFxRate('EUR', 'USD'),
+      getFxRate('EUR', 'GBP'),
+      getFxRate('EUR', 'GHS'),
+      getFxRate('EUR', 'NGN'),
+      getFxRate('GBP', 'USD'),
+      getFxRate('GBP', 'EUR'),
+      getFxRate('GBP', 'GHS'),
+    ];
+    
+    const rateResults = await Promise.all(ratePromises);
     
     // Build comprehensive rates object
     const rates = {
-      traditional: traditionalData.rates,
-      stablecoin: stablecoinData,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      source: rateResults[0]?.source || 'fallback'
     };
     
-    // Convert to our calculator format
+    // Build rates object from fetched data with margin applied
+    const baseRates = {};
+    const ratePairs = [
+      ['USD', 'EUR'], ['USD', 'GBP'], ['USD', 'GHS'], ['USD', 'NGN'], ['USD', 'AED'],
+      ['EUR', 'USD'], ['EUR', 'GBP'], ['EUR', 'GHS'], ['EUR', 'NGN'],
+      ['GBP', 'USD'], ['GBP', 'EUR'], ['GBP', 'GHS']
+    ];
+    
+    ratePairs.forEach(([from, to], index) => {
+      const result = rateResults[index];
+      if (result) {
+        const effectiveRate = result.rate * (1 - FX_MARGIN_BPS / 10000); // Apply 40bps margin
+        baseRates[`${from}_${to}`] = effectiveRate;
+      }
+    });
+    
+    // Convert to our calculator format with margin applied
     calcRates = {
-      // USD pairs
-      'USD_GHS': rates.traditional.GHS || 14.5,
-      'USD_NGN': rates.traditional.NGN || 1500,
-      'USD_KES': rates.traditional.KES || 160,
-      'USD_UGX': rates.traditional.UGX || 3800,
-      'USD_ZAR': rates.traditional.ZAR || 18.5,
-      'USD_ZMW': rates.traditional.ZMW || 25.8,
-      'USD_CAD': rates.traditional.CAD || 1.35,
-      'USD_AUD': rates.traditional.AUD || 1.52,
-      'USD_CHF': rates.traditional.CHF || 0.88,
-      'USD_GBP': rates.traditional.GBP || 0.79,
-      'USD_EUR': rates.traditional.EUR || 0.92,
+      // USD pairs (with margin)
+      'USD_GHS': baseRates['USD_GHS'] || 12.5 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_NGN': baseRates['USD_NGN'] || 1500 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_EUR': baseRates['USD_EUR'] || 0.92 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_GBP': baseRates['USD_GBP'] || 0.79 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_AED': 3.67 * (1 - FX_MARGIN_BPS / 10000),
       
-      // EUR pairs
-      'EUR_GHS': (rates.traditional.GHS || 14.5) / (rates.traditional.EUR || 0.92),
-      'EUR_NGN': (rates.traditional.NGN || 1500) / (rates.traditional.EUR || 0.92),
-      'EUR_KES': (rates.traditional.KES || 160) / (rates.traditional.EUR || 0.92),
-      'EUR_UGX': (rates.traditional.UGX || 3800) / (rates.traditional.EUR || 0.92),
-      'EUR_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.EUR || 0.92),
-      'EUR_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.EUR || 0.92),
-      'EUR_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.EUR || 0.92),
-      'EUR_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.EUR || 0.92),
-      'EUR_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.EUR || 0.92),
-      'EUR_GBP': (rates.traditional.GBP || 0.79) / (rates.traditional.EUR || 0.92),
-      'EUR_USD': 1 / (rates.traditional.EUR || 0.92),
+      // EUR pairs (with margin)
+      'EUR_USD': baseRates['EUR_USD'] || 1.08 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_GBP': baseRates['EUR_GBP'] || 0.86 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_GHS': baseRates['EUR_GHS'] || 13.5 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_NGN': baseRates['EUR_NGN'] || 1630 * (1 - FX_MARGIN_BPS / 10000),
       
-      // GBP pairs
-      'GBP_GHS': (rates.traditional.GHS || 14.5) / (rates.traditional.GBP || 0.79),
-      'GBP_NGN': (rates.traditional.NGN || 1500) / (rates.traditional.GBP || 0.79),
-      'GBP_KES': (rates.traditional.KES || 160) / (rates.traditional.GBP || 0.79),
-      'GBP_UGX': (rates.traditional.UGX || 3800) / (rates.traditional.GBP || 0.79),
-      'GBP_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.GBP || 0.79),
-      'GBP_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.GBP || 0.79),
-      'GBP_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.GBP || 0.79),
-      'GBP_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.GBP || 0.79),
-      'GBP_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.GBP || 0.79),
-      'GBP_EUR': (rates.traditional.EUR || 0.92) / (rates.traditional.GBP || 0.79),
-      'GBP_USD': 1 / (rates.traditional.GBP || 0.79),
+      // GBP pairs (with margin)
+      'GBP_USD': baseRates['GBP_USD'] || 1.27 * (1 - FX_MARGIN_BPS / 10000),
+      'GBP_EUR': baseRates['GBP_EUR'] || 1.16 * (1 - FX_MARGIN_BPS / 10000),
+      'GBP_GHS': baseRates['GBP_GHS'] || 18.3 * (1 - FX_MARGIN_BPS / 10000),
       
-      // Reverse pairs for all currencies
-      'GHS_USD': 1 / (rates.traditional.GHS || 14.5),
-      'NGN_USD': 1 / (rates.traditional.NGN || 1500),
-      'KES_USD': 1 / (rates.traditional.KES || 160),
-      'UGX_USD': 1 / (rates.traditional.UGX || 3800),
-      'ZAR_USD': 1 / (rates.traditional.ZAR || 18.5),
-      'ZMW_USD': 1 / (rates.traditional.ZMW || 25.8),
-      'CAD_USD': 1 / (rates.traditional.CAD || 1.35),
-      'AUD_USD': 1 / (rates.traditional.AUD || 1.52),
-      'CHF_USD': 1 / (rates.traditional.CHF || 0.88),
+      // Reverse pairs (with margin applied)
+      'GHS_USD': 1 / (baseRates['USD_GHS'] || 12.5),
+      'NGN_USD': 1 / (baseRates['USD_NGN'] || 1500),
+      'AED_USD': 1 / (3.67),
+      'GHS_EUR': 1 / (baseRates['EUR_GHS'] || 13.5),
+      'NGN_EUR': 1 / (baseRates['EUR_NGN'] || 1630),
+      'GHS_GBP': 1 / (baseRates['GBP_GHS'] || 18.3),
       
-      'GHS_EUR': 1 / ((rates.traditional.GHS || 14.5) / (rates.traditional.EUR || 0.92)),
-      'NGN_EUR': 1 / ((rates.traditional.NGN || 1500) / (rates.traditional.EUR || 0.92)),
-      'KES_EUR': 1 / ((rates.traditional.KES || 160) / (rates.traditional.EUR || 0.92)),
-      'UGX_EUR': 1 / ((rates.traditional.UGX || 3800) / (rates.traditional.EUR || 0.92)),
-      'ZAR_EUR': 1 / ((rates.traditional.ZAR || 18.5) / (rates.traditional.EUR || 0.92)),
-      'ZMW_EUR': 1 / ((rates.traditional.ZMW || 25.8) / (rates.traditional.EUR || 0.92)),
-      'CAD_EUR': 1 / ((rates.traditional.CAD || 1.35) / (rates.traditional.EUR || 0.92)),
-      'AUD_EUR': 1 / ((rates.traditional.AUD || 1.52) / (rates.traditional.EUR || 0.92)),
-      'CHF_EUR': 1 / ((rates.traditional.CHF || 0.88) / (rates.traditional.EUR || 0.92)),
-      
-      'GHS_GBP': 1 / ((rates.traditional.GHS || 14.5) / (rates.traditional.GBP || 0.79)),
-      'NGN_GBP': 1 / ((rates.traditional.NGN || 1500) / (rates.traditional.GBP || 0.79)),
-      'KES_GBP': 1 / ((rates.traditional.KES || 160) / (rates.traditional.GBP || 0.79)),
-      'UGX_GBP': 1 / ((rates.traditional.UGX || 3800) / (rates.traditional.GBP || 0.79)),
-      'ZAR_GBP': 1 / ((rates.traditional.ZAR || 18.5) / (rates.traditional.GBP || 0.79)),
-      'ZMW_GBP': 1 / ((rates.traditional.ZMW || 25.8) / (rates.traditional.GBP || 0.79)),
-      'CAD_GBP': 1 / ((rates.traditional.CAD || 1.35) / (rates.traditional.GBP || 0.79)),
-      'AUD_GBP': 1 / ((rates.traditional.AUD || 1.52) / (rates.traditional.GBP || 0.79)),
-      'CHF_GBP': 1 / ((rates.traditional.CHF || 0.88) / (rates.traditional.GBP || 0.79)),
-      
-      // Cross-currency pairs
-      'GHS_NGN': (rates.traditional.NGN || 1500) / (rates.traditional.GHS || 14.5),
-      'GHS_KES': (rates.traditional.KES || 160) / (rates.traditional.GHS || 14.5),
-      'GHS_UGX': (rates.traditional.UGX || 3800) / (rates.traditional.GHS || 14.5),
-      'GHS_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.GHS || 14.5),
-      'GHS_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.GHS || 14.5),
-      'GHS_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.GHS || 14.5),
-      'GHS_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.GHS || 14.5),
-      'GHS_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.GHS || 14.5),
-      
-      'NGN_KES': (rates.traditional.KES || 160) / (rates.traditional.NGN || 1500),
-      'NGN_UGX': (rates.traditional.UGX || 3800) / (rates.traditional.NGN || 1500),
-      'NGN_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.NGN || 1500),
-      'NGN_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.NGN || 1500),
-      'NGN_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.NGN || 1500),
-      'NGN_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.NGN || 1500),
-      'NGN_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.NGN || 1500),
-      
-      'KES_UGX': (rates.traditional.UGX || 3800) / (rates.traditional.KES || 160),
-      'KES_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.KES || 160),
-      'KES_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.KES || 160),
-      'KES_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.KES || 160),
-      'KES_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.KES || 160),
-      'KES_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.KES || 160),
-      
-      'UGX_ZAR': (rates.traditional.ZAR || 18.5) / (rates.traditional.UGX || 3800),
-      'UGX_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.UGX || 3800),
-      'UGX_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.UGX || 3800),
-      'UGX_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.UGX || 3800),
-      'UGX_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.UGX || 3800),
-      
-      'ZAR_ZMW': (rates.traditional.ZMW || 25.8) / (rates.traditional.ZAR || 18.5),
-      'ZAR_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.ZAR || 18.5),
-      'ZAR_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.ZAR || 18.5),
-      'ZAR_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.ZAR || 18.5),
-      
-      'ZMW_CAD': (rates.traditional.CAD || 1.35) / (rates.traditional.ZMW || 25.8),
-      'ZMW_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.ZMW || 25.8),
-      'ZMW_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.ZMW || 25.8),
-      
-      'CAD_AUD': (rates.traditional.AUD || 1.52) / (rates.traditional.CAD || 1.35),
-      'CAD_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.CAD || 1.35),
-      
-      'AUD_CHF': (rates.traditional.CHF || 0.88) / (rates.traditional.AUD || 1.52)
+      // Additional pairs for comprehensive coverage
+      'USD_AED': 3.67 * (1 - FX_MARGIN_BPS / 10000),
+      'AED_USD': 1 / 3.67,
+      'USD_CAD': 1.35 * (1 - FX_MARGIN_BPS / 10000),
+      'CAD_USD': 1 / 1.35,
+      'USD_AUD': 1.52 * (1 - FX_MARGIN_BPS / 10000),
+      'AUD_USD': 1 / 1.52
     };
     
     lastRatesUpdate = new Date();
@@ -1432,30 +1461,37 @@ async function fetchExchangeRates() {
     
   } catch (error) {
     console.error('Error fetching exchange rates:', error);
-    // Fallback to static rates if API fails
+    // Fallback to static rates with margin applied (matching transaction flow)
     calcRates = {
-      // USD pairs
-      'USD_GHS': 14.5, 'USD_NGN': 1500, 'USD_KES': 160, 'USD_UGX': 3800, 'USD_ZAR': 18.5, 'USD_ZMW': 25.8,
-      'USD_CAD': 1.35, 'USD_AUD': 1.52, 'USD_CHF': 0.88, 'USD_GBP': 0.79, 'USD_EUR': 0.92,
-      // EUR pairs
-      'EUR_GHS': 15.7, 'EUR_NGN': 1630, 'EUR_KES': 174, 'EUR_UGX': 4130, 'EUR_ZAR': 20.1, 'EUR_ZMW': 28.0,
-      'EUR_CAD': 1.47, 'EUR_AUD': 1.65, 'EUR_CHF': 0.96, 'EUR_GBP': 0.86, 'EUR_USD': 1.09,
-      // GBP pairs
-      'GBP_GHS': 18.3, 'GBP_NGN': 1900, 'GBP_KES': 203, 'GBP_UGX': 4810, 'GBP_ZAR': 23.4, 'GBP_ZMW': 32.6,
-      'GBP_CAD': 1.71, 'GBP_AUD': 1.92, 'GBP_CHF': 1.12, 'GBP_EUR': 1.16, 'GBP_USD': 1.27,
-      // African currencies
-      'GHS_NGN': 103, 'GHS_KES': 11.0, 'GHS_UGX': 262, 'GHS_ZAR': 1.28, 'GHS_ZMW': 1.78,
-      'NGN_KES': 0.107, 'NGN_UGX': 2.53, 'NGN_ZAR': 0.0123, 'NGN_ZMW': 0.0172,
-      'KES_UGX': 23.8, 'KES_ZAR': 0.116, 'KES_ZMW': 0.161,
-      'UGX_ZAR': 0.00487, 'UGX_ZMW': 0.00679,
-      'ZAR_ZMW': 1.39,
+      // USD pairs (with 40bps margin)
+      'USD_EUR': 0.92 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_GBP': 0.79 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_GHS': 12.5 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_NGN': 1500 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_AED': 3.67 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_CAD': 1.35 * (1 - FX_MARGIN_BPS / 10000),
+      'USD_AUD': 1.52 * (1 - FX_MARGIN_BPS / 10000),
+      
+      // EUR pairs (with 40bps margin)
+      'EUR_USD': 1.08 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_GBP': 0.86 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_GHS': 13.5 * (1 - FX_MARGIN_BPS / 10000),
+      'EUR_NGN': 1630 * (1 - FX_MARGIN_BPS / 10000),
+      
+      // GBP pairs (with 40bps margin)
+      'GBP_USD': 1.27 * (1 - FX_MARGIN_BPS / 10000),
+      'GBP_EUR': 1.16 * (1 - FX_MARGIN_BPS / 10000),
+      'GBP_GHS': 18.3 * (1 - FX_MARGIN_BPS / 10000),
+      
       // Reverse pairs
-      'GHS_USD': 0.069, 'NGN_USD': 0.00067, 'KES_USD': 0.00625, 'UGX_USD': 0.00026, 'ZAR_USD': 0.054, 'ZMW_USD': 0.0388,
-      'GHS_EUR': 0.064, 'NGN_EUR': 0.00061, 'KES_EUR': 0.00575, 'UGX_EUR': 0.00024, 'ZAR_EUR': 0.0498, 'ZMW_EUR': 0.0357,
-      'GHS_GBP': 0.055, 'NGN_GBP': 0.00053, 'KES_GBP': 0.00493, 'UGX_GBP': 0.00021, 'ZAR_GBP': 0.0427, 'ZMW_GBP': 0.0307,
-      'CAD_USD': 0.741, 'AUD_USD': 0.658, 'CHF_USD': 1.136, 'GBP_USD': 1.266,
-      'CAD_EUR': 0.680, 'AUD_EUR': 0.606, 'CHF_EUR': 1.042, 'GBP_EUR': 1.163,
-      'CAD_GBP': 0.585, 'AUD_GBP': 0.521, 'CHF_GBP': 0.893
+      'GHS_USD': 1 / 12.5,
+      'NGN_USD': 1 / 1500,
+      'AED_USD': 1 / 3.67,
+      'GHS_EUR': 1 / 13.5,
+      'NGN_EUR': 1 / 1630,
+      'GHS_GBP': 1 / 18.3,
+      'CAD_USD': 1 / 1.35,
+      'AUD_USD': 1 / 1.52
     };
   }
 }
