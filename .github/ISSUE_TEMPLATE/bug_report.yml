@@ -1,0 +1,6 @@
+name: Bug report
+description: File a bug
+body:
+  - type: textarea
+    attributes: { label: What happened? }
+    validations: { required: true }
