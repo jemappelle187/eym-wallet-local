@@ -1,0 +1,8 @@
+# Docs
+*.md                                  @jemappelle187
+# Mobile app
+/sendnreceive-app/**                  @jemappelle187
+# API
+/auto-convert-api/**                  @jemappelle187
+# Frontend website
+/*                                    @jemappelle187
