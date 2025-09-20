@@ -106,3 +106,8 @@ ios/Pods/
 .vscode/
 .idea/
 *.swp
+
+# Finder/AppleDouble
+.DS_Store
+._*
+
