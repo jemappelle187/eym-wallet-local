@@ -115,3 +115,6 @@ ios/Pods/
 # Editor state
 .cursor/
 
+
+.env.local
+
