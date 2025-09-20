@@ -7,3 +7,16 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.ai filter=lfs diff=lfs merge=lfs -text
+* text=auto
+*.sh text eol=lf
+*.md text eol=lf
+# Binary (don't diff)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp4 binary
+*.mov binary
+*.zip binary
+*.psd binary
+*.ai  binary
