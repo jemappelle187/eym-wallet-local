@@ -1,0 +1,12 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 'lts/*', cache: 'npm' }
+      - run: npm ci --prefix sendnreceive-app || npm install --prefix sendnreceive-app
+      - run: npm run -C sendnreceive-app lint --if-present
+      - run: npm run -C sendnreceive-app test --if-present
